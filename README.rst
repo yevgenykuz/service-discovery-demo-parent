@@ -62,13 +62,13 @@ Minikube - access services easily (opens chrome tab):
     minikube service propagator-example
     minikube service rest-entry-point-example
 
-Minikube - refresh internal routes of there is not access:
+Minikube - refresh internal routes of there is no access:
 
 .. code-block:: bash
 
     minikube tunnel --cleanup
 
-Minikube - allow access using the clusterIP (not to be used in production):
+Minikube (optional) - allow access using the clusterIP (not to be used in production):
 
 .. code-block:: bash
 
