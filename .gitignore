@@ -1,0 +1,12 @@
+# IDE
+.idea/
+*.iml
+
+# Java compiled/packaged files
+target/
+
+# Logs:
+logs/
+
+# CxAgent folder:
+Agent/
