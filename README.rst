@@ -12,11 +12,22 @@ This project includes demo applications and configuration to demo Checkmarx serv
 Usage
 =====
 
-* Clone or download
-* Use following cheatsheet to deploy in minikube
+Clone the source code
+---------------------
 
-Cheatsheet
-----------
+.. code-block:: bash
+
+    git clone https://github.com/yevgenykuz/service-discovery-demo-parent.git
+
+Compile with Maven
+------------------
+
+.. code-block:: bash
+
+    mvn clean install
+
+Deploy in minikube
+------------------
 
 Docker images, build, tag, push:
 
