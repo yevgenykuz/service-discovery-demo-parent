@@ -26,10 +26,10 @@ Compile with Maven
 
     mvn clean install
 
-Deploy in minikube
+Deploy in Minikube
 ------------------
 
-Docker images, build, tag, push:
+Docker images - build, tag, push:
 
 .. code-block:: bash
 
@@ -58,14 +58,14 @@ Minikube - run apps and expose ports:
 
 .. code-block:: bash
 
-    kubectl run jpa-example --image=yevgenykcx/jpa-example --port=8183
-    kubectl expose deployment/jpa-example --type=LoadBalancer --port 8183
-    kubectl run propagator-example --image=yevgenykcx/propagator-example --port=8182
-    kubectl expose deployment/propagator-example --type=LoadBalancer --port 8182
-    kubectl run rest-entry-point-example --image=yevgenykcx/rest-entry-point-example --port=8181
-    kubectl expose deployment/rest-entry-point-example --type=LoadBalancer --port 8181
+    kubectl run --generator=run-pod/v1 jpa-example --image=yevgenykcx/jpa-example --port=8183
+    kubectl expose pod/jpa-example --type=LoadBalancer --port 8183
+    kubectl run --generator=run-pod/v1 propagator-example --image=yevgenykcx/propagator-example --port=8182
+    kubectl expose pod/propagator-example --type=LoadBalancer --port 8182
+    kubectl run --generator=run-pod/v1 rest-entry-point-example --image=yevgenykcx/rest-entry-point-example --port=8181
+    kubectl expose pod/rest-entry-point-example --type=LoadBalancer --port 8181
 
-Minikube - access services easily (opens chrome tab):
+Minikube - access services easily using internal IPs and ports (opens chrome tab):
 
 .. code-block:: bash
 
@@ -76,8 +76,6 @@ Minikube - access services easily (opens chrome tab):
 Minikube - refresh internal routes of there is no access:
 
 .. code-block:: bash
-
-    minikube tunnel --cleanup
 
 Minikube (optional) - allow access using the clusterIP (not to be used in production):
 
@@ -90,6 +88,26 @@ Minikube - expose REST API on port 8080 (not to be used in production):
 .. code-block:: bash
 
     kubectl proxy --port=8080
+
+Minikube (debug) - list services to get cluster IP addresses:
+
+.. code-block:: bash
+
+    kubectl get services
+
+Minikube (debug) - refresh internal routes of there is no access using minikube tunnel:
+
+.. code-block:: bash
+
+    minikube tunnel --cleanup
+
+Minikube (cleanup) - remove all pods, deployments, and services:
+
+.. code-block:: bash
+
+    kubectl delete --all pods
+    kubectl delete --all deployments
+    kubectl delete --all services
 
 Meta
 ====
