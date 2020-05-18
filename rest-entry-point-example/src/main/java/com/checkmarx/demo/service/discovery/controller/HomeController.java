@@ -28,15 +28,26 @@ public class HomeController {
     public @ResponseBody String forwardInputToSqlService(@RequestParam("name") String name) {
         System.out.println("input entry point - name: " + name);
         try {
-            sendGet(name);
+            sendGet("http://localhost:8183/projects/safe?name=" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "ok";
     }
 
-    private void sendGet(String name) throws Exception {
-        HttpGet request = new HttpGet("http://localhost:8183/projects/safe?name=" + name);
+    @RequestMapping(path = "/prop-name", method = RequestMethod.GET)
+    public @ResponseBody String forwardInputToPropagatorAndThenToSqlService(@RequestParam("name") String name) {
+        System.out.println("input entry point - prop-name: " + name);
+        try {
+            sendGet("http://localhost:8182/name?name=" + name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ok";
+    }
+
+    private void sendGet(String uri) throws Exception {
+        HttpGet request = new HttpGet(uri);
         // add request headers
         request.addHeader("custom-key", "checkmarx");
         request.addHeader(HttpHeaders.USER_AGENT, "Chrome");

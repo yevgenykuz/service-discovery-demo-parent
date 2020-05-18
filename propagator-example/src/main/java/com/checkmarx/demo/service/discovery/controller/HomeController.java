@@ -35,6 +35,7 @@ public class HomeController {
 
     private void sanitizeAndSend(String name) {
         String value = ESAPI.encoder().encodeForSQL(new OracleCodec(), name);
+        System.out.println("Sanitized");
         try {
             sendGet(value);
         } catch (Exception e) {
@@ -43,7 +44,7 @@ public class HomeController {
     }
 
     private void sendGet(String name) throws Exception {
-        HttpGet request = new HttpGet("http://localhost:8183/projects/safe?name=" + name);
+        HttpGet request = new HttpGet("http://localhost:8183/projects/unsafe?name=" + name);
         // add request headers
         request.addHeader("custom-key", "checkmarx");
         request.addHeader(HttpHeaders.USER_AGENT, "Chrome");
