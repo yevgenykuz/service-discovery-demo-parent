@@ -112,11 +112,12 @@ Minikube (cleanup) - remove all pods, deployments, and services:
 Meta
 ====
 
-Authors
--------
+Contributors
+------------
 
 * `yevgenykuz <https://github.com/yevgenykuz>`_
 * `ofertavivcx <https://github.com/ofertavivcx>`_
+* `asafHalely <https://github.com/asafHalely>`_
 
 License
 -------
