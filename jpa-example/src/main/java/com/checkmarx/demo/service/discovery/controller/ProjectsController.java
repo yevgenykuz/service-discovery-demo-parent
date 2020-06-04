@@ -5,6 +5,7 @@ import com.checkmarx.demo.service.discovery.model.Project;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -22,7 +23,15 @@ public class ProjectsController {
 
 	@RequestMapping(path = "/safe", method = RequestMethod.GET)
 	public @ResponseBody Collection<Project> findByNameSafe(@RequestParam("name") String name) {
-		LOGGER.debug("findByNameSafe: " + name);
+		System.out.println("findByNameSafe: " + name);
+		return projectDao.findByNameSafe(name);
+	}
+
+	@RequestMapping(path = "/safe", method = RequestMethod.POST)
+	public @ResponseBody Collection<Project> findByNameSafePost(@RequestParam("name") String name,
+																@RequestHeader MultiValueMap<String,String> headers) {
+		System.out.println("findByNameSafePost: " + name);
+		System.out.println("findByNameSafePost - headers: " + headers);
 		return projectDao.findByNameSafe(name);
 	}
 
