@@ -8,5 +8,8 @@ target/
 # Logs:
 logs/
 
-# CxAgent folder:
+# CxAgent folders:
 Agent/
+
+# Windwos startup scripts:
+run.bat
