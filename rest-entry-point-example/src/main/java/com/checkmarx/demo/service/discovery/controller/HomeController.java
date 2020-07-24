@@ -73,8 +73,8 @@ public class HomeController {
         return "ok";
     }
 
-    private void sendGet(String name) throws Exception {
-        HttpGet request = new HttpGet("http://localhost:8183/projects/safe?name=" + name);
+    private void sendGet(String uri) throws Exception {
+        HttpGet request = new HttpGet(uri);
         // add request headers
         request.addHeader("custom-key", "checkmarx");
         request.addHeader(HttpHeaders.USER_AGENT, "Chrome");
