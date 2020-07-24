@@ -30,31 +30,36 @@ import java.util.Map;
  */
 @RestController
 public class HomeController {
-    private static final String USER_AGENT = "Mozilla/5.0";
 
+    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
     private HttpServletRequest request;
 
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
     @RequestMapping(path = "/name", method = RequestMethod.GET)
-    public @ResponseBody String forwardInputToNextService(@RequestParam("name") String name, @RequestParam(required = false) String forwardRequestMethod) {
+    @ResponseBody
+    public String forwardInputToNextService(@RequestParam("name") String name,
+                                            @RequestParam(required = false) String forwardRequestMethod) {
         System.out.println("input entry point - name=" + name + ", forwardRequestMethod=" + forwardRequestMethod);
         if (StringUtils.isEmpty(forwardRequestMethod)) {
             forwardRequestMethod = "GET"; //Backward compatibility
         }
-
         try {
-            if (forwardRequestMethod.equals("GET")) {
-                sendGet(name);
-            } else if (forwardRequestMethod.equals("POST")) {
-                sendPost(name);
-            } else if (forwardRequestMethod.equals("GET2")) {
-                sendGet2(name);
-            } else if (forwardRequestMethod.equals("POST2")) {
-                sendGet2(name);
+            switch (forwardRequestMethod) {
+                case "GET":
+                    sendGet("http://localhost:8183/projects/safe?name=" + name);
+                    break;
+                case "POST":
+                    sendPost("http://localhost:8183/projects/safe?name=", name);
+                    break;
+                case "GET2":
+                    sendGet2("http://localhost:8183/projects/safe?name=" + name);
+                    break;
+                case "POST2":
+                    sendPost2("http://localhost:8183/projects/safe?name=", name);
+                    break;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             return e.toString();
@@ -63,7 +68,8 @@ public class HomeController {
     }
 
     @RequestMapping(path = "/prop-name", method = RequestMethod.GET)
-    public @ResponseBody String forwardInputToPropagatorAndThenToSqlService(@RequestParam("name") String name) {
+    @ResponseBody
+    public String forwardInputToPropagatorAndThenToSqlService(@RequestParam("name") String name) {
         System.out.println("input entry point - prop-name: " + name);
         try {
             sendGet("http://localhost:8182/name?name=" + name);
@@ -81,16 +87,15 @@ public class HomeController {
         execute(httpClient.execute(request));
     }
 
-    private void sendPost(String name) throws Exception {
-        HttpPost request = new HttpPost("http://localhost:8183/projects/safe");
+    @SuppressWarnings("SameParameterValue")
+    private void sendPost(String URL, String name) throws Exception {
+        HttpPost request = new HttpPost(URL);
         // add request headers
         request.addHeader("custom-key", "checkmarx");
         request.addHeader(HttpHeaders.USER_AGENT, "Chrome");
         ArrayList<NameValuePair> postParameters = new ArrayList<>();
         postParameters.add(new BasicNameValuePair("name", name));
-
         request.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
-
         execute(httpClient.execute(request));
     }
 
@@ -107,25 +112,21 @@ public class HomeController {
         }
     }
 
-    private void sendGet2(String name) throws IOException {
-        String targetURL = "http://localhost:8183/projects/safe?name=" + name;
-        URL obj = new URL(targetURL);
+    private void sendGet2(String URL) throws IOException {
+        URL obj = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
         int responseCode = con.getResponseCode();
         System.out.println("GET Response Code :: " + responseCode);
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    con.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
-
+            StringBuilder response = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
             in.close();
-
             // print result
             System.out.println(response.toString());
         } else {
@@ -133,33 +134,26 @@ public class HomeController {
         }
     }
 
-    private void sendPost2(String name) throws IOException {
-        String targetURL = "http://localhost:8183/projects/safe";
+    @SuppressWarnings("SameParameterValue")
+    private void sendPost2(String URL, String name) throws IOException {
         HttpURLConnection connection = null;
         Map<String, String> parameters = new HashMap<>();
         parameters.put("name", name);
         String paramsString = getParamsString(parameters);
         try {
             //Create connection
-            URL url = new URL(targetURL);
+            URL url = new URL(URL);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type",
-                    "application/x-www-form-urlencoded");
-
-            connection.setRequestProperty("Content-Length",
-                    Integer.toString(paramsString.getBytes().length));
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            connection.setRequestProperty("Content-Length", Integer.toString(paramsString.getBytes().length));
             connection.setRequestProperty("Content-Language", "en-US");
-
             connection.setUseCaches(false);
             connection.setDoOutput(true);
-
             //Send request
-            DataOutputStream wr = new DataOutputStream (
-                    connection.getOutputStream());
+            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
             wr.writeBytes(paramsString);
             wr.close();
-
             //Get Response
             InputStream is = connection.getInputStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
@@ -178,24 +172,18 @@ public class HomeController {
                 connection.disconnect();
             }
         }
-
     }
 
-    public static String getParamsString(Map<String, String> params)
-            throws UnsupportedEncodingException{
+    public static String getParamsString(Map<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
-
         for (Map.Entry<String, String> entry : params.entrySet()) {
             result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
             result.append("=");
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
             result.append("&");
         }
-
         String resultString = result.toString();
-        return resultString.length() > 0
-                ? resultString.substring(0, resultString.length() - 1)
-                : resultString;
+        return resultString.length() > 0 ? resultString.substring(0, resultString.length() - 1) : resultString;
     }
 
     @RequestMapping("/home")

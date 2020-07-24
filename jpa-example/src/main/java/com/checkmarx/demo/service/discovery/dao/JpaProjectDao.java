@@ -19,27 +19,27 @@ import java.util.Collection;
  */
 @Repository
 public class JpaProjectDao implements ProjectDao {
-	private static final Logger LOGGER = LogManager.getLogger(JpaProjectDao.class);
-	
-	@PersistenceContext
-	private EntityManager entityManager;
+    private static final Logger LOGGER = LogManager.getLogger(JpaProjectDao.class);
 
-	@Override
-	public Collection<Project> findByNameSafe(String name) {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Project> criteriaQuery = criteriaBuilder.createQuery(Project.class);
-		Metamodel metamodel = entityManager.getMetamodel();
-		EntityType<Project> projectEntity = metamodel.entity(Project.class);
-		Root<Project> projectRoot = criteriaQuery.from(Project.class);
-		criteriaQuery.where(criteriaBuilder.equal(projectRoot.get(projectEntity.getSingularAttribute("name")), name));
-		return entityManager.createQuery(criteriaQuery).getResultList();
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Collection<Project> findByNameUnsafe(String name) {
-		String sql = String.format("SELECT * FROM PROJECTS WHERE name = '%s'", name);
-		LOGGER.debug("findByNameUnsafe: " + sql);
-		return entityManager.createNativeQuery(sql).getResultList();
-	}
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public Collection<Project> findByNameSafe(String name) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Project> criteriaQuery = criteriaBuilder.createQuery(Project.class);
+        Metamodel metamodel = entityManager.getMetamodel();
+        EntityType<Project> projectEntity = metamodel.entity(Project.class);
+        Root<Project> projectRoot = criteriaQuery.from(Project.class);
+        criteriaQuery.where(criteriaBuilder.equal(projectRoot.get(projectEntity.getSingularAttribute("name")), name));
+        return entityManager.createQuery(criteriaQuery).getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Collection<Project> findByNameUnsafe(String name) {
+        String sql = String.format("SELECT * FROM PROJECTS WHERE name = '%s'", name);
+        LOGGER.debug("findByNameUnsafe: " + sql);
+        return entityManager.createNativeQuery(sql).getResultList();
+    }
 }

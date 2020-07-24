@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class HomeController {
 
+    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
-    HttpServletRequest request;
+    private HttpServletRequest request;
 
     @RequestMapping("/home")
     public void jpaExampleIndex() {

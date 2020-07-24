@@ -20,14 +20,15 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class HomeController {
 
+    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
-    HttpServletRequest request;
+    private HttpServletRequest request;
 
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
     @RequestMapping(path = "/name", method = RequestMethod.GET)
-    public @ResponseBody
-    String forwardInputToSqlService(@RequestParam("name") String name) {
+    @ResponseBody
+    public String forwardInputToSqlService(@RequestParam("name") String name) {
         System.out.println("input entry point - name: " + name);
         sanitizeAndSend(name);
         return "ok";
