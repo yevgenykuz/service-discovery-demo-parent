@@ -1,5 +1,7 @@
 package com.checkmarx.demo.service.discovery.controller;
 
+import com.checkmarx.demo.service.discovery.properites.RelatedServicesProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
@@ -22,6 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,35 +32,42 @@ import java.util.Map;
  * Home page controller class.
  */
 @RestController
+@Slf4j
 public class HomeController {
 
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
-    @Autowired
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
+    private final RelatedServicesProperties relatedServicesProperties;
+    private final CloseableHttpClient httpClient;
 
-    private final CloseableHttpClient httpClient = HttpClients.createDefault();
+    @Autowired
+    public HomeController(HttpServletRequest request, RelatedServicesProperties relatedServicesProperties) {
+        this.request = request;
+        this.relatedServicesProperties = relatedServicesProperties;
+        this.httpClient = HttpClients.createDefault();
+    }
 
     @RequestMapping(path = "/name", method = RequestMethod.GET)
     @ResponseBody
     public String forwardInputToNextService(@RequestParam("name") String name,
                                             @RequestParam(required = false) String forwardRequestMethod) {
-        System.out.println("input entry point - name=" + name + ", forwardRequestMethod=" + forwardRequestMethod);
+        String jpaExampleUrl = relatedServicesProperties.getJpaExampleUrl() + "/projects/safe?name=";
+        log.info("input entry point - name=" + name + ", forwardRequestMethod=" + forwardRequestMethod);
         if (StringUtils.isEmpty(forwardRequestMethod)) {
             forwardRequestMethod = "GET"; //Backward compatibility
         }
         try {
             switch (forwardRequestMethod) {
                 case "GET":
-                    sendGet("http://localhost:8183/projects/safe?name=" + name);
+                    sendGet(jpaExampleUrl + name);
                     break;
                 case "POST":
-                    sendPost("http://localhost:8183/projects/safe?name=", name);
+                    sendPost(jpaExampleUrl, name);
                     break;
                 case "GET2":
-                    sendGet2("http://localhost:8183/projects/safe?name=" + name);
+                    sendGet2(jpaExampleUrl + name);
                     break;
                 case "POST2":
-                    sendPost2("http://localhost:8183/projects/safe?name=", name);
+                    sendPost2(jpaExampleUrl, name);
                     break;
             }
         } catch (Exception e) {
@@ -70,9 +80,9 @@ public class HomeController {
     @RequestMapping(path = "/prop-name", method = RequestMethod.GET)
     @ResponseBody
     public String forwardInputToPropagatorAndThenToSqlService(@RequestParam("name") String name) {
-        System.out.println("input entry point - prop-name: " + name);
+        log.info("input entry point - prop-name: " + name);
         try {
-            sendGet("http://localhost:8182/name?name=" + name);
+            sendGet(relatedServicesProperties.getPropagatorExampleUrl() + "/name?name=" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,13 +112,13 @@ public class HomeController {
     private void execute(CloseableHttpResponse execute) throws IOException {
         try (CloseableHttpResponse response = execute) {
             // Get HttpResponse Status
-            System.out.println(response.getStatusLine().toString());
+            log.info(response.getStatusLine().toString());
             HttpEntity entity = response.getEntity();
             Header headers = entity.getContentType();
-            System.out.println(headers);
+            log.info(Arrays.toString(headers.getElements()));
             // return it as a String
             String result = EntityUtils.toString(entity);
-            System.out.println(result);
+            log.info(result);
         }
     }
 
@@ -118,7 +128,7 @@ public class HomeController {
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
+        log.info("GET Response Code :: " + responseCode);
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -128,9 +138,9 @@ public class HomeController {
             }
             in.close();
             // print result
-            System.out.println(response.toString());
+            log.info(response.toString());
         } else {
-            System.out.println("GET request not worked");
+            log.info("GET request not worked");
         }
     }
 
@@ -164,7 +174,7 @@ public class HomeController {
                 response.append('\r');
             }
             rd.close();
-            System.out.println(response.toString());
+            log.info(response.toString());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -188,7 +198,7 @@ public class HomeController {
 
     @RequestMapping("/home")
     public void restEntryPointExample() {
-        System.out.println("rest-entry-point-example\n" + request.toString());
+        log.info("rest-entry-point-example\n" + request.toString());
     }
 
     @RequestMapping("/")

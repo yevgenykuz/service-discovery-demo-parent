@@ -1,8 +1,7 @@
 package com.checkmarx.demo.service.discovery.dao;
 
 import com.checkmarx.demo.service.discovery.model.Project;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,8 +17,8 @@ import java.util.Collection;
  * JPA project DAO implementation.
  */
 @Repository
+@Slf4j
 public class JpaProjectDao implements ProjectDao {
-    private static final Logger LOGGER = LogManager.getLogger(JpaProjectDao.class);
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -39,7 +38,7 @@ public class JpaProjectDao implements ProjectDao {
     @Override
     public Collection<Project> findByNameUnsafe(String name) {
         String sql = String.format("SELECT * FROM PROJECTS WHERE name = '%s'", name);
-        LOGGER.debug("findByNameUnsafe: " + sql);
+        log.info("findByNameUnsafe: " + sql);
         return entityManager.createNativeQuery(sql).getResultList();
     }
 }
