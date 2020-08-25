@@ -1,0 +1,203 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: propagator-example-buildNumber
+  namespace: ns-jenkins-ci
+  labels:
+    app: propagator-example-buildNumber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: propagator-example-buildNumber
+  template:
+    metadata:
+      labels:
+        app: propagator-example-buildNumber
+    spec:
+      dnsConfig:
+        nameservers:
+        - 10.32.0.14
+        searches:
+        - dm.cx
+      containers:
+      - name: propagator-example
+        image: yevgenykcx/propagator-example
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8182
+        env:
+        - name: server_ip
+          value: hostname
+        - name: REST_ENTRY_POINT_EXAMPLE_URL
+          value: rest-entry-point-example-buildNumber
+        - name: JPA_EXAMPLE_URL
+          value: jpa-example-buildNumber
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    name: propagator-example-buildNumber
+  name: propagator-example-buildNumber
+  namespace: ns-jenkins-ci
+spec:
+  ports:
+  - name: "propagator-example"
+    port: 8182
+    targetPort: 8182
+  selector:
+    app: propagator-example-buildNumber
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: propagator-example-buildNumber
+  namespace: ns-jenkins-ci
+spec:
+  rules:
+    - host: propagator-example-buildNumber.ns-jenkins-ci.10.32.1.14.xip.io
+      http:
+        paths:
+        - backend:
+            serviceName: propagator-example-buildNumber
+            servicePort: 8182
+          path: /
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-entry-point-example-buildNumber
+  namespace: ns-jenkins-ci
+  labels:
+    app: rest-entry-point-example-buildNumber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-entry-point-example-buildNumber
+  template:
+    metadata:
+      labels:
+        app: rest-entry-point-example-buildNumber
+    spec:
+      dnsConfig:
+        nameservers:
+        - 10.32.0.14
+        searches:
+        - dm.cx
+      containers:
+      - name: rest-entry-point-example
+        image: yevgenykcx/rest-entry-point-example
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8181
+        env:
+        - name: server_ip
+          value: hostname
+        - name: JPA_EXAMPLE_URL
+          value: jpa-example-buildNumber
+        - name: PROPAGATOR_EXAMPLE_URL
+          value: propagator-example-buildNumber
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    name: rest-entry-point-example-buildNumber
+  name: rest-entry-point-example-buildNumber
+  namespace: ns-jenkins-ci
+spec:
+  ports:
+  - name: "rest-entry-point-example"
+    port: 8181
+    targetPort: 8181
+  selector:
+    app: rest-entry-point-example-buildNumber
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rest-entry-point-example-buildNumber
+  namespace: ns-jenkins-ci
+spec:
+  rules:
+    - host: rest-entry-point-example-buildNumber.ns-jenkins-ci.10.32.1.14.xip.io
+      http:
+        paths:
+        - backend:
+            serviceName: rest-entry-point-example-buildNumber
+            servicePort: 8181
+          path: /
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jpa-example-buildNumber
+  namespace: ns-jenkins-ci
+  labels:
+    app: jpa-example-buildNumber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jpa-example-buildNumber
+  template:
+    metadata:
+      labels:
+        app: jpa-example-buildNumber
+    spec:
+      dnsConfig:
+        nameservers:
+        - 10.32.0.14
+        searches:
+        - dm.cx
+      containers:
+      - name: jpa-example
+        image: yevgenykcx/jpa-example
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8183
+        env:
+        - name: server_ip
+          value: hostname
+        - name: REST_ENTRY_POINT_EXAMPLE_URL
+          value: rest-entry-point-example-buildNumber
+        - name: PROPAGATOR_EXAMPLE_URL
+          value: propagator-example-buildNumber
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    name: jpa-example-buildNumber
+  name: jpa-example-buildNumber
+  namespace: ns-jenkins-ci
+spec:
+  ports:
+  - name: "jpa-example"
+    port: 8183
+    targetPort: 8183
+  selector:
+    app: jpa-example-buildNumber
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jpa-example-buildNumber
+  namespace: ns-jenkins-ci
+spec:
+  rules:
+    - host: jpa-example-buildNumber.ns-jenkins-ci.10.32.1.14.xip.io
+      http:
+        paths:
+        - backend:
+            serviceName: jpa-example-buildNumber
+            servicePort: 8183
+          path: /
