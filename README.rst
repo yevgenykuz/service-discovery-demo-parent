@@ -33,6 +33,7 @@ Docker images - build, tag, push:
 
 .. code-block:: bash
 
+    Manually with docker commands:
     # jpa-example - port 8183
     docker build . -t jpa-example
     docker tag jpa-example yevgenykcx/jpa-example
@@ -45,6 +46,9 @@ Docker images - build, tag, push:
     docker build . -t rest-entry-point-example
     docker tag rest-entry-point-example yevgenykcx/rest-entry-point-example
     docker push yevgenykcx/rest-entry-point-example
+
+    Using the JIB maven plugin, run the following for each application:
+    mvn docker:build
 
 Run images without kubernetes to test (after building):
 
