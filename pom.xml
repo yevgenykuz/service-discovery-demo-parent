@@ -21,6 +21,10 @@
         <module>jpa-example</module>
         <module>propagator-example</module>
         <module>rest-entry-point-example</module>
+        <module>kafka-entry-point</module>
+        <module>kafka-http-entry-point</module>
+        <module>kafka-propagator</module>
+        <module>kafka-sink</module>
     </modules>
 
     <licenses>
