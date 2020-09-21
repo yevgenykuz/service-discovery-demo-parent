@@ -1,0 +1,14 @@
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\bin\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.deps.json
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\bin\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.runtimeconfig.json
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\bin\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.runtimeconfig.dev.json
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\bin\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.dll
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\bin\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.pdb
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.csprojAssemblyReference.cache
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.csproj.CoreCompileInputs.cache
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.RazorAssemblyInfo.cache
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.RazorAssemblyInfo.cs
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.AssemblyInfoInputs.cache
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.AssemblyInfo.cs
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.RazorTargetAssemblyInfo.cache
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.dll
+C:\IAST_2308\iast\dotnet-Agent\Tests\MicroServicesApps\NET_CORE_PROPOGATOR_APP\obj\Debug\netcoreapp2.1\NET_CORE_PROPOGATOR_APP.pdb
