@@ -1,6 +1,6 @@
 #! /bin/bash
 if [[ -z "${server_ip}" ]]; then
-    java -jar java-http-propagator-1.0.0-SNAPSHOT.jar
+    java -jar java-http-propagator.jar
 else
     cwd=$(pwd)
     mkdir /usr/local/cxiast-agent
@@ -11,5 +11,5 @@ else
     chmod a+x CxIAST.sh
     echo "maxStoredStringLength=50" >> cx_agent.override.properties
     cd ${cwd}
-    /usr/local/cxiast-agent/CxIAST.sh -e "java -jar java-http-propagator-1.0.0-SNAPSHOT.jar"
+    /usr/local/cxiast-agent/CxIAST.sh -e "java -jar java-http-propagator.jar"
 fi

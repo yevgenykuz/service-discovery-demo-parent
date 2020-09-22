@@ -15,10 +15,27 @@ Deployment
 Compile with Maven
 ------------------
 
+In "*java-apps*" folder:
+
 .. code-block:: bash
 
-    # in java-apps folder:
     mvn clean install
+
+Run manually on Windows
+-----------------------
+
+* Download an agent from IAST manager
+* For each application you want to run:
+    * Create an empty "*agent*" folder in the application's folder
+    * Extract the contents of the zipped agent file you've downloaded into the "*agent*" folder
+* In "*java-apps*" folder run "*runAll.bat*"
+
+This will run all applications with the following:
+
+* IAST agent attached
+* Agent auto-upgrade disabled
+* Agent log level set to DEBUG
+* Open port for remote debug (see individual "*run.bat*" files for exact port)
 
 Build, tag, and push with Docker
 --------------------------------
@@ -40,11 +57,16 @@ To push Docker images to a different location, change *yevgenykcx* to your needs
 Run with Docker
 ---------------
 
+To run with IAST agent automatically:
+
 .. code-block:: bash
 
-    docker run --rm -it -p 8183:8183 java-http-sink
-    docker run --rm -it -p 8182:8182 java-http-propagator
-    docker run --rm -it -p 8181:8181 java-http-entry-point
+    # replace ${MANAGER_IP} with an IP or DNS name of a running IAST manager
+    docker run -e server_ip=${MANAGER_IP} --rm -it -p 8183:8183 java-http-sink
+    docker run -e server_ip=${MANAGER_IP} --rm -it -p 8182:8182 java-http-propagator
+    docker run -e server_ip=${MANAGER_IP} --rm -it -p 8181:8181 java-http-entry-point
+
+An agent will be downloaded from the provided manager before running.
 
 Flow Triggering
 ===============

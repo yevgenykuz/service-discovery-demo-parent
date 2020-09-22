@@ -10,7 +10,3 @@ logs/
 
 # CxAgent folders:
 agent/
-
-# Windwos startup scripts:
-run.bat
-runAll.bat
