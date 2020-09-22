@@ -21,10 +21,10 @@
         <module>java-http-entry-point</module>
         <module>java-http-propagator</module>
         <module>java-http-sink</module>
-        <module>kafka-entry-point</module>
-        <module>kafka-http-entry-point</module>
-        <module>kafka-propagator</module>
-        <module>kafka-sink</module>
+        <module>java-kafka-entry-point</module>
+        <module>java-kafka-http-entry-point</module>
+        <module>java-kafka-propagator</module>
+        <module>java-kafka-sink</module>
     </modules>
 
     <licenses>
@@ -74,5 +74,11 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 </project>

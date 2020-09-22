@@ -22,12 +22,12 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public void jpaExampleIndex() {
-        log.info("jpa-example\n" + request.toString());
+    public void javaHttpSinkIndex() {
+        log.info("java-http-sink\n" + request.toString());
     }
 
     @RequestMapping("/")
     public String showWelcomePage() {
-        return "jpaExampleIndex";
+        return "javaHttpSinkIndex";
     }
 }
