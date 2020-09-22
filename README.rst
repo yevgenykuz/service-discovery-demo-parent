@@ -122,6 +122,7 @@ Contributors
 * `yevgenykuz <https://github.com/yevgenykuz>`_
 * `ofertavivcx <https://github.com/ofertavivcx>`_
 * `asafHalely <https://github.com/asafHalely>`_
+* `snirshemtov <https://github.com/snirshemtov>`_
 
 License
 -------
