@@ -9,7 +9,7 @@ target/
 logs/
 
 # CxAgent folders:
-Agent/
+agent/
 
 # Windwos startup scripts:
 run.bat

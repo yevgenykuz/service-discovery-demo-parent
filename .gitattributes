@@ -3,3 +3,5 @@
 *.gitattributes text
 .gitignore text
 *.md text
+*.rst text
+*.txt text
