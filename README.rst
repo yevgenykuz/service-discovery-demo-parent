@@ -19,44 +19,8 @@ Clone the source code
 
     git clone https://github.com/yevgenykuz/service-discovery-demo-parent.git
 
-Compile with Maven
-------------------
-
-.. code-block:: bash
-
-    mvn clean install
-
 Deploy in Minikube
 ------------------
-
-Docker images - build, tag, push:
-
-.. code-block:: bash
-
-    # Manually with docker commands:
-    # jpa-example - port 8183
-    docker build . -t jpa-example
-    docker tag jpa-example yevgenykcx/jpa-example
-    docker push yevgenykcx/jpa-example
-    # propagator-example - port 8182
-    docker build . -t propagator-example
-    docker tag propagator-example yevgenykcx/propagator-example
-    docker push yevgenykcx/propagator-example
-    # rest-entry-point-example - port 8181
-    docker build . -t rest-entry-point-example
-    docker tag rest-entry-point-example yevgenykcx/rest-entry-point-example
-    docker push yevgenykcx/rest-entry-point-example
-
-    # Or, using the JIB maven plugin, run the following for each application:
-    mvn docker:build
-
-Run images without kubernetes to test (after building):
-
-.. code-block:: bash
-
-    docker run --rm -it -p 8183:8183 jpa-example
-    docker run --rm -it -p 8182:8182 propagator-example
-    docker run --rm -it -p 8181:8181 rest-entry-point-example
 
 Minikube - run apps and expose ports:
 

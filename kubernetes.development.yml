@@ -1,35 +1,44 @@
+# This file contains k8s deployment for all demo applications in this project.
+
+###############################
+# JAVA HTTP flow applications #
+###############################
+
+---
+# java-http-entry-point deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rest-entry-point
+  name: java-http-entry-point
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rest-entry-point
+      app: java-http-entry-point
   template:
     metadata:
       labels:
-        app: rest-entry-point
+        app: java-http-entry-point
     spec:
       containers:
-        - name: rest-entry-point
-          image: yevgenykcx/rest-entry-point-example
+        - name: java-http-entry-point
+          image: yevgenykcx/java-http-entry-point
           imagePullPolicy: Always
           ports: 
             - containerPort: 8181
           env:
           - name: server_ip
             value: ""
-          - name: PROPAGATOR_EXAMPLE_URL
-            value: http://propagator:8182
-          - name: JPA_EXAMPLE_URL
-            value: http://jpa:8183
+          - name: JAVA_HTTP_PROPAGATOR_URL
+            value: http://java-http-propagator:8182
+          - name: JAVA_HTTP_SINK_URL
+            value: http://java-http-sink:8183
 ---
+# java-http-entry-point service
 apiVersion: v1
 kind: Service
 metadata:
-  name: rest-entry-point
+  name: java-http-entry-point
 spec:
   type: NodePort
   ports:
@@ -37,40 +46,43 @@ spec:
       targetPort: 8181
       nodePort: 31181
   selector:
-    app: rest-entry-point
+    app: java-http-entry-point
+
 ---
+# java-http-propagator deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: propagator
+  name: java-http-propagator
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: propagator
+      app: java-http-propagator
   template:
     metadata:
       labels:
-        app: propagator
+        app: java-http-propagator
     spec:
       containers:
-        - name: propagator
-          image: yevgenykcx/propagator-example
+        - name: java-http-propagator
+          image: yevgenykcx/java-http-propagator
           imagePullPolicy: Always
           ports: 
             - containerPort: 8182
           env:
           - name: server_ip
             value: ""
-          - name: rest-entry-point
-            value: http://rest-entry-point:8181
-          - name: JPA_EXAMPLE_URL
-            value: http://jpa:8183
+          - name: JAVA_HTTP_ENTRY_POINT_URL
+            value: http://java-http-entry-point:8181
+          - name: JAVA_HTTP_SINK_URL
+            value: http://java-http-sink:8183
 ---
+# java-http-propagator service
 apiVersion: v1
 kind: Service
 metadata:
-  name: propagator
+  name: java-http-propagator
 spec:
   type: NodePort
   ports:
@@ -78,40 +90,43 @@ spec:
       targetPort: 8182
       nodePort: 31182
   selector:
-    app: propagator
+    app: java-http-propagator
+
 ---
+# java-http-sink deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jpa
+  name: java-http-sink
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jpa
+      app: java-http-sink
   template:
     metadata:
       labels:
-        app: jpa
+        app: java-http-sink
     spec:
       containers:
-        - name: jpa
-          image: yevgenykcx/jpa-example
+        - name: java-http-sink
+          image: yevgenykcx/java-http-sink
           imagePullPolicy: Always
           ports: 
             - containerPort: 8183
           env:
           - name: server_ip
             value: ""
-          - name: rest-entry-point
-            value: http://rest-entry-point:8181
-          - name: propagator
-            value: http://propagator:8182
+          - name: JAVA_HTTP_ENTRY_POINT_URL
+            value: http://java-http-entry-point:8181
+          - name: JAVA_HTTP_PROPAGATOR_URL
+            value: http://java-http-propagator:8182
 ---
+# java-http-sink service
 apiVersion: v1
 kind: Service
 metadata:
-  name: jpa
+  name: java-http-sink
 spec:
   type: NodePort
   ports:
@@ -119,4 +134,10 @@ spec:
       targetPort: 8183
       nodePort: 31183
   selector:
-    app: jpa
+    app: java-http-sink
+
+################################
+# JAVA Kafka flow applications #
+################################
+
+# TBD...

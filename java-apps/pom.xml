@@ -18,9 +18,9 @@
     </parent>
 
     <modules>
-        <module>jpa-example</module>
-        <module>propagator-example</module>
-        <module>rest-entry-point-example</module>
+        <module>java-http-entry-point</module>
+        <module>java-http-propagator</module>
+        <module>java-http-sink</module>
         <module>kafka-entry-point</module>
         <module>kafka-http-entry-point</module>
         <module>kafka-propagator</module>
