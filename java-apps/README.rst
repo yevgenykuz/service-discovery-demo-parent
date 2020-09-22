@@ -26,8 +26,8 @@ Run manually on Windows
 
 * Download an agent from IAST manager
 * For each application you want to run:
-    * Create an empty "*agent*" folder in the application's folder
-    * Extract the contents of the zipped agent file you've downloaded into the "*agent*" folder
+ * Create an empty "*agent*" folder in the application's folder
+ * Extract the contents of the zipped agent file you've downloaded into the "*agent*" folder
 * In "*java-apps*" folder run "*runAll.bat*"
 
 This will run all applications with the following:
