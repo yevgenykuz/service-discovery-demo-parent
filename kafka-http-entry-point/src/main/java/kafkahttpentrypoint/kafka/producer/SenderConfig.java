@@ -1,8 +1,10 @@
 package kafkahttpentrypoint.kafka.producer;
 
+import kafkahttpentrypoint.properites.RelatedServicesProperties;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,15 +18,15 @@ import java.util.Map;
 @Configuration
 public class SenderConfig {
 
-    @Value("${kafka.server.host}")
-    private String kafkaServerHost;
+    @Autowired
+    RelatedServicesProperties relatedServicesProperties;
 
     @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
         // list of host:port pairs used for establishing the initial connections
         // to the Kakfa cluster
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServerHost);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, relatedServicesProperties.getKafkaServerHost());
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         // value to block, after which it will throw a TimeoutException

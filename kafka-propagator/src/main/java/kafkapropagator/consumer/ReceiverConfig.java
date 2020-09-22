@@ -1,8 +1,10 @@
 package kafkapropagator.consumer;
 
+import kafkapropagator.properites.RelatedServicesProperties;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +20,8 @@ import java.util.Map;
 @EnableKafka
 public class ReceiverConfig {
 
-	@Value("${kafka.server.host}")
-	private String kafkaServerHost;
+	@Autowired
+	RelatedServicesProperties relatedServicesProperties;
 
 	@Value("${kafka.consumer.groupid}")
 	private String kafkaConsumerGroupId;
@@ -29,7 +31,7 @@ public class ReceiverConfig {
 		Map<String, Object> props = new HashMap<>();
 		// list of host:port pairs used for establishing the initial connections
 		// to the Kakfa cluster
-		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServerHost);
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, relatedServicesProperties.getKafkaServerHost());
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, IntegerDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		// consumer groups allow a pool of processes to divide the work of

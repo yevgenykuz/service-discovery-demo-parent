@@ -17,7 +17,7 @@ public class Receiver {
 	@Autowired
 	private ProjectDao projectDao;
 
-	@KafkaListener(topics = "${kafka.consumer.topic}")
+	@KafkaListener(topics = "${related.services.kafka-consumer-topic}")
 	public void receiveMessage(Message message) {
 		Object payload = message.getPayload();
 

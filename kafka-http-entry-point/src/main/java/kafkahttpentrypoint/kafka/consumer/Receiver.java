@@ -13,7 +13,7 @@ public class Receiver {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
     private BlockingQueue<String> receivedMessagesQueue = new ArrayBlockingQueue(1024);
 
-	@KafkaListener(topics = "${kafka.producer.topic}")
+	@KafkaListener(topics = "${related.services.kafka-producer-topic}")
 	public void receiveMessage(Message message) {
 		LOGGER.info("Received Kafka message " + message);
 		Object payload = message.getPayload();
