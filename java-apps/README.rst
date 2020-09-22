@@ -46,13 +46,13 @@ To push Docker images to a different location, change *yevgenykcx* to your needs
 
 .. code-block:: bash
 
-    # in http-entry-point folder:
+    # in java-http-entry-point folder:
     docker build -t yevgenykcx/java-http-entry-point .
     docker push yevgenykcx/java-http-entry-point
-    # in http-propagator folder:
+    # in java-http-propagator folder:
     docker build -t yevgenykcx/java-http-propagator .
     docker push yevgenykcx/java-http-propagator
-    # in http-sink folder:
+    # in java-http-sink folder:
     docker build -t yevgenykcx/java-http-sink .
     docker push yevgenykcx/java-http-sink
 
