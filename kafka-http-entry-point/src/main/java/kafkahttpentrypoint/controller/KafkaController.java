@@ -2,6 +2,7 @@ package kafkahttpentrypoint.controller;
 
 import kafkahttpentrypoint.kafka.consumer.Receiver;
 import kafkahttpentrypoint.kafka.producer.Sender;
+import kafkahttpentrypoint.properites.RelatedServicesProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,12 @@ public class KafkaController {
     @Autowired
     private Receiver receiver;
 
-    @Value("${kafka.producer.topic}")
-    private String producerTopic;
+    @Autowired
+    RelatedServicesProperties relatedServicesProperties;
 
     @RequestMapping("/send")
     public String sendMessageToKafka(String message) {
-        sender.sendMessage(producerTopic, message);
+        sender.sendMessage(relatedServicesProperties.getKafkaProducerTopic(), message);
         try {
             String receivedMessage = receiver.getReceivedMessagesQueue().poll(10, TimeUnit.SECONDS);
             return "The message \"" + receivedMessage + "\" sent and received successfully";
