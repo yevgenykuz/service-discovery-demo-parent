@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-slim
-EXPOSE 8181
+EXPOSE 8110
 COPY target/java-http-entry-point.jar java-http-entry-point.jar
 COPY start.sh start.sh
 RUN chmod +x start.sh
