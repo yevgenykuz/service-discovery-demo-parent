@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-slim
-EXPOSE 9092 2181
+EXPOSE 8114
 COPY target/java-kafka-entry-point.jar java-kafka-entry-point.jar
 COPY start.sh start.sh
 RUN chmod +x start.sh
