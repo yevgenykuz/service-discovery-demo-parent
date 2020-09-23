@@ -119,7 +119,7 @@ Relevant applications:
 
 To trigger Kafka flows you can do one of the following:
 
-* Send HTTP GET request to http://localhost:8085/kafka/send?message=${text}
+* Send HTTP GET request to http://localhost:8113/kafka/send?message=${text}
 * Produce ${text} to Kafka (topic: entry_point)
 
 Replace *${text}* with the following input to get the relevant vulnerability:

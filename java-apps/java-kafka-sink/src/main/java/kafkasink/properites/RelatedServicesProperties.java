@@ -12,7 +12,7 @@ public class RelatedServicesProperties {
     /**
      * kafka-server-host.
      * <p>
-     * <u>Example:</u> {@code localhost:9092}
+     * <u>Example:</u> {@code localhost:9002}
      */
     private String kafkaServerHost;
 
