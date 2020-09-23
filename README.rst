@@ -92,7 +92,7 @@ Contributors
 License
 -------
 
-`MIT License <https://github.com/yevgenykuz/service-discovery-demo/blob/master/LICENSE>`_
+`MIT License <https://github.com/yevgenykuz/service-discovery-demo-parent/blob/master/LICENSE>`_
 
 
 -----
