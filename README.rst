@@ -36,9 +36,9 @@ Kafka
 ====  ================
 Port  App
 ====  ================
-5110  Zookeeper
-5111  Kafka (listener)
-5112  Kafka-manager
+9000  Kafka-manager
+9001  Zookeeper
+9002  Kafka (listener)
 ====  ================
 
 Java applications
