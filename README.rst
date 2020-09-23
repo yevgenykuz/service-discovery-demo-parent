@@ -87,6 +87,7 @@ Contributors
 * `ofertavivcx <https://github.com/ofertavivcx>`_
 * `asafHalely <https://github.com/asafHalely>`_
 * `snirshemtov <https://github.com/snirshemtov>`_
+* `idantsadok <https://github.com/idantsadok>`_
 
 License
 -------
