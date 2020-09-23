@@ -66,7 +66,7 @@ To push Docker images to a different location, change *yevgenykcx* to your needs
     docker push yevgenykcx/java-kafka-propagator
     # in java-kafka-sink folder:
     docker build -t yevgenykcx/java-kafka-sink .
-    docker push yevgenykcx/java-kafka-entry-sink
+    docker push yevgenykcx/java-kafka-sink
 
 Run with Docker
 ---------------
