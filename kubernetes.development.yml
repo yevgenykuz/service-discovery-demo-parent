@@ -25,14 +25,14 @@ spec:
           image: yevgenykcx/java-http-entry-point
           imagePullPolicy: Always
           ports: 
-            - containerPort: 8181
+            - containerPort: 8110
           env:
           - name: server_ip
             value: ""
           - name: JAVA_HTTP_PROPAGATOR_URL
-            value: http://java-http-propagator:8182
+            value: http://java-http-propagator:8111
           - name: JAVA_HTTP_SINK_URL
-            value: http://java-http-sink:8183
+            value: http://java-http-sink:8112
 ---
 # java-http-entry-point service
 apiVersion: v1
@@ -42,9 +42,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8181
-      targetPort: 8181
-      nodePort: 31181
+    - port: 8110
+      targetPort: 8110
+      nodePort: 31110
   selector:
     app: java-http-entry-point
 
@@ -69,14 +69,14 @@ spec:
           image: yevgenykcx/java-http-propagator
           imagePullPolicy: Always
           ports: 
-            - containerPort: 8182
+            - containerPort: 8111
           env:
           - name: server_ip
             value: ""
           - name: JAVA_HTTP_ENTRY_POINT_URL
-            value: http://java-http-entry-point:8181
+            value: http://java-http-entry-point:8110
           - name: JAVA_HTTP_SINK_URL
-            value: http://java-http-sink:8183
+            value: http://java-http-sink:8112
 ---
 # java-http-propagator service
 apiVersion: v1
@@ -86,9 +86,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8182
-      targetPort: 8182
-      nodePort: 31182
+    - port: 8111
+      targetPort: 8111
+      nodePort: 31111
   selector:
     app: java-http-propagator
 
@@ -113,14 +113,14 @@ spec:
           image: yevgenykcx/java-http-sink
           imagePullPolicy: Always
           ports: 
-            - containerPort: 8183
+            - containerPort: 8112
           env:
           - name: server_ip
             value: ""
           - name: JAVA_HTTP_ENTRY_POINT_URL
-            value: http://java-http-entry-point:8181
+            value: http://java-http-entry-point:8110
           - name: JAVA_HTTP_PROPAGATOR_URL
-            value: http://java-http-propagator:8182
+            value: http://java-http-propagator:8111
 ---
 # java-http-sink service
 apiVersion: v1
@@ -130,9 +130,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8183
-      targetPort: 8183
-      nodePort: 31183
+    - port: 8112
+      targetPort: 8112
+      nodePort: 31112
   selector:
     app: java-http-sink
 
