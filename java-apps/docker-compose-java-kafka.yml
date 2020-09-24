@@ -1,0 +1,87 @@
+version: "3"
+
+networks:
+  java-kafka-net:
+    driver: bridge
+    
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    networks:
+      - java-kafka-net
+    ports:
+      - '9001:9001'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ZOO_PORT_NUMBER=9001
+  kafka:
+    image: 'bitnami/kafka:latest'
+    networks:
+      - java-kafka-net
+    ports:
+      - '9002:9002'
+      - '9003:9003'
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:9001
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_LISTENERS=INTERNAL://:9002,EXTERNAL://:9003
+      - KAFKA_ADVERTISED_LISTENERS=INTERNAL://kafka:9002,EXTERNAL://localhost:9003
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_INTER_BROKER_LISTENER_NAME=INTERNAL
+    depends_on:
+      - zookeeper
+  kafka-manager:
+    image: 'kafkamanager/kafka-manager:latest'
+    networks:
+      - java-kafka-net
+    ports:
+      - '9000:9000'
+    environment:
+      - ZK_HOSTS=zookeeper:9001
+    depends_on:
+      - zookeeper
+  java-kafka-entry-point:
+    image: 'yevgenykcx/java-kafka-http-entry-point:latest'
+    networks:
+      - java-kafka-net
+    ports:
+      - '8113:8113'
+    environment:
+      - KAFKA_SERVER_HOST=kafka:9002
+      - KAFKA_PRODUCER_TOPIC=propagator
+      - server_ip=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+  java-kafka-http-entry-point:
+    image: 'yevgenykcx/java-kafka-entry-point:latest'
+    networks:
+      - java-kafka-net
+    environment:
+      - KAFKA_SERVER_HOST=kafka:9002
+      - KAFKA_PRODUCER_TOPIC=propagator
+      - KAFKA_CONSUMER_TOPIC=entry_point
+      - server_ip=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+  java-kafka-propagator:
+    image: 'yevgenykcx/java-kafka-propagator:latest'
+    networks:
+      - java-kafka-net
+    environment:
+      - KAFKA_SERVER_HOST=kafka:9002
+      - KAFKA_PRODUCER_TOPIC=sink
+      - KAFKA_CONSUMER_TOPIC=propagator
+      - server_ip=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+  java-kafka-sink:
+    image: 'yevgenykcx/java-kafka-sink:latest'
+    networks:
+      - java-kafka-net
+    environment:
+      - KAFKA_SERVER_HOST=kafka:9002
+      - KAFKA_CONSUMER_TOPIC=sink
+      - server_ip=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure

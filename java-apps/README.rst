@@ -9,8 +9,8 @@ This folder includes demo applications written in Java.
 
 .. section-numbering::
 
-Deployment
-==========
+Packaging
+=========
 
 Compile with Maven
 ------------------
@@ -20,24 +20,6 @@ In "*java-apps*" folder:
 .. code-block:: bash
 
     mvn clean install
-
-Run manually on Windows
------------------------
-
-* Download an agent from IAST manager
-* For each application you want to run:
-
-  * Create an empty "*agent*" folder in the application's folder
-  * Extract the contents of the zipped agent file you've downloaded into the "*agent*" folder
-  
-* In "*java-apps*" folder run "*runAll.bat*"
-
-This will run all applications with the following:
-
-* IAST agent attached
-* Agent auto-upgrade disabled
-* Agent log level set to DEBUG
-* Open port for remote debug (see individual "*run.bat*" files for exact port)
 
 Build, tag, and push with Docker
 --------------------------------
@@ -68,27 +50,74 @@ To push Docker images to a different location, change *yevgenykcx* to your needs
     docker build -t yevgenykcx/java-kafka-sink .
     docker push yevgenykcx/java-kafka-sink
 
-Run with Docker
----------------
+Usage
+=====
 
-To run with IAST agent automatically:
+Launching
+---------
+
+Select one of the following options to launch the applications.
+
+Manually on Windows
+~~~~~~~~~~~~~~~~~~~
+
+* Compile with Maven, in "*java-apps*" folder run "*mvn clean install*"
+* Start a local IAST manager instance
+* Download an agent from IAST manager
+* For each application you want to run:
+
+  * Create an empty "*agent*" folder in the application's folder
+  * Extract the contents of the zipped agent file you've downloaded into the "*agent*" folder
+  
+* In "*java-apps*" folder run "*runAll.bat*"
+
+This will run all applications with the following:
+
+* IAST agent attached
+* Agent auto-upgrade disabled
+* Agent log level set to DEBUG
+* Open port for remote debug (see individual "*run.bat*" files for exact port)
+
+Docker-compose
+~~~~~~~~~~~~~~
+
+To run with IAST agent automatically, edit the provided "*.env*" and then:
+
+* HTTP flow applications:
 
 .. code-block:: bash
 
-    # replace ${MANAGER_IP} with an IP or DNS name of a running IAST manager
-    docker run -e server_ip=${MANAGER_IP} --rm -it -p 8183:8183 java-http-sink
-    docker run -e server_ip=${MANAGER_IP} --rm -it -p 8182:8182 java-http-propagator
-    docker run -e server_ip=${MANAGER_IP} --rm -it -p 8181:8181 java-http-entry-point
+    # start:
+    docker-compose -f docker-compose-java-http.yml up -d
+    # check status:
+    docker-compose -f docker-compose-java-http.yml ps
+    # check logs:
+    docker-compose -f docker-compose-java-http.yml logs
+    # stop:
+    docker-compose -f docker-compose-java-http.yml down
 
-An agent will be downloaded from the provided manager before running.
+* Kafka flow applications:
+
+.. code-block:: bash
+
+    # start:
+    docker-compose -f docker-compose-java-kafka.yml up -d
+    # check status:
+    docker-compose -f docker-compose-java-kafka.yml ps
+    # check logs:
+    docker-compose -f docker-compose-java-kafka.yml logs
+    # stop:
+    docker-compose -f docker-compose-java-kafka.yml down
+
+An agent will be downloaded from the configured manager for each application before running.
 
 Flow Triggering
-===============
+---------------
 
 To test locally, make sure all relevant applications are running before triggering flows.
 
 HTTP Flow
----------
+~~~~~~~~~
 
 Relevant applications:
 
@@ -108,7 +137,7 @@ To trigger HTTP flows you can send HTTP GET request as follows:
 Replace *${text}* with any string.
 
 Kafka Flow
-----------
+~~~~~~~~~~
 
 Relevant applications:
 
@@ -120,7 +149,13 @@ Relevant applications:
 To trigger Kafka flows you can do one of the following:
 
 * Send HTTP GET request to http://localhost:8113/kafka/send?message=${text}
-* Produce ${text} to Kafka (topic: entry_point)
+* Produce ${text} to Kafka (topic: entry_point), for example:
+
+.. code-block:: batch
+
+    # in Windows, after navigating to downloaded Kafka folder, run:
+    bin\windows\kafka-console-producer.bat --broker-list localhost:9003 --topic entry_point
+    # then, send your message
 
 Replace *${text}* with the following input to get the relevant vulnerability:
 

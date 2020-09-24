@@ -35,11 +35,12 @@ Kafka
 
 ====  ================
 Port  App
-====  ================
+====  =========================
 9000  Kafka-manager
 9001  Zookeeper
-9002  Kafka (listener)
-====  ================
+9002  Kafka (internal listener)
+9003  Kafka (external listener)
+====  =========================
 
 Java applications
 ~~~~~~~~~~~~~~~~~

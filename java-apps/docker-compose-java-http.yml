@@ -1,0 +1,43 @@
+version: "3"
+
+networks:
+  java-http-net:
+    driver: bridge
+
+services:
+  java-http-entry-point:
+    image: 'yevgenykcx/java-http-entry-point:latest'
+    networks:
+      - java-http-net
+    ports:
+      - '8110:8110'
+    environment:
+      - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
+      - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - server_ip=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+  java-http-propagator:
+    image: 'yevgenykcx/java-http-propagator:latest'
+    networks:
+      - java-http-net
+    ports:
+      - '8111:8111'
+    environment:
+      - JAVA_HTTP_ENTRY_POINT_URL_URL=http://java-http-entry-point:8110
+      - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - server_ip=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+  java-http-sink:
+    image: 'yevgenykcx/java-http-sink:latest'
+    networks:
+      - java-http-net
+    ports:
+      - '8112:8112'
+    environment:
+      - JAVA_HTTP_ENTRY_POINT_URL_URL=http://java-http-entry-point:8110
+      - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
+      - server_ip=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
