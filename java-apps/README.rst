@@ -87,8 +87,8 @@ Docker-compose
 To run with IAST agent automatically:
 
 * Start a local IAST manager instance
-* Edit the provided "*.env*" and then if needed
-* HTTP flow applications:
+* Edit the provided "*.env*" if needed
+* HTTP flow environment:
 
 .. code-block:: bash
 
@@ -101,7 +101,7 @@ To run with IAST agent automatically:
     # stop:
     docker-compose -f docker-compose-java-http.yml down
 
-* Kafka flow applications:
+* Kafka flow environment:
 
 .. code-block:: bash
 
@@ -115,8 +115,8 @@ To run with IAST agent automatically:
     docker-compose -f docker-compose-java-kafka.yml down
 
 | An agent will be downloaded from the configured manager for each application before running.
-| Depending on your machine, application startup may take a couple of minutes.
-| To access Kafka manually, use port *9003*.
+| Depending on your machine, full environment startup may take a couple of minutes.
+| To access Kafka manually in Kafka flow, use port *9003*.
 
 Flow Triggering
 ---------------
