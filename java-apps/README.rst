@@ -56,14 +56,14 @@ Usage
 Launching
 ---------
 
-Select one of the following options to launch the applications.
+Choose one of the following options to launch the applications.
 
 Manually on Windows
 ~~~~~~~~~~~~~~~~~~~
 
-* Compile with Maven, in "*java-apps*" folder run "*mvn clean install*"
+* `Compile with Maven`_
 * Start a local IAST manager instance
-* Download an agent from IAST manager
+* Download an agent from IAST manager UI
 * For each application you want to run:
 
   * Create an empty "*agent*" folder in the application's folder
@@ -81,8 +81,10 @@ This will run all applications with the following:
 Docker-compose
 ~~~~~~~~~~~~~~
 
-To run with IAST agent automatically, edit the provided "*.env*" and then:
+To run with IAST agent automatically:
 
+* Start a local IAST manager instanc
+* Edit the provided "*.env*" and then if needed
 * HTTP flow applications:
 
 .. code-block:: bash
