@@ -19,7 +19,10 @@ In "*java-apps*" folder:
 
 .. code-block:: bash
 
+    # if you have maven
     mvn clean install
+    # or, using the wrapper
+    .\mvnw clean install
 
 Build, tag, and push with Docker
 --------------------------------
