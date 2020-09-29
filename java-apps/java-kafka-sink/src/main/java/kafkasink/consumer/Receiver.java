@@ -28,9 +28,6 @@ public class Receiver {
 			performRandom(value);
 		} else if (value.equalsIgnoreCase("SQLI")) {
 			performSqlInjection(value);
-		} else if (value.equalsIgnoreCase("stop")){
-			LOGGER.info("received stop message, program will stop");
-			System.exit(0);
 		} else {
 			LOGGER.info("received message='{}'", message);
 		}
