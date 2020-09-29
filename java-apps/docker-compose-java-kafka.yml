@@ -42,7 +42,7 @@ services:
     depends_on:
       - zookeeper
   java-kafka-entry-point:
-    image: 'yevgenykcx/java-kafka-http-entry-point:latest'
+    image: 'yevgenykcx/java-kafka-entry-point:latest'
     networks:
       - java-kafka-net
     ports:
@@ -54,7 +54,7 @@ services:
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
   java-kafka-http-entry-point:
-    image: 'yevgenykcx/java-kafka-entry-point:latest'
+    image: 'yevgenykcx/java-kafka-http-entry-point:latest'
     networks:
       - java-kafka-net
     environment:
