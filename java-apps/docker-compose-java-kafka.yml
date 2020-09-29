@@ -45,8 +45,6 @@ services:
     image: 'yevgenykcx/java-kafka-entry-point:latest'
     networks:
       - java-kafka-net
-    ports:
-      - '8113:8113'
     environment:
       - KAFKA_SERVER_HOST=kafka:9002
       - KAFKA_PRODUCER_TOPIC=propagator
@@ -57,6 +55,8 @@ services:
     image: 'yevgenykcx/java-kafka-http-entry-point:latest'
     networks:
       - java-kafka-net
+    ports:
+      - '8113:8113'
     environment:
       - KAFKA_SERVER_HOST=kafka:9002
       - KAFKA_PRODUCER_TOPIC=propagator
