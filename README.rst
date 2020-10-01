@@ -42,6 +42,16 @@ Port  App
 9003  Kafka (external listener)
 ====  =========================
 
+RabbitMQ
+~~~~~
+
+=====  =========================
+Port   App
+=====  =========================
+15672  RabbitMQ management
+5672   RabbitMQ server
+=====  =========================
+
 Java applications
 ~~~~~~~~~~~~~~~~~
 
