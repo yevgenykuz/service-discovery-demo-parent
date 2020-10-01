@@ -9,6 +9,4 @@ public class JavaRabbitMQHttpEntryPoint {
     public static void main(String[] args) {
         SpringApplication.run(JavaRabbitMQHttpEntryPoint.class, args);
     }
-
-
 }
