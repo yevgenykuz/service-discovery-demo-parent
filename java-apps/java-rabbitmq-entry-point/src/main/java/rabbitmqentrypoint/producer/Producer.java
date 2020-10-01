@@ -18,7 +18,7 @@ public class Producer {
     }
 
     public void send(byte[] message) throws Exception {
-        System.out.println("Sending message...");
+        System.out.println("Sending message... <" + new String(message) + ">");
         rabbitTemplate.convertAndSend(relatedServicesProperties.getRabbitMQProducerQueueName(), message);
     }
 
