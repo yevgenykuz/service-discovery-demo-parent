@@ -9,6 +9,4 @@ public class JavaRabbitMQPropagator {
     public static void main(String[] args) {
         SpringApplication.run(JavaRabbitMQPropagator.class, args);
     }
-
-
 }
