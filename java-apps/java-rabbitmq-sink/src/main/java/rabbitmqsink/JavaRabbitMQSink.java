@@ -9,6 +9,4 @@ public class JavaRabbitMQSink {
     public static void main(String[] args) {
         SpringApplication.run(JavaRabbitMQSink.class, args);
     }
-
-
 }
