@@ -21,16 +21,6 @@ public class BaseConfiguration {
         return new Queue(relatedServicesProperties.getRabbitMQConsumerQueueName(), false);
     }
 
-/*    @Bean
-    TopicExchange exchange() {
-        return new TopicExchange(relatedServicesProperties.getRabbitmqExchange());
-    }
-
-    @Bean
-    Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("foo.bar.#");
-    }*/
-
     @Bean
     MessageListenerAdapter listenerAdapter(Receiver receiver) {
         return new MessageListenerAdapter(receiver, "receiveMessage");
