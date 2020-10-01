@@ -11,9 +11,6 @@ import rabbitmqhttpentrypoint.properites.RelatedServicesProperties;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Home page hybrid.controller class.
- */
 @RestController
 @RequestMapping("/rabbitmq")
 public class RabbitMQController {
