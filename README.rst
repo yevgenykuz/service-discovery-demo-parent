@@ -91,6 +91,19 @@ Port  App                            Remarks
 8420  java-rabitmq-sink				 Reserved
 ====  =============================  ======== 
 
+Node.js applications
+~~~~~~~~~~~~~~~~~~~~
+
+* HTTP access ports:
+
+====  =============================
+Port  App                          
+====  =============================
+5010  node-entry-point
+5011  node-propagator
+5012  node-sink
+====  =============================
+
 Deploy in Minikube
 ------------------
 
@@ -148,18 +161,6 @@ Minikube (cleanup) - remove all pods, deployments, and services:
     kubectl delete --all pods
     kubectl delete --all deployments
     kubectl delete --all services
-
-Node.js applications
-~~~~~~~~~~~~~~~~~~~~
-
-* HTTP access ports:
-
-====  =============================  ========
-Port  App                            Remarks
-====  =============================  ========
-5010  node-entry-point
-5011  node-propagator
-5012  node-sink
 
 Meta
 ====
