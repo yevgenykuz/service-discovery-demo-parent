@@ -49,6 +49,18 @@ To push Docker images to a different location, change *yevgenykcx* to your needs
     # in java-kafka-sink folder:
     docker build -t yevgenykcx/java-kafka-sink .
     docker push yevgenykcx/java-kafka-sink
+    # in java-rabbitmq-http-entry-point folder:
+    docker build -t yevgenykcx/java-rabbitmq-http-entry-point .
+    docker push yevgenykcx/java-rabbitmq-http-entry-point
+    # in java-rabbitmq-entry-point folder:
+    docker build -t yevgenykcx/java-rabbitmq-entry-point .
+    docker push yevgenykcx/java-rabbitmq-entry-point
+    # in java-rabbitmq-propagator folder:
+    docker build -t yevgenykcx/java-rabbitmq-propagator .
+    docker push yevgenykcx/java-rabbitmq-propagator
+    # in java-rabbitmq-sink folder:
+    docker build -t yevgenykcx/java-rabbitmq-sink .
+    docker push yevgenykcx/java-rabbitmq-sink
 
 Usage
 =====
@@ -69,7 +81,7 @@ Manually on Windows
   * Create an empty "*agent*" folder in the application's folder
   * Extract the contents of the zipped agent file you've downloaded into the "*agent*" folder
   
-* In "*java-apps*" folder run "*runAll.bat*"
+* In "*java-apps*" folder run "*runAllHttp.bat*"/"*runAllKafka.bat*"/"*runAllRabbitMQ.bat*"
 
 This will run all applications with the following:
 
@@ -113,7 +125,7 @@ To run with IAST agent automatically:
 
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
-| To access Kafka manually in Kafka flow, use port *9003*.
+| To access Kafka server manually in Kafka flow, use port *9003*.
 
 Flow Triggering
 ---------------
@@ -167,4 +179,6 @@ Replace *${text}* with the following input to get the relevant vulnerability:
 
 * *sqli* -> SQL injection
 * *commandi* -> command injection
+* *sanitized* -> Sanitized SQL call from *java-kafka-sink*
+* *loop* -> Sanitized SQL call from *java-kafka-sink* and a message back to both *entry-point* apps
 * *any other text* -> log forging

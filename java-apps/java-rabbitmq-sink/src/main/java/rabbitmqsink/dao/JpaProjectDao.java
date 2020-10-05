@@ -1,9 +1,9 @@
 package rabbitmqsink.dao;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import rabbitmqsink.model.Project;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -17,28 +17,28 @@ import java.util.Collection;
  * JPA project DAO implementation.
  */
 @Repository
+@Slf4j
 public class JpaProjectDao implements ProjectDao {
-	private static final Logger LOGGER = LoggerFactory.getLogger(JpaProjectDao.class);
-	
-	@PersistenceContext
-	private EntityManager entityManager;
 
-	@Override
-	public Collection<Project> findByNameSafe(String name) {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Project> criteriaQuery = criteriaBuilder.createQuery(Project.class);
-		Metamodel metamodel = entityManager.getMetamodel();
-		EntityType<Project> projectEntity = metamodel.entity(Project.class);
-		Root<Project> projectRoot = criteriaQuery.from(Project.class);
-		criteriaQuery.where(criteriaBuilder.equal(projectRoot.get(projectEntity.getSingularAttribute("name")), name));
-		return entityManager.createQuery(criteriaQuery).getResultList();
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Collection<Project> findByNameUnsafe(String name) {
-		String sql = String.format("SELECT * FROM PROJECTS WHERE name = '%s'", name);
-		LOGGER.debug("findByNameUnsafe: " + sql);
-		return entityManager.createNativeQuery(sql).getResultList();
-	}
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public Collection<Project> findByNameSafe(String name) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Project> criteriaQuery = criteriaBuilder.createQuery(Project.class);
+        Metamodel metamodel = entityManager.getMetamodel();
+        EntityType<Project> projectEntity = metamodel.entity(Project.class);
+        Root<Project> projectRoot = criteriaQuery.from(Project.class);
+        criteriaQuery.where(criteriaBuilder.equal(projectRoot.get(projectEntity.getSingularAttribute("name")), name));
+        return entityManager.createQuery(criteriaQuery).getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Collection<Project> findByNameUnsafe(String name) {
+        String sql = String.format("SELECT * FROM PROJECTS WHERE name = '%s'", name);
+        log.debug("findByNameUnsafe: " + sql);
+        return entityManager.createNativeQuery(sql).getResultList();
+    }
 }
