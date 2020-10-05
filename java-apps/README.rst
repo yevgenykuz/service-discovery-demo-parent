@@ -178,7 +178,7 @@ To trigger Kafka flows you can do one of the following:
 Replace *${text}* with the following input to get the relevant vulnerability:
 
 * *sqli* -> SQL injection
-* *commandi* -> command injection
+* *commandi* -> Command injection
 * *sanitized* -> Sanitized SQL call from *java-kafka-sink*
-* *loop* -> Sanitized SQL call from *java-kafka-sink* and a message back to both *entry-point* apps
-* *any other text* -> log forging
+* *loop* -> Flow to *java-kafka-sink* and then back to both *entry-point* apps
+* *any other text* -> Log forging
