@@ -149,6 +149,18 @@ Minikube (cleanup) - remove all pods, deployments, and services:
     kubectl delete --all deployments
     kubectl delete --all services
 
+Node.js applications
+~~~~~~~~~~~~~~~~~~~~
+
+* HTTP access ports:
+
+====  =============================  ========
+Port  App                            Remarks
+====  =============================  ========
+5010  node-entry-point
+5011  node-propagator
+5012  node-sink
+
 Meta
 ====
 
