@@ -93,7 +93,9 @@ This will run all applications with the following:
 Docker-compose
 ~~~~~~~~~~~~~~
 
-To run with IAST agent automatically:
+| An agent will be downloaded from the configured manager for each application before running.
+| Depending on your machine, full environment startup may take a couple of minutes.
+| To access Kafka server manually in Kafka flow, use port *9003*.
 
 * Start a local IAST manager instance
 * Edit the provided "*.env*" if needed
@@ -123,9 +125,80 @@ To run with IAST agent automatically:
     # stop:
     docker-compose -f docker-compose-java-kafka.yml down
 
+Kubernetes on Docker for Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
 | To access Kafka server manually in Kafka flow, use port *9003*.
+
+* Make sure Kubernetes is enabled in Docker for Windows
+* Make sure kubectl is installed
+* Get k8s dashboard, create a default account:
+
+.. code-block:: bash
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/recommended.yaml
+    kubectl apply -f k8s_create_account.yml
+    kubectl apply -f k8s_create_role.yml
+
+* Get the token of the user you've created:
+
+.. code-block:: bash
+
+    # linux (bash):
+    kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+
+
+.. code-block:: shell
+
+    # Windows (Powershell):
+    kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | sls admin-user | ForEach-Object { $_ -Split '\s+' } | Select -First 1)
+
+* Launch the dashboard and login with your token:
+
+.. code-block:: bash
+
+    # Launch
+    kubectl proxy
+    # Access
+    http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+    # Login with your token
+
+* Set ``KUBERNETES_TRUST_CERTIFICATES=true`` environment variable
+* Start a local IAST manager instance
+* In the "Service Discovery" page, should the auto-connection using .kube config won't work - enter:
+
+.. code-block:: bash
+
+    # Select API Key authentication method
+    # Cluster URL
+    https://kubernetes.docker.internal:6443
+    # API Key
+    *your key*
+
+* Edit the provided "*.env*" if needed
+* HTTP flow environment:
+
+.. code-block:: bash
+
+    # start:
+    docker stack deploy --orchestrator kubernetes --compose-file docker-compose-java-http.yml java-http-stack
+    # check status:
+    docker stack ps java-http-stack
+    # stop:
+    docker stack rm java-http-stack
+
+* Kafka flow environment:
+
+.. code-block:: bash
+
+    # start:
+    docker stack deploy --orchestrator kubernetes --compose-file docker-compose-java-kafka.yml java-kafka-stack
+    # check status:
+    docker stack ps java-kafka-stack
+    # stop:
+    docker stack rm java-kafka-stack
 
 Flow Triggering
 ---------------
