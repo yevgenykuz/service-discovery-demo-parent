@@ -20,12 +20,12 @@ public class Sender {
         future.addCallback(new ListenableFutureCallback<SendResult<Integer, String>>() {
             @Override
             public void onSuccess(SendResult<Integer, String> result) {
-                log.info("sent message='{}' with offset={}", message, result.getRecordMetadata().offset());
+                log.info("Sent message='{}' with offset={}", message, result.getRecordMetadata().offset());
             }
 
             @Override
             public void onFailure(Throwable ex) {
-                log.error("unable to send message='{}'", message, ex);
+                log.error("Unable to send message='{}'", message, ex);
             }
         });
     }

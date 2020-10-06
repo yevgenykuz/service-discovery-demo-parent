@@ -27,7 +27,6 @@ public class Receiver {
     @KafkaListener(topics = "#{relatedServicesProperties.getKafkaConsumerTopic()}")
     public void receiveMessage(Message<?> message) {
         Object payload = message.getPayload();
-
         String value = payload.toString();
         if (value.equalsIgnoreCase("COMMANDI")) {
             performCommandInjection(value);
@@ -45,6 +44,8 @@ public class Receiver {
     }
 
     private void performLoopBackToHttpEntry(String value) {
+        final Collection<Project> result = projectDao.findByNameSafe(value);
+        log.info("Perform sanitized SQL call, input value '{}', output value '{}'", value, result);
         sender.sendMessage(relatedServicesProperties.getKafkaProducerTopic(), value);
     }
 
@@ -61,7 +62,7 @@ public class Receiver {
     private void performRandom(String value) {
         Random rand = new Random();
         String output = value + " " + rand.nextInt();
-        log.info("Perform Random, input value '{}'", output);
+        log.info("Perform random, input value '{}'", output);
     }
 
     private void performCommandInjection(String value) {
