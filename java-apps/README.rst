@@ -97,6 +97,7 @@ Docker-compose
 | Depending on your machine, full environment startup may take a couple of minutes.
 | To access Kafka server manually in Kafka flow, use port *9003*.
 | Do the following steps:
+|
 
 * Start a local IAST manager instance
 * Edit the provided "*.env*" if needed
@@ -132,6 +133,7 @@ Kubernetes on Docker for Windows
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
 | To access Kafka server manually in Kafka flow, use port *9003*.
+| Do the following steps:
 |
 
 * Make sure Kubernetes is enabled in Docker for Windows
