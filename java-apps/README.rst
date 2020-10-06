@@ -127,8 +127,8 @@ Docker-compose
     # stop:
     docker-compose -f docker-compose-java-kafka.yml down
 
-Kubernetes on Docker for Windows
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Kubernetes on Docker Desktop
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
@@ -136,8 +136,20 @@ Kubernetes on Docker for Windows
 | Do the following steps:
 |
 
-* Make sure Kubernetes is enabled in Docker for Windows
-* Make sure kubectl is installed
+* Make sure Kubernetes is enabled in Docker desktop - ``https://docs.docker.com/docker-for-windows/#kubernetes``
+* Make sure kubectl is installed - ``https://kubernetes.io/docs/tasks/tools/install-kubectl/``
+* Make sure helm is installed - ``https://helm.sh/docs/intro/install/``
+* Download compose-for-kubernetes installer from ``https://github.com/docker/compose-on-kubernetes/releases``
+* Create a compose namespace by running ``kubectl create namespace compose``
+* Deploy an etcd instance:
+
+.. code-block:: bash
+
+    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm install etcd-operator stable/etcd-operator --namespace compose
+    kubectl apply -f k8s_etcd.yml
+
+* Deploy Compose on Kubernetes ``installer-[darwin|linux|windows.exe] -namespace=compose -etcd-servers=http://compose-etcd-client:2379``
 * Get k8s dashboard, create a default account:
 
 .. code-block:: bash
@@ -152,7 +164,6 @@ Kubernetes on Docker for Windows
 
     # linux (bash):
     kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
-
 
 .. code-block:: shell
 
