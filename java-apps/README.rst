@@ -179,7 +179,7 @@ Kubernetes on Docker for Windows
     # Cluster URL
     https://kubernetes.docker.internal:6443
     # API Key
-    *your key*
+    *your_key*
 
 * Edit the provided "*.env*" if needed
 * HTTP flow environment:
