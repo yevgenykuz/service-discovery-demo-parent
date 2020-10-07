@@ -244,13 +244,13 @@ Relevant applications:
 To trigger Kafka flows you can do one of the following:
 
 * Send HTTP GET request to http://localhost:8113/kafka/send?message=${text}
-* Produce ${text} to Kafka (topic: entry_point), for example:
+* Produce *${text}* to Kafka (topic: entry_point), for example:
 
 .. code-block:: batch
 
     # in Windows, after navigating to downloaded Kafka folder, run:
     bin\windows\kafka-console-producer.bat --broker-list localhost:9003 --topic entry_point
-    # then, send your message
+    # then, send ${text}
 
 Replace *${text}* with the following input to get the relevant vulnerability:
 
@@ -259,3 +259,4 @@ Replace *${text}* with the following input to get the relevant vulnerability:
 * *sanitized* -> Sanitized SQL call from *java-kafka-sink*
 * *loop* -> Sanitized SQL call from *java-kafka-sink* and then a Kafka message back to both *entry-point* apps
 * *any other text* -> Log forging
+* *split* - **HTTP GET only** -> Split flow from kafka-http-entry-point to kafka-entry-point and kafka-propagator

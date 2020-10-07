@@ -29,12 +29,17 @@ public class KafkaController {
 
     @RequestMapping("/send")
     public String sendMessageToKafka(String message) {
-        sender.sendMessage(relatedServicesProperties.getKafkaProducerTopic(), message);
-        try {
-            String receivedMessage = receiver.getReceivedMessagesQueue().poll(10, TimeUnit.SECONDS);
-            return "The message \"" + receivedMessage + "\" sent and received successfully";
-        } catch (InterruptedException e) {
-            log.error("Kafka message did not received in the time from of 10 seconds", e);
+        if (message.equalsIgnoreCase("SPLIT")) {
+            sender.sendMessage(relatedServicesProperties.getKafkaProducerSplitTopic(), message);
+            return "\"" + message + "\" sent";
+        } else {
+            sender.sendMessage(relatedServicesProperties.getKafkaProducerTopic(), message);
+            try {
+                String receivedMessage = receiver.getReceivedMessagesQueue().poll(10, TimeUnit.SECONDS);
+                return "The message \"" + receivedMessage + "\" sent and received successfully";
+            } catch (InterruptedException e) {
+                log.error("Kafka message did not received in the time from of 10 seconds", e);
+            }
         }
         return "Message could not been sent or received from Kafka, check logs for more information";
     }

@@ -24,6 +24,13 @@ public class RelatedServicesProperties {
     private String kafkaProducerTopic;
 
     /**
+     * Producer topic for split messages.
+     * <p>
+     * <u>Example:</u> {@code split}
+     */
+    private String kafkaProducerSplitTopic;
+
+    /**
      * Consumer topic for looped messages.
      * <p>
      * <u>Example:</u> {@code loop}

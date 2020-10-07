@@ -22,4 +22,16 @@ public class Receiver {
         log.info("received message='{}'", message);
         sender.sendMessage(relatedServicesProperties.getKafkaProducerTopic(), payload);
     }
+
+    @KafkaListener(topics = "#{relatedServicesProperties.getKafkaConsumerSplitTopic()}")
+    public void receiveSplitMessage(Message<?> message) {
+        try {
+            Object payload = message.getPayload();
+            String value = payload.toString();
+            new ProcessBuilder().inheritIO().command("cmd", "/c", "echo input is: " + value).start().waitFor();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        log.info("Received split Kafka message = '{}'", message);
+    }
 }

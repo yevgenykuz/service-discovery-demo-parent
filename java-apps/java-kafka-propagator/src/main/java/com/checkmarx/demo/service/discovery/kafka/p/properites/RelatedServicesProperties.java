@@ -31,6 +31,13 @@ public class RelatedServicesProperties {
     private String kafkaConsumerTopic;
 
     /**
+     * Consumer topic for split messages.
+     * <p>
+     * <u>Example:</u> {@code split}
+     */
+    private String kafkaConsumerSplitTopic;
+
+    /**
      * Kafka consumer group ID.
      * <p>
      * <u>Example:</u> {@code cxiast}
