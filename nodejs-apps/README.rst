@@ -26,14 +26,16 @@ Under nodejs-apps folder, run the following commands for all test applications, 
 Launch
 ======
 
-In case not all applications are running on the same machine please define the following 
-environment variables on all machines so that they can find each other:
+In case not all applications are running on the same machine please define the following
+environment variables on all machines so that they can find each other and the DB:
 
 ``NODEJS_REST_ENTRY_POINT_EXAMPLE_URL`` - Entry point app URL (e.g. http://localhost:5010)
 
 ``NODEJS_REST_PROPAGATOR_EXAMPLE_URL`` - Propagator app URL (e.g. http://localhost:5011)
 
 ``NODEJS_REST_SINK_EXAMPLE_URL``  - Sink app URL (e.g. http://localhost:5012)
+
+``MYSQL_URL`` - MySQL URL (e.g. localhost)
 
 Choose one of the following options to launch the applications:
 
