@@ -147,7 +147,7 @@ Kubernetes on Docker Desktop
 
     helm repo add stable https://kubernetes-charts.storage.googleapis.com/
     helm install etcd-operator stable/etcd-operator --namespace compose
-    kubectl apply -f k8s_etcd.yml
+    kubectl apply -f k8s-etcd.yml
 
 * Deploy Compose on Kubernetes ``installer-[darwin|linux|windows.exe] -namespace=compose -etcd-servers=http://compose-etcd-client:2379``
 * Get k8s dashboard, create a default account:
@@ -155,8 +155,8 @@ Kubernetes on Docker Desktop
 .. code-block:: bash
 
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/recommended.yaml
-    kubectl apply -f k8s_create_account.yml
-    kubectl apply -f k8s_create_role.yml
+    kubectl apply -f k8s-create-account.yml
+    kubectl apply -f k8s-create-role.yml
 
 * Get the token of the user you've created:
 
@@ -192,7 +192,7 @@ Kubernetes on Docker Desktop
     # API Key
     *your_key*
 
-* Edit the provided "*.env*" if needed
+* Set the following environment variable: ``IAST_MANAGER_IP=host.docker.internal``
 * HTTP flow environment:
 
 .. code-block:: bash
