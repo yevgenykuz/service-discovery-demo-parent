@@ -95,12 +95,11 @@ Docker-compose
 
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
-| To access Kafka server manually in Kafka flow, use port *9003*.
 | Do the following steps:
 |
 
 * Start a local IAST manager instance
-* Edit the provided "*.env*" if needed
+* Edit the provided "*.env*" file if needed
 * HTTP flow environment:
 
 .. code-block:: bash
@@ -126,13 +125,13 @@ Docker-compose
     docker-compose -f docker-compose-java-kafka.yml logs
     # stop:
     docker-compose -f docker-compose-java-kafka.yml down
+    # to manually access Kafka server, use port 9003 in your consumer/producer
 
 Kubernetes on Docker Desktop
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
-| To access Kafka server manually in Kafka flow, use port *9003*.
 | Do the following steps:
 |
 
@@ -214,6 +213,7 @@ Kubernetes on Docker Desktop
     docker stack ps java-kafka-stack
     # stop:
     docker stack rm java-kafka-stack
+    # to manually access Kafka server, use port 9003 in your consumer/producer
 
 Flow Triggering
 ---------------
