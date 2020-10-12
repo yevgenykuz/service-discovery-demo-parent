@@ -45,7 +45,18 @@ From every one of the test applications run ``npx cxiast index.js`` from its cor
 
 Docker
 ------
-TBD
+Under nodejs-apps folder, run the following command to build a docker image for each test application, see example for node-entry-point:
+
+.. code-block:: shell
+
+  cd node-entry-point
+  sudo docker build --build-arg IAST_MANAGER_IP="http://10.32.11.145:8380" -t node-entry-point .
+
+Run the following command to run the docker container for each test application, see example for node-entry-point:
+
+.. code-block:: shell
+
+  sudo docker run --rm -it -p 5010:5010 node-entry-point
 
 Test
 ====
