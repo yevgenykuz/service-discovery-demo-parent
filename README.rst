@@ -80,7 +80,7 @@ Port  App                            Remarks
 8118  java-rabitmq-entry-point		 Reserved
 8119  java-rabitmq-propagator		 Reserved
 8120  java-rabitmq-sink				 Reserved
-====  =============================  ======== 
+====  =============================  ========
 
 * HTTP remote debug ports:
 
@@ -106,12 +106,21 @@ Node.js applications
 * HTTP access ports:
 
 ====  =============================
-Port  App                          
+Port  App
 ====  =============================
 5010  node-entry-point
 5011  node-propagator
 5012  node-sink
 ====  =============================
+
+MySQL
+~~~~~
+
+=====  =========================
+Port   App
+=====  =========================
+3306   MySQL DB
+=====  =========================
 
 Meta
 ====
