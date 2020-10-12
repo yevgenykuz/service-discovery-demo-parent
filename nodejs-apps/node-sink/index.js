@@ -9,7 +9,7 @@ const END_POINTS = {
 
 function createMySqlConnection() {
     return mysql.createConnection({
-        host: 'localhost',
+        host: process.env.MYSQL_URL || 'localhost',
         user: 'root',
         password: 'root'
     });
