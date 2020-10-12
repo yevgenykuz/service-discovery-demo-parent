@@ -84,21 +84,21 @@ Port  App                            Remarks
 
 * HTTP remote debug ports:
 
-====  =============================  ========
-Port  App                            Remarks
-====  =============================  ========
+====  =============================
+Port  App
+====  =============================
 8410  java-http-entry-point
 8411  java-http-propagator
 8412  java-http-sink
-8413  java-kafka-http-entry-point    Reserved
-8414  java-kafka-entry-point		 Reserved
-8415  java-kafka-propagator			 Reserved
-8416  java-kafka-sink				 Reserved
-8417  java-rabitmq-http-entry-point  Reserved
-8418  java-rabitmq-entry-point		 Reserved
-8419  java-rabitmq-propagator		 Reserved
-8420  java-rabitmq-sink				 Reserved
-====  =============================  ======== 
+8413  java-kafka-http-entry-point
+8414  java-kafka-entry-point
+8415  java-kafka-propagator
+8416  java-kafka-sink
+8417  java-rabitmq-http-entry-point
+8418  java-rabitmq-entry-point
+8419  java-rabitmq-propagator
+8420  java-rabitmq-sink
+====  =============================
 
 Node.js applications
 ~~~~~~~~~~~~~~~~~~~~
