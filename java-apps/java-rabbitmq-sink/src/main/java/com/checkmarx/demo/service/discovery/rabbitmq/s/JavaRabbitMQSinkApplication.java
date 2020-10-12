@@ -1,12 +1,12 @@
-package com.checkmarx.demo.service.discovery.rabbitmq.hep;
+package com.checkmarx.demo.service.discovery.rabbitmq.s;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaRabbitMQHttpEntryPoint {
+public class JavaRabbitMQSinkApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaRabbitMQHttpEntryPoint.class, args);
+        SpringApplication.run(JavaRabbitMQSinkApplication.class, args);
     }
 }

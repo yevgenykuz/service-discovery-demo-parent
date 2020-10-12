@@ -12,17 +12,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ReceiverConfiguration {
 
+    private final RelatedServicesProperties relatedServicesProperties;
+
     @Autowired
-    private RelatedServicesProperties relatedServicesProperties;
+    public ReceiverConfiguration(RelatedServicesProperties relatedServicesProperties) {
+        this.relatedServicesProperties = relatedServicesProperties;
+    }
 
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-                                             MessageListenerAdapter listenerAdapter) {
+    public SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+                                                    MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(relatedServicesProperties.getRabbitMQProducerQueueName());
         container.setMessageListener(listenerAdapter);
         return container;
     }
-
 }

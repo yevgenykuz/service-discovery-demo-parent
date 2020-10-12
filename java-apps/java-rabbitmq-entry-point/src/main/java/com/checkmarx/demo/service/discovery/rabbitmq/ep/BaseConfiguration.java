@@ -13,22 +13,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BaseConfiguration {
 
+    private final RelatedServicesProperties relatedServicesProperties;
+
     @Autowired
-    private RelatedServicesProperties relatedServicesProperties;
+    public BaseConfiguration(RelatedServicesProperties relatedServicesProperties) {
+        this.relatedServicesProperties = relatedServicesProperties;
+    }
 
     @Bean
-    Queue queue() {
+    public Queue queue() {
         return new Queue(relatedServicesProperties.getRabbitMQConsumerQueueName(), false);
     }
 
     @Bean
-    MessageListenerAdapter listenerAdapter(Receiver receiver) {
+    public MessageListenerAdapter listenerAdapter(Receiver receiver) {
         return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(relatedServicesProperties.getRabbitMQServerHost());
+        CachingConnectionFactory connectionFactory =
+                new CachingConnectionFactory(relatedServicesProperties.getRabbitMQServerHost());
         connectionFactory.setUsername("guest");
         connectionFactory.setPassword("guest");
         return connectionFactory;

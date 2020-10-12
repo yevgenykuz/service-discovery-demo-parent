@@ -1,0 +1,6 @@
+DROP TABLE projects;
+CREATE TABLE projects
+(
+    id   INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL
+);

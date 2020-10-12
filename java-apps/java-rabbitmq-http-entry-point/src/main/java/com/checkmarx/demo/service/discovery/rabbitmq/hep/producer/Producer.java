@@ -1,25 +1,27 @@
 package com.checkmarx.demo.service.discovery.rabbitmq.hep.producer;
 
 import com.checkmarx.demo.service.discovery.rabbitmq.hep.properites.RelatedServicesProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class Producer {
 
     private final RabbitTemplate rabbitTemplate;
 
-    @Autowired
-    private RelatedServicesProperties relatedServicesProperties;
+    private final RelatedServicesProperties relatedServicesProperties;
 
-    public Producer(RabbitTemplate rabbitTemplate) {
+    @Autowired
+    public Producer(RabbitTemplate rabbitTemplate, RelatedServicesProperties relatedServicesProperties) {
         this.rabbitTemplate = rabbitTemplate;
+        this.relatedServicesProperties = relatedServicesProperties;
     }
 
-    public void send(byte[] message) throws Exception {
-        System.out.println("Sending message...");
+    public void send(byte[] message) {
+        log.info("Sending message...");
         rabbitTemplate.convertAndSend(relatedServicesProperties.getRabbitMQProducerQueueName(), message);
     }
-
 }

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaRabbitMQEntryPoint {
+public class JavaRabbitMQEntryPointApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaRabbitMQEntryPoint.class, args);
+        SpringApplication.run(JavaRabbitMQEntryPointApplication.class, args);
     }
 }

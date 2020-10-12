@@ -10,14 +10,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ProducerConfiguration {
 
+    private final RelatedServicesProperties relatedServicesProperties;
+
     @Autowired
-    private RelatedServicesProperties relatedServicesProperties;
+    public ProducerConfiguration(RelatedServicesProperties relatedServicesProperties) {
+        this.relatedServicesProperties = relatedServicesProperties;
+    }
 
-	@Bean
-	public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-		RabbitTemplate template = new RabbitTemplate(connectionFactory);
-		template.setRoutingKey(relatedServicesProperties.getRabbitMQProducerQueueName());
-		return template;
-	}
-
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        template.setRoutingKey(relatedServicesProperties.getRabbitMQProducerQueueName());
+        return template;
+    }
 }

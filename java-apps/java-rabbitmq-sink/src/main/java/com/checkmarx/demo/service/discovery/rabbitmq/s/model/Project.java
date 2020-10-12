@@ -1,33 +1,17 @@
 package com.checkmarx.demo.service.discovery.rabbitmq.s.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
-/**
- * Product class.
- */
 @Entity
 @Table(name = "projects")
+@Data
 public class Project {
-    @Id
-    private Long id;
-
-    private String name;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId() {
-        return id;
-    }
+    private Long id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 }
