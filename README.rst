@@ -3,6 +3,9 @@ Service Discovery Demo
 
 | This project includes demo applications and configuration to demo Checkmarx service discovery on kubernetes.
 | **Security note: These applications are vulnerable by design. Do not use them as reference for secured applications.**
+
+|ci|
+
 -----
 
 .. contents::
@@ -141,3 +144,8 @@ License
 
 
 -----
+
+
+.. |ci| image:: https://github.com/yevgenykuz/service-discovery-demo-parent/workflows/Java%20-%20all%20JDKs%20on%20all%20OSs/badge.svg
+    :target: https://github.com/yevgenykuz/service-discovery-demo-parent/actions
+    :alt: Github CI
