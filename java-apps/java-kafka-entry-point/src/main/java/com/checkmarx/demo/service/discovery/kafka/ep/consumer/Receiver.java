@@ -27,21 +27,34 @@ public class Receiver {
 
     @KafkaListener(topics = "#{relatedServicesProperties.getKafkaConsumerLoopTopic()}")
     public void receiveLoopedMessage(Message<?> message) {
-        Random rand = new Random();
-        String payload = (String) message.getPayload();
-        String output = payload + " " + rand.nextInt();
-        log.info("Received looped Kafka message = '{}'", output);
+        Object payload = message.getPayload();
+        String value = payload.toString();
+        performRandom(value);
+        performCommandInjection(value);
+        log.info("Received looped Kafka message = '{}'", message);
     }
 
     @KafkaListener(topics = "#{relatedServicesProperties.getKafkaConsumerSplitTopic()}")
     public void receiveSplitMessage(Message<?> message) {
-        try {
-            Object payload = message.getPayload();
-            String value = payload.toString();
-            new ProcessBuilder().inheritIO().command("cmd", "/c", "echo input is: " + value).start().waitFor();
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
+        Object payload = message.getPayload();
+        String value = payload.toString();
+        performRandom(value);
+        performCommandInjection(value);
         log.info("Received split Kafka message = '{}'", message);
+    }
+
+    private void performRandom(String value) {
+        Random rand = new Random();
+        String output = value + " " + rand.nextInt();
+        log.info("Perform random, input value '{}'", output);
+    }
+
+    private void performCommandInjection(String value) {
+        try {
+            new ProcessBuilder().inheritIO().command("cmd", "/c", "echo input is: " + value).start().waitFor();
+            log.info("Perform command injection, input value '{}'", value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
