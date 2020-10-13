@@ -95,12 +95,11 @@ Docker-compose
 
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
-| To access Kafka server manually in Kafka flow, use port *9003*.
 | Do the following steps:
 |
 
 * Start a local IAST manager instance
-* Edit the provided "*.env*" if needed
+* Edit the provided "*.env*" file if needed
 * HTTP flow environment:
 
 .. code-block:: bash
@@ -126,25 +125,37 @@ Docker-compose
     docker-compose -f docker-compose-java-kafka.yml logs
     # stop:
     docker-compose -f docker-compose-java-kafka.yml down
+    # to manually access Kafka server, use port 9003 in your consumer/producer
 
-Kubernetes on Docker for Windows
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Kubernetes on Docker Desktop
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
-| To access Kafka server manually in Kafka flow, use port *9003*.
 | Do the following steps:
 |
 
-* Make sure Kubernetes is enabled in Docker for Windows
-* Make sure kubectl is installed
+* Make sure Kubernetes is enabled in Docker desktop - ``https://docs.docker.com/docker-for-windows/#kubernetes``
+* Make sure kubectl is installed - ``https://kubernetes.io/docs/tasks/tools/install-kubectl/``
+* Make sure helm is installed - ``https://helm.sh/docs/intro/install/``
+* Download compose-for-kubernetes installer from ``https://github.com/docker/compose-on-kubernetes/releases``
+* Create a compose namespace by running ``kubectl create namespace compose``
+* Deploy an etcd instance:
+
+.. code-block:: bash
+
+    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm install etcd-operator stable/etcd-operator --namespace compose
+    kubectl apply -f k8s-etcd.yml
+
+* Deploy Compose on Kubernetes ``installer-[darwin|linux|windows.exe] -namespace=compose -etcd-servers=http://compose-etcd-client:2379``
 * Get k8s dashboard, create a default account:
 
 .. code-block:: bash
 
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/recommended.yaml
-    kubectl apply -f k8s_create_account.yml
-    kubectl apply -f k8s_create_role.yml
+    kubectl apply -f k8s-create-account.yml
+    kubectl apply -f k8s-create-role.yml
 
 * Get the token of the user you've created:
 
@@ -152,7 +163,6 @@ Kubernetes on Docker for Windows
 
     # linux (bash):
     kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
-
 
 .. code-block:: shell
 
@@ -181,7 +191,7 @@ Kubernetes on Docker for Windows
     # API Key
     *your_key*
 
-* Edit the provided "*.env*" if needed
+* Set ``IAST_MANAGER_IP=host.docker.internal`` environment variable
 * HTTP flow environment:
 
 .. code-block:: bash
@@ -203,6 +213,7 @@ Kubernetes on Docker for Windows
     docker stack ps java-kafka-stack
     # stop:
     docker stack rm java-kafka-stack
+    # to manually access Kafka server, use port 9003 in your consumer/producer
 
 Flow Triggering
 ---------------

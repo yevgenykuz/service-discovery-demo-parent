@@ -35,13 +35,11 @@ import java.util.Map;
 @Slf4j
 public class HomeController {
 
-    private final HttpServletRequest request;
     private final RelatedServicesProperties relatedServicesProperties;
     private final CloseableHttpClient httpClient;
 
     @Autowired
-    public HomeController(HttpServletRequest request, RelatedServicesProperties relatedServicesProperties) {
-        this.request = request;
+    public HomeController(RelatedServicesProperties relatedServicesProperties) {
         this.relatedServicesProperties = relatedServicesProperties;
         this.httpClient = HttpClients.createDefault();
     }
@@ -50,7 +48,7 @@ public class HomeController {
     @ResponseBody
     public String forwardInputToNextService(@RequestParam("name") String name,
                                             @RequestParam(required = false) String forwardRequestMethod) {
-        String httpSinkUrl = relatedServicesProperties.getJavaHttpSinkUrl() + "/projects/safe?name=";
+        String httpSinkUrl = relatedServicesProperties.getJavaHttpSinkUrl() + "/projects/unsafe?name=";
         log.info("input entry point - name=" + name + ", forwardRequestMethod=" + forwardRequestMethod);
         if (StringUtils.isEmpty(forwardRequestMethod)) {
             forwardRequestMethod = "GET"; //Backward compatibility
@@ -197,7 +195,7 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public void restEntryPointExample() {
+    public void restEntryPointExample(HttpServletRequest request) {
         log.info("rest-entry-point-example\n" + request.toString());
     }
 

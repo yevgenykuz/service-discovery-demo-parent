@@ -24,13 +24,11 @@ import java.util.Arrays;
 @Slf4j
 public class HomeController {
 
-    private final HttpServletRequest request;
     private final RelatedServicesProperties relatedServicesProperties;
     private final CloseableHttpClient httpClient;
 
     @Autowired
-    public HomeController(HttpServletRequest request, RelatedServicesProperties relatedServicesProperties) {
-        this.request = request;
+    public HomeController(RelatedServicesProperties relatedServicesProperties) {
         this.relatedServicesProperties = relatedServicesProperties;
         this.httpClient = HttpClients.createDefault();
     }
@@ -71,7 +69,7 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public void propagatorExampleIndex() {
+    public void propagatorExampleIndex(HttpServletRequest request) {
         log.info("propagator-example\n" + request.toString());
     }
 
