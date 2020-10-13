@@ -14,7 +14,7 @@ services:
     environment:
       - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
-      - server_ip=${IAST_MANAGER_IP}
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
   java-http-propagator:
@@ -26,7 +26,7 @@ services:
     environment:
       - JAVA_HTTP_ENTRY_POINT_URL_URL=http://java-http-entry-point:8110
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
-      - server_ip=${IAST_MANAGER_IP}
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
   java-http-sink:
@@ -38,6 +38,6 @@ services:
     environment:
       - JAVA_HTTP_ENTRY_POINT_URL_URL=http://java-http-entry-point:8110
       - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
-      - server_ip=${IAST_MANAGER_IP}
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure

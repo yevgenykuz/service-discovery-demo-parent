@@ -51,7 +51,7 @@ services:
       - KAFKA_CONSUMER_LOOP_TOPIC=loop
       - KAFKA_CONSUMER_SPLIT_TOPIC=split
       - KAFKA_PRODUCER_TOPIC=propagator
-      - server_ip=${IAST_MANAGER_IP}
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
   java-kafka-http-entry-point:
@@ -65,7 +65,7 @@ services:
       - KAFKA_CONSUMER_LOOP_TOPIC=loop
       - KAFKA_PRODUCER_TOPIC=propagator
       - KAFKA_PRODUCER_SPLIT_TOPIC=split
-      - server_ip=${IAST_MANAGER_IP}
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
   java-kafka-propagator:
@@ -77,7 +77,7 @@ services:
       - KAFKA_CONSUMER_TOPIC=propagator
       - KAFKA_CONSUMER_SPLIT_TOPIC=split
       - KAFKA_PRODUCER_TOPIC=sink
-      - server_ip=${IAST_MANAGER_IP}
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
   java-kafka-sink:
@@ -88,6 +88,6 @@ services:
       - KAFKA_SERVER_HOST=kafka:9002
       - KAFKA_CONSUMER_TOPIC=sink
       - KAFKA_PRODUCER_TOPIC=loop
-      - server_ip=${IAST_MANAGER_IP}
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
