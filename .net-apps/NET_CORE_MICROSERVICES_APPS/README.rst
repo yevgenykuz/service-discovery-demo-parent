@@ -35,8 +35,8 @@ For the vulnearble flows (SQL INJECTION):
 For the unvulnerable flows (SQL INJECTION):
 		[GET] http://localhost:5551/Entry/Prop/Sink/userInputGet
 		[POST with string in the request body] http://localhost:5551/Entry/Prop/Sink 
-		[PUT with string in the request body] http://localhost:5551/Entry/Sink/Prop/userInputPut
-		[DELETE] http://localhost:5551/Entry/Sink/Prop/userInputDelete
+		[PUT with string in the request body] http://localhost:5551/Entry/Prop/Sink/userInputPut
+		[DELETE] http://localhost:5551/Entry/Prop/Sink/userInputDelete
 
 ***********************************************
 ********** FOR IAST QA & PROGRAMMERS **********
