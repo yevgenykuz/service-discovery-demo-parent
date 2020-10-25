@@ -14,7 +14,7 @@ namespace NET_CORE_PROPOGATOR_APP
     {
         public static void Main(string[] args)
         {
-            string appAddress = Environment.GetEnvironmentVariable("NET_CORE_PROPOGATOR_EXAMPLE_URL");
+            string appAddress = "http://0.0.0.0:5552";
 
             new WebHostBuilder()
             .UseKestrel()
