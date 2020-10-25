@@ -14,7 +14,7 @@ namespace CoreMicroService_B
     {
         public static void Main(string[] args)
         {
-            string appAddress = Environment.GetEnvironmentVariable("NET_CORE_SINK_EXAMPLE_URL");
+            string appAddress = "http://0.0.0.0:5553";
 
             new WebHostBuilder()
             .UseKestrel()

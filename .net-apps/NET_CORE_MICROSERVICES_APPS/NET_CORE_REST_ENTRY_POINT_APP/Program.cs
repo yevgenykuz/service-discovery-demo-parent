@@ -18,7 +18,7 @@ namespace CoreMicroService_A
 
         public static async Task Main(string[] args)
         {
-            string appAddress = Environment.GetEnvironmentVariable("NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL");
+            string appAddress = "http://0.0.0.0:5551";
 
 
             new WebHostBuilder()
