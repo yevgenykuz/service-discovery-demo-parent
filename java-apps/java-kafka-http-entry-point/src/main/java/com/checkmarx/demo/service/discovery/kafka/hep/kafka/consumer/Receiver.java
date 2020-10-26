@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
 
-import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -23,10 +22,14 @@ public class Receiver {
 
     @KafkaListener(topics = "#{relatedServicesProperties.getKafkaConsumerLoopTopic()}")
     public void receiveLoopedMessage(Message<?> message) {
-        Random rand = new Random();
-        String payload = (String) message.getPayload();
-        String output = payload + " " + rand.nextInt();
-        log.info("Received looped Kafka message = '{}'", output);
+        try {
+            Object payload = message.getPayload();
+            String value = payload.toString();
+            new ProcessBuilder().inheritIO().command("cmd", "/c", "echo input is: " + value).start().waitFor();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        log.info("Received looped Kafka message = '{}'", message);
     }
 
     public BlockingQueue<String> getReceivedMessagesQueue() {

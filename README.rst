@@ -22,6 +22,8 @@ Clone the source code
 .. code-block:: bash
 
     git clone https://github.com/yevgenykuz/service-discovery-demo-parent.git
+    
+Specific instructions for every programming language can be found in each folder.
 
 Networking information
 ----------------------

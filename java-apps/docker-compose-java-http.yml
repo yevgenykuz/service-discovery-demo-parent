@@ -24,7 +24,7 @@ services:
     ports:
       - '8111:8111'
     environment:
-      - JAVA_HTTP_ENTRY_POINT_URL_URL=http://java-http-entry-point:8110
+      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
       - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
@@ -36,7 +36,7 @@ services:
     ports:
       - '8112:8112'
     environment:
-      - JAVA_HTTP_ENTRY_POINT_URL_URL=http://java-http-entry-point:8110
+      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
       - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
       - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
