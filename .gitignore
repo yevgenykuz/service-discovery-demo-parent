@@ -10,3 +10,9 @@ logs/
 
 # CxAgent folders:
 agent/
+
+#.net
+bin/
+obj/
+.vs/
+packages/
