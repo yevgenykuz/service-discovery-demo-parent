@@ -1,8 +1,35 @@
-***.NET CORE MICRO SERVICES APP***
+.NET Applications
+#################
 
-REQUIRMENTS
+This folder includes demo applications written in .NET.
+
+-----
+
+.. contents::
+
+.. section-numbering::
+
+Build, tag, and push with Docker
+--------------------------------
+
+To push Docker images to a different location, change *yevgenykcx* to your needs.
+
+.. code-block:: bash
+
+    # in NET_CORE_REST_ENTRY_POINT_APP folder:
+    docker build -t yevgenykcx/dotnet-core-http-entry-point .
+    docker push yevgenykcx/dotnet-core-http-entry-point
+    # in NET_CORE_PROPOGATOR_APP folder:
+    docker build -t yevgenykcx/dotnet-core-http-propagator .
+    docker push yevgenykcx/dotnet-core-http-propagator
+    # in NET_CORE_SINK_APP folder:
+    docker build -t yevgenykcx/dotnet-core-http-sink .
+    docker push yevgenykcx/dotnet-core-http-sink
+
+Requirements
+------------
 - .NET CORE 2.1
-- The following 3 enviornment variables must to be exists, while the varibale values have to be with in this format: "Protocol://ServerIP:ServerPort". For example: http://localhost:5551. Make sure the ports you choosed are available.
+- The following 3 environment variables must to be exists, while the variable values have to be with in this format: "Protocol://ServerIP:ServerPort". For example: http://localhost:5551. Make sure the ports you choosed are available.
 	1. NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL
 	2. NET_CORE_PROPOGATOR_EXAMPLE_URL
 	3. NET_CORE_SINK_EXAMPLE_URL
