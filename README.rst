@@ -70,7 +70,7 @@ To trigger HTTP flows you can send HTTP GET request as follows:
 
 * | java-http-entry-point -> java-propagator -> dotnet-http-entry-point -> dotnet-http-propagator ->
   | nodejs-http-entry-point -> nodejs-http-propagator -> nodejs-http-sink
-  | http://localhost:8110/cross-http/?name=${text}
+  | ``http://localhost:8110/cross-http/?name=${text}``
 
 Replace *${text}* with any string.
 

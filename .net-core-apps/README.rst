@@ -26,6 +26,29 @@ To push docker images to a different location, change *yevgenykcx* to your needs
     docker build -t yevgenykcx/dotnet-core-http-sink .
     docker push yevgenykcx/dotnet-core-http-sink
 
+Launch with docker-compose
+--------------------------
+
+| An agent will be downloaded from the configured manager for each application before running.
+| Depending on your machine, full environment startup may take a couple of minutes.
+| Do the following steps:
+|
+
+* Start a local IAST manager instance
+* Edit the provided "*.env*" file if needed
+* HTTP flow environment:
+
+.. code-block:: bash
+
+    # start:
+    docker-compose -f docker-compose-dotnet-http.yml up -d
+    # check status:
+    docker-compose -f docker-compose-dotnet-http.yml ps
+    # check logs:
+    docker-compose -f docker-compose-dotnet-http.yml logs
+    # stop:
+    docker-compose -f docker-compose-dotnet-http.yml down
+
 Requirements
 ------------
 - .NET CORE 2.1

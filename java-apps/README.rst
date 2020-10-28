@@ -232,13 +232,13 @@ Relevant applications:
 To trigger HTTP flows you can send HTTP GET request as follows:
 
 * | entry-point -> propagator -> sink:
-  | http://localhost:8110/prop-name/?name=${text}
+  | ``http://localhost:8110/prop-name/?name=${text}``
 * | entry-point -> sink:
-  | http://localhost:8110/name/?name=${text}
+  | ``http://localhost:8110/name/?name=${text}``
 * | propagator -> sink:
-  | http://localhost:8111/name?name=${text}
+  | ``http://localhost:8111/name?name=${text}``
 * | sink:
-  | http://localhost:8112/projects/unsafe?name=${text}
+  | ``http://localhost:8112/projects/unsafe?name=${text}``
 
 Replace *${text}* with any string.
 
@@ -254,7 +254,7 @@ Relevant applications:
 
 To trigger Kafka flows you can do one of the following:
 
-* Send HTTP GET request to http://localhost:8113/kafka/send?message=${text}
+* Send HTTP GET request to ``http://localhost:8113/kafka/send?message=${text}``
 * Produce *${text}* to Kafka (topic: entry_point), for example:
 
 .. code-block:: batch
