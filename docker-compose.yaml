@@ -1,0 +1,69 @@
+version: "3"
+
+services:
+
+  java-http-entry-point:
+    image: 'yevgenykcx/java-http-entry-point:latest'
+    ports:
+      - '8110:8110'
+    environment:
+      - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
+      - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+
+  java-http-propagator:
+    image: 'yevgenykcx/java-http-propagator:latest'
+    ports:
+      - '8111:8111'
+    environment:
+      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
+      - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+    
+  java-http-sink:
+    image: 'yevgenykcx/java-http-sink:latest'
+    ports:
+      - '8112:8112'
+    environment:
+      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
+      - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+    
+  dotnet-core-http-entry-point:
+    image: 'yevgenykcx/dotnet-core-http-entry-point'
+    ports:
+      - '5551:5551'
+    environment:
+      - NET_CORE_PROPOGATOR_EXAMPLE_URL=http://dotnet-core-http-propagator:5552
+      - NET_CORE_SINK_EXAMPLE_URL=http://dotnet-core-http-sink:5553
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+    
+  dotnet-core-http-propagator:
+    image: 'yevgenykcx/dotnet-core-http-propagator'
+    ports:
+      - '5552:5552'
+    environment:
+      - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
+      - NET_CORE_SINK_EXAMPLE_URL=http://dotnet-core-http-sink:5553
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+    
+  dotnet-core-http-sink:
+    image: 'yevgenykcx/dotnet-core-http-sink'
+    ports:
+      - '5553:5553'
+    environment:
+      - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
+      - NET_CORE_PROPOGATOR_EXAMPLE_URL=http://dotnet-core-http-propagator:5552
+      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
