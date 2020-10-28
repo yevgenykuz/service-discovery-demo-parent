@@ -48,9 +48,9 @@ Relevant applications:
 * *java-http-entry-point*
 * *java-http-propagator*
 * *java-http-sink*
-* *dotnet-http-entry-point*
-* *dotnet-http-propagator*
-* *dotnet-http-sink*
+* *dotnet-core-http-entry-point*
+* *dotnet-core-http-propagator*
+* *dotnet-core-http-sink*
 * *nodejs-http-entry-point*
 * *nodejs-http-propagator*
 * *nodejs-http-sink*

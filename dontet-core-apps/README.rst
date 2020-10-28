@@ -41,13 +41,13 @@ Launch with docker-compose
 .. code-block:: bash
 
     # start:
-    docker-compose -f docker-compose-dotnet-http.yml up -d
+    docker-compose -f docker-compose-dotnet-core-http.yml up -d
     # check status:
-    docker-compose -f docker-compose-dotnet-http.yml ps
+    docker-compose -f docker-compose-dotnet-core-http.yml ps
     # check logs:
-    docker-compose -f docker-compose-dotnet-http.yml logs
+    docker-compose -f docker-compose-dotnet-core-http.yml logs
     # stop:
-    docker-compose -f docker-compose-dotnet-http.yml down
+    docker-compose -f docker-compose-dotnet-core-http.yml down
 
 Requirements
 ------------
