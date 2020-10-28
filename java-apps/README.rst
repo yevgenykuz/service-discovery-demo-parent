@@ -145,6 +145,7 @@ Kubernetes on docker desktop
 .. code-block:: bash
 
     helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    help repo update
     helm install etcd-operator stable/etcd-operator --namespace compose
     kubectl apply -f k8s-etcd.yml
 
@@ -191,29 +192,39 @@ Kubernetes on docker desktop
     # API Key
     *your_key*
 
-* Set ``IAST_MANAGER_IP=host.docker.internal`` environment variable or set it manually in the relevant docker-compose .yml file
+* Set ``IAST_MANAGER_IP=host.docker.internal`` manually in the relevant docker-compose.yml file
 * HTTP flow environment:
 
 .. code-block:: bash
 
+    # create k8s namespace for this flow:
+    kubectl create namespace java-http-apps
     # start:
-    docker stack deploy --orchestrator kubernetes --compose-file docker-compose-java-http.yml java-http-stack
+    docker stack deploy --namespace java-http-apps --orchestrator kubernetes --compose-file docker-compose-java-http.yml java-http-stack
     # check status:
-    docker stack ps java-http-stack
-    # stop:
-    docker stack rm java-http-stack
+    docker stack ps --namespace java-http-apps java-http-stack
+    # stop and cleanup:
+    docker stack rm --namespace java-http-apps java-http-stack
+    kubectl delete namespace java-http-apps
 
 * Kafka flow environment:
 
 .. code-block:: bash
 
+    # create k8s namespace for this flow:
+    kubectl create namespace java-kafka-apps
     # start:
-    docker stack deploy --orchestrator kubernetes --compose-file docker-compose-java-kafka.yml java-kafka-stack
+    docker stack deploy --namespace java-kafka-apps --orchestrator kubernetes --compose-file docker-compose-java-kafka.yml java-kafka-stack
     # check status:
-    docker stack ps java-kafka-stack
-    # stop:
-    docker stack rm java-kafka-stack
+    docker stack ps --namespace java-kafka-apps java-kafka-stack
+    # stop and cleanup:
+    docker stack rm --namespace java-kafka-apps java-kafka-stack
+    kubectl delete namespace java-kafka-apps
     # to manually access Kafka server, use port 9003 in your consumer/producer
+
+* General cleanup
+
+Remove all pods and services by clicking the ``Reset Kubernetes Cluster`` button in docker desktop k8s settings page.
 
 Flow Triggering
 ---------------
