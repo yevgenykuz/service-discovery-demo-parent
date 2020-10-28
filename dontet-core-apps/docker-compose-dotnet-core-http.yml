@@ -1,8 +1,14 @@
 version: "3"
 
+networks:
+  dotnet-core-http-net:
+    driver: bridge
+
 services:    
   dotnet-core-http-entry-point:
     image: 'yevgenykcx/dotnet-core-http-entry-point'
+    networks:
+      - dotnet-core-http-net
     ports:
       - '5551:5551'
     environment:
@@ -14,6 +20,8 @@ services:
     
   dotnet-core-http-propagator:
     image: 'yevgenykcx/dotnet-core-http-propagator'
+    networks:
+      - dotnet-core-http-net
     ports:
       - '5552:5552'
     environment:
@@ -25,6 +33,8 @@ services:
     
   dotnet-core-http-sink:
     image: 'yevgenykcx/dotnet-core-http-sink'
+    networks:
+      - dotnet-core-http-net
     ports:
       - '5553:5553'
     environment:

@@ -17,6 +17,7 @@ services:
       - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
+
   java-http-propagator:
     image: 'yevgenykcx/java-http-propagator:latest'
     networks:
@@ -29,6 +30,7 @@ services:
       - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
+
   java-http-sink:
     image: 'yevgenykcx/java-http-sink:latest'
     networks:
