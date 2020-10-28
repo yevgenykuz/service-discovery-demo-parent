@@ -128,6 +128,32 @@ Port  App
 5012  node-sink
 ====  =============================
 
+.NET CORE applications
+~~~~~~~~~~~~~~~~~~~~
+
+* HTTP access ports:
+
+====  =============================
+Port  App
+====  =============================
+5551  net-core-entry-point
+5552  net-core-propagator
+5553  net-core-sink
+====  =============================
+
+.NET FRAMEWORK applications
+~~~~~~~~~~~~~~~~~~~~
+
+* HTTP access ports:
+
+====  =============================
+Port  App
+====  =============================
+5561  net-framework-entry-point
+5562  net-framework-propagator
+5563  net-framework-sink
+====  =============================
+
 Meta
 ====
 
