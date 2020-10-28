@@ -27,10 +27,11 @@ services:
     environment:
       - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
       - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
-    
+
   java-http-sink:
     image: 'yevgenykcx/java-http-sink:latest'
     networks:
@@ -43,7 +44,7 @@ services:
       - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
-    
+
   dotnet-core-http-entry-point:
     image: 'yevgenykcx/dotnet-core-http-entry-point'
     networks:
@@ -56,7 +57,7 @@ services:
       - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
-    
+
   dotnet-core-http-propagator:
     image: 'yevgenykcx/dotnet-core-http-propagator'
     networks:
@@ -69,7 +70,7 @@ services:
       - IAST_MANAGER_IP=${IAST_MANAGER_IP}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
-    
+
   dotnet-core-http-sink:
     image: 'yevgenykcx/dotnet-core-http-sink'
     networks:

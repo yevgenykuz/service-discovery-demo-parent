@@ -26,4 +26,11 @@ public class RelatedServicesProperties {
      * <u>Example:</u> {@code http://java-http-sink:8183}
      */
     private String javaHttpSinkUrl;
+
+    /**
+     * dotnet-core-http-entry-point application URL.
+     * <p>
+     * <u>Example:</u> {@code http://dotnet-core-http-entry-point:5551}
+     */
+    private String dotnetCoreHttpEntryPointUrl;
 }

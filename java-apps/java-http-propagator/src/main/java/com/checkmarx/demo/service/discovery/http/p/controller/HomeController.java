@@ -36,27 +36,37 @@ public class HomeController {
     @RequestMapping(path = "/name", method = RequestMethod.GET)
     @ResponseBody
     public String forwardInputToSqlService(@RequestParam("name") String name) {
-        log.info("input entry point - name: " + name);
-        sanitizeAndSend(name);
+        log.info("input propagator - name: " + name);
+        sanitizeAndSend(relatedServicesProperties.getJavaHttpSinkUrl() + "/projects/unsafe?name=", name);
         return "ok";
     }
 
-    private void sanitizeAndSend(String name) {
-        String value = name.replace("'", "''");
+    @RequestMapping(path = "/cross-http", method = RequestMethod.GET)
+    @ResponseBody
+    public String forwardInputToDotnetCoreEntryPoint(@RequestParam("name") String name) {
+        log.info("input propagator - cross-http: " + name);
+        sanitizeAndSend(relatedServicesProperties.getDotnetCoreHttpEntryPointUrl() + "/Entry/Prop?name=", name);
+        return "ok";
+    }
+
+
+    private void sanitizeAndSend(String url, String name) {
+        String sanitized = name.replace("'", "''");
         log.info("Sanitized");
         try {
-            sendGet(value);
+            sendGet(url, sanitized);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void sendGet(String name) throws Exception {
-        HttpGet request = new HttpGet(relatedServicesProperties.getJavaHttpSinkUrl() + "/projects/unsafe?name=" + name);
+    private void sendGet(String url, String name) throws Exception {
+        HttpGet request = new HttpGet(url + name);
         // add request headers
         request.addHeader("custom-key", "checkmarx");
         request.addHeader(HttpHeaders.USER_AGENT, "Chrome");
         try (CloseableHttpResponse response = httpClient.execute(request)) {
+            log.info("sent: " + request.getURI().toURL());
             // Get HttpResponse Status
             log.info(response.getStatusLine().toString());
             HttpEntity entity = response.getEntity();

@@ -44,6 +44,16 @@ public class HomeController {
         this.httpClient = HttpClients.createDefault();
     }
 
+    @RequestMapping("/home")
+    public void restEntryPointExample(HttpServletRequest request) {
+        log.info("rest-entry-point-example\n" + request.toString());
+    }
+
+    @RequestMapping("/")
+    public String showWelcomePage() {
+        return "restEntryPointExample";
+    }
+
     @RequestMapping(path = "/name", method = RequestMethod.GET)
     @ResponseBody
     public String forwardInputToNextService(@RequestParam("name") String name,
@@ -81,6 +91,18 @@ public class HomeController {
         log.info("input entry point - prop-name: " + name);
         try {
             sendGet(relatedServicesProperties.getJavaHttpPropagatorUrl() + "/name?name=" + name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ok";
+    }
+
+    @RequestMapping(path = "/cross-http", method = RequestMethod.GET)
+    @ResponseBody
+    public String forwardInputToPropagatorAndThenToDotnetCoreEntryPoint(@RequestParam("name") String name) {
+        log.info("input entry point - cross-http: " + name);
+        try {
+            sendGet(relatedServicesProperties.getJavaHttpPropagatorUrl() + "/cross-http?name=" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,7 +204,7 @@ public class HomeController {
         }
     }
 
-    public static String getParamsString(Map<String, String> params) throws UnsupportedEncodingException {
+    private static String getParamsString(Map<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         for (Map.Entry<String, String> entry : params.entrySet()) {
             result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
@@ -192,15 +214,5 @@ public class HomeController {
         }
         String resultString = result.toString();
         return resultString.length() > 0 ? resultString.substring(0, resultString.length() - 1) : resultString;
-    }
-
-    @RequestMapping("/home")
-    public void restEntryPointExample(HttpServletRequest request) {
-        log.info("rest-entry-point-example\n" + request.toString());
-    }
-
-    @RequestMapping("/")
-    public String showWelcomePage() {
-        return "restEntryPointExample";
     }
 }
