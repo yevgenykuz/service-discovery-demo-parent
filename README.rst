@@ -25,6 +25,58 @@ Clone the source code
     
 Specific instructions for every programming language can be found in each folder.
 
+Cross language flows
+--------------------
+
+| In addition to the possible flows in every programming language, there are some flows which run across applications
+  written in different programming languages.
+| Application launching can be done manually by following the instructions for every programming language, or by using
+  docker compose files found below.
+| An agent will be downloaded from the configured manager for each application before running.
+| Depending on your machine, full environment startup may take a couple of minutes.
+| Do the following steps before launching the applications:
+|
+
+* Start a local IAST manager instance
+* Edit the provided "*.env*" file if needed
+
+Cross HTTP applications
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Relevant applications:
+
+* *java-http-entry-point*
+* *java-http-propagator*
+* *dotnet-http-entry-point*
+* *dotnet-http-propagator*
+* *nodejs-http-entry-point*
+* *nodejs-http-propagator*
+* *nodejs-http-sink*
+
+Control with docker compose:
+
+.. code-block:: bash
+
+    # start:
+    docker-compose -f docker-compose-cross-http.yml up -d
+    # check status:
+    docker-compose -f docker-compose-cross-http.yml ps
+    # check logs:
+    docker-compose -f docker-compose-cross-http.yml logs
+    # stop:
+    docker-compose -f docker-compose-cross-http.yml down
+
+To trigger HTTP flows you can send HTTP GET request as follows:
+
+* | java-http-entry-point -> java-propagator -> dotnet-http-entry-point -> dotnet-http-propagator ->
+  | nodejs-http-entry-point -> nodejs-http-propagator -> nodejs-http-sink
+  | http://localhost:8110/cross-http/?name=${text}
+
+Replace *${text}* with any string.
+
+Meta
+====
+
 Networking information
 ----------------------
 
@@ -153,9 +205,6 @@ Port  App
 5562  net-framework-propagator
 5563  net-framework-sink
 ====  =============================
-
-Meta
-====
 
 Contributors
 ------------

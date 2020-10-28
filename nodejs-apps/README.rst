@@ -23,10 +23,10 @@ Under nodejs-apps folder, run the following commands for all test applications, 
     cd node-entry-point
     npm install && npm install <MANAGER_ORIGIN>/iast/nodejs
 
-Build, tag, and push with Docker
+Build, tag, and push with docker
 --------------------------------
 
-To push Docker images to a different location, change *yevgenykcx* to your needs.
+To push docker images to a different location, change *yevgenykcx* to your needs.
 
 .. code-block:: bash
 

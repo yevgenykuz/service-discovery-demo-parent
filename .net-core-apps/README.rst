@@ -9,10 +9,10 @@ This folder includes demo applications written in .NET.
 
 .. section-numbering::
 
-Build, tag, and push with Docker
+Build, tag, and push with docker
 --------------------------------
 
-To push Docker images to a different location, change *yevgenykcx* to your needs.
+To push docker images to a different location, change *yevgenykcx* to your needs.
 
 .. code-block:: bash
 

@@ -21,10 +21,10 @@ In "*java-apps*" folder:
 
     .\mvnw clean install
 
-Build, tag, and push with Docker
+Build, tag, and push with docker
 --------------------------------
 
-To push Docker images to a different location, change *yevgenykcx* to your needs.
+To push docker images to a different location, change *yevgenykcx* to your needs.
 
 .. code-block:: bash
 
@@ -127,7 +127,7 @@ Docker-compose
     docker-compose -f docker-compose-java-kafka.yml down
     # to manually access Kafka server, use port 9003 in your consumer/producer
 
-Kubernetes on Docker Desktop
+Kubernetes on docker desktop
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 | An agent will be downloaded from the configured manager for each application before running.
@@ -135,7 +135,7 @@ Kubernetes on Docker Desktop
 | Do the following steps:
 |
 
-* Make sure Kubernetes is enabled in Docker desktop - ``https://docs.docker.com/docker-for-windows/#kubernetes``
+* Make sure Kubernetes is enabled in docker desktop - ``https://docs.docker.com/docker-for-windows/#kubernetes``
 * Make sure kubectl is installed - ``https://kubernetes.io/docs/tasks/tools/install-kubectl/``
 * Make sure helm is installed - ``https://helm.sh/docs/intro/install/``
 * Download compose-for-kubernetes installer from ``https://github.com/docker/compose-on-kubernetes/releases``
