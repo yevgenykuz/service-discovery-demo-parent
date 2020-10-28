@@ -23,6 +23,23 @@ Under nodejs-apps folder, run the following commands for all test applications, 
     cd node-entry-point
     npm install && npm install <MANAGER_ORIGIN>/iast/nodejs
 
+Build, tag, and push with Docker
+--------------------------------
+
+To push Docker images to a different location, change *yevgenykcx* to your needs.
+
+.. code-block:: bash
+
+    # in node-entry-point folder:
+    docker build -t yevgenykcx/node-http-entry-point .
+    docker push yevgenykcx/node-http-entry-point
+    # in node-propagator folder:
+    docker build -t yevgenykcx/node-http-propagator .
+    docker push yevgenykcx/node-http-propagator
+    # in node-sink folder:
+    docker build -t yevgenykcx/node-http-sink .
+    docker push yevgenykcx/node-http-sink
+
 Launch
 ======
 
