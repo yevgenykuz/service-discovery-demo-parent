@@ -92,6 +92,10 @@ For the unvulnerable flows (SQL INJECTION):
 ********** FOR IAST QA & PROGRAMMERS **********
 ***********************************************
  
+CROSS_PLATFORM_API
+	[GET] http://localhost:5551/Entry/Prop?name={string : name}
+		- This Api send Get request to using NET_CORE_PROPOGATOR_APP HttpClient.GetStringAsync, and it send other request to <NODE_ENTRY_POINT>/sendToService2?id={id}
+			
 DEBUG MODE 
 In debug mode, NET_CORE_PROPOGATOR_APP and NET_CORE_SINK_APP will print the uuid & sequence.
 - Add this Environment variable to enable it: NET_CORE_MICRO_SERVICES_DEBUG = 1
