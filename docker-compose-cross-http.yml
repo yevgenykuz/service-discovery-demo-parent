@@ -14,7 +14,7 @@ services:
     environment:
       - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
 
@@ -28,7 +28,7 @@ services:
       - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
       - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
 
@@ -41,7 +41,7 @@ services:
     environment:
       - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
       - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
 
@@ -54,7 +54,7 @@ services:
     environment:
       - NET_CORE_PROPOGATOR_EXAMPLE_URL=http://dotnet-core-http-propagator:5552
       - NET_CORE_SINK_EXAMPLE_URL=http://dotnet-core-http-sink:5553
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
 
@@ -67,7 +67,7 @@ services:
     environment:
       - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
       - NET_CORE_SINK_EXAMPLE_URL=http://dotnet-core-http-sink:5553
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
 
@@ -80,6 +80,45 @@ services:
     environment:
       - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
       - NET_CORE_PROPOGATOR_EXAMPLE_URL=http://dotnet-core-http-propagator:5552
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
+    
+    mysql:
+      image: mysql:5
+      environment: 
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=test
+      expose:
+      - "3306"
+  
+    node-http-entry-point:
+      image: 'yevgenykcx/node-http-entry-point'
+      ports:
+        - '5010:5010'
+      environment:
+        - NODEJS_REST_PROPAGATOR_EXAMPLE_URL=http://node-http-propagator:5011
+        - NODEJS_REST_SINK_EXAMPLE_URL=http://node-http-sink:5012
+        - IAST_MANAGER_URL=${IAST_MANAGER_URL}
+      restart: on-failure
+      
+    node-http-propagator:
+      image: 'yevgenykcx/node-http-propagator'
+      ports:
+        - '5011:5011'
+      environment:
+        - NODEJS_REST_ENTRY_POINT_EXAMPLE_URL=http://node-http-entry-point:5010
+        - NODEJS_REST_SINK_EXAMPLE_URL=http://node-http-sink:5012
+        - IAST_MANAGER_URL=${IAST_MANAGER_URL}
+      restart: on-failure
+      
+    node-http-sink:
+      image: 'yevgenykcx/node-http-sink'
+      ports:
+        - '5012:5012'
+      environment:
+        - NODEJS_REST_ENTRY_POINT_EXAMPLE_URL=http://node-http-entry-point:5010
+        - NODEJS_REST_PROPAGATOR_EXAMPLE_URL=http://node-http-propagator:5011
+        - IAST_MANAGER_URL=${IAST_MANAGER_URL}
+        - MYSQL_URL=mysql
+      restart: on-failure
