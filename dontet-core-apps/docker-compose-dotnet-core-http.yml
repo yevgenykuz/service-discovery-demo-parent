@@ -14,7 +14,7 @@ services:
     environment:
       - NET_CORE_PROPOGATOR_EXAMPLE_URL=http://dotnet-core-http-propagator:5552
       - NET_CORE_SINK_EXAMPLE_URL=http://dotnet-core-http-sink:5553
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
     
@@ -27,7 +27,7 @@ services:
     environment:
       - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
       - NET_CORE_SINK_EXAMPLE_URL=http://dotnet-core-http-sink:5553
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
     
@@ -40,6 +40,6 @@ services:
     environment:
       - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
       - NET_CORE_PROPOGATOR_EXAMPLE_URL=http://dotnet-core-http-propagator:5552
-      - IAST_MANAGER_IP=${IAST_MANAGER_IP}
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
