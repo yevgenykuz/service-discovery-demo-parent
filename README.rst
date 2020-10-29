@@ -88,7 +88,7 @@ IAST manager
 ~~~~~~~~~~~~
 
 * IAST manager IP should be accessible from the docker host machine
-* Expected IAST manager HTTP port is **8380** (without SSL)
+* Default expected IAST manager HTTP port is **8380** (without SSL)
 
 Kafka
 ~~~~~
@@ -119,6 +119,16 @@ etcd
 Port   App
 =====  =========================
 2379   etcd compose client
+=====  =========================
+
+k8s
+~~~
+
+=====  =========================
+Port   App
+=====  =========================
+6443   k8s cluster API
+8001   k8s management portal
 =====  =========================
 
 MySQL

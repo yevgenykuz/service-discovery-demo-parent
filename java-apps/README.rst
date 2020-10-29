@@ -192,7 +192,7 @@ Kubernetes on docker desktop
     # API Key
     *your_key*
 
-* Set ``IAST_MANAGER_IP=host.docker.internal`` manually in the relevant docker-compose.yml file
+* Set ``IAST_MANAGER_URL=http://host.docker.internal:8380`` manually in the relevant docker-compose.yml file
 * HTTP flow environment:
 
 .. code-block:: bash
