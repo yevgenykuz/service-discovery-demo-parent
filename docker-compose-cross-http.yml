@@ -91,7 +91,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=test
     expose:
-    - "3306"
+      - "3306"
 
   node-http-entry-point:
     image: 'yevgenykcx/node-http-entry-point'
