@@ -282,3 +282,26 @@ Replace *${text}* with the following input to get the relevant vulnerability:
 * *loop* -> Sanitized SQL call from *java-kafka-sink* and then a Kafka message back to both *entry-point* apps
 * *any other text* -> Log forging
 * *split* - **HTTP GET only** -> Split flow from kafka-http-entry-point to kafka-entry-point and kafka-propagator
+
+RabbitMQ Flow
+~~~~~~~~~~
+
+Relevant applications:
+
+* *java-rabbitmq-http-entry-point*
+* *java-rabbitmq-entry-point*
+* *java-rabbitmq-propagator*
+* *java-rabbitmq-sink*
+
+To trigger RabbitMQ flows you can do one of the following:
+
+* Send HTTP GET request to ``http://localhost:8117/kafka/send?message=${text}``
+* Replace *${text}* with the following input to get the relevant vulnerability:
+* Produce *${text}* to Rabbit (queue name: entry_point), use RabbitMQ management (if installed) in order to produce kafka message to specific queue. http://localhost:15672/ username/password guest/guest. 
+* Generate RabbitMq application and produce messages.
+
+
+* *sqli* -> SQL injection
+* *commandi* -> Command injection
+* *random* -> Weak random
+* *any other text* -> Log forging
