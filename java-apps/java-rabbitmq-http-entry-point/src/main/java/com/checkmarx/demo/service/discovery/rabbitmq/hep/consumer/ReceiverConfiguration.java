@@ -1,3 +1,4 @@
+/*
 
 package com.checkmarx.demo.service.discovery.rabbitmq.hep.consumer;
 
@@ -29,3 +30,4 @@ public class ReceiverConfiguration {
         return container;
     }
 }
+*/

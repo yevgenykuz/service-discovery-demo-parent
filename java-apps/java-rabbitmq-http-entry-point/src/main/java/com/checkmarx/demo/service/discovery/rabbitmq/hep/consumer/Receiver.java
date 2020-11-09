@@ -1,3 +1,4 @@
+/*
 package com.checkmarx.demo.service.discovery.rabbitmq.hep.consumer;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,3 +23,4 @@ public class Receiver {
         return receivedMessagesQueue;
     }
 }
+*/

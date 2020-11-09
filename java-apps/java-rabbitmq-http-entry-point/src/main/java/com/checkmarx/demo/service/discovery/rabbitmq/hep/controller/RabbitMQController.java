@@ -15,20 +15,17 @@ import java.util.concurrent.TimeUnit;
 public class RabbitMQController {
 
     private final Producer sender;
-    private final Receiver receiver;
 
     @Autowired
-    public RabbitMQController(Producer sender, Receiver receiver) {
+    public RabbitMQController(Producer sender) {
         this.sender = sender;
-        this.receiver = receiver;
     }
 
     @RequestMapping("/send")
     public String sendMessageToRabbitMQ(String message) {
         try {
             sender.send(message.getBytes());
-            String receivedMessage = receiver.getReceivedMessagesQueue().poll(10, TimeUnit.SECONDS);
-            return "The message \"" + receivedMessage + "\" sent and received successfully";
+            return "The message \"" + message + "\" sent successfully";
         } catch (Exception e) {
             log.error("RabbitMQ message did not received in the time from of 10 seconds", e);
         }
