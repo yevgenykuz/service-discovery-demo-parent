@@ -1,0 +1,1 @@
+start "kotlin-http-middleman" /D ".\kotlin-http-middleman\" run.bat
