@@ -1,6 +1,5 @@
 package com.checkmarx.demo.service.discovery.rabbitmq.hep;
 
-import com.checkmarx.demo.service.discovery.rabbitmq.hep.consumer.Receiver;
 import com.checkmarx.demo.service.discovery.rabbitmq.hep.properites.RelatedServicesProperties;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -25,10 +24,10 @@ public class BaseConfiguration {
         return new Queue(relatedServicesProperties.getRabbitMQProducerQueueName(), false);
     }
 
-    @Bean
-    public MessageListenerAdapter listenerAdapter(Receiver receiver) {
+/*    @Bean
+    public MessageListenerAdapter listenerAdapter(Receiver recei) {
         return new MessageListenerAdapter(receiver, "receiveMessage");
-    }
+    }*/
 
     @Bean
     public ConnectionFactory connectionFactory() {
