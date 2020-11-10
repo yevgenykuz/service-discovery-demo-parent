@@ -295,7 +295,7 @@ Relevant applications:
 
 To trigger RabbitMQ flows you can do one of the following:
 
-* Send HTTP GET request to ``http://localhost:8117/kafka/send?message=${text}``
+* Send HTTP GET request to ``http://localhost:8117/rabbitmq/send?message=${text}``
 * Replace *${text}* with the following input to get the relevant vulnerability:
 * Produce *${text}* to Rabbit (queue name: entry_point), use RabbitMQ management (if installed) in order to produce kafka message to specific queue. http://localhost:15672/ username/password guest/guest. 
 * Generate RabbitMq application and produce messages.

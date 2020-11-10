@@ -1,13 +1,10 @@
 package com.checkmarx.demo.service.discovery.rabbitmq.hep.controller;
 
-import com.checkmarx.demo.service.discovery.rabbitmq.hep.consumer.Receiver;
+import com.checkmarx.demo.service.discovery.rabbitmq.hep.producer.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.checkmarx.demo.service.discovery.rabbitmq.hep.producer.Producer;
-
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/rabbitmq")
