@@ -21,7 +21,7 @@ public class Producer {
     }
 
     public void send(byte[] message) {
-        log.info("Sending message...");
+        log.info("Sending message: " + new String(message));
         rabbitTemplate.convertAndSend(relatedServicesProperties.getRabbitMQProducerQueueName(), message);
     }
 }
