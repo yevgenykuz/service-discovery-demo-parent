@@ -21,4 +21,4 @@ export URL=<url for the next app>
 run the app:
 flask run --host 0.0.0.0
 
-try to send http://localhost:5000/incomes?low=5000high=7000
+try to send http://localhost:5000/incomes?low=5000&high=7000

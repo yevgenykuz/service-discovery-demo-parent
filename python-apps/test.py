@@ -4,6 +4,7 @@ import requests
 
 app = Flask(__name__)
 
+
 incomes = [
   { 'description': 'salary', 'amount': 5000 },
 { 'description': 'salary', 'amount': 6000 },
@@ -12,19 +13,20 @@ incomes = [
 ]
 
 
-@app.route('/incomes', methods=['GET'])
+@app.route('/name', methods=['GET'])
 def get_incomes():
-  low = 0 if request.args.get('low') is None else int(request.args.get('low'))
-  high = max(income['amount'] for income in incomes) if request.args.get('high') is None else int(request.args.get('high'))
+  low = 0
+  name = request.args.get('name')
+  high = max(income['amount'] for income in incomes)
   res = [income for income in incomes if income['amount']>=low and income['amount']<=high]
-  print("HEADERS:\n"+str(request.headers)+"\n")
-  print("PARAMETERS:" + "low="+str(low)+", high="+str(high)+"\n")
-  print("METHOD: GET\n")
-  print("URL: "+request.path+"\n")
+  app.logger.info("\nHEADERS:\n"+str(request.headers)+"\n")
+  app.logger.info("PARAMETERS:" + "name="+name+"\n")
+  app.logger.info("METHOD: GET\n")
+  app.logger.info("URL: "+request.path+"\n")
   url = os.environ["URL"]
-  print("URL "+url)
+  app.logger.info("URL "+url)
   #send request to the next app
-  requests.get(url)
+  requests.get(url+"/middleman?name="+name)
 
   #print("URL environment"+os.environ.get('URL'))
   return jsonify(res)
@@ -34,3 +36,8 @@ def get_incomes():
 def add_income():
   incomes.append(request.get_json())
   return '', 20
+
+def main():
+  app.run(host='0.0.0.0')
+if __name__ == '__main__':
+  main()
