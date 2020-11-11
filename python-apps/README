@@ -1,0 +1,24 @@
+python installations:
+======================
+use python 3
+install the following: flask requests:
+pip install requests
+pip install flask
+
+environment variables before running the app:
+on windows:
+set FLASK_ENV=development
+set FLASK_DEBUG=1
+set FLASK_APP=test.py
+set URL=<url for the next app>
+
+on linux:
+export FLASK_ENV=development
+export FLASK_DEBUG=1
+export FLASK_APP=test.py
+export URL=<url for the next app>
+
+run the app:
+flask run --host 0.0.0.0
+
+try to send http://localhost:5000/incomes?low=5000high=7000
