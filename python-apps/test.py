@@ -4,6 +4,7 @@ import requests
 
 app = Flask(__name__)
 
+
 incomes = [
   { 'description': 'salary', 'amount': 5000 },
 { 'description': 'salary', 'amount': 6000 },
@@ -34,3 +35,8 @@ def get_incomes():
 def add_income():
   incomes.append(request.get_json())
   return '', 20
+
+def main():
+  app.run(host='0.0.0.0')
+if __name__ == '__main__':
+  main()
