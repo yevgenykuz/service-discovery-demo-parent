@@ -1,2 +1,2 @@
 #! /bin/bash
-java -jar java-http-entry-point.jar
+java -jar kotlin-http-middleman.jar
