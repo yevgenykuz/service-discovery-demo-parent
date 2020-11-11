@@ -13,7 +13,7 @@ incomes = [
 ]
 
 
-@app.route('/incomes', methods=['GET'])
+@app.route('/name', methods=['GET'])
 def get_incomes():
   low = 0
   name = request.args.get('name')
@@ -26,7 +26,7 @@ def get_incomes():
   url = os.environ["URL"]
   app.logger.info("URL "+url)
   #send request to the next app
-  requests.get(url+"?name="+name)
+  requests.get(url+"/middleman?name="+name)
 
   #print("URL environment"+os.environ.get('URL'))
   return jsonify(res)
