@@ -1,0 +1,70 @@
+version: "3"
+
+networks:
+  java-http-net:
+    driver: bridge
+
+services:
+  java-http-entry-point:
+    image: 'yevgenykcx/java-http-entry-point:latest'
+    networks:
+      - java-http-net
+    ports:
+      - '8110:8110'
+    environment:
+      - JAVA_HTTP_PROPAGATOR_URL=http://python-http-middleman:5000
+      - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+
+  python-http-middleman:
+    image: 'tgillon1/python-http-middleman'
+    networks:
+      - java-http-net
+    ports:
+      - '5000:5000'
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - URL=http://kotlin-http-middleman:9110
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+
+  kotlin-http-middleman:
+    image: 'ofertaviv/kotlin-http-middleman'
+    networks:
+      - java-http-net
+    ports:
+      - '9110:9110'
+    environment:
+      - TARGET_URL=http://java-http-propagator:8111
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+
+  java-http-propagator:
+    image: 'yevgenykcx/java-http-propagator:latest'
+    networks:
+      - java-http-net
+    ports:
+      - '8111:8111'
+    environment:
+      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
+      - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+
+  java-http-sink:
+    image: 'yevgenykcx/java-http-sink:latest'
+    networks:
+    - java-http-net
+    ports:
+    - '8112:8112'
+    environment:
+    - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
+    - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
+    - IAST_MANAGER_URL=${IAST_MANAGER_URL}
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+
