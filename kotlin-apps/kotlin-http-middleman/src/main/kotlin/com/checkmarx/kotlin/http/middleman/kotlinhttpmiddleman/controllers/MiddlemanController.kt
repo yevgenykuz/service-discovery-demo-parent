@@ -33,7 +33,7 @@ class MiddlemanController
     }
 
     fun sendGet(name: String) {
-        val url = URL("$targetUrl/projects/unsafe?name=$name")
+        val url = URL("$targetUrl/name?name=$name")
 
         with(url.openConnection() as HttpURLConnection) {
             requestMethod = "GET"  // optional default is GET
