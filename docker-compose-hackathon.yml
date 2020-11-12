@@ -41,6 +41,8 @@ services:
       - '9110:9110'
     environment:
       - TARGET_URL=http://java-http-propagator:8111
+      - APP_PORT=9110
+      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
 
