@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.net.HttpURLConnection
+import java.net.InetSocketAddress
+import java.net.Proxy
 import java.net.URL
 import javax.servlet.http.HttpServletRequest
 
@@ -34,8 +36,9 @@ class MiddlemanController
 
     fun sendGet(name: String) {
         val url = URL("$targetUrl/name?name=$name")
+        val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("localhost", 1337))
 
-        with(url.openConnection() as HttpURLConnection) {
+        with(url.openConnection(proxy) as HttpURLConnection) {
             requestMethod = "GET"  // optional default is GET
 
             println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
