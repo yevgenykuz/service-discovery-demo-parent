@@ -19,3 +19,7 @@ packages/
 
 # Executables
 *.exe
+
+# Python
+venv/
+__pycache__/
