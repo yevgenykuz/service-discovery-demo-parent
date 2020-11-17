@@ -226,6 +226,7 @@ Contributors
 * `asafHalely <https://github.com/asafHalely>`_
 * `snirshemtov <https://github.com/snirshemtov>`_
 * `idantsadok <https://github.com/idantsadok>`_
+* `talilabok <https://github.com/talilabok>`_
 
 License
 -------
