@@ -6,7 +6,7 @@ else
   cwd=$(pwd)
   mkdir /usr/local/cxiast-agent
   cd /usr/local/cxiast-agent
-  wget "${IAST_MANAGER_URL}/iast/compilation/download/C_SHARP" -O CxAgent.zip
+  wget --no-check-certificate "${IAST_MANAGER_URL}/iast/compilation/download/C_SHARP" -O CxAgent.zip
   unzip CxAgent.zip
   chmod a+w .
   chmod a+x CxIAST_CORE.sh
