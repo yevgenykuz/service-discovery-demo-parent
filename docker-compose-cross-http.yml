@@ -32,19 +32,6 @@ services:
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
 
-  java-http-sink:
-    image: 'yevgenykcx/java-http-sink:latest'
-    networks:
-      - cross-http-net
-    ports:
-      - '8112:8112'
-    environment:
-      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
-      - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
-      - IAST_MANAGER_URL=${IAST_MANAGER_URL}
-    # workaround for concurrent IAST agent download bug:
-    restart: on-failure
-
   dotnet-core-http-entry-point:
     image: 'yevgenykcx/dotnet-core-http-entry-point'
     networks:
