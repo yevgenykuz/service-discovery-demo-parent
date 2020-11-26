@@ -87,6 +87,8 @@ services:
     
   mysql:
     image: mysql:5
+    networks:
+      - cross-http-net
     environment: 
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=test
@@ -95,6 +97,8 @@ services:
 
   node-http-entry-point:
     image: 'yevgenykcx/node-http-entry-point'
+    networks:
+      - cross-http-net
     ports:
       - '5010:5010'
     environment:
@@ -105,6 +109,8 @@ services:
     
   node-http-propagator:
     image: 'yevgenykcx/node-http-propagator'
+    networks:
+      - cross-http-net
     ports:
       - '5011:5011'
     environment:
@@ -115,6 +121,8 @@ services:
     
   node-http-sink:
     image: 'yevgenykcx/node-http-sink'
+    networks:
+      - cross-http-net
     ports:
       - '5012:5012'
     environment:
