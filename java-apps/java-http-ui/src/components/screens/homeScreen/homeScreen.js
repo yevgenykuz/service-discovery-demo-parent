@@ -8,7 +8,7 @@ import useIsLoggedInState from "../../../recoilStates/userAuth";
 function HomeScreen(props) {
 
     const history = useHistory()
-    const [isLoggedIn, setIsLoggedIn] = useIsLoggedInState()
+    const [, setIsLoggedIn] = useIsLoggedInState()
     function handleLogout(){
         Auth.logout()
             .then(()=>{
