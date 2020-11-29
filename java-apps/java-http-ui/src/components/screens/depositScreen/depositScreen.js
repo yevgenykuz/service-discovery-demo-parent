@@ -1,5 +1,6 @@
 import React from 'react';
 import {depositAmount} from "../../../models/API";
+import ScreenWrapper from "../../components";
 
 function DepositScreen(props) {
 
@@ -11,11 +12,14 @@ function DepositScreen(props) {
     }
 
     return (
+        <ScreenWrapper>
         <form onSubmit={handleSubmit}>
             <input type="number" min={1} value={amount} onChange={e=>setAmount(Number(e.target.value))}/>
             <input type="submit"/>
 
         </form>
+        </ScreenWrapper>
+
     );
 }
 

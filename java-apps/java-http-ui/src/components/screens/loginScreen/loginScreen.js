@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {login} from "../../../models/auth";
 import useIsLoggedInState from "../../../recoilStates/userAuth";
+import ScreenWrapper from "../../components";
 
 function LoginScreen(props) {
     const [userName,setUserName] = useState("")
@@ -15,14 +16,14 @@ function LoginScreen(props) {
 
 
     return (
-        <div>
+        <ScreenWrapper>
             <form onSubmit={handleSubmit}>
                 <input type="text" value={userName} onChange={(e)=>setUserName(e.target.value)}/>
                 <input type="password" value={pass} onChange={e=>setPass((e.target.value))}/>
                 <input type="submit"/>
                 <span>{error}</span>
             </form>
-        </div>
+        </ScreenWrapper>
     );
 }
 
