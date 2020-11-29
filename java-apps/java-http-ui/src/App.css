@@ -1,0 +1,12 @@
+
+.App, html, body, div[id="root"] {
+  text-align: center;
+  height: 100vh;
+  padding:0;
+  margin:0;
+}
+
+
+.noOpacity{
+  opacity: 0;
+}

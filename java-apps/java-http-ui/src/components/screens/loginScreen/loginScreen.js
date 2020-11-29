@@ -1,28 +1,42 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {login} from "../../../models/auth";
 import useIsLoggedInState from "../../../recoilStates/userAuth";
 import ScreenWrapper from "../../components";
+import styles from "./login.module.css"
+import {Alert, Button, Card, Form} from "react-bootstrap"
 
 function LoginScreen(props) {
-    const [userName,setUserName] = useState("")
-    const [pass,setPass] = useState("")
-    const [error,setErrorMessage] = useState("")
-    const [_,setIsLoggedIn] = useIsLoggedInState()
+    const [userName, setUserName] = useState("")
+    const [pass, setPass] = useState("")
+    const [error, setErrorMessage] = useState("")
+    const [_, setIsLoggedIn] = useIsLoggedInState()
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault()
-        login(userName,pass).then(()=>setIsLoggedIn(true)).catch(e=>setErrorMessage(e.message));
+        login(userName, pass).then(() => setIsLoggedIn(true)).catch(e => setErrorMessage(e.message));
     }
 
 
     return (
-        <ScreenWrapper>
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={userName} onChange={(e)=>setUserName(e.target.value)}/>
-                <input type="password" value={pass} onChange={e=>setPass((e.target.value))}/>
-                <input type="submit"/>
-                <span>{error}</span>
-            </form>
+        <ScreenWrapper className={styles.component}>
+
+
+            <Form onSubmit={handleSubmit} className={styles.form}>
+                <Form.Group className={styles.field}>
+                    <Form.Label>username</Form.Label>
+                    <Form.Control placeholder="Enter username" className={styles.fieldInput} type="text" value={userName} onChange={(e) => setUserName(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group className={styles.field}>
+                <Form.Label>password</Form.Label>
+                <Form.Control  placeholder="Enter password" className={styles.fieldInput} type="password" value={pass} onChange={e => setPass((e.target.value))}/>
+                </Form.Group>
+
+
+                <Button type="submit" variant={"info"} className={styles.loginButton}>login</Button>
+            </Form>
+            <Alert variant={"danger"} className={`${styles.error} ${error?"":"noOpacity"}`}>{error}</Alert>
+
         </ScreenWrapper>
     );
 }
