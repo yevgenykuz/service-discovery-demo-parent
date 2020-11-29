@@ -1,10 +1,11 @@
 import React from 'react';
+import ScreenWrapper from "../../components";
 
 function BalanceScreen(props) {
     return (
-        <div>
+        <ScreenWrapper>
             balance
-        </div>
+        </ScreenWrapper>
     );
 }
 

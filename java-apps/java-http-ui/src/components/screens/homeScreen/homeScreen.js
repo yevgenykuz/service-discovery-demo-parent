@@ -4,6 +4,8 @@ import {CHECK_BALANCE, DEPOSIT} from "../../../constants/routes";
 import * as Auth from "../../../models/auth";
 import * as routes from "../../../constants/routes";
 import useIsLoggedInState from "../../../recoilStates/userAuth";
+import styles from "./homeScreen.module.css"
+import ScreenWrapper from "../../components";
 
 function HomeScreen(props) {
 
@@ -18,7 +20,7 @@ function HomeScreen(props) {
     }
 
     return (
-        <div>
+        <ScreenWrapper className={styles.component}>
             <Link to={DEPOSIT}>
                 <button>deposit</button>
             </Link>
@@ -27,7 +29,7 @@ function HomeScreen(props) {
             </Link>
             <button onClick={handleLogout}>logout</button>
 
-        </div>
+        </ScreenWrapper>
     );
 }
 
