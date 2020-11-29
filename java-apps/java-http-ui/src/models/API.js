@@ -8,6 +8,7 @@ export function depositAmount(amount) {
     return axios.get(`${DEPOSIT_ROUTE}?name=${amount}`)
 }
 
-export function checkBalance() {
-    return axios.get(CHECK_BALANCE_ROUTE)
+export async function checkBalance() {
+    return new Promise((resolve) => setTimeout(()=>resolve(200),3000))
+    // return await axios.get(CHECK_BALANCE_ROUTE)
 }
