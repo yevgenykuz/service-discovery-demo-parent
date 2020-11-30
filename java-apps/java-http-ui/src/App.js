@@ -6,7 +6,7 @@ import LoginScreen from "./components/screens/loginScreen";
 import HomeScreen from "./components/screens/homeScreen";
 import DepositScreen from "./components/screens/depositScreen";
 import BalanceScreen from "./components/screens/balanceScreen";
-import useIsLoggedInState from "./recoilStates/userAuth";
+import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
 import * as Auth from "./models/auth"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,10 +14,12 @@ import NavBar from "./components/navBar";
 
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useIsLoggedInState()
+    const isLoggedIn = useIsLoggedInState()
+    const [_,setObj] = useUserInfo()
 
     React.useEffect(() => {
-        setIsLoggedIn(Auth.isLoggedIn())
+        if(Auth.isLoggedIn())
+            Auth.getUserInfo().then(({username})=>setObj.setUserName(username))
     }, [])
 
 

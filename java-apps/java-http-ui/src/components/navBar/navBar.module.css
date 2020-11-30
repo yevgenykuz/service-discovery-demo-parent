@@ -9,6 +9,9 @@
 .logoText{
     color:var(--color-logo);
 }
+.buttons{
+    height:100%
+}
 .buttons, .buttons:visited, .buttons:active{
     color:white;
 }
