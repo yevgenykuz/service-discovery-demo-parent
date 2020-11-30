@@ -8,13 +8,10 @@
 .form{
     display: flex;
     flex-direction: column;
-    width: 500px;
-    height:300px;
-    background-color: white;
-    box-shadow: 0 0 3px 1px rgba(0,0,0,.5);
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
+    width: 500px;
+    height:300px;
 }
 .field{
     display: flex;
