@@ -6,7 +6,7 @@ export async function login(username, password) {
 
         if (username === "admin" && password === "123456") {
             localStorage.setItem("user", username)
-            return;
+            return  {username};
         }
          throw new Error("incorrect credentials")
 }

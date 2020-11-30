@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {login} from "../../../models/auth";
-import useIsLoggedInState from "../../../recoilStates/userAuth";
+import {useUserInfo} from "../../../recoilStates/userAuth";
 import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./login.module.css"
 import {Alert, Button, Form} from "react-bootstrap"
@@ -9,11 +9,11 @@ function LoginScreen(props) {
     const [userName, setUserName] = useState("")
     const [pass, setPass] = useState("")
     const [error, setErrorMessage] = useState("")
-    const [_, setIsLoggedIn] = useIsLoggedInState()
+    const [_, setObj] = useUserInfo()
 
     function handleSubmit(e) {
         e.preventDefault()
-        login(userName, pass).then(() => setIsLoggedIn(true)).catch(e => setErrorMessage(e.message));
+        login(userName, pass).then(({username}) => setObj.setUserName(username)).catch(e => setErrorMessage(e.message));
     }
 
 
