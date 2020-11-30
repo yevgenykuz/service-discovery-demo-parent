@@ -12,7 +12,7 @@ function BalanceScreen() {
     const [{username}] = useUserInfo()
 
     React.useEffect(() => {
-        checkBalance().then(value => {
+        checkBalance(username).then(value => {
             setBalance(value);
             setIsLoading(false)
         })
