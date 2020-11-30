@@ -10,7 +10,8 @@
     color:var(--color-logo);
 }
 .buttons{
-    height:100%
+    height:100%;
+    cursor: pointer;
 }
 .buttons, .buttons:visited, .buttons:active{
     color:white;
