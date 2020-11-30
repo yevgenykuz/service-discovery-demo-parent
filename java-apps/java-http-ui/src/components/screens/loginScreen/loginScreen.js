@@ -5,16 +5,21 @@ import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./login.module.css"
 import {Alert, Button, Form, Navbar} from "react-bootstrap"
 import CardWrapper from "../../components/cardWrapper";
+import useLogger from "../../../recoilStates/logger";
 
 function LoginScreen() {
     const [userName, setUserName] = useState("")
     const [pass, setPass] = useState("")
     const [error, setErrorMessage] = useState("")
     const [_, setObj] = useUserInfo()
+    const logger = useLogger()
 
     function handleSubmit(e) {
         e.preventDefault()
-        login(userName, pass).then(({username}) => setObj.setUserName(username)).catch(e => setErrorMessage(e.message));
+        login(userName, pass).then(({username}) => {
+            logger.logEntryPoint(`${userName} has logged in`)
+            setObj.setUserName(username)
+        }).catch(e => setErrorMessage(e.message));
     }
 
 
@@ -24,7 +29,7 @@ function LoginScreen() {
 
             <CardWrapper className={styles.cardWrapper}>
                 <Navbar.Brand as={"div"} className={styles.logoTextContainer}>
-                      <span>Bank</span>
+                    <span>Bank</span>
                 </Navbar.Brand>
 
                 <Form onSubmit={handleSubmit} className={styles.form}>
