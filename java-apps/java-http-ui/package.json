@@ -15,8 +15,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build ./test/",
-
+    "build": "npm-run-all -l deleteOldFiles buildStatic moveBuild",
+    "deleteOldFiles": "del-cli ../java-http-entry-point/src/main/resources/static --force",
+    "buildStatic": "react-scripts build ./test/",
+    "moveBuild": "move-file ./build/ ../java-http-entry-point/src/main/resources/static ",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -39,6 +41,9 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "del-cli": "^3.0.1",
+    "move-file-cli": "^2.0.0",
+    "npm-run-all": "^4.1.5"
   }
 }
