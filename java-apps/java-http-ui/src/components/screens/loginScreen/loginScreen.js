@@ -24,7 +24,7 @@ function LoginScreen() {
 
             <CardWrapper className={styles.cardWrapper}>
                 <Navbar.Brand as={"div"} className={styles.logoTextContainer}>
-                      Checkmarx Bank
+                      <span>Bank</span>
                 </Navbar.Brand>
 
                 <Form onSubmit={handleSubmit} className={styles.form}>

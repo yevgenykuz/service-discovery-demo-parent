@@ -30,7 +30,7 @@ function NavBar() {
 
     return (
         <Navbar className={styles.component} as={"nav"} bg={"dark"} variant={"dark"}>
-            <Navbar.Brand ><span className={styles.logoText}>Checkmarx Bank</span></Navbar.Brand>
+            <Navbar.Brand ><span className={styles.logoText}>Bank</span></Navbar.Brand>
 
             <Nav.Link  as="section">
                 <Link to={HOME}><span className={`${styles.buttons} ${getSelectedClassname(HOME)}`}>Home</span></Link>

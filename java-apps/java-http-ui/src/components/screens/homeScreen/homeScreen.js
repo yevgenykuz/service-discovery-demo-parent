@@ -4,6 +4,8 @@ import ScreenWrapper from "../../components/screenWrapper";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import CardWrapper from "../../components/cardWrapper";
 import HomeMenuButton from "../../components/homeMenuButton";
+import {CHECK_BALANCE, DEPOSIT} from "../../../constants/routes";
+import {Link} from "react-router-dom";
 
 function HomeScreen() {
 
@@ -16,8 +18,8 @@ function HomeScreen() {
             </CardWrapper>
 
         <div className={styles.menu}>
-            <HomeMenuButton label={"Deposit"} iconSrc={"/img/deposit.svg"} />
-            <HomeMenuButton label={"Check Balance"}  iconSrc={"/img/withdraw.svg"} />
+            <Link to={DEPOSIT}><HomeMenuButton label={"Deposit"} iconSrc={"/img/deposit.svg"}  /></Link>
+            <Link to={CHECK_BALANCE}><HomeMenuButton label={"Check Balance"}  iconSrc={"/img/withdraw.svg"} /></Link>
         </div>
 
         </ScreenWrapper>

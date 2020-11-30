@@ -8,14 +8,19 @@
     height: 100vh !important;
 }
 .cardWrapper{
-    padding: 0;
+    padding: 0 !important;
     overflow: hidden;
 }
 .logoTextContainer{
     color:var(--color-logo);
-    /*background: var(--background-color) ;*/
+    background: var(--gray-dark) ;
     width:100%;
-    padding: 20px 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    font-weight: bold;
 }
 .form{
     display: flex;
