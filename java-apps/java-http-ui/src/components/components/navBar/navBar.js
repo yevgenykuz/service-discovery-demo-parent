@@ -20,7 +20,7 @@ function NavBar() {
             .then(()=>{
                 setObj.logout()
                 history.push(routes.LOGIN)
-                logger.logEntryPoint(`${username} has logged out`)
+                logger.logEntryPoint(`"${username}" has logged out`)
             })
     }
 
