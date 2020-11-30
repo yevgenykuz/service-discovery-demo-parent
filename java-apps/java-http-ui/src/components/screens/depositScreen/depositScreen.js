@@ -4,7 +4,7 @@ import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./deposit.module.css"
 import LoadingPopup from "../../components/loadingPopup";
 import CardWrapper from "../../components/cardWrapper";
-import {Alert, Button, Form, Toast} from "react-bootstrap";
+import {Alert, Button, Form} from "react-bootstrap";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 
 const pageStates = {
@@ -27,7 +27,7 @@ function DepositScreen(props) {
 
     return (
         <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
-            {pageState === pageStates.loading ? <LoadingPopup/> :
+            {pageState === pageStates.loading ? <LoadingPopup title={"Processing..."}/> :
                 <div className={styles.contentContainer}>
                     <CardWrapper className={styles.contentCard}>
                         <Form className={styles.form} onSubmit={handleSubmit}>

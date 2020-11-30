@@ -1,5 +1,4 @@
 .component{
-    padding-bottom: 50px;
     box-sizing: border-box;
 }
 
@@ -22,4 +21,5 @@
 
 .popup{
     margin-top: 30px;
+    text-transform: capitalize;
 }
