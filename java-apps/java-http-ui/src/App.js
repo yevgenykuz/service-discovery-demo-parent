@@ -10,6 +10,7 @@ import useIsLoggedInState from "./recoilStates/userAuth";
 import * as Auth from "./models/auth"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from "./components/navBar";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 
 
     return (<div className="App">
+            <NavBar/>
             <Switch>
                 <Route exact path={routes.HOME} component={HomeScreen}/>
                 <Route exact path={routes.DEPOSIT} component={DepositScreen}/>
