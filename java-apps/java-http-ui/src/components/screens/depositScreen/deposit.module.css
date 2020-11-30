@@ -3,13 +3,12 @@
 }
 
 .contentContainer{
-    min-height: 250px;
-    max-height: 250px;
+    min-height: 300px;
+    max-height: 300px;
 }
 .contentCard{
     padding: 40px;
     width: max(200px,40vw);
-
 }
 
 .form{

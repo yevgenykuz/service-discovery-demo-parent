@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {depositAmount} from "../../../models/API";
 import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./deposit.module.css"
@@ -6,28 +6,34 @@ import LoadingPopup from "../../components/loadingPopup";
 import CardWrapper from "../../components/cardWrapper";
 import {Alert, Button, Form} from "react-bootstrap";
 import {useUserInfo} from "../../../recoilStates/userAuth";
+import {useHistory, useLocation} from "react-router-dom";
+import {DEPOSIT_PROCESSING, DEPOSIT_SUCCESSFUL} from "../../../constants/routes";
+import {DEPOSIT_DURATION} from "../../../constants/delayDurations";
 
-const pageStates = {
-    loading: "loading",
-    beforeDeposit: "beforeDeposit",
-    afterDeposit: "afterDeposit"
-}
 
 function DepositScreen(props) {
 
     const [amount, setAmount] = React.useState(1)
-    const [pageState, setPageState] = React.useState(pageStates.beforeDeposit)
+    const [lastDeposit, setLastDeposit] = React.useState(0)
+
     const [{username}] = useUserInfo()
+    let {pathname} = useLocation();
+    const history = useHistory()
+
 
     function handleSubmit(e) {
         e.preventDefault()
-        setPageState(pageStates.loading)
-        depositAmount(amount).then(res => setPageState(pageStates.afterDeposit))
+        history.push(DEPOSIT_PROCESSING)
+        depositAmount(amount).then(res => {
+            setLastDeposit(amount)
+            history.push(DEPOSIT_SUCCESSFUL)
+
+        })
     }
 
     return (
         <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
-            {pageState === pageStates.loading ? <LoadingPopup title={"Processing..."}/> :
+            {pathname === DEPOSIT_PROCESSING ? <LoadingPopup title={"Processing..."}/> :
                 <div className={styles.contentContainer}>
                     <CardWrapper className={styles.contentCard}>
                         <img src={"/img/deposit.svg"} alt={"deposit icon"} className={styles.depositIcon}/>
@@ -42,8 +48,8 @@ function DepositScreen(props) {
 
                         </Form>
                     </CardWrapper>
-                    {pageState === pageStates.afterDeposit &&
-                    <Alert className={styles.popup} variant={"success"}>{username} deposited {amount}$</Alert>}
+                    {pathname === DEPOSIT_SUCCESSFUL &&
+                    <Alert className={styles.popup} variant={"success"}>{username} deposited {lastDeposit}$</Alert>}
                 </div>
 
             }

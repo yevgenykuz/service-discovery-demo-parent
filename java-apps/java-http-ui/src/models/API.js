@@ -1,4 +1,5 @@
 import axios from "axios"
+import {CHECK_BALANCE_DURATION, DEPOSIT_DURATION} from "../constants/delayDurations";
 
 const DEPOSIT_ROUTE = "http://localhost:8110/prop-name"
 const CHECK_BALANCE_ROUTE = "http://localhost:8110/name"
@@ -9,13 +10,13 @@ function timeoutPromise(time = 1000){
 }
 
 export async function depositAmount(amount) {
-    await timeoutPromise(2000)
+    await timeoutPromise(DEPOSIT_DURATION)
     await axios.get(`${DEPOSIT_ROUTE}?name=${amount}`)
 
 }
 
 export async function checkBalance(username='test') {
-     await timeoutPromise(2000)
+     await timeoutPromise(CHECK_BALANCE_DURATION)
      await axios.get(`${CHECK_BALANCE_ROUTE}?name=${username}`)
     return 100
 }
