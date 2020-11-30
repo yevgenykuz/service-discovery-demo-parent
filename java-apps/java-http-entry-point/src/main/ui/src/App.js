@@ -37,6 +37,9 @@ function App() {
                 <Route exact path={routes.HOME} component={HomeScreen}/>
                 <Route path={routes.DEPOSIT} component={DepositScreen}/>
                 <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
+                <Route exact path={routes.LOGS_SINK} >
+
+                </Route>
             </Switch>
         </div>
     );
