@@ -31,6 +31,7 @@ import java.util.Map;
 /**
  * Home page controller class.
  */
+@CrossOrigin(origins = "http://localhost:3000") // TODO: remove
 @RestController
 @Slf4j
 public class HomeController {
@@ -47,11 +48,6 @@ public class HomeController {
     @RequestMapping("/home")
     public void restEntryPointExample(HttpServletRequest request) {
         log.info("rest-entry-point-example\n" + request.toString());
-    }
-
-    @RequestMapping("/")
-    public String showWelcomePage() {
-        return "restEntryPointExample";
     }
 
     @RequestMapping(path = "/name", method = RequestMethod.GET)
