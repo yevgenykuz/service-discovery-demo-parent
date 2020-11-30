@@ -1,0 +1,14 @@
+.component{
+    background-color: white;
+    box-shadow: 0 0 3px 2px rgba(0,0,0,.3);
+    cursor: pointer;
+    transition: all 200ms linear;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.component:hover{
+    transform: scale(1.1);
+}
