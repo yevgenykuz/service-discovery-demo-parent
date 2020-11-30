@@ -1,0 +1,6 @@
+.component {
+    height: calc(100vh - 60px);
+    background-color: var(--color-background);
+    padding: 20px;
+    box-sizing: border-box;
+}

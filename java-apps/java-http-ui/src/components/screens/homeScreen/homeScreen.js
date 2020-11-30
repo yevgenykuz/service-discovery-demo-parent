@@ -5,7 +5,7 @@ import * as Auth from "../../../models/auth";
 import * as routes from "../../../constants/routes";
 import useIsLoggedInState from "../../../recoilStates/userAuth";
 import styles from "./homeScreen.module.css"
-import ScreenWrapper from "../../components";
+import ScreenWrapper from "../../components/screenWrapper";
 
 function HomeScreen(props) {
 

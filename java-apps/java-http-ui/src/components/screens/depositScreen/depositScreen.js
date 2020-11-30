@@ -1,6 +1,6 @@
 import React from 'react';
 import {depositAmount} from "../../../models/API";
-import ScreenWrapper from "../../components";
+import ScreenWrapper from "../../components/screenWrapper";
 
 function DepositScreen(props) {
 
