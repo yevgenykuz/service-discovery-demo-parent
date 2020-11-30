@@ -24,7 +24,7 @@ export default function useLogger() {
     const [state, setState] = useRecoilState(loggerAtom)
 
     function log(type, message) {
-        setState([...state, {
+        setState((currentState)=>[...currentState, {
             message,
             type,
             date: new Date()

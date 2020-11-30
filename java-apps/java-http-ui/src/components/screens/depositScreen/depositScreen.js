@@ -9,6 +9,7 @@ import {useUserInfo} from "../../../recoilStates/userAuth";
 import {useHistory, useLocation} from "react-router-dom";
 import {DEPOSIT_PROCESSING, DEPOSIT_SUCCESSFUL} from "../../../constants/routes";
 import {DEPOSIT_DURATION} from "../../../constants/delayDurations";
+import useLogger from "../../../recoilStates/logger";
 
 
 function DepositScreen(props) {
@@ -19,14 +20,19 @@ function DepositScreen(props) {
     const [{username}] = useUserInfo()
     let {pathname} = useLocation();
     const history = useHistory()
+    const logger = useLogger()
 
 
     function handleSubmit(e) {
         e.preventDefault()
         history.push(DEPOSIT_PROCESSING)
+        logger.logEntryPoint(`deposit for ${username} initiated : ${amount} amount`)
+        logger.logPropagator(`deposit for ${username} processing : ${amount} amount`)
+
         depositAmount(amount).then(res => {
             setLastDeposit(amount)
             history.push(DEPOSIT_SUCCESSFUL)
+            logger.logSink(`deposit for ${username} registered : ${amount} amount`)
 
         })
     }

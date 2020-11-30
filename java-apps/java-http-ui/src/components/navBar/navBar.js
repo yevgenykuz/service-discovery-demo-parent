@@ -6,17 +6,21 @@ import * as Auth from "../../models/auth";
 import * as routes from "../../constants/routes";
 import styles from "./navBar.module.css"
 import {Nav, Navbar} from "react-bootstrap";
+import useLogger from "../../recoilStates/logger";
 
 function NavBar() {
 
     const history = useHistory()
     let location = useLocation();
-    const [, setObj] = useUserInfo()
+    const [{username}, setObj] = useUserInfo()
+    const logger = useLogger()
+
     function handleLogout(){
         Auth.logout()
             .then(()=>{
                 setObj.logout()
                 history.push(routes.LOGIN)
+                logger.logEntryPoint(`${username} has logged out`)
             })
     }
 
