@@ -43,6 +43,7 @@ export default function useLogger() {
         clearPropagators: () => setState(state.filter(x => x.type !== logTypes.propagator)),
         clearEntryPoints: () => setState(state.filter(x => x.type !== logTypes.entryPoint)),
         clearAll: () => setState([]),
+        setLogs : (arr)=> setState(arr)
     }
 
 }
