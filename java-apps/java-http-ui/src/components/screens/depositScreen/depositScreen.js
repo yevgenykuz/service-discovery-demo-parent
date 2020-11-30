@@ -30,6 +30,7 @@ function DepositScreen(props) {
             {pageState === pageStates.loading ? <LoadingPopup title={"Processing..."}/> :
                 <div className={styles.contentContainer}>
                     <CardWrapper className={styles.contentCard}>
+                        <img src={"/img/deposit.svg"} alt={"deposit icon"} className={styles.depositIcon}/>
                         <Form className={styles.form} onSubmit={handleSubmit}>
                             <Form.Group>
                                 <Form.Label>Enter the amount to deposit</Form.Label>

@@ -22,6 +22,8 @@ function BalanceScreen() {
         <ScreenWrapper className={`flexCenter`}>
             {isLoading ? <LoadingPopup/> :
                 <CardWrapper className={styles.content}>
+                    <img src="/img/withdraw.svg" alt="" className={styles.icon}/>
+
                     <h6>{username}'s current balance is:</h6>
                     <p>
                     {/*add up/down arrow icon */}
