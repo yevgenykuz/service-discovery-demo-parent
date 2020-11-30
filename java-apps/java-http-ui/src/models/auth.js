@@ -3,12 +3,11 @@ export function isLoggedIn() {
 }
 
 export async function login(username, password) {
+            if(!username || !password)
+                throw new Error("invalid credentials")
 
-        if (username === "admin" && password === "123456") {
             localStorage.setItem("user", username)
             return  {username};
-        }
-         throw new Error("incorrect credentials")
 }
 
 
