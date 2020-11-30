@@ -1,6 +1,30 @@
 .component {
     height: calc(100vh - 60px);
-    background-color: var(--color-background);
     padding: 20px;
+    position: relative;
+    background-color: var(--color-background);
+
+}
+.content{
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    position: relative;
+
+}
+.background{
     box-sizing: border-box;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    position: absolute;
+
+    top:0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    z-index: 1;
+
+    opacity: .6;
 }
