@@ -1,0 +1,3 @@
+
+export const DEPOSIT_DURATION = 5000
+export const CHECK_BALANCE_DURATION = 3000

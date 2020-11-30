@@ -35,7 +35,7 @@ function App() {
             <NavBar/>
             <Switch>
                 <Route exact path={routes.HOME} component={HomeScreen}/>
-                <Route exact path={routes.DEPOSIT} component={DepositScreen}/>
+                <Route path={routes.DEPOSIT} component={DepositScreen}/>
                 <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
             </Switch>
         </div>
