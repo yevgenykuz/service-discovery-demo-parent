@@ -9,12 +9,12 @@ function timeoutPromise(time = 1000){
 
 export async function depositAmount(amount) {
     await timeoutPromise(2000)
-    // await axios.get(`${DEPOSIT_ROUTE}?name=${amount}`)
+    await axios.get(`${DEPOSIT_ROUTE}?name=${amount}`)
 
 }
 
 export async function checkBalance() {
      await timeoutPromise(2000)
-     // await axios.get(`${CHECK_BALANCE_ROUTE}?name=test`)
+     await axios.get(`${CHECK_BALANCE_ROUTE}?name=test`)
     return 100
 }

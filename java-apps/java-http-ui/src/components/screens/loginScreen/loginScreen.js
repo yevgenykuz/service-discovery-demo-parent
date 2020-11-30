@@ -3,10 +3,10 @@ import {login} from "../../../models/auth";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./login.module.css"
-import {Alert, Button, Form} from "react-bootstrap"
+import {Alert, Button, Form, Navbar} from "react-bootstrap"
 import CardWrapper from "../../components/cardWrapper";
 
-function LoginScreen(props) {
+function LoginScreen() {
     const [userName, setUserName] = useState("")
     const [pass, setPass] = useState("")
     const [error, setErrorMessage] = useState("")
@@ -19,26 +19,32 @@ function LoginScreen(props) {
 
 
     return (
-        <ScreenWrapper className={styles.component}>
+        <ScreenWrapper className={styles.component} containerClassName={styles.containerClassName}>
 
 
-            <CardWrapper>
-            <Form onSubmit={handleSubmit} className={styles.form}>
-                <Form.Group className={styles.field}>
-                    <Form.Label>username</Form.Label>
-                    <Form.Control placeholder="Enter username" className={styles.fieldInput} type="text" value={userName} onChange={(e) => setUserName(e.target.value)}/>
-                </Form.Group>
+            <CardWrapper className={styles.cardWrapper}>
+                <Navbar.Brand as={"div"} className={styles.logoTextContainer}>
+                      Checkmarx Bank
+                </Navbar.Brand>
 
-                <Form.Group className={styles.field}>
-                <Form.Label>password</Form.Label>
-                <Form.Control  placeholder="Enter password" className={styles.fieldInput} type="password" value={pass} onChange={e => setPass((e.target.value))}/>
-                </Form.Group>
+                <Form onSubmit={handleSubmit} className={styles.form}>
+                    <Form.Group className={styles.field}>
+                        <Form.Label>username</Form.Label>
+                        <Form.Control placeholder="Enter username" className={styles.fieldInput} type="text"
+                                      value={userName} onChange={(e) => setUserName(e.target.value)}/>
+                    </Form.Group>
+
+                    <Form.Group className={styles.field}>
+                        <Form.Label>password</Form.Label>
+                        <Form.Control placeholder="Enter password" className={styles.fieldInput} type="password"
+                                      value={pass} onChange={e => setPass((e.target.value))}/>
+                    </Form.Group>
 
 
-                <Button type="submit" variant={"info"} className={styles.loginButton}>login</Button>
-            </Form>
+                    <Button type="submit" variant={"info"} className={styles.loginButton}>login</Button>
+                </Form>
             </CardWrapper>
-            <Alert variant={"danger"} className={`${styles.error} ${error?"":"noOpacity"}`}>{error}</Alert>
+            <Alert variant={"danger"} className={`${styles.error} ${error ? "" : "noOpacity"}`}>{error}</Alert>
 
         </ScreenWrapper>
     );

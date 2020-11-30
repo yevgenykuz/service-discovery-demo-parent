@@ -3,15 +3,28 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.containerClassName{
     height: 100vh !important;
+}
+.cardWrapper{
+    padding: 0;
+    overflow: hidden;
+}
+.logoTextContainer{
+    color:var(--color-logo);
+    /*background: var(--background-color) ;*/
+    width:100%;
+    padding: 20px 0;
 }
 .form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     width: 500px;
-    height:300px;
+    margin: 20px;
+
 }
 .field{
     display: flex;
@@ -25,8 +38,8 @@
 }
 
 .loginButton{
-    width: 60%;
-
+    width: 100%;
+    margin-top: 20px;
 }
 
 .error{
