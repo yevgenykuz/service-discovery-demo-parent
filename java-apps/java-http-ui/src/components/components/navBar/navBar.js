@@ -1,12 +1,12 @@
 import React from 'react';
 import {Link, useHistory,useLocation} from "react-router-dom";
-import {CHECK_BALANCE, DEPOSIT, HOME} from "../../constants/routes";
-import {useUserInfo} from "../../recoilStates/userAuth";
-import * as Auth from "../../models/auth";
-import * as routes from "../../constants/routes";
+import {CHECK_BALANCE, DEPOSIT, HOME} from "../../../constants/routes";
+import {useUserInfo} from "../../../recoilStates/userAuth";
+import * as Auth from "../../../models/auth";
+import * as routes from "../../../constants/routes";
 import styles from "./navBar.module.css"
 import {Nav, Navbar} from "react-bootstrap";
-import useLogger from "../../recoilStates/logger";
+import useLogger from "../../../recoilStates/logger";
 
 function NavBar() {
 

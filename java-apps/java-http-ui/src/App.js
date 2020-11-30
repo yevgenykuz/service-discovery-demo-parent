@@ -10,7 +10,7 @@ import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
 import * as Auth from "./models/auth"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from "./components/navBar";
+import NavBar from "./components/components/navBar";
 
 
 function App() {
