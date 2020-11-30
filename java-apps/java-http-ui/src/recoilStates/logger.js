@@ -35,7 +35,7 @@ export default function useLogger() {
         getSinkLogs: () => state.filter(x => x.type === logTypes.sink),
         getPropagatorLogs: () => state.filter(x => x.type === logTypes.propagator),
         getEntryPointLogs: () => state.filter(x => x.type === logTypes.entryPoint),
-        getAll: () => [...state],
+        logs: state,
         logSink: (message) => log(logTypes.sink, message),
         logPropagator: (message) => log(logTypes.propagator, message),
         logEntryPoint: (message) => log(logTypes.entryPoint, message),

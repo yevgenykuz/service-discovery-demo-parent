@@ -14,7 +14,7 @@ function BalanceScreen() {
     const logger = useLogger()
 
     useEffect(()=>{
-        logger.logEntryPoint(`check balance for ${username} initiated`)
+        logger.logEntryPoint(`check balance for "${username}" initiated`)
 
     },[])
 
@@ -22,7 +22,7 @@ function BalanceScreen() {
         checkBalance(username).then(value => {
             setBalance(value);
             setIsLoading(false)
-            logger.logSink(`check balance for ${username} called `)
+            logger.logSink(`check balance for "${username}" called `)
 
         })
     }, [])

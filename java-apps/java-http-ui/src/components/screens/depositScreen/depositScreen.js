@@ -26,13 +26,13 @@ function DepositScreen(props) {
     function handleSubmit(e) {
         e.preventDefault()
         history.push(DEPOSIT_PROCESSING)
-        logger.logEntryPoint(`deposit for ${username} initiated : ${amount} amount`)
-        logger.logPropagator(`deposit for ${username} processing : ${amount} amount`)
+        logger.logEntryPoint(`deposit for "${username}" initiated : ${amount} amount`)
+        logger.logPropagator(`deposit for "${username}" processing : ${amount} amount`)
 
         depositAmount(amount).then(res => {
             setLastDeposit(amount)
             history.push(DEPOSIT_SUCCESSFUL)
-            logger.logSink(`deposit for ${username} registered : ${amount} amount`)
+            logger.logSink(`deposit for "${username}" registered : ${amount} amount`)
 
         })
     }

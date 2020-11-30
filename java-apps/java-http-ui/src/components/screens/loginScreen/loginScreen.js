@@ -17,7 +17,7 @@ function LoginScreen() {
     function handleSubmit(e) {
         e.preventDefault()
         login(userName, pass).then(({username}) => {
-            logger.logEntryPoint(`${userName} has logged in`)
+            logger.logEntryPoint(`"${userName}" has logged in`)
             setObj.setUserName(username)
         }).catch(e => setErrorMessage(e.message));
     }
