@@ -4,6 +4,7 @@ import {useUserInfo} from "../../../recoilStates/userAuth";
 import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./login.module.css"
 import {Alert, Button, Form} from "react-bootstrap"
+import CardWrapper from "../../components/cardWrapper";
 
 function LoginScreen(props) {
     const [userName, setUserName] = useState("")
@@ -21,6 +22,7 @@ function LoginScreen(props) {
         <ScreenWrapper className={styles.component}>
 
 
+            <CardWrapper>
             <Form onSubmit={handleSubmit} className={styles.form}>
                 <Form.Group className={styles.field}>
                     <Form.Label>username</Form.Label>
@@ -35,6 +37,7 @@ function LoginScreen(props) {
 
                 <Button type="submit" variant={"info"} className={styles.loginButton}>login</Button>
             </Form>
+            </CardWrapper>
             <Alert variant={"danger"} className={`${styles.error} ${error?"":"noOpacity"}`}>{error}</Alert>
 
         </ScreenWrapper>
