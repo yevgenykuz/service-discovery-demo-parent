@@ -1,0 +1,35 @@
+.component{
+    display: flex;
+    flex-direction: column;
+}
+.title{
+
+    margin: 20px 0;
+}
+
+
+.list{
+    overflow-y: scroll;
+    max-height: 80vh;
+}
+.logEntry{
+    display: flex;
+    padding: 5px;
+    align-items: center;
+}
+.logEntry h5{
+    margin: 0 10px;
+}
+
+.dateSpan{
+    max-width:30%;
+    text-align: center;
+    background: var(--gray);
+    color:var(--light);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.messageSpan{
+    flex-grow: 1 ;
+    text-align: start;
+}
