@@ -5,3 +5,13 @@
 
 
 }
+
+.logoText{
+    color:var(--color-logo);
+}
+.buttons, .buttons:visited, .buttons:active{
+    color:white;
+}
+.selected{
+    color:deepskyblue;
+}
