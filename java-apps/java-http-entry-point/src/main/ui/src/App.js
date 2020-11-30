@@ -47,6 +47,13 @@ function App() {
                 <Route exact path={routes.LOGS_SINK} >
                     <LogsScreen title={"Sink Logs"} logs={logger.getSinkLogs()}/>
                 </Route>
+                <Route exact path={routes.LOGS_ENTRY_POINT} >
+                    <LogsScreen title={"Entry Point Logs"} logs={logger.getEntryPointLogs()}/>
+                </Route>
+                <Route exact path={routes.LOGS_PROPAGATOR} >
+                    <LogsScreen title={"Propagator Logs"} logs={logger.getPropagatorLogs()}/>
+                </Route>
+
             </Switch>
         </div>
     );
