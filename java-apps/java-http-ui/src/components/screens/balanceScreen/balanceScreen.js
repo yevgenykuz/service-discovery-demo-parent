@@ -23,7 +23,7 @@ function BalanceScreen() {
                     <h6>You're current balance is:</h6>
                     <p>
                     {/*add up/down arrow icon */}
-                    <h3 className={balance>=0?styles.money_plus:styles.money_minus}>{balance}$</h3>
+                    <h3 className={`${styles.amount} ${balance>=0?styles.amount_plus:styles.amount_minus}`}>{balance}$</h3>
                     </p>
                 </CardWrapper>}
         </ScreenWrapper>
