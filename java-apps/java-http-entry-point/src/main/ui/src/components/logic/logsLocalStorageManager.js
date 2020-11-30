@@ -12,7 +12,6 @@ function LogsLocalStorageManager(props) {
             setLoaded(true)
         }
         localStorage.setItem("logs", JSON.stringify(logger.logs))
-        console.log(logger.logs)
     }, [logger.logs])
 
     return <></>

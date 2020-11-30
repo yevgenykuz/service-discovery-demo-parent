@@ -1,6 +1,6 @@
 import React from 'react';
 import ScreenWrapper from "../../components/screenWrapper";
-import {ListGroup, Modal} from "react-bootstrap";
+import {ListGroup} from "react-bootstrap";
 import dayjs from "dayjs"
 import styles from "./logsScreen.module.css"
 
