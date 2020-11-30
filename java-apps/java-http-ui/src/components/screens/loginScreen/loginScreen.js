@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {login} from "../../../models/auth";
 import useIsLoggedInState from "../../../recoilStates/userAuth";
-import ScreenWrapper from "../../components";
+import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./login.module.css"
-import {Alert, Button, Card, Form} from "react-bootstrap"
+import {Alert, Button, Form} from "react-bootstrap"
 
 function LoginScreen(props) {
     const [userName, setUserName] = useState("")

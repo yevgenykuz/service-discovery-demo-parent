@@ -1,8 +1,8 @@
 import React from 'react';
-import ScreenWrapper from "../../components";
+import ScreenWrapper from "../../components/screenWrapper";
 import {checkBalance} from "../../../models/API";
 
-function BalanceScreen(props) {
+function BalanceScreen() {
 
     const [balance, setBalance] = React.useState()
     const [isLoading, setIsLoading] = React.useState(true)
