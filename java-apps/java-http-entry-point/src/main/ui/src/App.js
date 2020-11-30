@@ -1,21 +1,28 @@
 import React from "react"
-import './App.css';
 import {Switch, Route} from "react-router-dom"
-import * as routes from "./constants/routes"
+
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import LoginScreen from "./components/screens/loginScreen";
 import HomeScreen from "./components/screens/homeScreen";
 import DepositScreen from "./components/screens/depositScreen";
 import BalanceScreen from "./components/screens/balanceScreen";
+import LogsScreen from "./components/screens/logsScreen";
+import NavBar from "./components/components/navBar";
+
 import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
 import * as Auth from "./models/auth"
+import * as routes from "./constants/routes"
+import useLogger from "./recoilStates/logger";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from "./components/components/navBar";
+
 
 
 function App() {
     const isLoggedIn = useIsLoggedInState()
     const [_,setObj] = useUserInfo()
+    const logger = useLogger()
 
     React.useEffect(() => {
         if(Auth.isLoggedIn())
@@ -38,7 +45,7 @@ function App() {
                 <Route path={routes.DEPOSIT} component={DepositScreen}/>
                 <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
                 <Route exact path={routes.LOGS_SINK} >
-
+                    <LogsScreen title={"Sink Logs"} logs={logger.getSinkLogs()}/>
                 </Route>
             </Switch>
         </div>
