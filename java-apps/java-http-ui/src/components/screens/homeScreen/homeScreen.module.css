@@ -2,7 +2,14 @@
 .component{
 
 }
-.content{
+.welcome{
     padding: 40px ;
 
+}
+
+.menu{
+    display: flex;
+}
+.menu *{
+    margin: 0 10px
 }

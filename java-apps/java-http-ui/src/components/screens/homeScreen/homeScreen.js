@@ -16,8 +16,8 @@ function HomeScreen() {
             </CardWrapper>
 
         <div className={styles.menu}>
-            <HomeMenuButton label={"deposit"} iconSrc={"/img/deposit.svg"} />
-            <HomeMenuButton label={"check balance"}/>
+            <HomeMenuButton label={"Deposit"} iconSrc={"/img/deposit.svg"} />
+            <HomeMenuButton label={"Check Balance"}  iconSrc={"/img/withdraw.svg"} />
         </div>
 
         </ScreenWrapper>
