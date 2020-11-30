@@ -1,0 +1,25 @@
+.component{
+    padding-bottom: 50px;
+    box-sizing: border-box;
+}
+
+.contentContainer{
+    min-height: 300px;
+    max-height: 300px;
+}
+.contentCard{
+    padding: 40px;
+    width: max(200px,40vw);
+
+}
+
+.form{
+    height: 100%;
+}
+.depositButton{
+    width: 100%;
+}
+
+.popup{
+    margin-top: 30px;
+}
