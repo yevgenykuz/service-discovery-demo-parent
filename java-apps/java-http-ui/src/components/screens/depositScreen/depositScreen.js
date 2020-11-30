@@ -5,6 +5,7 @@ import styles from "./deposit.module.css"
 import LoadingPopup from "../../components/loadingPopup";
 import CardWrapper from "../../components/cardWrapper";
 import {Alert, Button, Form, Toast} from "react-bootstrap";
+import {useUserInfo} from "../../../recoilStates/userAuth";
 
 const pageStates = {
     loading: "loading",
@@ -16,6 +17,7 @@ function DepositScreen(props) {
 
     const [amount, setAmount] = React.useState(1)
     const [pageState, setPageState] = React.useState(pageStates.beforeDeposit)
+    const [{username}] = useUserInfo()
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -26,7 +28,7 @@ function DepositScreen(props) {
     return (
         <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
             {pageState === pageStates.loading ? <LoadingPopup/> :
-                    <div className={styles.contentContainer}>
+                <div className={styles.contentContainer}>
                     <CardWrapper className={styles.contentCard}>
                         <Form className={styles.form} onSubmit={handleSubmit}>
                             <Form.Group>
@@ -39,10 +41,11 @@ function DepositScreen(props) {
 
                         </Form>
                     </CardWrapper>
-                    {pageState === pageStates.afterDeposit && <Alert className={styles.popup} variant={"success"}>The deposit has been successfully transmitted</Alert>}
-                    </div>
+                    {pageState === pageStates.afterDeposit &&
+                    <Alert className={styles.popup} variant={"success"}>{username} deposited {amount}$</Alert>}
+                </div>
 
-               }
+            }
         </ScreenWrapper>
 
     );
