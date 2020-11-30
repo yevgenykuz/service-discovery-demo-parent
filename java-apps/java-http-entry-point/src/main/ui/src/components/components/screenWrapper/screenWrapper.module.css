@@ -1,6 +1,5 @@
 .component {
     height: calc(100vh - 60px);
-    padding: 20px;
     position: relative;
     background-color: var(--color-background);
 
@@ -10,7 +9,7 @@
     height: 100%;
     z-index: 5;
     position: relative;
-
+    overflow: hidden;
 }
 .background{
     box-sizing: border-box;
