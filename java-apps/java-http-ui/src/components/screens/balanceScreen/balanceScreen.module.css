@@ -1,0 +1,10 @@
+.content{
+    padding: 40px;
+}
+
+.money_plus{
+    color: forestgreen;
+}
+.money_minus{
+    color: darkred;
+}
