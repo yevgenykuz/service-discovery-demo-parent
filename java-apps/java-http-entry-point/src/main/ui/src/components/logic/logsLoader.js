@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import useLogger from "../../recoilStates/logger";
+import useLogger, {getLogsFromLocalStorage, saveLogsToLocalStorage} from "../../recoilStates/logger";
 
 function LogsLoader() {
     const logger = useLogger()
@@ -7,11 +7,11 @@ function LogsLoader() {
 
     useEffect(() => {
         if (!loaded) {
-            const logs = JSON.parse(localStorage.getItem("logs") || "[]")
+            const logs = getLogsFromLocalStorage()
             logger.setLogs(logs)
             setLoaded(true)
         }
-        localStorage.setItem("logs", JSON.stringify(logger.logs))
+        saveLogsToLocalStorage(logger.logs)
     }, [logger.logs])
 
     return <></>
