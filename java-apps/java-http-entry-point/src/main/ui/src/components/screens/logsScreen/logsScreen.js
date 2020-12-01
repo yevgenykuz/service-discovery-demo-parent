@@ -25,8 +25,8 @@ function LogsScreen({logsType = "all", title}) {
             {
                 currentLogsFunctions?.logs && <ListGroup className={styles.list}>
                     {!currentLogsFunctions.logs.length &&<main className={styles.notFound}><h4>no logs were found</h4></main>}
-                    {currentLogsFunctions.logs.map(data => (
-                        <ListGroup.Item key={data.date} action
+                    { [...currentLogsFunctions.logs].sort((a,b)=>a.date>=b.date?-1:1).map((data,index) => (
+                        <ListGroup.Item key={index} action
                                         className={styles.logEntry}>
                             <span className={styles.dateSpan}>{dayjs(data?.date).format("DD/MM/YYYY HH:mm:ss")}</span>
                             <h5>-</h5>

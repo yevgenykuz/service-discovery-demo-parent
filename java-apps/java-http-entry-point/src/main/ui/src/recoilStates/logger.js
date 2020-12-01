@@ -1,4 +1,5 @@
 import {atom, useRecoilState} from "recoil";
+import dayjs from "dayjs";
 
 
 export const loggerAtom = atom({
@@ -35,7 +36,7 @@ export default function useLogger() {
         setState((currentState) => [...currentState, {
             message,
             type,
-            date: new Date()
+            date: dayjs().set("millisecond",0).toDate()
         }])
     }
 
