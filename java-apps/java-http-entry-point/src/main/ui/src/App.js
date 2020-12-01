@@ -15,6 +15,7 @@ import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
 import * as Auth from "./models/auth"
 import * as routes from "./constants/routes"
 import {logTypes} from "./recoilStates/logger";
+import LogsMenu from "./components/components/logsMenu";
 
 
 function App() {
@@ -28,8 +29,9 @@ function App() {
 
 
     return (<div className="App">
+            {isLoggedIn && <NavBar/>}
+            <LogsMenu/>
             <Switch>
-
                 <Route exact path={routes.LOGS_SINK}>
                     <LogsScreen title={"Sink Logs"} logsType={logTypes.sink}/>
                 </Route>
@@ -40,12 +42,10 @@ function App() {
                     <LogsScreen title={"Propagator Logs"} logsType={logTypes.propagator}/>
                 </Route>
                 <Route exact path={routes.LOGS}>
-                    <LogsScreen title={"Logs"} />
+                    <LogsScreen title={"Logs"}/>
                 </Route>
-
                 {isLoggedIn ?
                     <>
-                        <NavBar/>
                         <Route exact path={routes.HOME} component={HomeScreen}/>
                         <Route path={routes.DEPOSIT} component={DepositScreen}/>
                         <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
