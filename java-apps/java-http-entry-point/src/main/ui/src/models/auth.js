@@ -1,4 +1,5 @@
-import {silentlyInvokeEntryPoint} from "./API";
+import {silentlyInvokeEntryPoint, timeoutPromise} from "./API";
+import {LOGIN_DURATION} from "../constants/delayDurations";
 
 
 export function isLoggedIn() {
@@ -8,6 +9,8 @@ export function isLoggedIn() {
 export async function login(username, password) {
     if (!username || !password)
         throw new Error("invalid credentials")
+
+    await timeoutPromise(LOGIN_DURATION)
 
     localStorage.setItem("user", username)
 

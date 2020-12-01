@@ -28,7 +28,6 @@ function App() {
 
 
     return (<div className="App">
-            <NavBar/>
             <Switch>
 
                 <Route exact path={routes.LOGS_SINK}>
@@ -45,6 +44,7 @@ function App() {
 
                 {isLoggedIn ?
                     <>
+                        <NavBar/>
                         <Route exact path={routes.HOME} component={HomeScreen}/>
                         <Route path={routes.DEPOSIT} component={DepositScreen}/>
                         <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
