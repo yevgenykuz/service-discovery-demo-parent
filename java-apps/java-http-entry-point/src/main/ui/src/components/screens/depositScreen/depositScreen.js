@@ -1,13 +1,11 @@
 import React from 'react';
-import {depositAmount} from "../../../models/API";
 import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./deposit.module.css"
-import LoadingPopup from "../../components/loadingPopup";
 import CardWrapper from "../../components/cardWrapper";
-import {Alert, Button, Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {useUserInfo} from "../../../recoilStates/userAuth";
-import {useHistory, useLocation} from "react-router-dom";
-import {DEPOSIT, DEPOSIT_PROCESSING, DEPOSIT_SUCCESSFUL} from "../../../constants/routes";
+import {useHistory} from "react-router-dom";
+import {DEPOSIT_PROCESSING} from "../../../constants/routes";
 import useLogger from "../../../recoilStates/logger";
 
 

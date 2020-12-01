@@ -16,7 +16,7 @@ function BalanceScreen() {
     useEffect(()=>{
         logger.entryPoint.log(`check balance for "${username}" initiated`)
 
-    },[])
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     React.useEffect(() => {
         checkBalance(username).then(value => {
@@ -24,7 +24,7 @@ function BalanceScreen() {
             setIsLoading(false)
             logger.sink.log(`check balance for "${username}" called `)
         })
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <ScreenWrapper className={`flexCenter`}>

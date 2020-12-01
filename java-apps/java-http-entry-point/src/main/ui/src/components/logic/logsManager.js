@@ -18,7 +18,7 @@ function LogsManager() {
         const intervalId = setInterval(logger.updateFromLocalStorage, LOGS_UPDATE_DURATION)
         return () => clearInterval(intervalId)
 
-    }, [logger.logs])
+    }, [logger.logs]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return <></>
 }
