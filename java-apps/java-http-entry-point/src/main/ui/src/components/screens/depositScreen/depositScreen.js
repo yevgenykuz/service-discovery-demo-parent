@@ -23,6 +23,7 @@ function DepositScreen() {
         e.preventDefault()
         history.push(`${DEPOSIT_PROCESSING}?amount=${amount}&flow=true`)
         logger.entryPoint.log(`deposit for "${username}" initiated : ${amount} amount`)
+        logger.propagator.log(`deposit for "${username}" processing : ${amount} amount`)
     }
 
     return (
