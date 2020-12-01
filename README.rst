@@ -225,6 +225,7 @@ Contributors
 * `snirshemtov <https://github.com/snirshemtov>`_
 * `idantsadok <https://github.com/idantsadok>`_
 * `talilabok <https://github.com/talilabok>`_
+* `MorisR <https://github.com/MorisR>`_
 
 License
 -------
