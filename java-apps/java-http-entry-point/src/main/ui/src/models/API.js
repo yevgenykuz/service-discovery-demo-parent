@@ -5,7 +5,7 @@ const DEPOSIT_ROUTE = "http://localhost:8110/prop-name"
 const CHECK_BALANCE_ROUTE = "http://localhost:8110/name"
 const INVOKE_ENTRY_POINT = "http://localhost:8110/home"
 
-function timeoutPromise(time = 1000){
+export function timeoutPromise(time = 1000){
     return new Promise((resolve) => setTimeout(resolve,time))
 }
 
