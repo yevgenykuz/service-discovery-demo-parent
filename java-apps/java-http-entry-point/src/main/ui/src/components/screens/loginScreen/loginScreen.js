@@ -30,7 +30,7 @@ function LoginScreen() {
     return (
         <ScreenWrapper className={styles.component} containerClassName={styles.containerClassName}>
 
-            {isLoading ? <LoadingPopup title={"logging in..."}/> : <>
+            {isLoading ? <LoadingPopup loadingTitle={"logging in..."}/> : <>
 
                 <CardWrapper className={styles.cardWrapper}>
                     <Navbar.Brand as={"div"} className={styles.logoTextContainer}>

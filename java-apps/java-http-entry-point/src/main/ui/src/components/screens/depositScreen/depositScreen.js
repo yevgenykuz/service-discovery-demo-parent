@@ -38,7 +38,7 @@ function DepositScreen() {
 
     return (
         <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
-            {pathname === DEPOSIT_PROCESSING ? <LoadingPopup title={"Processing..."}/> :
+            {pathname === DEPOSIT_PROCESSING ? <LoadingPopup headerTitle={`depositing ${amount}$ to ${username}'s account`} loadingTitle={"Processing..."}/> :
                 <div className={styles.contentContainer}>
                     {pathname === DEPOSIT ?
                         <CardWrapper className={styles.contentCard}>
@@ -46,8 +46,11 @@ function DepositScreen() {
                             <Form className={styles.form} onSubmit={handleSubmit}>
                                 <Form.Group>
                                     <Form.Label>Enter the amount to deposit</Form.Label>
+                                    <div style={{display:"flex",alignItems:"center"}}>
                                     <Form.Control type="number" min={1} value={amount}
                                                   onChange={e => setAmount(Number(e.target.value))}/>
+                                                  <h5>$</h5>
+                                    </div>
 
                                 </Form.Group>
                                 <Button variant={"info"} className={styles.depositButton} type="submit">Deposit</Button>
