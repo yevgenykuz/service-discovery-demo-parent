@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import useLogger from "../../recoilStates/logger";
 
-function LogsLocalStorageManager(props) {
+function LogsLoader() {
     const logger = useLogger()
     const [loaded, setLoaded] = useState(false)
 
@@ -17,4 +17,4 @@ function LogsLocalStorageManager(props) {
     return <></>
 }
 
-export default LogsLocalStorageManager;
+export default LogsLoader;

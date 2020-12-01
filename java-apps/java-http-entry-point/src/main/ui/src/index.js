@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom"
 import {RecoilRoot} from "recoil";
-import LogsLocalStorageManager from "./components/logic/logsLocalStorageManager";
+import LogsLoader from "./components/logic/logsLoader";
 
 ReactDOM.render(
     <React.StrictMode>
         <RecoilRoot>
             <BrowserRouter>
-                <LogsLocalStorageManager/>
+                <LogsLoader/>
                 <App/>
             </BrowserRouter>
         </RecoilRoot>
