@@ -28,7 +28,7 @@ function App() {
     React.useEffect(() => {
         if (Auth.isLoggedIn())
             Auth.getUserInfo().then(({username}) => setObj.setUserName(username))
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (<div className="App">

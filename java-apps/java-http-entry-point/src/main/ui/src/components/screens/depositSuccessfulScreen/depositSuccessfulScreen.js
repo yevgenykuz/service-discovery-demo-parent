@@ -13,7 +13,7 @@ function DepositSuccessfulScreen(props) {
         const searchParams = new URLSearchParams(search)
         const paramAmount = searchParams.get("amount") || "1";
         setAmount(paramAmount)
-    },[])
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
     return (<ScreenWrapper className={`flexCenter`}>
             <CardWrapper className={styles.card}>
                 <img src="/img/tick.svg" className={`iconSmall ${styles.icon}`} alt="tick icon"/>
