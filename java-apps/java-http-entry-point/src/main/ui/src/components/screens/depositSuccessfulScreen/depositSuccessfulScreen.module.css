@@ -1,0 +1,8 @@
+.card{
+    color: var(--success);
+    padding: 10px 20px;
+}
+
+.icon{
+    margin: 20px 0;
+}

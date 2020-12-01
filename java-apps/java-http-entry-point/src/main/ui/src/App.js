@@ -9,6 +9,8 @@ import HomeScreen from "./components/screens/homeScreen";
 import DepositScreen from "./components/screens/depositScreen";
 import BalanceScreen from "./components/screens/balanceScreen";
 import LogsScreen from "./components/screens/logsScreen";
+import DepositProcessingScreen from "./components/screens/depositProccessingScreen";
+import DepositSuccessfulScreen from "./components/screens/depositSuccessfulScreen";
 import NavBar from "./components/components/navBar";
 
 import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
@@ -16,6 +18,7 @@ import * as Auth from "./models/auth"
 import * as routes from "./constants/routes"
 import {logTypes} from "./recoilStates/logger";
 import LogsMenu from "./components/components/logsMenu";
+
 
 
 function App() {
@@ -47,7 +50,9 @@ function App() {
                 {isLoggedIn ?
                     <>
                         <Route exact path={routes.HOME} component={HomeScreen}/>
-                        <Route path={routes.DEPOSIT} component={DepositScreen}/>
+                        <Route exact path={routes.DEPOSIT} component={DepositScreen}/>
+                        <Route exact path={routes.DEPOSIT_PROCESSING} component={DepositProcessingScreen}/>
+                        <Route exact path={routes.DEPOSIT_SUCCESSFUL} component={DepositSuccessfulScreen}/>
                         <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
                     </>
                     : <>

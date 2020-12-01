@@ -2,13 +2,12 @@
     box-sizing: border-box;
 }
 
-.contentContainer{
-    min-height: 300px;
-    max-height: 300px;
-}
+
 .contentCard{
     padding: 40px;
     width: max(200px,40vw);
+    min-height: 300px;
+    max-height: 300px;
 }
 
 .form{
@@ -18,12 +17,7 @@
     width: 100%;
 }
 
-.popup{
-    margin-top: 30px;
-    text-transform: capitalize;
-}
+
 .depositIcon{
-    width:80px;
-    height:80px;
     margin-bottom: 20px;
 }
