@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {depositAmount} from "../../../models/API";
 import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./deposit.module.css"
@@ -8,11 +8,10 @@ import {Alert, Button, Form} from "react-bootstrap";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import {useHistory, useLocation} from "react-router-dom";
 import {DEPOSIT_PROCESSING, DEPOSIT_SUCCESSFUL} from "../../../constants/routes";
-import {DEPOSIT_DURATION} from "../../../constants/delayDurations";
 import useLogger from "../../../recoilStates/logger";
 
 
-function DepositScreen(props) {
+function DepositScreen() {
 
     const [amount, setAmount] = React.useState(1)
     const [lastDeposit, setLastDeposit] = React.useState(0)
@@ -26,13 +25,13 @@ function DepositScreen(props) {
     function handleSubmit(e) {
         e.preventDefault()
         history.push(DEPOSIT_PROCESSING)
-        logger.logEntryPoint(`deposit for "${username}" initiated : ${amount} amount`)
-        logger.logPropagator(`deposit for "${username}" processing : ${amount} amount`)
+        logger.entryPoint.log(`deposit for "${username}" initiated : ${amount} amount`)
+        logger.propagator.log(`deposit for "${username}" processing : ${amount} amount`)
 
-        depositAmount(amount).then(res => {
+        depositAmount(amount).then(() => {
             setLastDeposit(amount)
             history.push(DEPOSIT_SUCCESSFUL)
-            logger.logSink(`deposit for "${username}" registered : ${amount} amount`)
+            logger.sink.log(`deposit for "${username}" registered : ${amount} amount`)
 
         })
     }

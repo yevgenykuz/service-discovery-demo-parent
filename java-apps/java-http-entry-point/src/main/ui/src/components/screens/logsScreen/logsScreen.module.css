@@ -3,9 +3,11 @@
     flex-direction: column;
     padding: 20px;
 }
-.title{
-
-    margin: 20px 0;
+.header{
+    display:flex;
+    justify-content: space-between;
+    height: 40px;
+    margin: 30px 10px;
 }
 
 
