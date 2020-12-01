@@ -32,16 +32,31 @@ export default function useLogger() {
     }
 
     return {
-        getSinkLogs: () => state.filter(x => x.type === logTypes.sink),
-        getPropagatorLogs: () => state.filter(x => x.type === logTypes.propagator),
-        getEntryPointLogs: () => state.filter(x => x.type === logTypes.entryPoint),
+       sink:{
+           logs: state.filter(x => x.type === logTypes.sink),
+           log:(message) => log(logTypes.sink, message),
+           clear: () => setState(state.filter(x => x.type !== logTypes.sink))
+       },
+        propagator:{
+            logs: state.filter(x => x.type === logTypes.propagator),
+            log:(message) => log(logTypes.propagator, message),
+            clear: () => setState(state.filter(x => x.type !== logTypes.propagator))
+        },
+        entryPoint:{
+            logs: state.filter(x => x.type === logTypes.entryPoint),
+            log:(message) => log(logTypes.entryPoint, message),
+            clear: () => setState(state.filter(x => x.type !== logTypes.entryPoint))
+        },
+        propagatorLogs:state.filter(x => x.type === logTypes.propagator),
+        entryPointLogs:  state.filter(x => x.type === logTypes.entryPoint),
         logs: state,
+
+
         logSink: (message) => log(logTypes.sink, message),
         logPropagator: (message) => log(logTypes.propagator, message),
         logEntryPoint: (message) => log(logTypes.entryPoint, message),
-        clearSinks: () => setState(state.filter(x => x.type !== logTypes.sink)),
-        clearPropagators: () => setState(state.filter(x => x.type !== logTypes.propagator)),
-        clearEntryPoints: () => setState(state.filter(x => x.type !== logTypes.entryPoint)),
+
+
         clearAll: () => setState([]),
         setLogs : (arr)=> setState(arr)
     }
