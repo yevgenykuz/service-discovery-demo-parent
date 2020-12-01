@@ -4,10 +4,6 @@
     padding: 20px;
 }
 
-.componentBackground {
-    height: 100vh !important;
-}
-
 .header {
     display: flex;
     justify-content: space-between;
