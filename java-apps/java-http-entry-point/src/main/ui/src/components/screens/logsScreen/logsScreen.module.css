@@ -1,41 +1,81 @@
-.component{
+.component {
     display: flex;
     flex-direction: column;
     padding: 20px;
 }
-.componentBackground{
+
+.componentBackground {
     height: 100vh !important;
 }
-.header{
-    display:flex;
+
+.header {
+    display: flex;
     justify-content: space-between;
     height: 40px;
     margin: 30px 10px;
 }
 
 
-.list{
+.list {
     overflow-y: scroll;
     max-height: 80vh;
+    height: 100%;
+
 }
-.logEntry{
+
+.logEntry {
     display: flex;
     padding: 5px;
     align-items: center;
 }
-.logEntry h5{
+
+.logEntry h5 {
     margin: 0 10px;
 }
 
-.dateSpan{
-    max-width:30%;
+.dateSpan {
+    min-width: max(15%, 200px);
+    max-width: max(15%, 200px);
     text-align: center;
     background: var(--gray);
-    color:var(--light);
+    color: var(--light);
     padding: 5px 10px;
     border-radius: 5px;
 }
-.messageSpan{
-    flex-grow: 1 ;
+
+.logTypeSpan {
+    min-width: max(10%, 100px);
+    max-width: max(10%, 100px);
+    text-align: center;
+    background: var(--gray);
+    color: var(--light);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.messageSpan {
+    flex-grow: 1;
     text-align: start;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 1.2em;
+    white-space: nowrap;
+
+}
+
+.sink{
+    background-color: var(--green);
+}
+.propagator{
+    background-color: var(--orange);
+}
+.entryPoint{
+    background-color: var(--red);
+
+}
+.notFound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }

@@ -8,4 +8,5 @@ export const CHECK_BALANCE = "/balance"
 export const LOGS_ENTRY_POINT = "/logs/entry"
 export const LOGS_PROPAGATOR = "/logs/propagator"
 export const LOGS_SINK = "/logs/sink"
+export const LOGS = "/logs"
 

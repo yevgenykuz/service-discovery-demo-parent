@@ -59,11 +59,13 @@ export default function useLogger() {
             log: (message) => log(logTypes.entryPoint, message),
             clear: () => clearLogs(logTypes.entryPoint)
         },
+        all:{
+            logs: state,
+            clear: () => setState([])
+        },
+
 
         logs: state,
-
-
-        clearAll: () => setState([]),
         setLogs: setState,
         updateFromLocalStorage: () => {
             const logs = getLogsFromLocalStorage()

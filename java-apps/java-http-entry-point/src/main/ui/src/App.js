@@ -39,8 +39,9 @@ function App() {
                 <Route exact path={routes.LOGS_PROPAGATOR}>
                     <LogsScreen title={"Propagator Logs"} logsType={logTypes.propagator}/>
                 </Route>
-
-
+                <Route exact path={routes.LOGS}>
+                    <LogsScreen title={"Logs"} />
+                </Route>
 
                 {isLoggedIn ?
                     <>
