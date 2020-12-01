@@ -2,4 +2,4 @@
 export const DEPOSIT_DURATION = 2000
 export const CHECK_BALANCE_DURATION = 2000
 export const LOGIN_DURATION = 1000
-export const LOGS_UPDATE_DURATION = 500
+export const LOGS_UPDATE_DURATION = 300
