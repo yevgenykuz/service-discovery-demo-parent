@@ -4,16 +4,12 @@ import {Button, ListGroup} from "react-bootstrap";
 import dayjs from "dayjs"
 import styles from "./logsScreen.module.css"
 import useLogger from "../../../recoilStates/logger";
-import {LOGS_UPDATE_DURATION} from "../../../constants/delayDurations";
 
 function LogsScreen({logsType = "all", title}) {
     const logger = useLogger()
     const currentLogsFunctions = logger[logsType]
 
-    useEffect(() => {
-        const intervalId = setInterval(logger.updateFromLocalStorage, LOGS_UPDATE_DURATION)
-        return () => clearInterval(intervalId)
-    })
+
 
     return (
         <ScreenWrapper className={styles.component} >
