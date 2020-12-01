@@ -33,10 +33,10 @@ function DepositScreen() {
                     <Form className={styles.form} onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label>Enter the amount to deposit</Form.Label>
-                            <div style={{display: "flex", alignItems: "center"}}>
+                            <div className={"flexCenter"}>
                                 <Form.Control type="number" min={1} value={amount}
                                               onChange={e => setAmount(Number(e.target.value))}/>
-                                <h5>$</h5>
+                                <h5 className={styles.dollar}>$</h5>
                             </div>
 
                         </Form.Group>
