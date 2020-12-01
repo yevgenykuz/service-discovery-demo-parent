@@ -240,11 +240,11 @@ Relevant applications:
 * *java-http-propagator*
 * *java-http-sink*
 
-To trigger HTTP flows you can send HTTP GET request as follows:
+To trigger HTTP flows you can you can access the UI in ``http://localhost:8110/`` or send HTTP GET request as follows:
 
-* | entry-point -> propagator -> sink:
+* | entry-point -> propagator -> sink ("Deposit" action in the UI):
   | ``http://localhost:8110/prop-name/?name=${text}``
-* | entry-point -> sink:
+* | entry-point -> sink ("Check Balance" action in the UI):
   | ``http://localhost:8110/name/?name=${text}``
 * | propagator -> sink:
   | ``http://localhost:8111/name?name=${text}``
