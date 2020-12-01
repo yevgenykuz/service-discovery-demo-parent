@@ -14,56 +14,38 @@ import useLogger from "../../../recoilStates/logger";
 function DepositScreen() {
 
     const [amount, setAmount] = React.useState(1)
-    const [lastDeposit, setLastDeposit] = React.useState(0)
-
     const [{username}] = useUserInfo()
-    let {pathname} = useLocation();
     const history = useHistory()
     const logger = useLogger()
 
 
     function handleSubmit(e) {
         e.preventDefault()
-        history.push(DEPOSIT_PROCESSING)
+        history.push(`${DEPOSIT_PROCESSING}?amount=${amount}&flow=true`)
         logger.entryPoint.log(`deposit for "${username}" initiated : ${amount} amount`)
-        logger.propagator.log(`deposit for "${username}" processing : ${amount} amount`)
-
-        depositAmount(username, amount).then(() => {
-            setLastDeposit(amount)
-            history.push(DEPOSIT_SUCCESSFUL)
-            logger.sink.log(`deposit for "${username}" registered : ${amount} amount`)
-
-        })
     }
 
     return (
         <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
-            {pathname === DEPOSIT_PROCESSING ? <LoadingPopup headerTitle={`depositing ${amount}$ to ${username}'s account`} loadingTitle={"Processing..."}/> :
-                <div className={styles.contentContainer}>
-                    {pathname === DEPOSIT ?
-                        <CardWrapper className={styles.contentCard}>
-                            <img src={"/img/deposit.svg"} alt={"deposit icon"} className={styles.depositIcon}/>
-                            <Form className={styles.form} onSubmit={handleSubmit}>
-                                <Form.Group>
-                                    <Form.Label>Enter the amount to deposit</Form.Label>
-                                    <div style={{display:"flex",alignItems:"center"}}>
-                                    <Form.Control type="number" min={1} value={amount}
-                                                  onChange={e => setAmount(Number(e.target.value))}/>
-                                                  <h5>$</h5>
-                                    </div>
 
-                                </Form.Group>
-                                <Button variant={"info"} className={styles.depositButton} type="submit">Deposit</Button>
+                <CardWrapper className={styles.contentCard}>
+                    <img src={"/img/deposit.svg"} alt={"deposit icon"} className={`${styles.depositIcon} iconMedium`}/>
+                    <Form className={styles.form} onSubmit={handleSubmit}>
+                        <Form.Group>
+                            <Form.Label>Enter the amount to deposit</Form.Label>
+                            <div style={{display: "flex", alignItems: "center"}}>
+                                <Form.Control type="number" min={1} value={amount}
+                                              onChange={e => setAmount(Number(e.target.value))}/>
+                                <h5>$</h5>
+                            </div>
 
-                            </Form>
-                        </CardWrapper>
-                        :
-                        <Alert className={styles.popup} variant={"success"}>{username} deposited {lastDeposit}$</Alert>
-                    }
+                        </Form.Group>
+                        <Button variant={"info"} className={styles.depositButton} type="submit">Deposit</Button>
 
-                </div>
+                    </Form>
+                </CardWrapper>
 
-            }
+
         </ScreenWrapper>
 
     );

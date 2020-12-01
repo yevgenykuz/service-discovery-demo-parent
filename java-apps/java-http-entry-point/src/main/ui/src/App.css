@@ -20,3 +20,12 @@
   display: flex;
   flex-direction: column;
 }
+
+.iconMedium{
+  width:80px;
+  height:80px;
+}
+.iconSmall{
+  width:60px;
+  height:60px;
+}
