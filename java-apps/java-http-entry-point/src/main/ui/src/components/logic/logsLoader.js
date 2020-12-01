@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import useLogger, {getLogsFromLocalStorage, saveLogsToLocalStorage} from "../../recoilStates/logger";
+import {LOGS_UPDATE_DURATION} from "../../constants/delayDurations";
 
 function LogsLoader() {
     const logger = useLogger()
@@ -12,6 +13,8 @@ function LogsLoader() {
             setLoaded(true)
         }
         saveLogsToLocalStorage(logger.logs)
+        const intervalId = setInterval(logger.updateFromLocalStorage, LOGS_UPDATE_DURATION)
+        return () => clearInterval(intervalId)
     }, [logger.logs])
 
     return <></>

@@ -9,9 +9,9 @@ export function timeoutPromise(time = 1000){
     return new Promise((resolve) => setTimeout(resolve,time))
 }
 
-export async function depositAmount(amount) {
+export async function depositAmount(username,amount) {
     await timeoutPromise(DEPOSIT_DURATION)
-    await axios.get(`${DEPOSIT_ROUTE}?name=${amount}`)
+    await axios.get(`${DEPOSIT_ROUTE}?name=${username}_${amount}`)
 
 }
 
