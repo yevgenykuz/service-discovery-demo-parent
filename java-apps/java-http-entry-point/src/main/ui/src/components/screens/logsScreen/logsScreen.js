@@ -6,7 +6,7 @@ import styles from "./logsScreen.module.css"
 import useLogger from "../../../recoilStates/logger";
 import {LOGS_UPDATE_DURATION} from "../../../constants/delayDurations";
 
-function LogsScreen({logsType, title}) {
+function LogsScreen({logsType = "all", title}) {
     const logger = useLogger()
     const currentLogsFunctions = logger[logsType]
 
@@ -24,11 +24,18 @@ function LogsScreen({logsType, title}) {
 
             {
                 currentLogsFunctions?.logs && <ListGroup className={styles.list}>
+                    {!currentLogsFunctions.logs.length &&<main className={styles.notFound}><h4>no logs were found</h4></main>}
                     {currentLogsFunctions.logs.map(data => (
                         <ListGroup.Item key={data.date} action
                                         className={styles.logEntry}>
                             <span className={styles.dateSpan}>{dayjs(data?.date).format("DD/MM/YYYY HH:mm:ss")}</span>
                             <h5>-</h5>
+
+                            {logsType === "all" && <>
+                                <span className={`${styles.logTypeSpan} ${styles[data?.type]}`}>{data?.type}</span>
+                                <h5>-</h5>
+                            </>}
+
                             <span className={styles.messageSpan}>{data?.message}</span>
 
                         </ListGroup.Item>
