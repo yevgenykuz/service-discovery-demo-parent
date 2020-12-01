@@ -13,11 +13,11 @@ function LogsMenu(props) {
 
     return (<div className={styles.component}>
             {!showContent && <Button variant={"secondary"} onClick={togglePopup} >
-                <strong className="mr-auto">Transaction Logs</strong>
+                <strong className="mr-auto">Transactions</strong>
             </Button>}
             <Toast show={showContent} onClose={togglePopup} animation={false}>
                 <Toast.Header>
-                    <strong className="mr-auto">Transaction Logs</strong>
+                    <strong className="mr-auto">Transactions</strong>
                 </Toast.Header>
                 <Toast.Body className={styles.buttonsContainer}>
                     <Link to={LOGS}><Button variant={"info"}>All</Button></Link>
