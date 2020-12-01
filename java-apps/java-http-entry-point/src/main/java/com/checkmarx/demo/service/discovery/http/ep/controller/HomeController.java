@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * Home page controller class.
  */
-@CrossOrigin(origins = "http://localhost:3000") // TODO: remove
+@CrossOrigin(origins = "http://localhost:3000") // For quick UI development
 @RestController
 @Slf4j
 public class HomeController {
