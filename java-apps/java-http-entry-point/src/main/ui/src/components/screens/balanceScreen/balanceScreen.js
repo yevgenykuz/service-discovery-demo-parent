@@ -23,13 +23,12 @@ function BalanceScreen() {
             setBalance(value);
             setIsLoading(false)
             logger.sink.log(`check balance for "${username}" called `)
-
         })
     }, [])
 
     return (
         <ScreenWrapper className={`flexCenter`}>
-            {isLoading ? <LoadingPopup title={"Processing..."}/> :
+            {isLoading ? <LoadingPopup headerTitle={`loading ${username}'s balance`} loadingTitle={"Processing..."}/> :
                 <CardWrapper className={styles.content}>
                     <img src="/img/withdraw.svg" alt="" className={styles.icon}/>
 
