@@ -45,7 +45,7 @@ function App() {
                     <LogsScreen title={"Propagator Logs"} logsType={logTypes.propagator}/>
                 </Route>
                 <Route exact path={routes.LOGS}>
-                    <LogsScreen title={"Logs"}/>
+                    <LogsScreen title={"Transaction Log"}/>
                 </Route>
                 {isLoggedIn ?
                     <>
