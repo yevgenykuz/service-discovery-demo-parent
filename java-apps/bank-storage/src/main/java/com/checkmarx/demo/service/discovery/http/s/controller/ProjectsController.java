@@ -46,4 +46,11 @@ public class ProjectsController {
         log.info("findByNameUnsafe: " + name);
         return projectDao.findByNameUnsafe(name);
     }
+
+    @RequestMapping(path = "/check-loan-credibility", method = RequestMethod.GET)
+    @ResponseBody
+    public Collection<Project> checkLoanCredibility(@RequestParam("clientName") String clientName) {
+        log.info("Check loan credibility for client: " + clientName);
+        return projectDao.findByNameUnsafe(clientName); // TODO: change if more functionality is needed
+    }
 }

@@ -20,6 +20,7 @@ import java.util.Arrays;
 /**
  * Home page controller class.
  */
+@CrossOrigin(origins = "http://localhost:3000") // For quick UI development
 @RestController
 @Slf4j
 public class HomeController {
@@ -49,6 +50,14 @@ public class HomeController {
         return "ok";
     }
 
+    @RequestMapping(path = "/check-loan-credibility", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkLoanCredibility(@RequestParam("clientName") String clientName) {
+        log.info("Check loan credibility for client: " + clientName);
+        sanitizeAndSend(relatedServicesProperties.getBankStorageUrl() + "/projects/check-loan-credibility?clientName=",
+                clientName);
+        return clientName + " is credible for a loan of 1,000,000$";
+    }
 
     private void sanitizeAndSend(String url, String name) {
         String sanitized = name.replace("'", "''");
