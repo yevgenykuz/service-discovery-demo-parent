@@ -68,7 +68,7 @@ Control with docker compose:
 
 To trigger HTTP flows you can send HTTP GET request as follows:
 
-* | bank-gateway -> java-propagator -> dotnet-http-entry-point -> dotnet-http-propagator ->
+* | bank-gateway -> bank-analysis -> dotnet-http-entry-point -> dotnet-http-propagator ->
   | nodejs-http-entry-point -> nodejs-http-propagator -> nodejs-http-sink
   | ``http://localhost:8110/cross-http/?name=${text}``
 
@@ -148,7 +148,7 @@ Port  App                            Remarks
 ====  =============================  ========
 8110  bank-gateway
 8111  bank-analysis
-8112  java-http-sink
+8112  bank-storage
 8113  java-kafka-http-entry-point
 8114  java-kafka-entry-point		 Reserved
 8115  java-kafka-propagator			 Reserved
@@ -166,7 +166,7 @@ Port  App
 ====  =============================
 8410  bank-gateway
 8411  bank-analysis
-8412  java-http-sink
+8412  bank-storage
 8413  java-kafka-http-entry-point
 8414  java-kafka-entry-point
 8415  java-kafka-propagator

@@ -37,7 +37,7 @@ public class HomeController {
     @ResponseBody
     public String forwardInputToSqlService(@RequestParam("name") String name) {
         log.info("input propagator - name: " + name);
-        sanitizeAndSend(relatedServicesProperties.getJavaHttpSinkUrl() + "/projects/unsafe?name=", name);
+        sanitizeAndSend(relatedServicesProperties.getBankStorageUrl() + "/projects/unsafe?name=", name);
         return "ok";
     }
 

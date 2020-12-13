@@ -54,7 +54,7 @@ public class HomeController {
     @ResponseBody
     public String forwardInputToNextService(@RequestParam("name") String name,
                                             @RequestParam(required = false) String forwardRequestMethod) {
-        String httpSinkUrl = relatedServicesProperties.getJavaHttpSinkUrl() + "/projects/unsafe?name=";
+        String httpSinkUrl = relatedServicesProperties.getBankStorageUrl() + "/projects/unsafe?name=";
         log.info("input entry point - name=" + name + ", forwardRequestMethod=" + forwardRequestMethod);
         if (StringUtils.isEmpty(forwardRequestMethod)) {
             forwardRequestMethod = "GET"; //Backward compatibility

@@ -13,7 +13,7 @@ services:
       - '8110:8110'
     environment:
       - BANK_ANALYSIS_URL=http://bank-analysis:8111
-      - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - BANK_STORAGE_URL=http://bank-storage:8112
       - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
@@ -26,7 +26,7 @@ services:
       - '8111:8111'
     environment:
       - JAVA_HTTP_ENTRY_POINT_URL=http://bank-gateway:8110
-      - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
+      - BANK_STORAGE_URL=http://bank-storage:8112
       - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
       - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:

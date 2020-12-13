@@ -21,11 +21,11 @@ public class RelatedServicesProperties {
     private String bankGatewayUrl;
 
     /**
-     * java-http-sink application URL.
+     * bank-storage application URL.
      * <p>
-     * <u>Example:</u> {@code http://java-http-sink:8183}
+     * <u>Example:</u> {@code http://bank-storage:8183}
      */
-    private String javaHttpSinkUrl;
+    private String bankStorageUrl;
 
     /**
      * dotnet-core-http-entry-point application URL.

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaHttpSinkApplication {
+public class BankStorageApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaHttpSinkApplication.class, args);
+        SpringApplication.run(BankStorageApplication.class, args);
     }
 }

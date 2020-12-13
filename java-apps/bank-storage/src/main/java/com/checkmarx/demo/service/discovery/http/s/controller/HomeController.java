@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeController {
 
     @RequestMapping("/home")
-    public void javaHttpSinkIndex(HttpServletRequest request) {
-        log.info("java-http-sink\n" + request.toString());
+    public void bankStorageIndex(HttpServletRequest request) {
+        log.info("bank-storage-home\n" + request.toString());
     }
 
     @RequestMapping("/")
     public String showWelcomePage() {
-        return "javaHttpSinkIndex";
+        return "bankStorageIndex";
     }
 }
