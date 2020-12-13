@@ -46,8 +46,8 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public void restEntryPointExample(HttpServletRequest request) {
-        log.info("rest-entry-point-example\n" + request.toString());
+    public void bankGatewayHome(HttpServletRequest request) {
+        log.info("bank-gateway-home\n" + request.toString());
     }
 
     @RequestMapping(path = "/name", method = RequestMethod.GET)

@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 public class RelatedServicesProperties {
 
     /**
-     * java-http-entry-point application URL.
+     * bank-gateway application URL.
      * <p>
-     * <u>Example:</u> {@code http://java-http-entry-point:8181}
+     * <u>Example:</u> {@code http://bank-gateway:8181}
      */
-    private String javaHttpEntryPointUrl;
+    private String bankGatewayUrl;
 
     /**
      * java-http-sink application URL.

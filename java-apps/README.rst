@@ -28,9 +28,9 @@ To push docker images to a different location, change *yevgenykcx* to your needs
 
 .. code-block:: bash
 
-    # in java-http-entry-point folder:
-    docker build -t yevgenykcx/java-http-entry-point .
-    docker push yevgenykcx/java-http-entry-point
+    # in bank-gateway folder:
+    docker build -t yevgenykcx/bank-gateway .
+    docker push yevgenykcx/bank-gateway
     # in java-http-propagator folder:
     docker build -t yevgenykcx/java-http-propagator .
     docker push yevgenykcx/java-http-propagator
@@ -236,7 +236,7 @@ HTTP Flow
 
 Relevant applications:
 
-* *java-http-entry-point*
+* *bank-gateway*
 * *java-http-propagator*
 * *java-http-sink*
 

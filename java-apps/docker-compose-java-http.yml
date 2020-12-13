@@ -5,8 +5,8 @@ networks:
     driver: bridge
 
 services:
-  java-http-entry-point:
-    image: 'yevgenykcx/java-http-entry-point:latest'
+  bank-gateway:
+    image: 'yevgenykcx/bank-gateway:latest'
     networks:
       - java-http-net
     ports:
@@ -25,7 +25,7 @@ services:
     ports:
       - '8111:8111'
     environment:
-      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
+      - BANK_GATEWAY_URL=http://bank-gateway:8110
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
       - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
@@ -38,7 +38,7 @@ services:
     ports:
       - '8112:8112'
     environment:
-      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
+      - BANK_GATEWAY_URL=http://bank-gateway:8110
       - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
       - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:

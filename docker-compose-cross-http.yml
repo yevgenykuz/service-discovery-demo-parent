@@ -5,8 +5,8 @@ networks:
     driver: bridge
 
 services:
-  java-http-entry-point:
-    image: 'yevgenykcx/java-http-entry-point:latest'
+  bank-gateway:
+    image: 'yevgenykcx/bank-gateway:latest'
     networks:
       - cross-http-net
     ports:
@@ -25,7 +25,7 @@ services:
     ports:
       - '8111:8111'
     environment:
-      - JAVA_HTTP_ENTRY_POINT_URL=http://java-http-entry-point:8110
+      - JAVA_HTTP_ENTRY_POINT_URL=http://bank-gateway:8110
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
       - NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL=http://dotnet-core-http-entry-point:5551
       - IAST_MANAGER_URL=${IAST_MANAGER_URL}

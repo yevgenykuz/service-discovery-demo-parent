@@ -18,7 +18,7 @@
     </parent>
 
     <modules>
-        <module>java-http-entry-point</module>
+        <module>bank-gateway</module>
         <module>java-http-propagator</module>
         <module>java-http-sink</module>
         <module>java-kafka-entry-point</module>

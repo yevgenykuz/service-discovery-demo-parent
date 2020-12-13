@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-slim
 EXPOSE 8110
-COPY target/java-http-entry-point.jar java-http-entry-point.jar
+COPY target/bank-gateway.jar bank-gateway.jar
 COPY start.sh start.sh
 RUN chmod +x start.sh
 RUN apt-get update

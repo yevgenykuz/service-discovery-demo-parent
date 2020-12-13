@@ -45,7 +45,7 @@ Cross HTTP applications
 
 Relevant applications:
 
-* *java-http-entry-point*
+* *bank-gateway*
 * *java-http-propagator*
 * *dotnet-core-http-entry-point*
 * *dotnet-core-http-propagator*
@@ -68,7 +68,7 @@ Control with docker compose:
 
 To trigger HTTP flows you can send HTTP GET request as follows:
 
-* | java-http-entry-point -> java-propagator -> dotnet-http-entry-point -> dotnet-http-propagator ->
+* | bank-gateway -> java-propagator -> dotnet-http-entry-point -> dotnet-http-propagator ->
   | nodejs-http-entry-point -> nodejs-http-propagator -> nodejs-http-sink
   | ``http://localhost:8110/cross-http/?name=${text}``
 
@@ -146,7 +146,7 @@ Java applications
 ====  =============================  ========
 Port  App                            Remarks
 ====  =============================  ========
-8110  java-http-entry-point
+8110  bank-gateway
 8111  java-http-propagator
 8112  java-http-sink
 8113  java-kafka-http-entry-point
@@ -164,7 +164,7 @@ Port  App                            Remarks
 ====  =============================
 Port  App
 ====  =============================
-8410  java-http-entry-point
+8410  bank-gateway
 8411  java-http-propagator
 8412  java-http-sink
 8413  java-kafka-http-entry-point
