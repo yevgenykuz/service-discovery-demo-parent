@@ -5,7 +5,7 @@ Service Discovery Demo
 | **Security note: These applications are vulnerable by design. Do not use them as reference for secured applications.**
 |
 
-|ci|
+|java_ci|
 
 -----
 
@@ -236,6 +236,6 @@ License
 -----
 
 
-.. |ci| image:: https://github.com/yevgenykuz/service-discovery-demo-parent/workflows/Java%20-%20all%20JDKs%20on%20all%20OSs/badge.svg
-    :target: https://github.com/yevgenykuz/service-discovery-demo-parent/actions
-    :alt: Github CI
+.. |java_ci| image:: https://github.com/yevgenykuz/service-discovery-demo-parent/workflows/Java%20-%20JDK%208%20and%2011%20on%20all%20OSs/badge.svg
+    :target: https://github.com/yevgenykuz/service-discovery-demo-parent/actions?query=workflow%3A%22Java+-+JDK+8+and+11+on+all+OSs%22
+    :alt: Java CI
