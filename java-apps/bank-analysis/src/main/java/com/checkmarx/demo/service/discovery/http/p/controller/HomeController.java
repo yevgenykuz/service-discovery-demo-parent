@@ -2,6 +2,8 @@ package com.checkmarx.demo.service.discovery.http.p.controller;
 
 
 import com.checkmarx.demo.service.discovery.http.p.properites.RelatedServicesProperties;
+import com.checkmarx.demo.service.discovery.http.p.service.Currency;
+import com.checkmarx.demo.service.discovery.http.p.service.CurrencyService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -27,11 +29,32 @@ public class HomeController {
 
     private final RelatedServicesProperties relatedServicesProperties;
     private final CloseableHttpClient httpClient;
+    private final CurrencyService currencyService;
 
     @Autowired
-    public HomeController(RelatedServicesProperties relatedServicesProperties) {
+    public HomeController(RelatedServicesProperties relatedServicesProperties, CurrencyService currencyService) {
         this.relatedServicesProperties = relatedServicesProperties;
         this.httpClient = HttpClients.createDefault();
+        this.currencyService = currencyService;
+    }
+
+    @RequestMapping("/home")
+    public void bankAnalysisIndex(HttpServletRequest request) {
+        log.info("bank-analysis-home\n" + request.toString());
+    }
+
+    @RequestMapping("/")
+    public String showWelcomePage() {
+        return "bankAnalysisIndex";
+    }
+
+    @RequestMapping(path = "/convert-currency", method = RequestMethod.GET)
+    @ResponseBody
+    public Double convertCurrency(@RequestParam("amount") Long amount,
+                                  @RequestParam("sourceCurrency") Currency sourceCurrency,
+                                  @RequestParam("targetCurrency") Currency targetCurrency) {
+        log.info("Converting {} {} to {}", amount, sourceCurrency, targetCurrency);
+        return currencyService.convert(amount, sourceCurrency, targetCurrency);
     }
 
     @RequestMapping(path = "/name", method = RequestMethod.GET)
@@ -85,15 +108,5 @@ public class HomeController {
             String result = EntityUtils.toString(entity);
             log.info(result);
         }
-    }
-
-    @RequestMapping("/home")
-    public void bankAnalysisIndex(HttpServletRequest request) {
-        log.info("bank-analysis-home\n" + request.toString());
-    }
-
-    @RequestMapping("/")
-    public String showWelcomePage() {
-        return "bankAnalysisIndex";
     }
 }

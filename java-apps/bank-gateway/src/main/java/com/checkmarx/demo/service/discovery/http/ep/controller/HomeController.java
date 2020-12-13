@@ -50,6 +50,17 @@ public class HomeController {
         log.info("bank-gateway-home\n" + request.toString());
     }
 
+    @RequestMapping(path = "/convert-currency", method = RequestMethod.GET)
+    @ResponseBody
+    public String convertCurrency(@RequestParam("amount") Long amount,
+                                  @RequestParam("sourceCurrency") String sourceCurrency,
+                                  @RequestParam("targetCurrency") String targetCurrency) {
+        log.info("Converting {} {} to {}", amount, sourceCurrency, targetCurrency);
+        String targetUrl = relatedServicesProperties.getBankAnalysisUrl() + "/convert-currency?amount=" + amount +
+                "?sourceCurrency=" + sourceCurrency + "?targetCurrency=" + targetCurrency;
+        return sendGetAndReturnString(targetUrl);
+    }
+
     @RequestMapping(path = "/name", method = RequestMethod.GET)
     @ResponseBody
     public String forwardInputToNextService(@RequestParam("name") String name,
@@ -103,6 +114,17 @@ public class HomeController {
             e.printStackTrace();
         }
         return "ok";
+    }
+
+    private String sendGetAndReturnString(String url) {
+        HttpGet request = new HttpGet(url);
+        request.addHeader("custom-key", "checkmarx");
+        request.addHeader(HttpHeaders.USER_AGENT, "Chrome");
+        try (CloseableHttpResponse response = httpClient.execute(request)) {
+            return EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            return "Couldn't send get for: " + url;
+        }
     }
 
     private void sendGet(String uri) throws Exception {
