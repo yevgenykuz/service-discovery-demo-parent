@@ -46,7 +46,7 @@ Cross HTTP applications
 Relevant applications:
 
 * *bank-gateway*
-* *java-http-propagator*
+* *bank-analysis*
 * *dotnet-core-http-entry-point*
 * *dotnet-core-http-propagator*
 * *nodejs-http-entry-point*
@@ -147,7 +147,7 @@ Java applications
 Port  App                            Remarks
 ====  =============================  ========
 8110  bank-gateway
-8111  java-http-propagator
+8111  bank-analysis
 8112  java-http-sink
 8113  java-kafka-http-entry-point
 8114  java-kafka-entry-point		 Reserved
@@ -165,7 +165,7 @@ Port  App                            Remarks
 Port  App
 ====  =============================
 8410  bank-gateway
-8411  java-http-propagator
+8411  bank-analysis
 8412  java-http-sink
 8413  java-kafka-http-entry-point
 8414  java-kafka-entry-point

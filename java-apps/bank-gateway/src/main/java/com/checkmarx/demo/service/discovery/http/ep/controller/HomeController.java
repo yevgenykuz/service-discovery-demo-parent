@@ -86,7 +86,7 @@ public class HomeController {
     public String forwardInputToPropagatorAndThenToSqlService(@RequestParam("name") String name) {
         log.info("input entry point - prop-name: " + name);
         try {
-            sendGet(relatedServicesProperties.getJavaHttpPropagatorUrl() + "/name?name=" + name);
+            sendGet(relatedServicesProperties.getBankAnalysisUrl() + "/name?name=" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +98,7 @@ public class HomeController {
     public String forwardInputToPropagatorAndThenToDotnetCoreEntryPoint(@RequestParam("name") String name) {
         log.info("input entry point - cross-http: " + name);
         try {
-            sendGet(relatedServicesProperties.getJavaHttpPropagatorUrl() + "/cross-http?name=" + name);
+            sendGet(relatedServicesProperties.getBankAnalysisUrl() + "/cross-http?name=" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }

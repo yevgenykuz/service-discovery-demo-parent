@@ -1,6 +1,6 @@
 #! /bin/bash
 if [[ -z "${IAST_MANAGER_URL}" ]]; then
-  java -jar java-http-propagator.jar
+  java -jar bank-analysis.jar
 else
   cwd=$(pwd)
   mkdir /usr/local/cxiast-agent
@@ -11,5 +11,5 @@ else
   chmod a+x CxIAST.sh
   echo "maxStoredStringLength=50" >>cx_agent.override.properties
   cd ${cwd}
-  /usr/local/cxiast-agent/CxIAST.sh -e "java -jar java-http-propagator.jar"
+  /usr/local/cxiast-agent/CxIAST.sh -e "java -jar bank-analysis.jar"
 fi

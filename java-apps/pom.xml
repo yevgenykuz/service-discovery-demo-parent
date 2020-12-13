@@ -19,7 +19,7 @@
 
     <modules>
         <module>bank-gateway</module>
-        <module>java-http-propagator</module>
+        <module>bank-analysis</module>
         <module>java-http-sink</module>
         <module>java-kafka-entry-point</module>
         <module>java-kafka-http-entry-point</module>

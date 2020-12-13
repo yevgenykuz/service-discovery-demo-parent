@@ -31,9 +31,9 @@ To push docker images to a different location, change *yevgenykcx* to your needs
     # in bank-gateway folder:
     docker build -t yevgenykcx/bank-gateway .
     docker push yevgenykcx/bank-gateway
-    # in java-http-propagator folder:
-    docker build -t yevgenykcx/java-http-propagator .
-    docker push yevgenykcx/java-http-propagator
+    # in bank-analysis folder:
+    docker build -t yevgenykcx/bank-analysis .
+    docker push yevgenykcx/bank-analysis
     # in java-http-sink folder:
     docker build -t yevgenykcx/java-http-sink .
     docker push yevgenykcx/java-http-sink
@@ -237,7 +237,7 @@ HTTP Flow
 Relevant applications:
 
 * *bank-gateway*
-* *java-http-propagator*
+* *bank-analysis*
 * *java-http-sink*
 
 To trigger HTTP flows you can access the UI in ``http://localhost:8110/`` or send HTTP GET request as follows:

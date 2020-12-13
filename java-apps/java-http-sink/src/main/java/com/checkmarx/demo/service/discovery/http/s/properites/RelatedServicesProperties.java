@@ -21,9 +21,9 @@ public class RelatedServicesProperties {
     private String bankGatewayUrl;
 
     /**
-     * java-http-propagator application URL.
+     * bank-analysis application URL.
      * <p>
-     * <u>Example:</u> {@code http://java-http-propagator:8182}
+     * <u>Example:</u> {@code http://bank-analysis:8182}
      */
-    private String javaHttpPropagatorUrl;
+    private String bankAnalysisUrl;
 }

@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-slim
 EXPOSE 8111
-COPY target/java-http-propagator.jar java-http-propagator.jar
+COPY target/bank-analysis.jar bank-analysis.jar
 COPY start.sh start.sh
 RUN chmod +x start.sh
 RUN apt-get update

@@ -12,14 +12,14 @@ services:
     ports:
       - '8110:8110'
     environment:
-      - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
+      - BANK_ANALYSIS_URL=http://bank-analysis:8111
       - JAVA_HTTP_SINK_URL=http://java-http-sink:8112
       - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure
 
-  java-http-propagator:
-    image: 'yevgenykcx/java-http-propagator:latest'
+  bank-analysis:
+    image: 'yevgenykcx/bank-analysis:latest'
     networks:
       - java-http-net
     ports:
@@ -39,7 +39,7 @@ services:
       - '8112:8112'
     environment:
       - BANK_GATEWAY_URL=http://bank-gateway:8110
-      - JAVA_HTTP_PROPAGATOR_URL=http://java-http-propagator:8111
+      - BANK_ANALYSIS_URL=http://bank-analysis:8111
       - IAST_MANAGER_URL=${IAST_MANAGER_URL}
     # workaround for concurrent IAST agent download bug:
     restart: on-failure

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaHttpPropagatorApplication {
+public class BankAnalysisApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaHttpPropagatorApplication.class, args);
+        SpringApplication.run(BankAnalysisApplication.class, args);
     }
 }

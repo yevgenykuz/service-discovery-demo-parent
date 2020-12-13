@@ -79,12 +79,12 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public void propagatorExampleIndex(HttpServletRequest request) {
-        log.info("propagator-example\n" + request.toString());
+    public void bankAnalysisIndex(HttpServletRequest request) {
+        log.info("bank-analysis-home\n" + request.toString());
     }
 
     @RequestMapping("/")
     public String showWelcomePage() {
-        return "propagatorExampleIndex";
+        return "bankAnalysisIndex";
     }
 }
