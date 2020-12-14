@@ -28,7 +28,7 @@ function DepositScreen() {
         <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
 
                 <CardWrapper className={styles.contentCard}>
-                    <img src={"/img/deposit.svg"} alt={"deposit icon"} className={`${styles.depositIcon} iconMedium`}/>
+                    <img src={"/img/deposit.svg"} alt={"deposit icon"} className={`iconMarginMedium iconMedium`}/>
                     <Form className={styles.form} onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label>Enter the amount to deposit</Form.Label>
