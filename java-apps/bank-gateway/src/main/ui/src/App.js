@@ -1,5 +1,5 @@
 import React from "react"
-import {Switch, Route, useLocation} from "react-router-dom"
+import {Switch, Route, useLocation, useHistory} from "react-router-dom"
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,22 +19,38 @@ import * as routes from "./constants/routes"
 import {logTypes} from "./recoilStates/logger";
 import LogsMenu from "./components/components/logsMenu";
 import NavBarBase from "./components/components/navBarBase";
-
+import {getAllowedRoutesWithoutLogin} from "./constants/routes";
 
 
 function App() {
     const isLoggedIn = useIsLoggedInState()
     const [, setObj] = useUserInfo()
     let {pathname} = useLocation();
+    let history = useHistory();
+
+    const isInLogsScreen = pathname.startsWith(routes.LOGS)
+
+
 
     React.useEffect(() => {
         if (Auth.isLoggedIn())
             Auth.getUserInfo().then(({username}) => setObj.setUserName(username))
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    React.useEffect(()=>{
+        if(!isLoggedIn)
+            if(!getAllowedRoutesWithoutLogin().includes(pathname))
+                return  history.replace(routes.LOGIN)
+
+        if(isLoggedIn && pathname === routes.LOGIN)
+            return  history.replace(routes.HOME)
+
+    },[pathname,isLoggedIn])// eslint-disable-line react-hooks/exhaustive-deps
+
+
 
 
     return (<div className="App">
-            {isLoggedIn && !pathname.startsWith(routes.LOGS) && <NavBar/>}
+            {isLoggedIn && !isInLogsScreen && <NavBar/>}
             {pathname.startsWith(routes.LOGS) && <NavBarBase/>}
             <LogsMenu/>
             <Switch>
@@ -50,18 +66,14 @@ function App() {
                 <Route exact path={routes.LOGS}>
                     <LogsScreen title={"Transactions"}/>
                 </Route>
-                {isLoggedIn ?
-                    <>
-                        <Route exact path={routes.HOME} component={HomeScreen}/>
-                        <Route exact path={routes.DEPOSIT} component={DepositScreen}/>
-                        <Route exact path={routes.DEPOSIT_PROCESSING} component={DepositProcessingScreen}/>
-                        <Route exact path={routes.DEPOSIT_SUCCESSFUL} component={DepositSuccessfulScreen}/>
-                        <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
-                    </>
-                    : <>
-                        <Route path={routes.LOGIN} component={LoginScreen}/>
-                    </>
-                }
+
+                <Route exact path={routes.DEPOSIT} component={DepositScreen}/>
+                <Route exact path={routes.DEPOSIT_PROCESSING} component={DepositProcessingScreen}/>
+                <Route exact path={routes.DEPOSIT_SUCCESSFUL} component={DepositSuccessfulScreen}/>
+                <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
+                <Route exact path={routes.LOGIN} component={LoginScreen} />
+                <Route path={routes.HOME} component={HomeScreen}/>
+
             </Switch>
         </div>
     );

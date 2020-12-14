@@ -1,6 +1,5 @@
-
 export const HOME = "/"
-export const LOGIN= "/"
+export const LOGIN = "/login"
 export const DEPOSIT = "/deposit"
 export const DEPOSIT_PROCESSING = "/deposit/processing"
 export const DEPOSIT_SUCCESSFUL = "/deposit/successful"
@@ -10,3 +9,10 @@ export const LOGS_PROPAGATOR = "/logs/propagator"
 export const LOGS_SINK = "/logs/sink"
 export const LOGS = "/logs"
 
+export function getAllowedRoutesWithoutLogin() {
+    return [LOGS,
+        LOGS_ENTRY_POINT,
+        LOGS_PROPAGATOR,
+        LOGS_SINK
+    ]
+}
