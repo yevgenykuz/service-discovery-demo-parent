@@ -1,0 +1,24 @@
+.card {
+    min-width: 400px;
+    max-width: 400px;
+}
+
+.form {
+    width: 100%
+}
+
+.fieldWithLabel {
+    display: flex;
+    align-items: center;
+    padding-inline-start: 5px;
+}
+
+.fieldWithLabel :first-child {
+    min-width: 50px;
+    max-width: 50px;
+    text-align: start;
+}
+
+.submitButton {
+    width: 100%;
+}
