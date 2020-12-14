@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import ScreenWrapper from "../../components/screenWrapper";
 import {checkBalance} from "../../../models/API";
 import LoadingPopup from "../../components/loadingPopup";
@@ -12,14 +12,17 @@ function BalanceScreen() {
     const [isLoading, setIsLoading] = React.useState(true)
     const [{username}] = useUserInfo()
     const logger = useLogger()
+    const userLeftPageRef = useRef(false)
 
     useEffect(()=>{
         logger.entryPoint.log(`check balance for "${username}" initiated`)
-
+        return  ()=> userLeftPageRef.current=false
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    React.useEffect(() => {
+    useEffect(() => {
         checkBalance(username).then(value => {
+            if(!userLeftPageRef.current)
+                return;
             setBalance(value);
             setIsLoading(false)
             logger.sink.log(`check balance for "${username}" called `)
