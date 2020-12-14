@@ -16,12 +16,12 @@ function BalanceScreen() {
 
     useEffect(()=>{
         logger.entryPoint.log(`check balance for "${username}" initiated`)
-        return  ()=> userLeftPageRef.current=false
+        return  ()=> userLeftPageRef.current=true
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         checkBalance(username).then(value => {
-            if(!userLeftPageRef.current)
+            if(userLeftPageRef.current)
                 return;
             setBalance(value);
             setIsLoading(false)
