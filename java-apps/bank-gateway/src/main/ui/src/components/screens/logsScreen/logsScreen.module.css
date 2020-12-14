@@ -3,9 +3,7 @@
     flex-direction: column;
     padding: 20px;
 }
-.fillHeight{
-    height: 100vh;
-}
+
 .header {
     display: flex;
     justify-content: space-between;
