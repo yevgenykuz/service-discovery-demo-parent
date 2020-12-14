@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {login} from "../../../models/auth";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import ScreenWrapper from "../../components/screenWrapper";
@@ -14,12 +14,16 @@ function LoginScreen() {
     const [, setObj] = useUserInfo()
     const [isLoading, setIsLoading] = useState(false)
 
+    const userLeftPageRef = useRef(false)
+    useEffect(()=>()=>userLeftPageRef.current=true ,[])
+
     function handleSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
         login(userName, pass).then(({username}) => {
-            setObj.setUserName(username)
-        }).catch(e => setErrorMessage(e.message)).finally(() => setIsLoading(false)
+            !userLeftPageRef.current && setObj.setUserName(username)
+        }).catch(e => setErrorMessage(e.message)).finally(() =>
+            !userLeftPageRef.current && setIsLoading(false)
         );
     }
 
