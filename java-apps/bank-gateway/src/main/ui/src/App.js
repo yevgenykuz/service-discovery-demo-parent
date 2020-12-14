@@ -1,5 +1,5 @@
 import React from "react"
-import {Switch, Route} from "react-router-dom"
+import {Switch, Route, useLocation} from "react-router-dom"
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,12 +18,14 @@ import * as Auth from "./models/auth"
 import * as routes from "./constants/routes"
 import {logTypes} from "./recoilStates/logger";
 import LogsMenu from "./components/components/logsMenu";
+import NavBarBase from "./components/components/navBarBase";
 
 
 
 function App() {
     const isLoggedIn = useIsLoggedInState()
     const [, setObj] = useUserInfo()
+    let {pathname} = useLocation();
 
     React.useEffect(() => {
         if (Auth.isLoggedIn())
@@ -32,7 +34,8 @@ function App() {
 
 
     return (<div className="App">
-            {isLoggedIn && <NavBar/>}
+            {isLoggedIn && !pathname.startsWith(routes.LOGS) && <NavBar/>}
+            {pathname.startsWith(routes.LOGS) && <NavBarBase/>}
             <LogsMenu/>
             <Switch>
                 <Route exact path={routes.LOGS_SINK}>

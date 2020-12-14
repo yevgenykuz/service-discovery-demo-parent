@@ -1,21 +1,22 @@
 .component{
     height:60px;
-    /*display:flex;*/
+
     width:100%;
 
 
 }
-
 .logoText{
     color:var(--color-logo);
 }
-.buttons{
+
+.button{
     height:100%;
     cursor: pointer;
 }
-.buttons, .buttons:visited, .buttons:active{
+.button, .button:visited, .button:active{
     color:white;
 }
-.selected{
+
+.button--selected{
     color:deepskyblue;
 }
