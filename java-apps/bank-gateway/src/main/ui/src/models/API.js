@@ -1,18 +1,20 @@
 import axios from "axios"
-import {CHECK_BALANCE_DURATION, DEPOSIT_DURATION} from "../constants/delayDurations";
+import {CHECK_BALANCE_DURATION, CURRENCY_CONVERSION_DURATION, DEPOSIT_DURATION} from "../constants/delayDurations";
 import {loggerInstance} from "./logger";
+import {USD} from "../constants/convertCurrencyOptions";
 
 const DEPOSIT_ROUTE = "http://localhost:8110/prop-name"
 const CHECK_BALANCE_ROUTE = "http://localhost:8110/name"
 const INVOKE_ENTRY_POINT = "http://localhost:8110/home"
+const CONVERT_CURRENCY = "http://localhost:8110/convert-currency"
 
 export function timeoutPromise(time = 1000) {
     return new Promise((resolve) => setTimeout(resolve, time))
 }
 
 export async function depositAmount(username, amount) {
-
-    loggerInstance.logPropagator(`deposit for "${username}" processing : ${amount} amount`)
+    loggerInstance.logEntryPoint(`deposit for "${username}" initiated : ${amount}$`)
+    loggerInstance.logPropagator(`deposit for "${username}" processing : ${amount}$`)
 
     await timeoutPromise(DEPOSIT_DURATION)
     try {
@@ -20,7 +22,7 @@ export async function depositAmount(username, amount) {
     } catch (e) {
     }
 
-    loggerInstance.logSink(`deposit for "${username}" registered : ${amount} amount`)
+    loggerInstance.logSink(`deposit for "${username}" registered : ${amount}$`)
 
 }
 
@@ -37,7 +39,27 @@ export async function checkBalance(username = 'test') {
     return 100
 }
 
-export function silentlyInvokeEntryPoint(username = 'test') {
+export async function convertCurrency(username,amount, sourceCur, targetCur) {
+
+    loggerInstance.logEntryPoint(`"${username}" requested converting ${amount} ${sourceCur} to ${targetCur} `)
+
+    await timeoutPromise(CURRENCY_CONVERSION_DURATION)
+
+    let ilsRate= 3.25;
+    try {
+        const {data} = await axios.get("https://api.exchangeratesapi.io/latest?base=USD");
+        ilsRate = data?.rates["ILS"];
+        await axios.get(`${CONVERT_CURRENCY}?amount=${amount}&sourceCurrency=${sourceCur}&targetCurrency=${targetCur}`)
+
+    } catch (e) {
+    }
+    const response = sourceCur === USD? amount * ilsRate : amount*(1/ilsRate);
+
+    loggerInstance.logEntryPoint(`"${username}" responded with  ${response} ${targetCur}`)
+    return response;
+}
+
+export function silentlyInvokeEntryPoint() {
     return axios.get(INVOKE_ENTRY_POINT)
 }
 

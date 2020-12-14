@@ -3,23 +3,19 @@ import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./deposit.module.css"
 import CardWrapper from "../../components/cardWrapper";
 import {Button, Form} from "react-bootstrap";
-import {useUserInfo} from "../../../recoilStates/userAuth";
 import {useHistory} from "react-router-dom";
 import {DEPOSIT_PROCESSING} from "../../../constants/routes";
-import {loggerInstance} from "../../../models/logger";
 
 
 function DepositScreen() {
 
     const [amount, setAmount] = React.useState(1)
-    const [{username}] = useUserInfo()
     const history = useHistory()
 
 
     function handleSubmit(e) {
         e.preventDefault()
         history.push(`${DEPOSIT_PROCESSING}?amount=${amount}&flow=true`)
-        loggerInstance.logEntryPoint(`deposit for "${username}" initiated : ${amount} amount`)
     }
 
     return (
