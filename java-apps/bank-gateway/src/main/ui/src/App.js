@@ -9,7 +9,7 @@ import HomeScreen from "./components/screens/homeScreen";
 import DepositScreen from "./components/screens/depositScreen";
 import BalanceScreen from "./components/screens/balanceScreen";
 import LogsScreen from "./components/screens/logsScreen";
-import DepositProcessingScreen from "./components/screens/depositProccessingScreen";
+import DepositProcessingScreen from "./components/screens/depositProcessingScreen";
 import DepositSuccessfulScreen from "./components/screens/depositSuccessfulScreen";
 import NavBar from "./components/components/navBar";
 
