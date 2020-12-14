@@ -21,6 +21,7 @@
     justify-content: center;
     font-size: x-large;
     font-weight: bold;
+    margin: 0;
 }
 .form{
     display: flex;
