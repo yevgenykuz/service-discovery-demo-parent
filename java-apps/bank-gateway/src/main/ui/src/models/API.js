@@ -55,7 +55,7 @@ export async function convertCurrency(username,amount, sourceCur, targetCur) {
     }
     const response = sourceCur === USD? amount * ilsRate : amount*(1/ilsRate);
 
-    loggerInstance.logEntryPoint(`"${username}" responded with  ${response} ${targetCur}`)
+    loggerInstance.logPropagator(`"${username}" responded with  ${response} ${targetCur}`)
     return response;
 }
 
