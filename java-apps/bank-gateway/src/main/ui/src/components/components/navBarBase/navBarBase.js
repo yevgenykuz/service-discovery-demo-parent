@@ -10,7 +10,7 @@ function NavBarBase({children}) {
 
     return (
             <Navbar className={styles.component} as={"nav"} bg={"dark"} variant={"dark"}>
-                <Navbar.Brand ><span className={styles.logoText}>Bank</span></Navbar.Brand>
+                <Navbar.Brand > <Link to={HOME}><span className={styles.logoText}>Bank</span></Link></Navbar.Brand>
 
                 <Nav.Link  as="section">
                     <Link to={HOME}><span className={`${styles.button} ${getSelectedClassname(pathname,HOME)}`}>Home</span></Link>
