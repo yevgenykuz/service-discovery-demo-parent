@@ -12,6 +12,7 @@
 .button{
     height:100%;
     cursor: pointer;
+    transition: all 200ms linear;
 }
 .button, .button:visited, .button:active{
     color:white;
