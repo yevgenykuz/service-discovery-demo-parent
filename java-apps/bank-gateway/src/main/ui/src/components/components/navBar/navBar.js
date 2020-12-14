@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link, useHistory,useLocation} from "react-router-dom";
-import {CHECK_BALANCE, DEPOSIT} from "../../../constants/routes";
+import {Link, useHistory, useLocation} from "react-router-dom";
+import {CHECK_BALANCE, CONVERT_CURRENCY, DEPOSIT} from "../../../constants/routes";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import * as Auth from "../../../models/auth";
 import * as routes from "../../../constants/routes";
@@ -17,9 +17,9 @@ function NavBar() {
     const [{username}, setObj] = useUserInfo()
     const logger = useLogger()
 
-    function handleLogout(){
+    function handleLogout() {
         Auth.logout()
-            .then(()=>{
+            .then(() => {
                 setObj.logout()
                 history.push(routes.LOGIN)
                 logger.entryPoint.log(`"${username}" has logged out`)
@@ -28,19 +28,27 @@ function NavBar() {
 
 
     return (
-      <NavBarBase>
+        <NavBarBase>
 
-            <Nav.Link  as="section">
-                <Link to={DEPOSIT}><span className={`${styles.button} ${getSelectedClassname(pathname,DEPOSIT)}`}>Deposit</span></Link>
+            <Nav.Link as="section">
+                <Link to={DEPOSIT}><span
+                    className={`${styles.button} ${getSelectedClassname(pathname, DEPOSIT)}`}>Deposit</span></Link>
             </Nav.Link>
 
-            <Nav.Link  as="section">
-                <Link to={CHECK_BALANCE} ><span className={`${styles.button} ${getSelectedClassname(pathname,CHECK_BALANCE)}`}>Check Balance</span></Link>
+            <Nav.Link as="section">
+                <Link to={CHECK_BALANCE}><span
+                    className={`${styles.button} ${getSelectedClassname(pathname, CHECK_BALANCE)}`}>Check Balance</span></Link>
             </Nav.Link>
 
-            <Nav.Link as={"section"}  onClick={handleLogout}>
-               <span className={styles.button}>Logout</span>
+            <Nav.Link as="section">
+                <Link to={CONVERT_CURRENCY}><span
+                    className={`${styles.button} ${getSelectedClassname(pathname, CHECK_BALANCE)}`}>Convert Currency</span></Link>
             </Nav.Link>
+
+            <Nav.Link as={"section"} onClick={handleLogout}>
+                <span className={styles.button}>Logout</span>
+            </Nav.Link>
+
 
         </NavBarBase>
     );

@@ -8,6 +8,7 @@ export const LOGS_ENTRY_POINT = "/logs/entry"
 export const LOGS_PROPAGATOR = "/logs/propagator"
 export const LOGS_SINK = "/logs/sink"
 export const LOGS = "/logs"
+export const CONVERT_CURRENCY = "/convert-currency"
 
 export function getAllowedRoutesWithoutLogin() {
     return [LOGS,
