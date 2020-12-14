@@ -4,17 +4,14 @@ import {Button, ListGroup} from "react-bootstrap";
 import dayjs from "dayjs"
 import styles from "./logsScreen.module.css"
 import useLogger from "../../../recoilStates/logger";
-import {useIsLoggedInState} from "../../../recoilStates/userAuth";
 
 function LogsScreen({logsType = "all", title}) {
     const logger = useLogger()
     const currentLogsFunctions = logger[logsType]
 
-    const isLoggedIn = useIsLoggedInState()
-
 
     return (
-        <ScreenWrapper className={styles.component} containerClassName={isLoggedIn?"":styles.fillHeight} >
+        <ScreenWrapper className={styles.component} >
             <header className={styles.header}>
                 {title && <h4>{title}</h4>}
                 <Button variant={"info"} onClick={currentLogsFunctions?.clear}>Clear</Button>
