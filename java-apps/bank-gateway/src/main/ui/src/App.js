@@ -16,7 +16,7 @@ import NavBar from "./components/components/navBar";
 import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
 import * as Auth from "./models/auth"
 import * as routes from "./constants/routes"
-import {logTypes} from "./recoilStates/logger";
+import {logTypes} from "./models/logger";
 import LogsMenu from "./components/components/logsMenu";
 import NavBarBase from "./components/components/navBarBase";
 import {getAllowedRoutesWithoutLogin} from "./constants/routes";

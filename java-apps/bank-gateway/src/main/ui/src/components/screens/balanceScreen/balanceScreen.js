@@ -5,28 +5,25 @@ import LoadingPopup from "../../components/loadingPopup";
 import CardWrapper from "../../components/cardWrapper";
 import styles from "./balanceScreen.module.css"
 import {useUserInfo} from "../../../recoilStates/userAuth";
-import useLogger from "../../../recoilStates/logger";
 function BalanceScreen() {
 
     const [balance, setBalance] = React.useState()
     const [isLoading, setIsLoading] = React.useState(true)
     const [{username}] = useUserInfo()
-    const logger = useLogger()
     const userLeftPageRef = useRef(false)
 
-    useEffect(()=>{
-        logger.entryPoint.log(`check balance for "${username}" initiated`)
-        return  ()=> userLeftPageRef.current=true
-    },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
+
         checkBalance(username).then(value => {
             if(userLeftPageRef.current)
                 return;
             setBalance(value);
             setIsLoading(false)
-            logger.sink.log(`check balance for "${username}" called `)
         })
+
+        return  ()=> userLeftPageRef.current=true
+
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

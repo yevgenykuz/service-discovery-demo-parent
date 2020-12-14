@@ -6,7 +6,6 @@ import * as Auth from "../../../models/auth";
 import * as routes from "../../../constants/routes";
 import styles from "../navBarBase/navBarBase.module.css"
 import {Nav} from "react-bootstrap";
-import useLogger from "../../../recoilStates/logger";
 import NavBarBase from "../navBarBase";
 import {getSelectedClassname} from "../navBarBase/navBarUtil";
 
@@ -14,15 +13,13 @@ function NavBar() {
 
     const history = useHistory()
     let {pathname} = useLocation();
-    const [{username}, setObj] = useUserInfo()
-    const logger = useLogger()
+    const [, setObj] = useUserInfo()
 
     function handleLogout() {
         Auth.logout()
             .then(() => {
                 setObj.logout()
                 history.push(routes.LOGIN)
-                logger.entryPoint.log(`"${username}" has logged out`)
             })
     }
 

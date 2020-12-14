@@ -5,13 +5,11 @@ import {useUserInfo} from "../../../recoilStates/userAuth";
 import {useHistory, useLocation} from "react-router-dom";
 import {depositAmount} from "../../../models/API";
 import {DEPOSIT_SUCCESSFUL} from "../../../constants/routes";
-import useLogger from "../../../recoilStates/logger";
 
 function DepositProcessingScreen() {
     const [{username}] = useUserInfo()
     let {search} = useLocation();
     const history = useHistory()
-    const logger = useLogger()
 
     const [amount,setAmount] = useState("1")
     useEffect(()=>{
@@ -23,7 +21,6 @@ function DepositProcessingScreen() {
         if(flow)
             depositAmount(username, paramAmount).then(() => {
                 history.push(`${DEPOSIT_SUCCESSFUL}?amount=${paramAmount||1}`)
-                logger.sink.log(`deposit for "${username}" registered : ${paramAmount} amount`)
             })
 
 

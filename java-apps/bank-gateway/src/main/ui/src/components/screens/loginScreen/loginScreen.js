@@ -5,7 +5,6 @@ import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./login.module.css"
 import {Alert, Button, Form, Navbar} from "react-bootstrap"
 import CardWrapper from "../../components/cardWrapper";
-import useLogger from "../../../recoilStates/logger";
 import LoadingPopup from "../../components/loadingPopup";
 
 function LoginScreen() {
@@ -14,13 +13,11 @@ function LoginScreen() {
     const [error, setErrorMessage] = useState("")
     const [, setObj] = useUserInfo()
     const [isLoading, setIsLoading] = useState(false)
-    const logger = useLogger()
 
     function handleSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
         login(userName, pass).then(({username}) => {
-            logger.entryPoint.log(`"${userName}" has logged in`)
             setObj.setUserName(username)
         }).catch(e => setErrorMessage(e.message)).finally(() => setIsLoading(false)
         );

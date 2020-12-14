@@ -6,7 +6,7 @@ import {Button, Form} from "react-bootstrap";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import {useHistory} from "react-router-dom";
 import {DEPOSIT_PROCESSING} from "../../../constants/routes";
-import useLogger from "../../../recoilStates/logger";
+import {loggerInstance} from "../../../models/logger";
 
 
 function DepositScreen() {
@@ -14,14 +14,12 @@ function DepositScreen() {
     const [amount, setAmount] = React.useState(1)
     const [{username}] = useUserInfo()
     const history = useHistory()
-    const logger = useLogger()
 
 
     function handleSubmit(e) {
         e.preventDefault()
         history.push(`${DEPOSIT_PROCESSING}?amount=${amount}&flow=true`)
-        logger.entryPoint.log(`deposit for "${username}" initiated : ${amount} amount`)
-        logger.propagator.log(`deposit for "${username}" processing : ${amount} amount`)
+        loggerInstance.logEntryPoint(`deposit for "${username}" initiated : ${amount} amount`)
     }
 
     return (
