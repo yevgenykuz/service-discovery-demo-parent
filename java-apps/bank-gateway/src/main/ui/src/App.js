@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import {Switch, Route, useLocation, useHistory} from "react-router-dom"
 
 import './App.css';
@@ -20,23 +20,32 @@ import {logTypes} from "./recoilStates/logger";
 import LogsMenu from "./components/components/logsMenu";
 import NavBarBase from "./components/components/navBarBase";
 import {getAllowedRoutesWithoutLogin} from "./constants/routes";
+import ConvertCurrencyScreen from "./components/screens/convertCurrencyScreen";
 
 
 function App() {
+    const [isLoaded,setIsLoaded] = useState(false)
     const isLoggedIn = useIsLoggedInState()
     const [, setObj] = useUserInfo()
+
+
     let {pathname} = useLocation();
     let history = useHistory();
-
     const isInLogsScreen = pathname.startsWith(routes.LOGS)
 
 
 
-    React.useEffect(() => {
+   useEffect(() => {
         if (Auth.isLoggedIn())
-            Auth.getUserInfo().then(({username}) => setObj.setUserName(username))
+            Auth.getUserInfo().then(({username}) => {
+                setObj.setUserName(username)
+                setIsLoaded(true)
+            })
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
-    React.useEffect(()=>{
+    useEffect(()=>{
+        if(!isLoaded)
+            return ;
+
         if(!isLoggedIn)
             if(!getAllowedRoutesWithoutLogin().includes(pathname))
                 return  history.replace(routes.LOGIN)
@@ -44,7 +53,7 @@ function App() {
         if(isLoggedIn && pathname === routes.LOGIN)
             return  history.replace(routes.HOME)
 
-    },[pathname,isLoggedIn])// eslint-disable-line react-hooks/exhaustive-deps
+    },[pathname,isLoggedIn,isLoaded])// eslint-disable-line react-hooks/exhaustive-deps
 
 
 
@@ -67,6 +76,7 @@ function App() {
                     <LogsScreen title={"Transactions"}/>
                 </Route>
 
+                <Route exact path={routes.CONVERT_CURRENCY} component={ConvertCurrencyScreen}/>
                 <Route exact path={routes.DEPOSIT} component={DepositScreen}/>
                 <Route exact path={routes.DEPOSIT_PROCESSING} component={DepositProcessingScreen}/>
                 <Route exact path={routes.DEPOSIT_SUCCESSFUL} component={DepositSuccessfulScreen}/>
