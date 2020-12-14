@@ -15,7 +15,10 @@ export async function depositAmount(username, amount) {
     loggerInstance.logPropagator(`deposit for "${username}" processing : ${amount} amount`)
 
     await timeoutPromise(DEPOSIT_DURATION)
-    await axios.get(`${DEPOSIT_ROUTE}?name=${username}_Deposit_${amount}`)
+    try {
+        await axios.get(`${DEPOSIT_ROUTE}?name=${username}_Deposit_${amount}`)
+    } catch (e) {
+    }
 
     loggerInstance.logSink(`deposit for "${username}" registered : ${amount} amount`)
 
@@ -25,7 +28,10 @@ export async function checkBalance(username = 'test') {
     loggerInstance.logEntryPoint(`check balance for "${username}" initiated`)
 
     await timeoutPromise(CHECK_BALANCE_DURATION)
-    await axios.get(`${CHECK_BALANCE_ROUTE}?name=${username}_CheckBalance`)
+    try {
+        await axios.get(`${CHECK_BALANCE_ROUTE}?name=${username}_CheckBalance`)
+    } catch (e) {
+    }
 
     loggerInstance.logSink(`check balance for "${username}" called `)
     return 100
