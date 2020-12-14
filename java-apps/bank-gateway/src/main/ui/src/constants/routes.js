@@ -9,6 +9,8 @@ export const LOGS_PROPAGATOR = "/logs/propagator"
 export const LOGS_SINK = "/logs/sink"
 export const LOGS = "/logs"
 export const CONVERT_CURRENCY = "/convert-currency"
+export const CONVERT_CURRENCY_PROCESSING = "/convert-currency/processing"
+export const CONVERT_CURRENCY_RESULT = "/convert-currency/result"
 
 export function getAllowedRoutesWithoutLogin() {
     return [LOGS,

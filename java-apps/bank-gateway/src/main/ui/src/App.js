@@ -11,6 +11,9 @@ import BalanceScreen from "./components/screens/balanceScreen";
 import LogsScreen from "./components/screens/logsScreen";
 import DepositProcessingScreen from "./components/screens/depositProcessingScreen";
 import DepositSuccessfulScreen from "./components/screens/depositSuccessfulScreen";
+import ConvertCurrencyScreen from "./components/screens/convertCurrencyScreen";
+import ConvertCurrencyProcessingScreen from "./components/screens/convertCurrencyProcessingScreen";
+import ConvertCurrencyResultScreen from "./components/screens/convertCurrencyResultScreen";
 import NavBar from "./components/components/navBar";
 
 import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
@@ -20,7 +23,6 @@ import {logTypes} from "./models/logger";
 import LogsMenu from "./components/components/logsMenu";
 import NavBarBase from "./components/components/navBarBase";
 import {getAllowedRoutesWithoutLogin} from "./constants/routes";
-import ConvertCurrencyScreen from "./components/screens/convertCurrencyScreen";
 
 
 function App() {
@@ -77,6 +79,8 @@ function App() {
                 </Route>
 
                 <Route exact path={routes.CONVERT_CURRENCY} component={ConvertCurrencyScreen}/>
+                <Route exact path={routes.CONVERT_CURRENCY_PROCESSING} component={ConvertCurrencyProcessingScreen}/>
+                <Route exact path={routes.CONVERT_CURRENCY_RESULT} component={ConvertCurrencyResultScreen}/>
                 <Route exact path={routes.DEPOSIT} component={DepositScreen}/>
                 <Route exact path={routes.DEPOSIT_PROCESSING} component={DepositProcessingScreen}/>
                 <Route exact path={routes.DEPOSIT_SUCCESSFUL} component={DepositSuccessfulScreen}/>
