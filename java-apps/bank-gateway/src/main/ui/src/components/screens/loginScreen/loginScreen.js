@@ -40,13 +40,13 @@ function LoginScreen() {
                     <Form onSubmit={handleSubmit} className={styles.form}>
                         <Form.Group className={styles.field}>
                             <Form.Label>username</Form.Label>
-                            <Form.Control placeholder="Enter username" className={styles.fieldInput} type="text"
+                            <Form.Control placeholder="Enter username" className={styles.fieldInput} type="text" autoComplete='username'
                                           value={userName} onChange={(e) => setUserName(e.target.value)}/>
                         </Form.Group>
 
                         <Form.Group className={styles.field}>
                             <Form.Label>password</Form.Label>
-                            <Form.Control placeholder="Enter password" className={styles.fieldInput} type="password"
+                            <Form.Control placeholder="Enter password" className={styles.fieldInput} type="password" autoComplete='current-password'
                                           value={pass} onChange={e => setPass((e.target.value))}/>
                         </Form.Group>
 
