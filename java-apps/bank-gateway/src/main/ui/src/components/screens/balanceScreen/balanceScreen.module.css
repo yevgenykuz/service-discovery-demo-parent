@@ -11,3 +11,7 @@
 .amount_minus{
     color: darkred;
 }
+
+.loadingContainer{
+    min-width: 400px ;
+}

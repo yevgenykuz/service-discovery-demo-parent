@@ -28,7 +28,7 @@ function BalanceScreen() {
 
     return (
         <ScreenWrapper className={`flexCenter`}>
-            {isLoading ? <LoadingPopup headerTitle={`loading ${username}'s balance`} loadingTitle={"Processing..."}/> :
+            {isLoading ? <LoadingPopup className={styles.loadingContainer} headerTitle={`loading ${username}'s balance`} loadingTitle={"Processing..."}/> :
                 <CardWrapper className={styles.content}>
                     <img src="/img/withdraw.svg" alt="" className={`iconMarginMedium iconMedium`}/>
 
