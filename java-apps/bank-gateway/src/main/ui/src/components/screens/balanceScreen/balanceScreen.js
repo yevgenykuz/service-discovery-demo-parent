@@ -28,13 +28,14 @@ function BalanceScreen() {
 
     return (
         <ScreenWrapper className={`flexCenter`}>
-            {isLoading ? <LoadingPopup className={styles.loadingContainer} headerTitle={`loading ${username}'s balance`} loadingTitle={"Processing..."}/> :
+            {isLoading ? <LoadingPopup className={styles.loadingContainer} headerTitle={`loading ${username}'s balance`}
+                                       loadingTitle={"Processing..."}/> :
                 <CardWrapper className={styles.content}>
                     <img src="/img/withdraw.svg" alt="" className={`iconMarginMedium iconMedium`}/>
 
-                    <h6>{username}'s current balance is:</h6>
+                    <h6><span className={styles.userName}>{username}'s</span> current balance is:</h6>
 
-                    <h3 className={`${styles.amount} ${balance>=0?styles.amount_plus:styles.amount_minus}`}>{balance}$</h3>
+                    <h3 className={`${styles.amount} ${balance >= 0 ? styles.amount_plus : styles.amount_minus}`}>{balance}$</h3>
 
                 </CardWrapper>}
         </ScreenWrapper>
