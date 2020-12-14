@@ -9,7 +9,7 @@ import {Nav} from "react-bootstrap";
 import NavBarBase from "../navBarBase";
 import {getSelectedClassname} from "../navBarBase/navBarUtil";
 
-function NavBar() {
+function LoggedInNavBar() {
 
     const history = useHistory()
     let {pathname} = useLocation();
@@ -39,7 +39,7 @@ function NavBar() {
 
             <Nav.Link as="section">
                 <Link to={CONVERT_CURRENCY}><span
-                    className={`${styles.button} ${getSelectedClassname(pathname, CHECK_BALANCE)}`}>Convert Currency</span></Link>
+                    className={`${styles.button} ${getSelectedClassname(pathname, CONVERT_CURRENCY)}`}>Convert Currency</span></Link>
             </Nav.Link>
 
             <Nav.Link as={"section"} onClick={handleLogout}>
@@ -51,4 +51,4 @@ function NavBar() {
     );
 }
 
-export default NavBar;
+export default LoggedInNavBar;

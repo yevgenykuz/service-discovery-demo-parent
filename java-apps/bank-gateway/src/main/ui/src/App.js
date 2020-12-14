@@ -14,7 +14,7 @@ import DepositSuccessfulScreen from "./components/screens/depositSuccessfulScree
 import ConvertCurrencyScreen from "./components/screens/convertCurrencyScreen";
 import ConvertCurrencyProcessingScreen from "./components/screens/convertCurrencyProcessingScreen";
 import ConvertCurrencyResultScreen from "./components/screens/convertCurrencyResultScreen";
-import NavBar from "./components/components/navBar";
+import LoggedInNavBar from "./components/components/loggedInNavBar";
 
 import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
 import * as Auth from "./models/auth"
@@ -61,7 +61,7 @@ function App() {
 
 
     return (<div className="App">
-            {isLoggedIn && !isInLogsScreen && <NavBar/>}
+            {isLoggedIn && !isInLogsScreen && <LoggedInNavBar/>}
             {pathname.startsWith(routes.LOGS) && <NavBarBase/>}
             <LogsMenu/>
             <Switch>
