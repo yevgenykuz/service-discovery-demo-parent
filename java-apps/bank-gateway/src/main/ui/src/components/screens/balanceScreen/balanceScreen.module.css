@@ -15,3 +15,6 @@
 .loadingContainer{
     min-width: 400px ;
 }
+.userName{
+    text-transform: capitalize;
+}
