@@ -15,7 +15,7 @@ function DepositSuccessfulScreen() {
         setAmount(paramAmount)
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
     return (<ScreenWrapper>
-            <CardWrapper className={styles.card}>
+            <CardWrapper className={`capitalize ${styles.card}`}>
                 <img src="/img/tick.svg" className={`iconSmall ${styles.icon}`} alt="tick icon"/>
                 <h4>{username} deposited {amount}$</h4>
             </CardWrapper>

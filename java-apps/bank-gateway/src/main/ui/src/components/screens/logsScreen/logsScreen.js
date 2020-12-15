@@ -13,7 +13,7 @@ function LogsScreen({logsType = "all", title}) {
 
     return (
         <ScreenWrapper className={styles.component}>
-            <header className={styles.header}>
+            <header className={`${styles.header} capitalize`}>
                 {title && <h4>{title}</h4>}
                 <Button variant={"info"} onClick={() => loggerInstance.clearType(logsType)}>Clear</Button>
             </header>

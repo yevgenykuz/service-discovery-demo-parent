@@ -21,13 +21,13 @@ function ConvertCurrencyResultScreen() {
     },[])
 
     return (<ScreenWrapper>
-            <CardWrapper className={styles.card}>
+            <CardWrapper className={`capitalize ${styles.card}`}>
                 <div className={`flexCenter ${styles.iconsContainer} iconMarginMedium`}>
                     <img src="/img/exchange.svg" className={`iconMedium ${styles.icon}`} alt="grayscale exchange icon"/>
                     <img src="/img/exchange-color.svg" className={`iconMedium ${styles.iconColor}`} alt=" colored exchange icon"/>
                 </div>
                 <h4>{data.amount} {data.source} Is Approximately</h4>
-                <ColoredMoney amount={data.target}>{data.result} {data.target}</ColoredMoney>
+                <ColoredMoney amount={data.result}>{data.result} {data.target}</ColoredMoney>
             </CardWrapper>
         </ScreenWrapper>
     );

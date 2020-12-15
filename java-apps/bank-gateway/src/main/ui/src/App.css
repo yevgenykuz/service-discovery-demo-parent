@@ -34,3 +34,9 @@
 .iconMarginMedium{
   margin: 20px;
 }
+.capitalize{
+    text-transform: capitalize;
+}
+ .allCaps{
+     text-transform: uppercase;
+ }

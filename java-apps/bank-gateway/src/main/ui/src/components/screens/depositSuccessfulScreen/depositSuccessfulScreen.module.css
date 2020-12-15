@@ -1,7 +1,6 @@
 .card{
     color: var(--success);
     padding: 10px 20px;
-    text-transform: capitalize;
 }
 
 .icon{

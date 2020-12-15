@@ -13,7 +13,7 @@ function HomeScreen() {
     return (
         <ScreenWrapper>
 
-            <CardWrapper className={styles.welcome}>
+            <CardWrapper className={`${styles.welcome} capitalize`}>
                 <h3>Welcome back {userInfo?.username}</h3>
             </CardWrapper>
 

@@ -34,22 +34,22 @@ function ConvertCurrencyScreen() {
                         <Form.Label>From</Form.Label>
 
                         <Form.Control as={'select'} name={'sourceCur'}  required onChange={e => setSourceCur(e.target.value)}>
-                            <option value="">Select Currency</option>
+                            <option value="" className={"capitalize"}>Select Currency</option>
                             {getAllOptions().map((currencyType) =>
-                                <option value={currencyType} key={`from_${currencyType}`}>{currencyType}</option>)}
+                                <option className={"allCaps"} value={currencyType} key={`from_${currencyType}`}>{currencyType}</option>)}
                         </Form.Control>
                     </Form.Group>
 
                     <Form.Group className={styles.fieldWithLabel}>
                         <Form.Label>To</Form.Label>
                         <Form.Control as={'select'} name={"targetCur"}  required >
-                            {toCurOptions.length-1 && <option value="">Select Currency</option>}
+                            {toCurOptions.length-1 && <option className={"capitalize"} value="">Select Currency</option>}
                             {toCurOptions.map((currencyType) =>
-                                <option value={currencyType} key={`to_${currencyType}`}>{currencyType}</option>)
+                                <option className={"allCaps"}  value={currencyType} key={`to_${currencyType}`}>{currencyType}</option>)
                               }
                         </Form.Control>
                     </Form.Group>
-                    <Button type="submit" className={styles.submitButton} variant={"info"}>Convert</Button>
+                    <Button type="submit" className={`capitalize ${styles.submitButton}`} variant={"info"}>Convert</Button>
                 </Form>
             </CardWrapper>
         </ScreenWrapper>
