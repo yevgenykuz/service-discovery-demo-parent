@@ -83,7 +83,7 @@ export async function checkLoanCredibility(username) {
     } catch (e) {
     }
 
-    loggerInstance.logPropagator(response)
+    loggerInstance.logSink(response)
     return response;
 }
 
