@@ -5,6 +5,7 @@ import LoadingPopup from "../../components/loadingPopup";
 import CardWrapper from "../../components/cardWrapper";
 import styles from "./balanceScreen.module.css"
 import {useUserInfo} from "../../../recoilStates/userAuth";
+import ColoredMoney from "../../components/coloredMoney";
 function BalanceScreen() {
 
     const [balance, setBalance] = React.useState()
@@ -34,9 +35,7 @@ function BalanceScreen() {
                     <img src="/img/withdraw.svg" alt="" className={`iconMarginMedium iconMedium`}/>
 
                     <h6><span className={styles.userName}>{username}'s</span> current balance is:</h6>
-
-                    <h3 className={`${styles.amount} ${balance >= 0 ? styles.amount_plus : styles.amount_minus}`}>{balance}$</h3>
-
+                    <ColoredMoney className={styles.amount} amount={balance}>{balance}$</ColoredMoney>
                 </CardWrapper>}
         </ScreenWrapper>
     );

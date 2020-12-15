@@ -1,0 +1,48 @@
+.card {
+    min-width: 400px;
+}
+
+
+.iconsContainer {
+    position: relative;
+}
+
+.icon {
+    animation: fadeOut 300ms linear 750ms forwards ;
+}
+
+.iconColor {
+    position: absolute;
+    animation: fadeIn 300ms linear 750ms forwards, enlarge 1.5s linear alternate 2  ;
+    opacity: 0;
+    transition: all 200ms linear;
+
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes  enlarge{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}

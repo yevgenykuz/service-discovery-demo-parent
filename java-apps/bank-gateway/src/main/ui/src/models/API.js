@@ -46,17 +46,17 @@ export async function convertCurrency(username,amount, sourceCur, targetCur) {
     await timeoutPromise(CURRENCY_CONVERSION_DURATION)
 
     let ilsRate= 3.25;
+    let result;
     try {
-        const {data} = await axios.get("https://api.exchangeratesapi.io/latest?base=USD");
-        ilsRate = data?.rates["ILS"];
-        await axios.get(`${CONVERT_CURRENCY}?amount=${amount}&sourceCurrency=${sourceCur}&targetCurrency=${targetCur}`)
-
+        const response = await axios.get(`${CONVERT_CURRENCY}?amount=${amount}&sourceCurrency=${sourceCur}&targetCurrency=${targetCur}`)
+        result = response.data
     } catch (e) {
     }
-    const response = sourceCur === USD? amount * ilsRate : amount*(1/ilsRate);
+    if(!result)
+        result = sourceCur === USD? amount * ilsRate : amount*(1/ilsRate);
 
-    loggerInstance.logPropagator(`"${username}" responded with  ${response} ${targetCur}`)
-    return response;
+    loggerInstance.logPropagator(`"${username}" responded with  ${result} ${targetCur}`)
+    return result;
 }
 
 export function silentlyInvokeEntryPoint() {
