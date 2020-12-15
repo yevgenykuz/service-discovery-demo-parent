@@ -8,8 +8,7 @@ import CardWrapper from "../../components/cardWrapper";
 import LoadingPopup from "../../components/loadingPopup";
 
 function LoginScreen() {
-    const [userName, setUserName] = useState("")
-    const [pass, setPass] = useState("")
+
     const [error, setErrorMessage] = useState("")
     const [, setObj] = useUserInfo()
     const [isLoading, setIsLoading] = useState(false)
@@ -20,13 +19,17 @@ function LoginScreen() {
     function handleSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
-        login(userName, pass).then(({username}) => {
+
+        const formData = new FormData(e.currentTarget)
+
+
+        login(formData.get("username"), formData.get("password")).then(({username}) => {
             if(!userLeftPageRef.current)
             {
                 setObj.setUserName(username)
                 setIsLoading(false)
             }
-        }).catch(e => setErrorMessage(e.message))
+        }).catch(e => !userLeftPageRef.current && setErrorMessage(e.message))
     }
 
 
@@ -45,16 +48,22 @@ function LoginScreen() {
                         <Form onSubmit={handleSubmit} className={styles.form}>
                             <Form.Group className={styles.field}>
                                 <Form.Label>username</Form.Label>
-                                <Form.Control placeholder="Enter username" className={styles.fieldInput} type="text"
+                                <Form.Control placeholder="Enter username"
+                                              className={styles.fieldInput}
+                                              type="text"
                                               autoComplete='username'
-                                              value={userName} onChange={(e) => setUserName(e.target.value)}/>
+                                              name="username"
+                                              required />
                             </Form.Group>
 
                             <Form.Group className={styles.field}>
                                 <Form.Label>password</Form.Label>
-                                <Form.Control placeholder="Enter password" className={styles.fieldInput} type="password"
+                                <Form.Control placeholder="Enter password"
+                                              className={styles.fieldInput}
+                                              type="password"
                                               autoComplete='current-password'
-                                              value={pass} onChange={e => setPass((e.target.value))}/>
+                                              name={"password"}
+                                              required/>
                             </Form.Group>
 
 
