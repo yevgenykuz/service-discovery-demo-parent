@@ -7,7 +7,9 @@
 
 .menu{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .menu *{
-    margin: 0 10px
+    padding:  10px;
 }

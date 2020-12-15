@@ -32,6 +32,7 @@ export function getLoggedInNavBarOptions(){
         [DEPOSIT]:"Deposit",
         [CHECK_BALANCE]:"Check Balance",
         [CONVERT_CURRENCY]:"Convert Currency",
+        [CHECK_LOAN_CREDIBILITY]:"Check Loan Credibility",
     }
 }
 
@@ -40,5 +41,7 @@ export function getHomeMenuNavigationOptions(){
         [DEPOSIT]: {name:"Deposit",iconSrc:"/img/deposit.svg"},
         [CHECK_BALANCE]: {name:"Check Balance",iconSrc:"/img/withdraw.svg"},
         [CONVERT_CURRENCY]: {name:"Convert Currency",iconSrc:"/img/exchange.svg"},
+        [CHECK_LOAN_CREDIBILITY]: {name:"Check Loan Credibility",iconSrc:"/img/loan.svg"},
+
     }
 }
