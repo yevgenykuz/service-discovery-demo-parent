@@ -1,23 +1,22 @@
 .component {
-    display: flex;
-    flex-direction: column;
     padding: 20px;
+    justify-content: flex-start;
+    align-items: stretch;
 }
-.fillHeight{
-    height: 100vh;
-}
+
 .header {
     display: flex;
     justify-content: space-between;
     height: 40px;
-    margin: 30px 10px;
+    margin: 5px 0 10px 5px;
 }
 
 
 .list {
     overflow-y: scroll;
-    max-height: 80vh;
-    height: 100%;
+    flex-grow: 1;
+    /*workaround - fix component overflowing + scroll*/
+    height: 5px;
 
 }
 
@@ -32,8 +31,8 @@
 }
 
 .dateSpan {
-    min-width: max(15%, 200px);
-    max-width: max(15%, 200px);
+    min-width: 200px;
+    max-width: 200px;
     text-align: center;
     background: var(--gray);
     color: var(--light);
@@ -42,8 +41,8 @@
 }
 
 .logTypeSpan {
-    min-width: max(10%, 100px);
-    max-width: max(10%, 100px);
+    min-width: 150px;
+    max-width: 150px;
     text-align: center;
     background: var(--gray);
     color: var(--light);
@@ -60,17 +59,20 @@
     padding: 3px 0;
 }
 
-.sink{
+.sink {
     background-color: var(--green);
 }
-.propagator{
+
+.propagator {
     background-color: var(--blue);
 }
-.entryPoint{
+
+.entryPoint {
     background-color: var(--red);
 
 }
-.notFound{
+
+.notFound {
     display: flex;
     justify-content: center;
     align-items: center;

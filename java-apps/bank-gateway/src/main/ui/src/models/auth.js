@@ -1,5 +1,6 @@
 import {silentlyInvokeEntryPoint, timeoutPromise} from "./API";
 import {LOGIN_DURATION} from "../constants/delayDurations";
+import {loggerInstance} from "./logger";
 
 
 export function isLoggedIn() {
@@ -13,6 +14,8 @@ export async function login(username, password) {
     await timeoutPromise(LOGIN_DURATION)
 
     localStorage.setItem("user", username)
+
+    loggerInstance.logEntryPoint(`"${username}" has logged in`)
 
     try {
        await silentlyInvokeEntryPoint()
@@ -29,5 +32,6 @@ export async function getUserInfo() {
 }
 
 export async function logout() {
+    loggerInstance.logEntryPoint(`"${localStorage.getItem("user")}" has logged out`)
     localStorage.removeItem("user")
 }

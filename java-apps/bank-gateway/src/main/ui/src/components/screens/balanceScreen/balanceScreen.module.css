@@ -5,13 +5,8 @@
 .amount{
     margin-top: 30px;
 }
-.amount_plus{
-    color: forestgreen;
-}
-.amount_minus{
-    color: darkred;
+
+.loadingContainer{
+    min-width: 400px ;
 }
 
-.icon{
-    margin-bottom: 20px;
-}

@@ -10,7 +10,7 @@ function HomeMenuButton({size = "150px", color = "white", textColor = "black", i
             backgroundColor: color,
             color: textColor
         }}
-                 className={`${styles.component} ${className}`} {...props} onClick={onClick}>
+                 className={`capitalize ${styles.component} ${className}`} {...props} onClick={onClick}>
             {iconSrc && <img src={iconSrc} alt={label} style={{
                 ...style,
                 width: `calc( ${size.toString()} / 3 )`,

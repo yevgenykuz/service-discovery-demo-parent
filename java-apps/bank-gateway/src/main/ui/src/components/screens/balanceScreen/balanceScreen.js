@@ -1,43 +1,32 @@
-import React, {useEffect} from 'react';
-import ScreenWrapper from "../../components/screenWrapper";
-import {checkBalance} from "../../../models/API";
-import LoadingPopup from "../../components/loadingPopup";
-import CardWrapper from "../../components/cardWrapper";
+import React from 'react';
 import styles from "./balanceScreen.module.css"
+import AwaitingAsyncScreen from "../../components/awaitingAsyncScreen/awaitingAsyncScreen";
+import CardWrapper from "../../components/cardWrapper";
+import ColoredMoney from "../../components/coloredMoney";
+import {checkBalance} from "../../../models/API";
 import {useUserInfo} from "../../../recoilStates/userAuth";
-import useLogger from "../../../recoilStates/logger";
+
 function BalanceScreen() {
 
-    const [balance, setBalance] = React.useState()
-    const [isLoading, setIsLoading] = React.useState(true)
     const [{username}] = useUserInfo()
-    const logger = useLogger()
-
-    useEffect(()=>{
-        logger.entryPoint.log(`check balance for "${username}" initiated`)
-
-    },[]) // eslint-disable-line react-hooks/exhaustive-deps
-
-    React.useEffect(() => {
-        checkBalance(username).then(value => {
-            setBalance(value);
-            setIsLoading(false)
-            logger.sink.log(`check balance for "${username}" called `)
-        })
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <ScreenWrapper className={`flexCenter`}>
-            {isLoading ? <LoadingPopup headerTitle={`loading ${username}'s balance`} loadingTitle={"Processing..."}/> :
-                <CardWrapper className={styles.content}>
-                    <img src="/img/withdraw.svg" alt="" className={`${styles.icon} iconMedium`}/>
+        <AwaitingAsyncScreen
+            fetchTask={() => checkBalance(username)}
+            loadingHeader={`loading ${username}'s balance`}
+            loadingTitle={"Processing..."}
+        >
+            {
+                (balance) =>
+                    <CardWrapper className={styles.content}>
+                        <img src="/img/withdraw.svg" alt="" className={`iconMarginMedium iconMedium`}/>
 
-                    <h6>{username}'s current balance is:</h6>
+                        <h6><span className={"capitalize"}>{username}'s</span> current balance is:</h6>
+                        <ColoredMoney className={styles.amount} amount={balance}>{balance}$</ColoredMoney>
+                    </CardWrapper>
+            }
 
-                    <h3 className={`${styles.amount} ${balance>=0?styles.amount_plus:styles.amount_minus}`}>{balance}$</h3>
-
-                </CardWrapper>}
-        </ScreenWrapper>
+        </AwaitingAsyncScreen>
     );
 
 

@@ -1,26 +1,25 @@
-.component{
-    box-sizing: border-box;
-}
-
 
 .contentCard{
-    padding: 40px;
-    width: max(200px,40vw);
+    min-width: 300px;
+    width: 40vw;
+    max-width: 400px;
     min-height: 300px;
     max-height: 300px;
 }
 
 .form{
-    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    width: 100%;
+;
 }
 .depositButton{
     width: 100%;
 }
 
-
-.depositIcon{
-    margin-bottom: 20px;
-}
 .dollar{
     margin: 0 5px;
 }

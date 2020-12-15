@@ -1,7 +1,8 @@
 
-.App, html, body, div[id="root"] {
+ html, body, div[id="root"] {
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
   padding:0;
   margin:0;
 }
@@ -29,3 +30,13 @@
   width:60px;
   height:60px;
 }
+
+.iconMarginMedium{
+  margin: 20px;
+}
+.capitalize{
+    text-transform: capitalize;
+}
+ .allCaps{
+     text-transform: uppercase;
+ }

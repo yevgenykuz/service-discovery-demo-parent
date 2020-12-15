@@ -4,23 +4,24 @@ import ScreenWrapper from "../../components/screenWrapper";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import CardWrapper from "../../components/cardWrapper";
 import HomeMenuButton from "../../components/homeMenuButton";
-import {CHECK_BALANCE, DEPOSIT} from "../../../constants/routes";
+import {getHomeMenuNavigationOptions} from "../../../constants/routes";
 import {Link} from "react-router-dom";
 
 function HomeScreen() {
 
     const [userInfo] = useUserInfo()
     return (
-        <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
+        <ScreenWrapper>
 
-            <CardWrapper className={styles.welcome}>
+            <CardWrapper className={`${styles.welcome} capitalize`}>
                 <h3>Welcome back {userInfo?.username}</h3>
             </CardWrapper>
 
-        <div className={styles.menu}>
-            <Link to={DEPOSIT}><HomeMenuButton label={"Deposit"} iconSrc={"/img/deposit.svg"}  /></Link>
-            <Link to={CHECK_BALANCE}><HomeMenuButton label={"Check Balance"}  iconSrc={"/img/withdraw.svg"} /></Link>
-        </div>
+            <div className={styles.menu}>
+                {Object.entries(getHomeMenuNavigationOptions()).map(([route, {name, iconSrc}]) =>
+                    <Link to={route}  key={`homeMenu_${route}`}><HomeMenuButton label={name} iconSrc={iconSrc}/></Link>
+                )}
+            </div>
 
         </ScreenWrapper>
     );

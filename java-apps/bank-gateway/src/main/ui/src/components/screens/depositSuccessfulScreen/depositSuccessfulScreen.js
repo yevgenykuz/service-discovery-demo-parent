@@ -5,7 +5,7 @@ import {useUserInfo} from "../../../recoilStates/userAuth";
 import {useLocation} from "react-router-dom";
 import CardWrapper from "../../components/cardWrapper";
 
-function DepositSuccessfulScreen(props) {
+function DepositSuccessfulScreen() {
     const [{username}] = useUserInfo()
     let {search} = useLocation();
     const [amount,setAmount] = useState("1")
@@ -14,8 +14,8 @@ function DepositSuccessfulScreen(props) {
         const paramAmount = searchParams.get("amount") || "1";
         setAmount(paramAmount)
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
-    return (<ScreenWrapper className={`flexCenter`}>
-            <CardWrapper className={styles.card}>
+    return (<ScreenWrapper>
+            <CardWrapper className={`capitalize ${styles.card}`}>
                 <img src="/img/tick.svg" className={`iconSmall ${styles.icon}`} alt="tick icon"/>
                 <h4>{username} deposited {amount}$</h4>
             </CardWrapper>

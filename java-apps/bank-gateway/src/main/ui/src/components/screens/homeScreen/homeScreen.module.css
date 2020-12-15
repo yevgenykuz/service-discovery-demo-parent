@@ -1,16 +1,15 @@
 
-.component{
 
-}
 .welcome{
     padding: 40px ;
     margin: 20px 0 ;
-    text-transform: capitalize;
 }
 
 .menu{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .menu *{
-    margin: 0 10px
+    padding:  10px;
 }

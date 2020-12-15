@@ -5,34 +5,35 @@ import {useUserInfo} from "../../../recoilStates/userAuth";
 import {useHistory, useLocation} from "react-router-dom";
 import {depositAmount} from "../../../models/API";
 import {DEPOSIT_SUCCESSFUL} from "../../../constants/routes";
-import useLogger from "../../../recoilStates/logger";
 
 function DepositProcessingScreen() {
     const [{username}] = useUserInfo()
     let {search} = useLocation();
     const history = useHistory()
-    const logger = useLogger()
 
-    const [amount,setAmount] = useState("1")
-    useEffect(()=>{
+    const [amount, setAmount] = useState("1")
+    useEffect(() => {
         const searchParams = new URLSearchParams(search)
         const paramAmount = searchParams.get("amount") || "1";
+        const flow = searchParams.get("flow")?.toLowerCase() === "true"
+
         setAmount(paramAmount)
 
-        const flow = Boolean(searchParams.get("flow"))
-        if(flow)
-            depositAmount(username, paramAmount).then(() => {
-                history.push(`${DEPOSIT_SUCCESSFUL}?amount=${paramAmount||1}`)
-                logger.sink.log(`deposit for "${username}" registered : ${paramAmount} amount`)
-            })
+        if (!flow)
+            return;
+
+        depositAmount(username, paramAmount).then(() => {
+            history.push(`${DEPOSIT_SUCCESSFUL}?amount=${paramAmount || 1}`)
+        })
 
 
-    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (
-        <ScreenWrapper className={`flexCenter`}>
-            <LoadingPopup headerTitle={`depositing ${amount}$ to ${username}'s account`} loadingTitle={"Processing..."}/>
+        <ScreenWrapper>
+            <LoadingPopup headerTitle={`depositing ${amount}$ to ${username}'s account`}
+                          loadingTitle={"Processing..."} style={{minWidth:"500px"}}/>
         </ScreenWrapper>
     );
 }
