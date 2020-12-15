@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, useHistory, useLocation} from "react-router-dom";
-import {CHECK_BALANCE, CONVERT_CURRENCY, DEPOSIT} from "../../../constants/routes";
+import {getLoggedInNavBarOptions} from "../../../constants/routes";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import * as Auth from "../../../models/auth";
 import * as routes from "../../../constants/routes";
@@ -26,21 +26,12 @@ function LoggedInNavBar() {
 
     return (
         <NavBarBase>
-
-            <Nav.Link as="section">
-                <Link to={DEPOSIT}><span
-                    className={`${styles.button} ${getSelectedClassname(pathname, DEPOSIT)}`}>Deposit</span></Link>
-            </Nav.Link>
-
-            <Nav.Link as="section">
-                <Link to={CHECK_BALANCE}><span
-                    className={`${styles.button} ${getSelectedClassname(pathname, CHECK_BALANCE)}`}>Check Balance</span></Link>
-            </Nav.Link>
-
-            <Nav.Link as="section">
-                <Link to={CONVERT_CURRENCY}><span
-                    className={`${styles.button} ${getSelectedClassname(pathname, CONVERT_CURRENCY)}`}>Convert Currency</span></Link>
-            </Nav.Link>
+            {Object.entries(getLoggedInNavBarOptions()).map(([route, routeName]) =>
+                <Nav.Link as="section" key={route}>
+                    <Link to={route}><span
+                        className={`${styles.button} ${getSelectedClassname(pathname, route)}`}>{routeName}</span></Link>
+                </Nav.Link>
+            )}
 
             <Nav.Link as={"section"} onClick={handleLogout}>
                 <span className={styles.button}>Logout</span>

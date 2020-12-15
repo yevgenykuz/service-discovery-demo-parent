@@ -4,6 +4,7 @@ import {Switch, Route, useLocation, useHistory} from "react-router-dom"
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import BackgroundImageWrapper from "./components/backgroundImageWrapper";
 import LoginScreen from "./components/screens/loginScreen";
 import HomeScreen from "./components/screens/homeScreen";
 import DepositScreen from "./components/screens/depositScreen";
@@ -14,7 +15,9 @@ import DepositSuccessfulScreen from "./components/screens/depositSuccessfulScree
 import ConvertCurrencyScreen from "./components/screens/convertCurrencyScreen";
 import ConvertCurrencyProcessingScreen from "./components/screens/convertCurrencyProcessingScreen";
 import ConvertCurrencyResultScreen from "./components/screens/convertCurrencyResultScreen";
+import CheckLoanCredibilityScreen from "./components/screens/CheckLoanCredibilityScreen";
 import LoggedInNavBar from "./components/components/loggedInNavBar";
+
 
 import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
 import * as Auth from "./models/auth"
@@ -23,7 +26,6 @@ import {logTypes} from "./models/logger";
 import LogsMenu from "./components/components/logsMenu";
 import NavBarBase from "./components/components/navBarBase";
 import {getAllowedRoutesWithoutLogin} from "./constants/routes";
-import BackgroundImageWrapper from "./components/backgroundImageWrapper";
 
 
 function App() {
@@ -79,6 +81,7 @@ function App() {
                     <LogsScreen title={"Transactions"}/>
                 </Route>
 
+                <Route exact path={routes.CHECK_LOAN_CREDIBILITY} component={CheckLoanCredibilityScreen}/>
                 <Route exact path={routes.CONVERT_CURRENCY} component={ConvertCurrencyScreen}/>
                 <Route exact path={routes.CONVERT_CURRENCY_PROCESSING} component={ConvertCurrencyProcessingScreen}/>
                 <Route exact path={routes.CONVERT_CURRENCY_RESULT} component={ConvertCurrencyResultScreen}/>

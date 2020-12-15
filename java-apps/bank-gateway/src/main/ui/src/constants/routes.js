@@ -11,6 +11,7 @@ export const LOGS = "/logs"
 export const CONVERT_CURRENCY = "/convert-currency"
 export const CONVERT_CURRENCY_PROCESSING = "/convert-currency/processing"
 export const CONVERT_CURRENCY_RESULT = "/convert-currency/result"
+export const CHECK_LOAN_CREDIBILITY = "/loan-credibility"
 
 export function getAllowedRoutesWithoutLogin() {
     return [LOGS,
@@ -18,4 +19,26 @@ export function getAllowedRoutesWithoutLogin() {
         LOGS_PROPAGATOR,
         LOGS_SINK
     ]
+}
+
+export function getBaseNavBarOptions(){
+    return {
+        [HOME]:"Home",
+    }
+}
+
+export function getLoggedInNavBarOptions(){
+    return {
+        [DEPOSIT]:"Deposit",
+        [CHECK_BALANCE]:"Check Balance",
+        [CONVERT_CURRENCY]:"Convert Currency",
+    }
+}
+
+export function getHomeMenuNavigationOptions(){
+    return {
+        [DEPOSIT]: {name:"Deposit",iconSrc:"/img/deposit.svg"},
+        [CHECK_BALANCE]: {name:"Check Balance",iconSrc:"/img/withdraw.svg"},
+        [CONVERT_CURRENCY]: {name:"Convert Currency",iconSrc:"/img/exchange.svg"},
+    }
 }
