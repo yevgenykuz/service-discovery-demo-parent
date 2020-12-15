@@ -29,13 +29,8 @@ export async function login(username, password) {
 export async function getUserInfo() {
     const loggedIn = await isLoggedIn()
     if (loggedIn)
-    {
-        try {
-            await silentlyInvokeEntryPoint()
-        } catch (e) {
-        }
         return {username: localStorage.getItem("user")}
-    }
+
 
     return {}
 }
