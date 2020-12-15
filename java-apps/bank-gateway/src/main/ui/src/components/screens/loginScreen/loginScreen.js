@@ -58,7 +58,7 @@ function LoginScreen() {
                             </Form.Group>
 
 
-                            <Button type="submit" variant={"info"} className={styles.loginButton}>login</Button>
+                            <Button type="submit" variant={"info"} className={`capitalize ${styles.loginButton}`}>login</Button>
                         </Form>
                     </CardWrapper>
                     <Alert variant={"danger"} className={`${styles.error} ${error ? "" : "noOpacity"}`}>{error}</Alert>
