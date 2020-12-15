@@ -19,7 +19,7 @@ function HomeScreen() {
 
             <div className={styles.menu}>
                 {Object.entries(getHomeMenuNavigationOptions()).map(([route, {name, iconSrc}]) =>
-                    <Link to={route}><HomeMenuButton label={name} iconSrc={iconSrc} key={`homeMenu_${name}`}/></Link>
+                    <Link to={route}  key={`homeMenu_${route}`}><HomeMenuButton label={name} iconSrc={iconSrc}/></Link>
                 )}
             </div>
 
