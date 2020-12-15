@@ -21,10 +21,12 @@ function LoginScreen() {
         e.preventDefault()
         setIsLoading(true)
         login(userName, pass).then(({username}) => {
-            !userLeftPageRef.current && setObj.setUserName(username)
-        }).catch(e => setErrorMessage(e.message)).finally(() =>
-            !userLeftPageRef.current && setIsLoading(false)
-        );
+            if(!userLeftPageRef.current)
+            {
+                setObj.setUserName(username)
+                setIsLoading(false)
+            }
+        }).catch(e => setErrorMessage(e.message))
     }
 
 
