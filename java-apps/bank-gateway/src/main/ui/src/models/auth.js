@@ -3,7 +3,7 @@ import {LOGIN_DURATION} from "../constants/delayDurations";
 import {loggerInstance} from "./logger";
 
 
-export function isLoggedIn() {
+export async function isLoggedIn() {
     return Boolean(localStorage.getItem("user"))
 }
 
@@ -27,8 +27,12 @@ export async function login(username, password) {
 
 
 export async function getUserInfo() {
-    if (isLoggedIn())
+    const loggedIn = await isLoggedIn()
+    if (loggedIn)
         return {username: localStorage.getItem("user")}
+
+
+    return {}
 }
 
 export async function logout() {

@@ -9,7 +9,7 @@ export const logTypes = {
 export function getLogTypeDisplayName(logType){
     switch (logType){
         case logTypes.sink:
-            return "Bank sink";
+            return "Bank Storage";
         case logTypes.entryPoint:
             return "Bank Gateway"
         case logTypes.propagator:

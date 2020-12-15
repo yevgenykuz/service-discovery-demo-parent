@@ -41,12 +41,13 @@ function App() {
 
 
    useEffect(() => {
-        if (Auth.isLoggedIn())
             Auth.getUserInfo().then(({username}) => {
                 setObj.setUserName(username)
+            }).finally(()=>{
                 setIsLoaded(true)
             })
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
     useEffect(()=>{
         if(!isLoaded)
             return ;
