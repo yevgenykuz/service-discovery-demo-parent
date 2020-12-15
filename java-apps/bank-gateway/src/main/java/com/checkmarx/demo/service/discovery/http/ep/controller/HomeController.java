@@ -52,12 +52,12 @@ public class HomeController {
 
     @RequestMapping(path = "/convert-currency", method = RequestMethod.GET)
     @ResponseBody
-    public String convertCurrency(@RequestParam("amount") Long amount,
+    public String convertCurrency(@RequestParam("amount") String amount,
                                   @RequestParam("sourceCurrency") String sourceCurrency,
                                   @RequestParam("targetCurrency") String targetCurrency) {
         log.info("Converting {} {} to {}", amount, sourceCurrency, targetCurrency);
         String targetUrl = relatedServicesProperties.getBankAnalysisUrl() + "/convert-currency?amount=" + amount +
-                "?sourceCurrency=" + sourceCurrency + "?targetCurrency=" + targetCurrency;
+                "&sourceCurrency=" + sourceCurrency + "&targetCurrency=" + targetCurrency;
         return sendGetAndReturnString(targetUrl);
     }
 

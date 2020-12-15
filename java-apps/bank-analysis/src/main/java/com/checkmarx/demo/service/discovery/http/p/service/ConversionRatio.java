@@ -37,11 +37,11 @@ public class ConversionRatio {
         return targetToSource(amount);
     }
 
-    public double sourceToTarget(long sourceAmount) {
+    private double sourceToTarget(long sourceAmount) {
         return Math.round(sourceAmount * ratio * 100.0) / 100.0;
     }
 
-    public double targetToSource(long targetAmount) {
+    private double targetToSource(long targetAmount) {
         return Math.round(targetAmount / ratio * 100.0) / 100.0;
     }
 }
