@@ -7,6 +7,12 @@
 .containerClassName{
     height: 100vh !important;
 }
+.contentContainer{
+    display: flex;
+    flex-direction: column;
+    min-height: 350px;
+    margin-top: 50px;
+}
 .cardWrapper{
     padding: 0 !important;
     overflow: hidden;

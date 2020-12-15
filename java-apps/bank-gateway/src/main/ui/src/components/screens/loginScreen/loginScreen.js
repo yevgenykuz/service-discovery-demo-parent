@@ -31,6 +31,8 @@ function LoginScreen() {
     return (
         <ScreenWrapper className={styles.component} containerClassName={styles.containerClassName}>
 
+            <div className={styles.contentContainer}>
+
             {isLoading ? <LoadingPopup loadingTitle={"logging in..."}/> : <>
 
                 <CardWrapper className={styles.cardWrapper}>
@@ -58,6 +60,7 @@ function LoginScreen() {
                 <Alert variant={"danger"} className={`${styles.error} ${error ? "" : "noOpacity"}`}>{error}</Alert>
 
             </>}
+            </div>
 
 
         </ScreenWrapper>
