@@ -14,7 +14,7 @@ function LogsScreen({logsType = "all"}) {
     return (
         <ScreenWrapper className={styles.component}>
             <header className={`${styles.header} capitalize`}>
-                 <h4>{getLogTypeDisplayName(logsType)} Logs</h4>
+                 <h4>{getLogTypeDisplayName(logsType)} Transactions</h4>
                 <Button variant={"info"} onClick={() => loggerInstance.clearType(logsType)}>Clear</Button>
             </header>
 
