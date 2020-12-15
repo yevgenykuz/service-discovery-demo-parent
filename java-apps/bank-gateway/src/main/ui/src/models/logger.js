@@ -16,6 +16,8 @@ export function getLogTypeDisplayName(logType){
             return "Bank Analysis"
         case "all":
             return "All"
+        default:
+            return ;
     }
 }
 

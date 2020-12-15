@@ -18,7 +18,7 @@ function ConvertCurrencyResultScreen() {
         const result = Number(searchParams.get("result") || "0")
         setData({amount,target,source,result})
 
-    },[])
+    },[])// eslint-disable-line react-hooks/exhaustive-deps
 
     return (<ScreenWrapper>
             <CardWrapper className={`capitalize ${styles.card}`}>
