@@ -23,6 +23,7 @@ import {logTypes} from "./models/logger";
 import LogsMenu from "./components/components/logsMenu";
 import NavBarBase from "./components/components/navBarBase";
 import {getAllowedRoutesWithoutLogin} from "./constants/routes";
+import BackgroundImageWrapper from "./components/backgroundImageWrapper";
 
 
 function App() {
@@ -60,7 +61,7 @@ function App() {
 
 
 
-    return (<div className="App">
+    return (<BackgroundImageWrapper>
             {isLoggedIn && !isInLogsScreen && <LoggedInNavBar/>}
             {pathname.startsWith(routes.LOGS) && <NavBarBase/>}
             <LogsMenu/>
@@ -89,7 +90,7 @@ function App() {
                 <Route path={routes.HOME} component={HomeScreen}/>
 
             </Switch>
-        </div>
+        </BackgroundImageWrapper>
     );
 }
 

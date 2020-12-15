@@ -28,7 +28,7 @@ function BalanceScreen() {
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <ScreenWrapper className={`flexCenter`}>
+        <ScreenWrapper>
             {isLoading ? <LoadingPopup className={styles.loadingContainer} headerTitle={`loading ${username}'s balance`}
                                        loadingTitle={"Processing..."}/> :
                 <CardWrapper className={styles.content}>

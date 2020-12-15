@@ -11,7 +11,7 @@ function HomeScreen() {
 
     const [userInfo] = useUserInfo()
     return (
-        <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
+        <ScreenWrapper>
 
             <CardWrapper className={styles.welcome}>
                 <h3>Welcome back {userInfo?.username}</h3>

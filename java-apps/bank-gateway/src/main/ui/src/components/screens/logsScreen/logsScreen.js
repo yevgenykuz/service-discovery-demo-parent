@@ -12,16 +12,17 @@ function LogsScreen({logsType = "all", title}) {
 
 
     return (
-        <ScreenWrapper className={styles.component} >
+        <ScreenWrapper className={styles.component}>
             <header className={styles.header}>
                 {title && <h4>{title}</h4>}
-                <Button variant={"info"} onClick={()=>loggerInstance.clearType(logsType)}>Clear</Button>
+                <Button variant={"info"} onClick={() => loggerInstance.clearType(logsType)}>Clear</Button>
             </header>
 
             {
                 currentLogsFunctions && <ListGroup className={styles.list}>
-                    {!currentLogsFunctions.length &&<main className={styles.notFound}><h4>no logs were found</h4></main>}
-                    { [...currentLogsFunctions].sort((a,b)=>a.date>=b.date?-1:1).map((data,index) => (
+                    {!currentLogsFunctions.length &&
+                    <main className={styles.notFound}><h4>no logs were found</h4></main>}
+                    {[...currentLogsFunctions].sort((a, b) => a.date >= b.date ? -1 : 1).map((data, index) => (
                         <ListGroup.Item key={index} action
                                         className={styles.logEntry}>
                             <span className={styles.dateSpan}>{dayjs(data?.date).format("DD/MM/YYYY HH:mm:ss")}</span>

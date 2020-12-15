@@ -31,7 +31,7 @@ function DepositProcessingScreen() {
 
 
     return (
-        <ScreenWrapper className={`flexCenter`}>
+        <ScreenWrapper>
             <LoadingPopup headerTitle={`depositing ${amount}$ to ${username}'s account`}
                           loadingTitle={"Processing..."} style={{minWidth:"500px"}}/>
         </ScreenWrapper>

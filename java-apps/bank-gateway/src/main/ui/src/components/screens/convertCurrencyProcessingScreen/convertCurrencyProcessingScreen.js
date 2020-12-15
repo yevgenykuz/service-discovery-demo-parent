@@ -32,7 +32,7 @@ function ConvertCurrencyProcessingScreen() {
 
 
     return (
-        <ScreenWrapper className={`flexCenter`} >
+        <ScreenWrapper>
             <LoadingPopup headerTitle={`processing currency conversion request`} loadingTitle={"Processing..."} style={{minWidth:"560px"}}/>
         </ScreenWrapper>
     );

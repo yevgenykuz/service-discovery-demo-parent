@@ -20,7 +20,7 @@ function ConvertCurrencyResultScreen() {
 
     },[])
 
-    return (<ScreenWrapper className={`flexCenter`}>
+    return (<ScreenWrapper>
             <CardWrapper className={styles.card}>
                 <div className={`flexCenter ${styles.iconsContainer} iconMarginMedium`}>
                     <img src="/img/exchange.svg" className={`iconMedium ${styles.icon}`} alt="grayscale exchange icon"/>

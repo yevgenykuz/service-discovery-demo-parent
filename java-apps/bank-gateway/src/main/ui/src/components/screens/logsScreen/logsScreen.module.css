@@ -1,21 +1,22 @@
 .component {
-    display: flex;
-    flex-direction: column;
     padding: 20px;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     height: 40px;
-    margin: 30px 10px;
+    margin: 5px 0 10px 5px;
 }
 
 
 .list {
     overflow-y: scroll;
-    max-height: 80vh;
-    height: 100%;
+    flex-grow: 1;
+    /*workaround - fix component overflowing + scroll*/
+    height:5px;
 
 }
 

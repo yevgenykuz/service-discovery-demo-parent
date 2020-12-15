@@ -20,7 +20,7 @@ function ConvertCurrencyScreen() {
 
     const toCurOptions = getAllOptions().filter(cur=>cur!== sourceCur)
 
-    return (<ScreenWrapper className="flexCenter">
+    return (<ScreenWrapper>
             <CardWrapper className={styles.card}>
                 <img src={"/img/exchange.svg"} alt={"deposit icon"} className={`iconMarginMedium iconMedium`}/>
                 <Form className={styles.form} onSubmit={handleSubmit}>

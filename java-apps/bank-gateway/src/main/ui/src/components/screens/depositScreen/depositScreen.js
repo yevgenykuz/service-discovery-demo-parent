@@ -19,7 +19,7 @@ function DepositScreen() {
     }
 
     return (
-        <ScreenWrapper className={`flexCenter flexColumn ${styles.component}`}>
+        <ScreenWrapper>
 
                 <CardWrapper className={styles.contentCard}>
                     <img src={"/img/deposit.svg"} alt={"deposit icon"} className={`iconMarginMedium iconMedium`}/>

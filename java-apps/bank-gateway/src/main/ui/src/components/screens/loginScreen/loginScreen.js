@@ -15,7 +15,7 @@ function LoginScreen() {
     const [isLoading, setIsLoading] = useState(false)
 
     const userLeftPageRef = useRef(false)
-    useEffect(()=>()=>userLeftPageRef.current=true ,[])
+    useEffect(() => () => userLeftPageRef.current = true, [])
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -29,37 +29,39 @@ function LoginScreen() {
 
 
     return (
-        <ScreenWrapper className={styles.component} containerClassName={styles.containerClassName}>
+        <ScreenWrapper>
 
             <div className={styles.contentContainer}>
 
-            {isLoading ? <LoadingPopup loadingTitle={"logging in..."}/> : <>
+                {isLoading ? <LoadingPopup loadingTitle={"logging in..."}/> : <>
 
-                <CardWrapper className={styles.cardWrapper}>
-                    <Navbar.Brand as={"div"} className={styles.logoTextContainer}>
-                        <span>Bank</span>
-                    </Navbar.Brand>
+                    <CardWrapper className={styles.cardWrapper}>
+                        <Navbar.Brand as={"div"} className={styles.logoTextContainer}>
+                            <span>Bank</span>
+                        </Navbar.Brand>
 
-                    <Form onSubmit={handleSubmit} className={styles.form}>
-                        <Form.Group className={styles.field}>
-                            <Form.Label>username</Form.Label>
-                            <Form.Control placeholder="Enter username" className={styles.fieldInput} type="text" autoComplete='username'
-                                          value={userName} onChange={(e) => setUserName(e.target.value)}/>
-                        </Form.Group>
+                        <Form onSubmit={handleSubmit} className={styles.form}>
+                            <Form.Group className={styles.field}>
+                                <Form.Label>username</Form.Label>
+                                <Form.Control placeholder="Enter username" className={styles.fieldInput} type="text"
+                                              autoComplete='username'
+                                              value={userName} onChange={(e) => setUserName(e.target.value)}/>
+                            </Form.Group>
 
-                        <Form.Group className={styles.field}>
-                            <Form.Label>password</Form.Label>
-                            <Form.Control placeholder="Enter password" className={styles.fieldInput} type="password" autoComplete='current-password'
-                                          value={pass} onChange={e => setPass((e.target.value))}/>
-                        </Form.Group>
+                            <Form.Group className={styles.field}>
+                                <Form.Label>password</Form.Label>
+                                <Form.Control placeholder="Enter password" className={styles.fieldInput} type="password"
+                                              autoComplete='current-password'
+                                              value={pass} onChange={e => setPass((e.target.value))}/>
+                            </Form.Group>
 
 
-                        <Button type="submit" variant={"info"} className={styles.loginButton}>login</Button>
-                    </Form>
-                </CardWrapper>
-                <Alert variant={"danger"} className={`${styles.error} ${error ? "" : "noOpacity"}`}>{error}</Alert>
+                            <Button type="submit" variant={"info"} className={styles.loginButton}>login</Button>
+                        </Form>
+                    </CardWrapper>
+                    <Alert variant={"danger"} className={`${styles.error} ${error ? "" : "noOpacity"}`}>{error}</Alert>
 
-            </>}
+                </>}
             </div>
 
 
