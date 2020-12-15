@@ -67,13 +67,13 @@ function App() {
             <LogsMenu/>
             <Switch>
                 <Route exact path={routes.LOGS_SINK}>
-                    <LogsScreen title={"Sink Logs"} logsType={logTypes.sink}/>
+                    <LogsScreen logsType={logTypes.sink}/>
                 </Route>
                 <Route exact path={routes.LOGS_ENTRY_POINT}>
-                    <LogsScreen title={"Entry Point Logs"} logsType={logTypes.entryPoint}/>
+                    <LogsScreen logsType={logTypes.entryPoint}/>
                 </Route>
                 <Route exact path={routes.LOGS_PROPAGATOR}>
-                    <LogsScreen title={"Propagator Logs"} logsType={logTypes.propagator}/>
+                    <LogsScreen logsType={logTypes.propagator}/>
                 </Route>
                 <Route exact path={routes.LOGS}>
                     <LogsScreen title={"Transactions"}/>

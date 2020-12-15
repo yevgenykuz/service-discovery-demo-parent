@@ -6,12 +6,19 @@ export const logTypes = {
     propagator: "propagator",
     entryPoint: "entryPoint",
 }
- function getLogsFromLocalStorage() {
-    return JSON.parse(localStorage.getItem("logs") || "[]")
+export function getLogTypeDisplayName(logType){
+    switch (logType){
+        case logTypes.sink:
+            return "Bank sink";
+        case logTypes.entryPoint:
+            return "Bank Gateway"
+        case logTypes.propagator:
+            return "Bank Analysis"
+        case "all":
+            return "All"
+    }
 }
- function saveLogsToLocalStorage(logs) {
-    localStorage.setItem("logs", JSON.stringify(logs))
-}
+
 export class Logger {
     #logs = [];
     #uniqueId = 0
@@ -81,7 +88,12 @@ export class Logger {
     }
 
 }
-
+function getLogsFromLocalStorage() {
+    return JSON.parse(localStorage.getItem("logs") || "[]")
+}
+function saveLogsToLocalStorage(logs) {
+    localStorage.setItem("logs", JSON.stringify(logs))
+}
 
 export const loggerInstance = new Logger()
 

@@ -4,9 +4,9 @@ import {Button, ListGroup} from "react-bootstrap";
 import dayjs from "dayjs"
 import styles from "./logsScreen.module.css"
 import {useLogs} from "../../../recoilStates/logger";
-import {loggerInstance} from "../../../models/logger";
+import {getLogTypeDisplayName, loggerInstance} from "../../../models/logger";
 
-function LogsScreen({logsType = "all", title}) {
+function LogsScreen({logsType = "all"}) {
     const [logs] = useLogs()
     const currentLogsFunctions = logs[logsType]
 
@@ -14,7 +14,7 @@ function LogsScreen({logsType = "all", title}) {
     return (
         <ScreenWrapper className={styles.component}>
             <header className={`${styles.header} capitalize`}>
-                {title && <h4>{title}</h4>}
+                 <h4>{getLogTypeDisplayName(logsType)} Logs</h4>
                 <Button variant={"info"} onClick={() => loggerInstance.clearType(logsType)}>Clear</Button>
             </header>
 
@@ -25,11 +25,11 @@ function LogsScreen({logsType = "all", title}) {
                     {[...currentLogsFunctions].sort((a, b) => a.date >= b.date ? -1 : 1).map((data, index) => (
                         <ListGroup.Item key={index} action
                                         className={styles.logEntry}>
-                            <span className={styles.dateSpan}>{dayjs(data?.date).format("DD/MM/YYYY HH:mm:ss")}</span>
+                            <span className={`${styles.dateSpan} ${logsType !== "all"?styles[data?.type]:""}`}>{dayjs(data?.date).format("DD/MM/YYYY HH:mm:ss")}</span>
                             <h5>-</h5>
 
                             {logsType === "all" && <>
-                                <span className={`${styles.logTypeSpan} ${styles[data?.type]}`}>{data?.type}</span>
+                                <span className={`${styles.logTypeSpan} ${styles[data?.type]}`}>{getLogTypeDisplayName(data?.type)}</span>
                                 <h5>-</h5>
                             </>}
 
