@@ -24,6 +24,7 @@ namespace CoreMicroService_A.Controllers
         [HttpGet("{userInput}")]
         public void Get(string userInput)
         {
+			new System.Data.SqlClient.SqlConnection(@"Data Source=WIN-50GP30FGO75;Initial Catalog=Demodb;User ID=sa;Password=demol23");
             Console.WriteLine("Get(string userInput) got: " + userInput);
             client.GetStringAsync(SinkAddress + "/input_which_sent_using_GetStringAsync_"+userInput);
         }
