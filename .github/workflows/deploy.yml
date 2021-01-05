@@ -168,3 +168,55 @@ jobs:
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-rabbitmq-sink.outputs.digest }}
+
+  deploy_dotnet_apps:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: deploy NET_CORE_PROPOGATOR_APP
+      id: deploy_NET_CORE_PROPOGATOR_APP
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/NET_CORE_PROPOGATOR_APP
+        file: ./java-apps/NET_CORE_PROPOGATOR_APP/Dockerfile
+        push: true
+        tags: asafino/NET_CORE_PROPOGATOR_APP:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_NET_CORE_PROPOGATOR_APP.outputs.digest }}
+
+    - name: deploy NET_CORE_REST_ENTRY_POINT_APP
+      id: deploy_NET_CORE_REST_ENTRY_POINT_APP
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/NET_CORE_REST_ENTRY_POINT_APP
+        file: ./java-apps/NET_CORE_REST_ENTRY_POINT_APP/Dockerfile
+        push: true
+        tags: asafino/NET_CORE_REST_ENTRY_POINT_APP:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_NET_CORE_REST_ENTRY_POINT_APP.outputs.digest }}
+
+    - name: deploy NET_CORE_SINK_APP
+      id: deploy_NET_CORE_SINK_APP
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/NET_CORE_SINK_APP
+        file: ./java-apps/NET_CORE_SINK_APP/Dockerfile
+        push: true
+        tags: asafino/NET_CORE_SINK_APP:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_NET_CORE_SINK_APP.outputs.digest }}
