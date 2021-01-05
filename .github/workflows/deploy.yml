@@ -10,9 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        application: ['bank-analysis', 'bank-gateway', 'bank-storage']
 
     steps:
     - uses: actions/checkout@v2
@@ -30,6 +27,13 @@ jobs:
       working-directory: ./java-apps
       run: ./mvnw clean install
 
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        application: ['bank-analysis', 'bank-gateway', 'bank-storage']
+        
     - name: Login to DockerHub
       uses: docker/login-action@v1 
       with:
