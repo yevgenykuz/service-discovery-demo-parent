@@ -185,38 +185,38 @@ jobs:
       id: buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: deploy NET_CORE_PROPOGATOR_APP
-      id: deploy_NET_CORE_PROPOGATOR_APP
+    - name: deploy net_core_propogator_app
+      id: deploy_net_core_propogator_app
       uses: docker/build-push-action@v2
       with:
-        context: ./java-apps/NET_CORE_PROPOGATOR_APP
-        file: ./java-apps/NET_CORE_PROPOGATOR_APP/Dockerfile
+        context: ./java-apps/net_core_propogator_app
+        file: ./java-apps/net_core_propogator_app/Dockerfile
         push: true
-        tags: asafino/NET_CORE_PROPOGATOR_APP:latest
+        tags: asafino/net_core_propogator_app:latest
 
     - name: Image digest
-      run: echo ${{ steps.deploy_NET_CORE_PROPOGATOR_APP.outputs.digest }}
+      run: echo ${{ steps.deploy_net_core_propogator_app.outputs.digest }}
 
-    - name: deploy NET_CORE_REST_ENTRY_POINT_APP
-      id: deploy_NET_CORE_REST_ENTRY_POINT_APP
+    - name: deploy net_core_rest_entry_point_app
+      id: deploy_net_core_rest_entry_point_app
       uses: docker/build-push-action@v2
       with:
-        context: ./java-apps/NET_CORE_REST_ENTRY_POINT_APP
-        file: ./java-apps/NET_CORE_REST_ENTRY_POINT_APP/Dockerfile
+        context: ./java-apps/net_core_rest_entry_point_app
+        file: ./java-apps/net_core_rest_entry_point_app/Dockerfile
         push: true
-        tags: asafino/NET_CORE_REST_ENTRY_POINT_APP:latest
+        tags: asafino/net_core_rest_entry_point_app:latest
 
     - name: Image digest
-      run: echo ${{ steps.deploy_NET_CORE_REST_ENTRY_POINT_APP.outputs.digest }}
+      run: echo ${{ steps.deploy_net_core_rest_entry_point_app.outputs.digest }}
 
-    - name: deploy NET_CORE_SINK_APP
-      id: deploy_NET_CORE_SINK_APP
+    - name: deploy net_core_sink_app
+      id: deploy_net_core_sink_app
       uses: docker/build-push-action@v2
       with:
-        context: ./java-apps/NET_CORE_SINK_APP
-        file: ./java-apps/NET_CORE_SINK_APP/Dockerfile
+        context: ./java-apps/net_core_sink_app
+        file: ./java-apps/net_core_sink_app/Dockerfile
         push: true
-        tags: asafino/NET_CORE_SINK_APP:latest
+        tags: asafino/net_core_sink_app:latest
 
     - name: Image digest
-      run: echo ${{ steps.deploy_NET_CORE_SINK_APP.outputs.digest }}
+      run: echo ${{ steps.deploy_net_core_sink_app.outputs.digest }}
