@@ -189,8 +189,8 @@ jobs:
       id: deploy_net_core_propogator_app
       uses: docker/build-push-action@v2
       with:
-        context: ./java-apps/NET_CORE_PROPOGATOR_APP
-        file: ./java-apps/NET_CORE_PROPOGATOR_APP/Dockerfile
+        context: ./dotnet-core-apps/NET_CORE_PROPOGATOR_APP
+        file: ./dotnet-core-apps/NET_CORE_PROPOGATOR_APP/Dockerfile
         push: true
         tags: asafino/net_core_propogator_app:latest
 
@@ -201,8 +201,8 @@ jobs:
       id: deploy_net_core_rest_entry_point_app
       uses: docker/build-push-action@v2
       with:
-        context: ./java-apps/NET_CORE_REST_ENTRY_POINT_APP
-        file: ./java-apps/NET_CORE_REST_ENTRY_POINT_APP/Dockerfile
+        context: ./dotnet-core-apps/NET_CORE_REST_ENTRY_POINT_APP
+        file: ./dotnet-core-apps/NET_CORE_REST_ENTRY_POINT_APP/Dockerfile
         push: true
         tags: asafino/net_core_rest_entry_point_app:latest
 
@@ -213,8 +213,8 @@ jobs:
       id: deploy_net_core_sink_app
       uses: docker/build-push-action@v2
       with:
-        context: ./java-apps/NET_CORE_SINK_APP
-        file: ./java-apps/NET_CORE_SINK_APP/Dockerfile
+        context: ./dotnet-core-apps/NET_CORE_SINK_APP
+        file: ./dotnet-core-apps/NET_CORE_SINK_APP/Dockerfile
         push: true
         tags: asafino/net_core_sink_app:latest
 
