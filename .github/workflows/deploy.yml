@@ -34,6 +34,7 @@ jobs:
       matrix:
         application: ['bank-analysis', 'bank-gateway', 'bank-storage']
         
+    steps:
     - name: Login to DockerHub
       uses: docker/login-action@v1 
       with:
