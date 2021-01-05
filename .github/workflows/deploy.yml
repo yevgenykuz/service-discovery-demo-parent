@@ -44,7 +44,7 @@ jobs:
         context: ./java-apps/bank-analysis
         file: ./java-apps/bank-analysis/Dockerfile
         push: true
-        tags: asafino/bank-analysis:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-analysis:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_bank-analysis.outputs.digest }}
@@ -56,7 +56,7 @@ jobs:
         context: ./java-apps/bank-gateway
         file: ./java-apps/bank-gateway/Dockerfile
         push: true
-        tags: asafino/bank-gateway:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-gateway:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_bank-gateway.outputs.digest }}
@@ -68,7 +68,7 @@ jobs:
         context: ./java-apps/bank-storage
         file: ./java-apps/bank-storage/Dockerfile
         push: true
-        tags: asafino/bank-storage:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-storage:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_bank-storage.outputs.digest }}
@@ -80,7 +80,7 @@ jobs:
         context: ./java-apps/java-kafka-entry-point
         file: ./java-apps/java-kafka-entry-point/Dockerfile
         push: true
-        tags: asafino/java-kafka-entry-point:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-entry-point:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-kafka-entry-point.outputs.digest }}
@@ -92,7 +92,7 @@ jobs:
         context: ./java-apps/java-kafka-http-entry-point
         file: ./java-apps/java-kafka-http-entry-point/Dockerfile
         push: true
-        tags: asafino/java-kafka-http-entry-point:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-http-entry-point:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-kafka-http-entry-point.outputs.digest }}
@@ -104,7 +104,7 @@ jobs:
         context: ./java-apps/java-kafka-propagator
         file: ./java-apps/java-kafka-propagator/Dockerfile
         push: true
-        tags: asafino/java-kafka-propagator:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-propagator:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-kafka-propagator.outputs.digest }}
@@ -116,7 +116,7 @@ jobs:
         context: ./java-apps/java-kafka-sink
         file: ./java-apps/java-kafka-sink/Dockerfile
         push: true
-        tags: asafino/java-kafka-sink:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-sink:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-kafka-sink.outputs.digest }}
@@ -128,7 +128,7 @@ jobs:
         context: ./java-apps/java-rabbitmq-entry-point
         file: ./java-apps/java-rabbitmq-entry-point/Dockerfile
         push: true
-        tags: asafino/java-rabbitmq-entry-point:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-entry-point:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-rabbitmq-entry-point.outputs.digest }}
@@ -140,7 +140,7 @@ jobs:
         context: ./java-apps/java-rabbitmq-http-entry-point
         file: ./java-apps/java-rabbitmq-http-entry-point/Dockerfile
         push: true
-        tags: asafino/java-rabbitmq-http-entry-point:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-http-entry-point:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-rabbitmq-http-entry-point.outputs.digest }}
@@ -152,7 +152,7 @@ jobs:
         context: ./java-apps/java-rabbitmq-propagator
         file: ./java-apps/java-rabbitmq-propagator/Dockerfile
         push: true
-        tags: asafino/java-rabbitmq-propagator:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-propagator:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-rabbitmq-propagator.outputs.digest }}
@@ -164,7 +164,7 @@ jobs:
         context: ./java-apps/java-rabbitmq-sink
         file: ./java-apps/java-rabbitmq-sink/Dockerfile
         push: true
-        tags: asafino/java-rabbitmq-sink:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-sink:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_java-rabbitmq-sink.outputs.digest }}
@@ -192,7 +192,7 @@ jobs:
         context: ./dotnet-core-apps/NET_CORE_PROPOGATOR_APP
         file: ./dotnet-core-apps/NET_CORE_PROPOGATOR_APP/Dockerfile
         push: true
-        tags: asafino/net_core_propogator_app:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/net_core_propogator_app:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_net_core_propogator_app.outputs.digest }}
@@ -204,7 +204,7 @@ jobs:
         context: ./dotnet-core-apps/NET_CORE_REST_ENTRY_POINT_APP
         file: ./dotnet-core-apps/NET_CORE_REST_ENTRY_POINT_APP/Dockerfile
         push: true
-        tags: asafino/net_core_rest_entry_point_app:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/net_core_rest_entry_point_app:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_net_core_rest_entry_point_app.outputs.digest }}
@@ -216,7 +216,7 @@ jobs:
         context: ./dotnet-core-apps/NET_CORE_SINK_APP
         file: ./dotnet-core-apps/NET_CORE_SINK_APP/Dockerfile
         push: true
-        tags: asafino/net_core_sink_app:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/net_core_sink_app:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_net_core_sink_app.outputs.digest }}
@@ -245,7 +245,7 @@ jobs:
         context: ./nodejs-apps/node-entry-point
         file: ./nodejs-apps/node-entry-point/Dockerfile
         push: true
-        tags: asafino/node-entry-point:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-entry-point:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_node-entry-point.outputs.digest }}
@@ -257,7 +257,7 @@ jobs:
         context: ./nodejs-apps/node-propagator
         file: ./nodejs-apps/node-propagator/Dockerfile
         push: true
-        tags: asafino/node-propagator:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-propagator:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_node-propagator.outputs.digest }}
@@ -269,7 +269,7 @@ jobs:
         context: ./nodejs-apps/node-sink
         file: ./nodejs-apps/node-sink/Dockerfile
         push: true
-        tags: asafino/node-sink:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-sink:latest
 
     - name: Image digest
       run: echo ${{ steps.deploy_node-sink.outputs.digest }}
