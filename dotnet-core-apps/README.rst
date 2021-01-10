@@ -1,13 +1,16 @@
-.NET Applications
-#################
+.NET Core Applications
+######################
 
-This folder includes demo applications written in .NET.
+This folder includes demo applications written in .NET Core.
 
 -----
 
 .. contents::
 
 .. section-numbering::
+
+Packaging
+=========
 
 Build, tag, and push with docker
 --------------------------------
@@ -26,8 +29,16 @@ To push docker images to a different location, change *yevgenykcx* to your needs
     docker build -t yevgenykcx/dotnet-core-http-sink .
     docker push yevgenykcx/dotnet-core-http-sink
 
-Launch with docker-compose
---------------------------
+Usage
+=====
+
+Launching
+---------
+
+Choose one of the following options to launch the applications.
+
+Docker-compose
+~~~~~~~~~~~~~~
 
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
@@ -49,87 +60,111 @@ Launch with docker-compose
     # stop:
     docker-compose -f docker-compose-dotnet-core-http.yml down
 
-Requirements
-------------
-- .NET CORE 2.1
-- The following 3 environment variables must to be exists, while the variable values have to be with in this format: "Protocol://ServerIP:ServerPort". For example: http://localhost:5551. Make sure the ports you choosed are available.
-	1. NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL
-	2. NET_CORE_PROPOGATOR_EXAMPLE_URL
-	3. NET_CORE_SINK_EXAMPLE_URL
+Manually on Windows
+~~~~~~~~~~~~~~~~~~~
 
-HOW TO RUN THE APPLICATIONS MANUALLY
-- open CMD/Terminal:
-	cd \NET_CORE_REST_ENTRY_POINT_APP
-	dotnet build
-	dotnet run
+* Make sure .NET CORE 2.1 is installed
+* The following 3 environment variables must exist. The variable values have to be with in this format: ``Protocol://ServerIP:ServerPort``. For example: ``http://localhost:5551``.
 
-- open CMD/Terminal:
-	cd \NET_CORE_PROPOGATOR_APP
-	dotnet build
-	dotnet run
+.. code-block:: bash
 
-- open CMD/Terminal:
-	cd \NET_CORE_SINK_APP
-	dotnet build
-	dotnet run
+    NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL
+    NET_CORE_PROPOGATOR_EXAMPLE_URL
+    NET_CORE_SINK_EXAMPLE_URL
 
-HOW TO GET SQL_INJETION FLOW
-** The following examples are based on the assumption that the protocol is 'http' and NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL is '5551'. Edit it according to your settings.
 
-For the vulnearble flows (SQL INJECTION):
-		[GET] http://localhost:5551/Entry/Sink/userInputGet
-		[POST with string in the request body] http://localhost:5551/Entry/Sink 
-		[PUT with string in the request body] http://localhost:5551/Entry/Sink/userInputPut
-		[DELETE] http://localhost:5551/Entry/Sink/userInputDelete
+* Build and run all applications. *For each application*, open CMD/Terminal and type:
 
-For the unvulnerable flows (SQL INJECTION):
-		[GET] http://localhost:5551/Entry/Prop/Sink/userInputGet
-		[POST with string in the request body] http://localhost:5551/Entry/Prop/Sink 
-		[PUT with string in the request body] http://localhost:5551/Entry/Prop/Sink/userInputPut
-		[DELETE] http://localhost:5551/Entry/Prop/Sink/userInputDelete
+.. code-block:: bash
 
-***********************************************
-********** FOR IAST QA & PROGRAMMERS **********
-***********************************************
+    dotnet build
+    dotnet run
+
+Flow Triggering
+---------------
+
+To test locally, make sure all relevant applications are running before triggering flows.
+
+SQL Injection HTTP Flow
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Relevant applications:
+
+* *NET_CORE_REST_ENTRY_POINT_APP*
+* *NET_CORE_PROPOGATOR_APP*
+* *NET_CORE_SINK_APP*
+
+The following examples are based on the assumption that the protocol is 'http' and NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL is '5551'. Edit it according to your settings.
+
+* For the vulnearble flows (SQL INJECTION):
+
+.. code-block:: bash
+
+    [GET] http://localhost:5551/Entry/Sink/userInputGet
+    [POST with string in the request body] http://localhost:5551/Entry/Sink 
+    [PUT with string in the request body] http://localhost:5551/Entry/Sink/userInputPut
+    [DELETE] http://localhost:5551/Entry/Sink/userInputDelete
+
+* For the unvulnerable flows (SQL INJECTION):
+
+.. code-block:: bash
+
+    [GET] http://localhost:5551/Entry/Prop/Sink/userInputGet
+    [POST with string in the request body] http://localhost:5551/Entry/Prop/Sink 
+    [PUT with string in the request body] http://localhost:5551/Entry/Prop/Sink/userInputPut
+    [DELETE] http://localhost:5551/Entry/Prop/Sink/userInputDelete
+
+
+Appendix - for IAST QA and programmers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
-CROSS_PLATFORM_API
-	[GET] http://localhost:5551/Entry/Prop?name={string : name}
-		- This Api send Get request to using NET_CORE_PROPOGATOR_APP HttpClient.GetStringAsync, and it send other request to <NODE_ENTRY_POINT>/sendToService2?id={id}
+Cross platform API
+``````````````````
+``[GET] http://localhost:5551/Entry/Prop?name={string : name}`` - This API send Get request to using NET_CORE_PROPOGATOR_APP HttpClient.GetStringAsync, and it send other request to ``<NODE_ENTRY_POINT>/sendToService2?id={id}``
 			
-DEBUG MODE 
-In debug mode, NET_CORE_PROPOGATOR_APP and NET_CORE_SINK_APP will print the uuid & sequence.
-- Add this Environment variable to enable it: NET_CORE_MICRO_SERVICES_DEBUG = 1
+Debug mode 
+``````````
+| In debug mode, NET_CORE_PROPOGATOR_APP and NET_CORE_SINK_APP will print the uuid & sequence.
+| Add this Environment variable to enable it: ``NET_CORE_MICRO_SERVICES_DEBUG = 1``
  
-OTHER APIs:
-** The following examples are based on the assumption that:
-- protocol is 'http'
-- NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL = '5551'
-- NET_CORE_PROPOGATOR_EXAMPLE_URL = '5552'
-- NET_CORE_SINK_EXAMPLE_URL = '5553'
+Other APIs
+``````````
+The following examples are based on the assumption that:
 
-NET_CORE_REST_ENTRY_POINT_APP APIS:
-	[GET] http://localhost:5551/Entry2/Sink/userInputGet
-		- This API send GET request to NET_CORE_SINK_APP using WebRequest.Create
-	[GET] http://localhost:5551/Entry3/Sink/userInputGet
-		- This API send GET request to NET_CORE_SINK_APP using WebClient.OpenRead
-	[GET] http://localhost:5551/Entry4/Sink/userInputGet
-		- This API send GET request to NET_CORE_SINK_APP using httpClient.SendAsync
+* Protocol is ``HTTP``
+* ``NET_CORE_REST_ENTRY_POINT_EXAMPLE_URL = 5551``
+* ``NET_CORE_PROPOGATOR_EXAMPLE_URL = 5552``
+* ``NET_CORE_SINK_EXAMPLE_URL = 5553``
 
-NET_CORE_PROPOGATOR_APP
-	[GET] http://localhost:5552/Propogator/Sink/userInputGet
-		- This API send GET request to NET_CORE_SINK_APP using HttpClient.GetStringAsync
-	[POST with string in the request body] http://localhost:5552/Propogator/Sink 
-		- This API send POST request to NET_CORE_SINK_APP using HttpClient.PostAsync
-	[PUT with string in the request body] http://localhost:5552/Propogator/Sink/userInputPut
-		- This API send PUT request to NET_CORE_SINK_APP using HttpClient.PutAsync
-	[DELETE] http://localhost:5552/Propogator/Sink/userInputDelete
-		- This API send DELETE request to NET_CORE_SINK_APP using HttpClient.DeleteAsync
+NET_CORE_REST_ENTRY_POINT_APP APIs:
 
-NET_CORE_SINK_APP
-	[GET] http://localhost:5553/userInputGet
-	[POST with string in the request body] http://localhost:5553/
-	[PUT with string in the request body] http://localhost:5553/userInputPut
-	[DELETE] http://localhost:5553/userInputDelete
+.. code-block:: bash
 
-***************************
-Snir.ShemTov@checkmarx.com
+    # This API send GET request to NET_CORE_SINK_APP using WebRequest.Create:
+    [GET] http://localhost:5551/Entry2/Sink/userInputGet
+    # This API send GET request to NET_CORE_SINK_APP using WebClient.OpenRead:
+    [GET] http://localhost:5551/Entry3/Sink/userInputGet
+    # This API send GET request to NET_CORE_SINK_APP using httpClient.SendAsync:
+    [GET] http://localhost:5551/Entry4/Sink/userInputGet
+
+NET_CORE_PROPOGATOR_APP APIs:
+
+.. code-block:: bash
+
+    # This API send GET request to NET_CORE_SINK_APP using HttpClient.GetStringAsync:    
+    [GET] http://localhost:5552/Propogator/Sink/userInputGet
+    # This API send POST request to NET_CORE_SINK_APP using HttpClient.PostAsync:    
+    [POST with string in the request body] http://localhost:5552/Propogator/Sink 
+    # This API send PUT request to NET_CORE_SINK_APP using HttpClient.PutAsync:
+    [PUT with string in the request body] http://localhost:5552/Propogator/Sink/userInputPut
+    # This API send DELETE request to NET_CORE_SINK_APP using HttpClient.DeleteAsync:
+    [DELETE] http://localhost:5552/Propogator/Sink/userInputDelete
+
+NET_CORE_SINK_APP APIs:
+
+.. code-block:: bash
+
+    [GET] http://localhost:5553/userInputGet
+    [POST with string in the request body] http://localhost:5553/
+    [PUT with string in the request body] http://localhost:5553/userInputPut
+    [DELETE] http://localhost:5553/userInputDelete
