@@ -31,20 +31,18 @@ jobs:
         id: deploy-net-core-propogator-app
         uses: docker/build-push-action@v2
         with:
-          context: ./NET_CORE_PROPOGATOR_APP
-          file: ./NET_CORE_PROPOGATOR_APP/Dockerfile
+          context: ./dotnet-core-apps/NET_CORE_PROPOGATOR_APP
+          file: ./dotnet-core-apps/NET_CORE_PROPOGATOR_APP/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/net-core-propogator-app:latest
-
       - name: Image digest - NET_CORE_PROPOGATOR_APP
         run: echo ${{ steps.deploy-net-core-propogator-app.outputs.digest }}
-
       - name: Deploy NET_CORE_REST_ENTRY_POINT_APP
         id: deploy-net-core-rest-entry-point-app
         uses: docker/build-push-action@v2
         with:
-          context: ./NET_CORE_REST_ENTRY_POINT_APP
-          file: ./NET_CORE_REST_ENTRY_POINT_APP/Dockerfile
+          context: ./dotnet-core-apps/NET_CORE_REST_ENTRY_POINT_APP
+          file: ./dotnet-core-apps/NET_CORE_REST_ENTRY_POINT_APP/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/net-core-rest-entry-point-app:latest
       - name: Image digest - NET_CORE_REST_ENTRY_POINT_APP
@@ -53,8 +51,8 @@ jobs:
         id: deploy-net-core-sink-app
         uses: docker/build-push-action@v2
         with:
-          context: ./NET_CORE_SINK_APP
-          file: ./NET_CORE_SINK_APP/Dockerfile
+          context: ./dotnet-core-apps/NET_CORE_SINK_APP
+          file: ./dotnet-core-apps/NET_CORE_SINK_APP/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/net-core-sink-app:latest
       - name: Image digest - NET_CORE_SINK_APP
