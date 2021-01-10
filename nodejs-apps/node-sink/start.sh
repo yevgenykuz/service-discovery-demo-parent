@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 if [[ -z "${IAST_MANAGER_URL}" ]]; then
   node index.js

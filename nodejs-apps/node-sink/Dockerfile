@@ -1,6 +1,5 @@
-FROM node:10
-RUN apt-get update
-RUN apt-get install -y zip unzip
+FROM node:10-alpine
+RUN apk add zip unzip
 COPY . /node-sink
 WORKDIR /node-sink
 RUN npm install --production --unsafe-perm
