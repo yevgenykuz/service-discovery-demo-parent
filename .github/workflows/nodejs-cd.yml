@@ -31,8 +31,8 @@ jobs:
         id: deploy-node-entry-point
         uses: docker/build-push-action@v2
         with:
-          context: ./node-entry-point
-          file: ./node-entry-point/Dockerfile
+          context: ./nodejs-apps/node-entry-point
+          file: ./nodejs-apps/node-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-entry-point:latest
       - name: Image digest
@@ -41,8 +41,8 @@ jobs:
         id: deploy-node-propagator
         uses: docker/build-push-action@v2
         with:
-          context: ./node-propagator
-          file: ./node-propagator/Dockerfile
+          context: ./nodejs-apps/node-propagator
+          file: ./nodejs-apps/node-propagator/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-propagator:latest
       - name: Image digest
@@ -51,9 +51,9 @@ jobs:
         id: deploy-node-sink
         uses: docker/build-push-action@v2
         with:
-          context: ./node-sink
-          file: ./node-sink/Dockerfile
+          context: ./nodejs-apps/node-sink
+          file: ./nodejs-apps/node-sink/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-sink:latest
       - name: Image digest
-        run: echo ${{ steps.deploy-node-sink.outputs.di
+        run: echo ${{ steps.deploy-node-sink.outputs.digest }}

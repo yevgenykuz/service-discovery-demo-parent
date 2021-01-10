@@ -43,8 +43,8 @@ jobs:
         id: bank-analysis
         uses: docker/build-push-action@v2
         with:
-          context: ./bank-analysis
-          file: ./bank-analysis/Dockerfile
+          context: ./java-apps/bank-analysis
+          file: ./java-apps/bank-analysis/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-analysis:latest
       - name: Image digest - bank-analysis
@@ -53,8 +53,8 @@ jobs:
         id: bank-gateway
         uses: docker/build-push-action@v2
         with:
-          context: ./bank-gateway
-          file: ./bank-gateway/Dockerfile
+          context: ./java-apps/bank-gateway
+          file: ./java-apps/bank-gateway/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-gateway:latest
       - name: Image digest - bank-gateway
@@ -63,8 +63,8 @@ jobs:
         id: deploy-bank-storage
         uses: docker/build-push-action@v2
         with:
-          context: ./bank-storage
-          file: ./bank-storage/Dockerfile
+          context: ./java-apps/bank-storage
+          file: ./java-apps/bank-storage/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-storage:latest
       - name: Image digest - bank-storage
@@ -73,8 +73,8 @@ jobs:
         id: deploy-java-kafka-entry-point
         uses: docker/build-push-action@v2
         with:
-          context: ./java-kafka-entry-point
-          file: ./java-kafka-entry-point/Dockerfile
+          context: ./java-apps/java-kafka-entry-point
+          file: ./java-apps/java-kafka-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-entry-point:latest
       - name: Image digest - java-kafka-entry-point
@@ -83,8 +83,8 @@ jobs:
         id: deploy-java-kafka-http-entry-point
         uses: docker/build-push-action@v2
         with:
-          context: ./java-kafka-http-entry-point
-          file: ./java-kafka-http-entry-point/Dockerfile
+          context: ./java-apps/java-kafka-http-entry-point
+          file: ./java-apps/java-kafka-http-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-http-entry-point:latest
       - name: Image digest - java-kafka-http-entry-point
@@ -93,8 +93,8 @@ jobs:
         id: deploy-java-kafka-propagator
         uses: docker/build-push-action@v2
         with:
-          context: ./java-kafka-propagator
-          file: ./java-kafka-propagator/Dockerfile
+          context: ./java-apps/java-kafka-propagator
+          file: ./java-apps/java-kafka-propagator/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-propagator:latest
       - name: Image digest - java-kafka-propagator
@@ -103,8 +103,8 @@ jobs:
         id: deploy-java-kafka-sink
         uses: docker/build-push-action@v2
         with:
-          context: ./java-kafka-sink
-          file: ./java-kafka-sink/Dockerfile
+          context: ./java-apps/java-kafka-sink
+          file: ./java-apps/java-kafka-sink/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-sink:latest
       - name: Image digest - java-kafka-sink
@@ -113,8 +113,8 @@ jobs:
         id: deploy-java-rabbitmq-entry-point
         uses: docker/build-push-action@v2
         with:
-          context: ./java-rabbitmq-entry-point
-          file: ./java-rabbitmq-entry-point/Dockerfile
+          context: ./java-apps/java-rabbitmq-entry-point
+          file: ./java-apps/java-rabbitmq-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-entry-point:latest
       - name: Image digest - java-rabbitmq-entry-point
@@ -123,8 +123,8 @@ jobs:
         id: deploy-java-rabbitmq-http-entry-point
         uses: docker/build-push-action@v2
         with:
-          context: ./java-rabbitmq-http-entry-point
-          file: ./java-rabbitmq-http-entry-point/Dockerfile
+          context: ./java-apps/java-rabbitmq-http-entry-point
+          file: ./java-apps/java-rabbitmq-http-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-http-entry-point:latest
       - name: Image digest - java-rabbitmq-http-entry-point
@@ -133,8 +133,8 @@ jobs:
         id: deploy-java-rabbitmq-propagator
         uses: docker/build-push-action@v2
         with:
-          context: ./java-rabbitmq-propagator
-          file: ./java-rabbitmq-propagator/Dockerfile
+          context: ./java-apps/java-rabbitmq-propagator
+          file: ./java-apps/java-rabbitmq-propagator/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-propagator:latest
       - name: Image digest - java-rabbitmq-propagator
@@ -143,8 +143,8 @@ jobs:
         id: deploy-java-rabbitmq-sink
         uses: docker/build-push-action@v2
         with:
-          context: ./java-rabbitmq-sink
-          file: ./java-rabbitmq-sink/Dockerfile
+          context: ./java-apps/java-rabbitmq-sink
+          file: ./java-apps/java-rabbitmq-sink/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-sink:latest
       - name: Image digest - java-rabbitmq-sink
