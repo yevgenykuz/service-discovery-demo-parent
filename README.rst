@@ -226,6 +226,7 @@ Contributors
 * `idantsadok <https://github.com/idantsadok>`_
 * `talilabok <https://github.com/talilabok>`_
 * `MorisR <https://github.com/MorisR>`_
+* `mariakulesskiy <https://github.com/mariakulesskiy>`_
 
 License
 -------
