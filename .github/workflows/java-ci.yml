@@ -1,11 +1,6 @@
-name: Java - JDK 8 and 11 on all OSs
+name: Java CI - Pull Requests
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-    - 'java-apps/**'
   pull_request:
     branches:
       - master
@@ -24,10 +19,9 @@ jobs:
       matrix:
         java_version: [1.8, 11]
         os: [windows-latest, macOS-latest, ubuntu-latest]
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Set up JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v1
         with:
