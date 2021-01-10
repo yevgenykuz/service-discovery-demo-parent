@@ -144,7 +144,7 @@ Kubernetes on docker desktop
 
 .. code-block:: bash
 
-    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm repo add stable https://charts.helm.sh/stable
     helm repo update
     helm install etcd-operator stable/etcd-operator --namespace compose
     kubectl apply -f k8s-etcd.yml
