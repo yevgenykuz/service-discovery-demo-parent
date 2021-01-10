@@ -1,0 +1,275 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: deploy
+
+on:
+  push:
+    branches: [ master ]
+    
+jobs:
+  deploy_java_apps:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+        
+    - name: Grant execute permission for gradlew
+      working-directory: ./java-apps
+      run: chmod +x mvnw 
+
+    - name: Build with Gradle
+      working-directory: ./java-apps
+      run: ./mvnw clean install
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: deploy bank-analysis
+      id: deploy_bank-analysis
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/bank-analysis
+        file: ./java-apps/bank-analysis/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-analysis:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_bank-analysis.outputs.digest }}
+
+    - name: deploy bank-gateway
+      id: deploy_bank-gateway
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/bank-gateway
+        file: ./java-apps/bank-gateway/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-gateway:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_bank-gateway.outputs.digest }}
+
+    - name: deploy bank-storage
+      id: deploy_bank-storage
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/bank-storage
+        file: ./java-apps/bank-storage/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-storage:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_bank-storage.outputs.digest }}
+
+    - name: deploy java-kafka-entry-point
+      id: deploy_java-kafka-entry-point
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/java-kafka-entry-point
+        file: ./java-apps/java-kafka-entry-point/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-entry-point:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_java-kafka-entry-point.outputs.digest }}
+
+    - name: deploy java-kafka-http-entry-point
+      id: deploy_java-kafka-http-entry-point
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/java-kafka-http-entry-point
+        file: ./java-apps/java-kafka-http-entry-point/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-http-entry-point:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_java-kafka-http-entry-point.outputs.digest }}
+
+    - name: deploy java-kafka-propagator
+      id: deploy_java-kafka-propagator
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/java-kafka-propagator
+        file: ./java-apps/java-kafka-propagator/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-propagator:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_java-kafka-propagator.outputs.digest }}
+
+    - name: deploy java-kafka-sink
+      id: deploy_java-kafka-sink
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/java-kafka-sink
+        file: ./java-apps/java-kafka-sink/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-sink:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_java-kafka-sink.outputs.digest }}
+
+    - name: deploy java-rabbitmq-entry-point
+      id: deploy_java-rabbitmq-entry-point
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/java-rabbitmq-entry-point
+        file: ./java-apps/java-rabbitmq-entry-point/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-entry-point:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_java-rabbitmq-entry-point.outputs.digest }}
+
+    - name: deploy java-rabbitmq-http-entry-point
+      id: deploy_java-rabbitmq-http-entry-point
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/java-rabbitmq-http-entry-point
+        file: ./java-apps/java-rabbitmq-http-entry-point/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-http-entry-point:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_java-rabbitmq-http-entry-point.outputs.digest }}
+
+    - name: deploy java-rabbitmq-propagator
+      id: deploy_java-rabbitmq-propagator
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/java-rabbitmq-propagator
+        file: ./java-apps/java-rabbitmq-propagator/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-propagator:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_java-rabbitmq-propagator.outputs.digest }}
+
+    - name: deploy java-rabbitmq-sink
+      id: deploy_java-rabbitmq-sink
+      uses: docker/build-push-action@v2
+      with:
+        context: ./java-apps/java-rabbitmq-sink
+        file: ./java-apps/java-rabbitmq-sink/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-sink:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_java-rabbitmq-sink.outputs.digest }}
+
+  deploy_dotnet_apps:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: deploy net_core_propogator_app
+      id: deploy_net_core_propogator_app
+      uses: docker/build-push-action@v2
+      with:
+        context: ./dotnet-core-apps/NET_CORE_PROPOGATOR_APP
+        file: ./dotnet-core-apps/NET_CORE_PROPOGATOR_APP/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/net_core_propogator_app:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_net_core_propogator_app.outputs.digest }}
+
+    - name: deploy net_core_rest_entry_point_app
+      id: deploy_net_core_rest_entry_point_app
+      uses: docker/build-push-action@v2
+      with:
+        context: ./dotnet-core-apps/NET_CORE_REST_ENTRY_POINT_APP
+        file: ./dotnet-core-apps/NET_CORE_REST_ENTRY_POINT_APP/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/net_core_rest_entry_point_app:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_net_core_rest_entry_point_app.outputs.digest }}
+
+    - name: deploy net_core_sink_app
+      id: deploy_net_core_sink_app
+      uses: docker/build-push-action@v2
+      with:
+        context: ./dotnet-core-apps/NET_CORE_SINK_APP
+        file: ./dotnet-core-apps/NET_CORE_SINK_APP/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/net_core_sink_app:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_net_core_sink_app.outputs.digest }}
+
+
+  deploy_node_apps:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: deploy node-entry-point
+      id: deploy_node-entry-point
+      uses: docker/build-push-action@v2
+      with:
+        context: ./nodejs-apps/node-entry-point
+        file: ./nodejs-apps/node-entry-point/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-entry-point:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_node-entry-point.outputs.digest }}
+
+    - name: deploy node-propagator
+      id: deploy_node-propagator
+      uses: docker/build-push-action@v2
+      with:
+        context: ./nodejs-apps/node-propagator
+        file: ./nodejs-apps/node-propagator/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-propagator:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_node-propagator.outputs.digest }}
+
+    - name: deploy node-sink
+      id: deploy_node-sink
+      uses: docker/build-push-action@v2
+      with:
+        context: ./nodejs-apps/node-sink
+        file: ./nodejs-apps/node-sink/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-sink:latest
+
+    - name: Image digest
+      run: echo ${{ steps.deploy_node-sink.outputs.digest }}
