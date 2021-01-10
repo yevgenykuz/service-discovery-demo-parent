@@ -5,7 +5,7 @@ Service Discovery Demo
 | **Security note: These applications are vulnerable by design. Do not use them as reference for secured applications.**
 |
 
-|java_ci|
+|java_cd| |dotnet_core_cd| |nodejs_cd|
 
 -----
 
@@ -237,6 +237,14 @@ License
 -----
 
 
-.. |java_ci| image:: https://github.com/yevgenykuz/service-discovery-demo-parent/workflows/Java%20-%20JDK%208%20and%2011%20on%20all%20OSs/badge.svg
-    :target: https://github.com/yevgenykuz/service-discovery-demo-parent/actions?query=workflow%3A%22Java+-+JDK+8+and+11+on+all+OSs%22
-    :alt: Java CI
+.. |java_cd| image:: https://github.com/yevgenykuz/service-discovery-demo-parent/workflows/Java%20CD/badge.svg
+    :target: https://github.com/yevgenykuz/service-discovery-demo-parent/actions?query=workflow%3A%22Java+CD%22
+    :alt: Java CD
+
+.. |dotnet_core_cd| image:: https://github.com/yevgenykuz/service-discovery-demo-parent/workflows/.NET%20Core%20CD/badge.svg
+    :target: https://github.com/yevgenykuz/service-discovery-demo-parent/actions?query=workflow%3A%22.NET+Core+CD%22
+    :alt: .NET Core CD
+
+.. |nodejs_cd| image:: https://github.com/yevgenykuz/service-discovery-demo-parent/workflows/NodeJS%20CD/badge.svg
+    :target: https://github.com/yevgenykuz/service-discovery-demo-parent/actions?query=workflow%3A%22NodeJS+CD%22
+    :alt: NodeJS CD
