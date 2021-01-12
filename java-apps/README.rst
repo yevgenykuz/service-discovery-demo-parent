@@ -240,15 +240,26 @@ Relevant applications:
 * *bank-analysis*
 * *bank-storage*
 
-To trigger HTTP flows you can access the UI in ``http://localhost:8110/`` or send HTTP GET request as follows:
+To trigger HTTP flows you can access the UI in ``http://localhost:8110/`` and trigger the following actions:
 
-* | entry-point -> propagator -> sink ("Deposit" action in the UI):
+* | gateway -> analysis -> storage:
+  | ``Deposit``
+* | gateway -> storage:
+  | ``Check Balance``
+* | gateway -> analysis:
+  | ``Convert Currency``
+* | analysis -> storage:
+  | ``Check Loan Credibility``
+
+You can also send HTTP GET requests as follows:
+
+* | gateway -> analysis -> storage:
   | ``http://localhost:8110/prop-name/?name=${text}``
-* | entry-point -> sink ("Check Balance" action in the UI):
+* | gateway -> storage:
   | ``http://localhost:8110/name/?name=${text}``
-* | propagator -> sink:
+* | analysis -> storage:
   | ``http://localhost:8111/name?name=${text}``
-* | sink:
+* | storage:
   | ``http://localhost:8112/projects/unsafe?name=${text}``
 
 Replace *${text}* with any string.
