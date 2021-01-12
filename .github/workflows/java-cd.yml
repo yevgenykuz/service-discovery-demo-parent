@@ -37,115 +37,81 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Set up Docker Buildx
-        id: buildx
         uses: docker/setup-buildx-action@v1
       - name: Deploy bank-analysis
-        id: bank-analysis
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/bank-analysis
           file: ./java-apps/bank-analysis/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-analysis:latest
-      - name: Image digest - bank-analysis
-        run: echo ${{ steps.bank-analysis.outputs.digest }}
       - name: Deploy bank-gateway
-        id: bank-gateway
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/bank-gateway
           file: ./java-apps/bank-gateway/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-gateway:latest
-      - name: Image digest - bank-gateway
-        run: echo ${{ steps.bank-gateway.outputs.digest }}
       - name: Deploy bank-storage
-        id: deploy-bank-storage
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/bank-storage
           file: ./java-apps/bank-storage/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bank-storage:latest
-      - name: Image digest - bank-storage
-        run: echo ${{ steps.deploy-bank-storage.outputs.digest }}
       - name: Deploy java-kafka-entry-point
-        id: deploy-java-kafka-entry-point
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/java-kafka-entry-point
           file: ./java-apps/java-kafka-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-entry-point:latest
-      - name: Image digest - java-kafka-entry-point
-        run: echo ${{ steps.deploy-java-kafka-entry-point.outputs.digest }}
       - name: Deploy java-kafka-http-entry-point
-        id: deploy-java-kafka-http-entry-point
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/java-kafka-http-entry-point
           file: ./java-apps/java-kafka-http-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-http-entry-point:latest
-      - name: Image digest - java-kafka-http-entry-point
-        run: echo ${{ steps.deploy-java-kafka-http-entry-point.outputs.digest }}
       - name: Deploy java-kafka-propagator
-        id: deploy-java-kafka-propagator
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/java-kafka-propagator
           file: ./java-apps/java-kafka-propagator/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-propagator:latest
-      - name: Image digest - java-kafka-propagator
-        run: echo ${{ steps.deploy-java-kafka-propagator.outputs.digest }}
       - name: Deploy java-kafka-sink
-        id: deploy-java-kafka-sink
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/java-kafka-sink
           file: ./java-apps/java-kafka-sink/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-kafka-sink:latest
-      - name: Image digest - java-kafka-sink
-        run: echo ${{ steps.deploy-java-kafka-sink.outputs.digest }}
       - name: Deploy java-rabbitmq-entry-point
-        id: deploy-java-rabbitmq-entry-point
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/java-rabbitmq-entry-point
           file: ./java-apps/java-rabbitmq-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-entry-point:latest
-      - name: Image digest - java-rabbitmq-entry-point
-        run: echo ${{ steps.deploy-java-rabbitmq-entry-point.outputs.digest }}
       - name: Deploy java-rabbitmq-http-entry-point
-        id: deploy-java-rabbitmq-http-entry-point
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/java-rabbitmq-http-entry-point
           file: ./java-apps/java-rabbitmq-http-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-http-entry-point:latest
-      - name: Image digest - java-rabbitmq-http-entry-point
-        run: echo ${{ steps.deploy-java-rabbitmq-http-entry-point.outputs.digest }}
       - name: Deploy java-rabbitmq-propagator
-        id: deploy-java-rabbitmq-propagator
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/java-rabbitmq-propagator
           file: ./java-apps/java-rabbitmq-propagator/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-propagator:latest
-      - name: Image digest - java-rabbitmq-propagator
-        run: echo ${{ steps.deploy-java-rabbitmq-propagator.outputs.digest }}
       - name: Deploy java-rabbitmq-sink
-        id: deploy-java-rabbitmq-sink
         uses: docker/build-push-action@v2
         with:
           context: ./java-apps/java-rabbitmq-sink
           file: ./java-apps/java-rabbitmq-sink/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-rabbitmq-sink:latest
-      - name: Image digest - java-rabbitmq-sink
-        run: echo ${{ steps.deploy-java-rabbitmq-sink.outputs.digest }}
