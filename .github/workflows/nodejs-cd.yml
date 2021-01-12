@@ -25,35 +25,25 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Set up Docker Buildx
-        id: buildx
         uses: docker/setup-buildx-action@v1
       - name: Deploy node-entry-point
-        id: deploy-node-entry-point
         uses: docker/build-push-action@v2
         with:
           context: ./nodejs-apps/node-entry-point
           file: ./nodejs-apps/node-entry-point/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-entry-point:latest
-      - name: Image digest
-        run: echo ${{ steps.deploy-node-entry-point.outputs.digest }}
       - name: Deploy node-propagator
-        id: deploy-node-propagator
         uses: docker/build-push-action@v2
         with:
           context: ./nodejs-apps/node-propagator
           file: ./nodejs-apps/node-propagator/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-propagator:latest
-      - name: Image digest
-        run: echo ${{ steps.deploy-node-propagator.outputs.digest }}
       - name: Deploy node-sink
-        id: deploy-node-sink
         uses: docker/build-push-action@v2
         with:
           context: ./nodejs-apps/node-sink
           file: ./nodejs-apps/node-sink/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-sink:latest
-      - name: Image digest
-        run: echo ${{ steps.deploy-node-sink.outputs.digest }}
