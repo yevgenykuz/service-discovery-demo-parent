@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {Switch, Route, useLocation, useHistory} from "react-router-dom"
+import {Switch, Route, useLocation, useHistory, Redirect} from "react-router-dom"
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,6 +17,7 @@ import ConvertCurrencyProcessingScreen from "./components/screens/convertCurrenc
 import ConvertCurrencyResultScreen from "./components/screens/convertCurrencyResultScreen";
 import CheckLoanCredibilityScreen from "./components/screens/CheckLoanCredibilityScreen";
 import LoggedInNavBar from "./components/components/loggedInNavBar";
+import StressTestScreen from "./components/screens/stressTestScreen";
 
 
 import {useIsLoggedInState, useUserInfo} from "./recoilStates/userAuth";
@@ -26,42 +27,42 @@ import {logTypes} from "./models/logger";
 import LogsMenu from "./components/components/logsMenu";
 import NavBarBase from "./components/components/navBarBase";
 import {getAllowedRoutesWithoutLogin} from "./constants/routes";
+import {useHiddenMode, useListenForKeyStroke} from "./recoilStates/hiddenModeEnabled";
 
 
 function App() {
-    const [isLoaded,setIsLoaded] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)
     const isLoggedIn = useIsLoggedInState()
     const [, setObj] = useUserInfo()
+    const hiddenModeEnabled = useHiddenMode()
 
 
     let {pathname} = useLocation();
     let history = useHistory();
     const isInLogsScreen = pathname.startsWith(routes.LOGS)
 
+    useListenForKeyStroke()
 
-
-   useEffect(() => {
-            Auth.getUserInfo().then(({username}) => {
-                setObj.setUserName(username)
-            }).finally(()=>{
-                setIsLoaded(true)
-            })
+    useEffect(() => {
+        Auth.getUserInfo().then(({username}) => {
+            setObj.setUserName(username)
+        }).finally(() => {
+            setIsLoaded(true)
+        })
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(()=>{
-        if(!isLoaded)
-            return ;
+    useEffect(() => {
+        if (!isLoaded)
+            return;
 
-        if(!isLoggedIn)
-            if(!getAllowedRoutesWithoutLogin().includes(pathname))
-                return  history.replace(routes.LOGIN)
+        if (!isLoggedIn)
+            if (!getAllowedRoutesWithoutLogin().includes(pathname))
+                return history.replace(routes.LOGIN)
 
-        if(isLoggedIn && pathname === routes.LOGIN)
-            return  history.replace(routes.HOME)
+        if (isLoggedIn && pathname === routes.LOGIN)
+            return history.replace(routes.HOME)
 
-    },[pathname,isLoggedIn,isLoaded])// eslint-disable-line react-hooks/exhaustive-deps
-
-
+    }, [pathname, isLoggedIn, isLoaded])// eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (<BackgroundImageWrapper>
@@ -81,6 +82,7 @@ function App() {
                 <Route exact path={routes.LOGS}>
                     <LogsScreen title={"Transactions"}/>
                 </Route>
+                {hiddenModeEnabled && <Route exact path={routes.STRESS_TEST} component={StressTestScreen}/>}
 
                 <Route exact path={routes.CHECK_LOAN_CREDIBILITY} component={CheckLoanCredibilityScreen}/>
                 <Route exact path={routes.CONVERT_CURRENCY} component={ConvertCurrencyScreen}/>
@@ -90,9 +92,10 @@ function App() {
                 <Route exact path={routes.DEPOSIT_PROCESSING} component={DepositProcessingScreen}/>
                 <Route exact path={routes.DEPOSIT_SUCCESSFUL} component={DepositSuccessfulScreen}/>
                 <Route exact path={routes.CHECK_BALANCE} component={BalanceScreen}/>
-                <Route exact path={routes.LOGIN} component={LoginScreen} />
-                <Route path={routes.HOME} component={HomeScreen}/>
+                <Route exact path={routes.LOGIN} component={LoginScreen}/>
+                <Route exact path={routes.HOME} component={HomeScreen}/>
 
+                {isLoggedIn ? <Redirect to={routes.HOME}/> : <Redirect to={routes.LOGIN}/>}
             </Switch>
         </BackgroundImageWrapper>
     );

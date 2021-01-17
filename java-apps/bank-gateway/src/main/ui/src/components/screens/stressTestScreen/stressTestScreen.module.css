@@ -1,0 +1,25 @@
+.component{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    overflow: hidden;
+}
+.list{
+    padding: 10px;
+    box-sizing: border-box;
+}
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+    background-color: var(--gray-dark);
+}
+
+
+.button{
+    border-radius: 15px;
+   margin-top: 10px;
+}

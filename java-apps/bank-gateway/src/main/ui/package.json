@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "chance": "^1.1.7",
     "dayjs": "^1.9.6",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
@@ -37,5 +38,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "eslintConfig": {
+    "extends": ["react-app"],
+    "rules": {
+      "react-hooks/exhaustive-deps": "off"
+    }
   }
 }

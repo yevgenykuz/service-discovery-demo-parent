@@ -12,12 +12,14 @@ export const CONVERT_CURRENCY = "/convert-currency"
 export const CONVERT_CURRENCY_PROCESSING = "/convert-currency/processing"
 export const CONVERT_CURRENCY_RESULT = "/convert-currency/result"
 export const CHECK_LOAN_CREDIBILITY = "/loan-credibility"
+export const STRESS_TEST = "/stress-test"
 
 export function getAllowedRoutesWithoutLogin() {
     return [LOGS,
         LOGS_ENTRY_POINT,
         LOGS_PROPAGATOR,
-        LOGS_SINK
+        LOGS_SINK,
+        STRESS_TEST
     ]
 }
 
