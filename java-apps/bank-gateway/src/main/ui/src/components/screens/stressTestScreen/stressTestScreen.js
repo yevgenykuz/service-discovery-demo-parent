@@ -22,7 +22,7 @@ import {getAllOptions} from "../../../constants/convertCurrencyOptions";
 //randomizer------------------------------------------------------------------
 const chance = new Chance();
 const randomUserName = () => chance.first()
-const randomNumber = () => chance.integer({min: 1})
+const randomNumber = () => chance.integer({min: 1, max:10000})
 const randomCurrency = () => chance.shuffle(getAllOptions());
 
 
@@ -35,7 +35,7 @@ const options = {
 }
 
 //rendering an entry-------------------------------------------------------------
-function renderField({route, onChange, checked, disabled}) {
+function renderField({route, onChange, checked, disabled, onInvokeClick}) {
     return <InputGroup className="mb-3" key={route}>
         <InputGroup.Prepend>
             <InputGroup.Checkbox disabled={disabled} onChange={() => onChange(route)} checked={checked}
@@ -48,6 +48,7 @@ function renderField({route, onChange, checked, disabled}) {
             disabled={disabled}
             readOnly={true}
             aria-label="Text input with checkbox"/>
+            <Button onClick={onInvokeClick} variant={"warning"}>Invoke</Button>
     </InputGroup>
 }
 
@@ -59,13 +60,13 @@ function StressTestScreen() {
     const [frequencyMS, setFrequencyMS] = React.useState(10)
     const [invokeAll, setInvokeAll] = React.useState(false)
     const lastIntervalId = React.useRef(-1)
-    console.log(routesToRun)
+
     useEffect(() => {
         clearInterval(lastIntervalId.current)
         if (started)
             lastIntervalId.current = setInterval(() => {
-                if(invokeAll)
-                    routesToRun.forEach(key=>options[key]()).catch(console.log)
+                if (invokeAll)
+                    routesToRun.forEach(key => options[key]()).catch(console.log)
                 else options[chance.pick(routesToRun)]().catch(console.log)
 
             }, frequencyMS)
@@ -88,7 +89,8 @@ function StressTestScreen() {
                 route,
                 onChange: toggleChecked,
                 disabled: started,
-                checked: routesToRun.includes(route)
+                checked: routesToRun.includes(route),
+                onInvokeClick: options[route]
             })
         ), [routesToRun, started])
 
