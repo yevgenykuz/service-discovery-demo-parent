@@ -11,37 +11,52 @@ import {USD} from "../constants/convertCurrencyOptions";
 const ENTRY_POINT_ORIGIN = process.env.NODE_ENV === "production" ? "" : "http://localhost:8110"
 const PROPAGATOR_ORIGIN = process.env.BANK_ANALYSIS_URL || "http://localhost:8111"
 
-const DEPOSIT_URL = `${ENTRY_POINT_ORIGIN}/prop-name`
-const CHECK_BALANCE_URL = `${ENTRY_POINT_ORIGIN}/name`
-const INVOKE_ENTRY_POINT_URL = `${ENTRY_POINT_ORIGIN}/home`
-const CONVERT_CURRENCY_URL = `${ENTRY_POINT_ORIGIN}/convert-currency`
-const CHECK_LOAN_CREDIBILITY_URL = `${PROPAGATOR_ORIGIN}/check-loan-credibility`
+export const DEPOSIT_URL = `${ENTRY_POINT_ORIGIN}/prop-name`
+export const CHECK_BALANCE_URL = `${ENTRY_POINT_ORIGIN}/name`
+export const INVOKE_ENTRY_POINT_URL = `${ENTRY_POINT_ORIGIN}/home`
+export const CONVERT_CURRENCY_URL = `${ENTRY_POINT_ORIGIN}/convert-currency`
+export const CHECK_LOAN_CREDIBILITY_URL = `${PROPAGATOR_ORIGIN}/check-loan-credibility`
+
+export  function _GET_DEPOSIT(username,amount){
+    return  axios.get(`${DEPOSIT_URL}?name=${username}_Deposit_${amount}`)
+}
+export  function _GET_CHECK_BALANCE(username){
+    return  axios.get(`${CHECK_BALANCE_URL}?name=${username}_CheckBalance`)
+}
+export  function _GET_LOGIN(){
+    return axios.get(INVOKE_ENTRY_POINT_URL)
+}
+export  function _GET_CONVERT_CURRENCY_URL(amount,sourceCur,targetCur){
+    return axios.get(`${CONVERT_CURRENCY_URL}?amount=${amount}&sourceCurrency=${sourceCur}&targetCurrency=${targetCur}`)
+}
+export  function _GET_CHECK_LOAN_CREDIBILITY_URL(username){
+    return axios.get(`${CHECK_LOAN_CREDIBILITY_URL}?clientName=${username}`)
+}
+
 
 
 export function timeoutPromise(time = 1000) {
     return new Promise((resolve) => setTimeout(resolve, time))
 }
-
 export async function depositAmount(username, amount) {
     loggerInstance.logEntryPoint(`deposit for "${username}" initiated : ${amount}$`)
     loggerInstance.logPropagator(`deposit for "${username}" processing : ${amount}$`)
 
     await timeoutPromise(DEPOSIT_DURATION)
     try {
-        await axios.get(`${DEPOSIT_URL}?name=${username}_Deposit_${amount}`)
+        await _GET_DEPOSIT(username,amount)
     } catch (e) {
     }
 
     loggerInstance.logSink(`deposit for "${username}" registered : ${amount}$`)
 
 }
-
 export async function checkBalance(username = 'test') {
     loggerInstance.logEntryPoint(`check balance for "${username}" initiated`)
 
     await timeoutPromise(CHECK_BALANCE_DURATION)
     try {
-        await axios.get(`${CHECK_BALANCE_URL}?name=${username}_CheckBalance`)
+        await _GET_CHECK_BALANCE(username)
     } catch (e) {
     }
 
@@ -58,7 +73,7 @@ export async function convertCurrency(username,amount, sourceCur, targetCur) {
     let ilsRate= 3.25;
     let result;
     try {
-        const response = await axios.get(`${CONVERT_CURRENCY_URL}?amount=${amount}&sourceCurrency=${sourceCur}&targetCurrency=${targetCur}`)
+        const response = await _GET_CONVERT_CURRENCY_URL(amount,sourceCur,targetCur)
         result = response.data
     } catch (e) {
     }
@@ -78,7 +93,7 @@ export async function checkLoanCredibility(username) {
     let response = `${username} is credible for a loan`;
 
     try {
-       const {data} = await axios.get(`${CHECK_LOAN_CREDIBILITY_URL}?clientName=${username}`)
+       const {data} = await _GET_CHECK_LOAN_CREDIBILITY_URL(username)
         response = data;
     } catch (e) {
     }
@@ -86,10 +101,8 @@ export async function checkLoanCredibility(username) {
     loggerInstance.logSink(response)
     return response;
 }
-
-
 export function silentlyInvokeEntryPoint() {
-    return axios.get(INVOKE_ENTRY_POINT_URL)
+    return _GET_LOGIN()
 }
 
 
