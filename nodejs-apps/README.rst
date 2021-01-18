@@ -75,7 +75,7 @@ Run the following command to run the docker container for each test application,
 
   sudo docker run --rm -it -p 5010:5010 node-entry-point
 
-Docker compose
+Docker-compose
 --------------
 
 .. code-block:: bash
