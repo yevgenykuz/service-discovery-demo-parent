@@ -75,6 +75,22 @@ Run the following command to run the docker container for each test application,
 
   sudo docker run --rm -it -p 5010:5010 node-entry-point
 
+Docker compose
+--------------
+
+.. code-block:: bash
+
+    # pull latest:
+    docker-compose -f docker-compose-nodejs-http.yml pull
+    # start:
+    docker-compose -f docker-compose-nodejs-http.yml up -d
+    # check status:
+    docker-compose -f docker-compose-nodejs-http.yml ps
+    # check logs:
+    docker-compose -f docker-compose-nodejs-http.yml logs
+    # stop:
+    docker-compose -f docker-compose-nodejs-http.yml down
+
 Test
 ====
 To start a flow including all services send the following GET request:

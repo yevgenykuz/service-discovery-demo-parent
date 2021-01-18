@@ -51,6 +51,8 @@ Docker-compose
 
 .. code-block:: bash
 
+    # pull latest:
+    docker-compose -f docker-compose-dotnet-core-http.yml pull
     # start:
     docker-compose -f docker-compose-dotnet-core-http.yml up -d
     # check status:

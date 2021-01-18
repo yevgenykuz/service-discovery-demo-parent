@@ -104,6 +104,8 @@ Docker-compose
 
 .. code-block:: bash
 
+    # pull latest:
+    docker-compose -f docker-compose-java-http.yml pull
     # start:
     docker-compose -f docker-compose-java-http.yml up -d
     # check status:
@@ -117,6 +119,8 @@ Docker-compose
 
 .. code-block:: bash
 
+    # pull latest:
+    docker-compose -f docker-compose-java-kafka.yml pull
     # start:
     docker-compose -f docker-compose-java-kafka.yml up -d
     # check status:

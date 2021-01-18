@@ -57,6 +57,8 @@ Control with docker compose:
 
 .. code-block:: bash
 
+    # pull latest:
+    docker-compose -f docker-compose-cross-http.yml pull
     # start:
     docker-compose -f docker-compose-cross-http.yml up -d
     # check status:
