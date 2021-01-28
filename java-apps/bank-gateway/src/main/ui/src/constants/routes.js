@@ -11,7 +11,7 @@ export const LOGS = "/logs"
 export const CONVERT_CURRENCY = "/convert-currency"
 export const CONVERT_CURRENCY_PROCESSING = "/convert-currency/processing"
 export const CONVERT_CURRENCY_RESULT = "/convert-currency/result"
-export const CHECK_LOAN_CREDIBILITY = "/loan-credibility"
+export const CHECK_LOAN_CREDIBILITY = "/check-loan-credibility"
 export const STRESS_TEST = "/stress-test"
 
 export function getAllowedRoutesWithoutLogin() {
