@@ -9,7 +9,7 @@ import {loggerInstance} from "./logger";
 import {USD} from "../constants/convertCurrencyOptions";
 
 const ENTRY_POINT_ORIGIN = process.env.NODE_ENV === "production" ? "" : "http://localhost:8110"
-const PROPAGATOR_ORIGIN = process.env.BANK_ANALYSIS_URL || "http://localhost:8111"
+const PROPAGATOR_ORIGIN = "http://localhost:8111"
 
 export const DEPOSIT_URL = `${ENTRY_POINT_ORIGIN}/prop-name`
 export const CHECK_BALANCE_URL = `${ENTRY_POINT_ORIGIN}/name`

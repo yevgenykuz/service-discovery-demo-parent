@@ -9,59 +9,6 @@ This folder includes demo applications written in Java.
 
 .. section-numbering::
 
-Packaging
-=========
-
-Compile with Maven
-------------------
-
-In "*java-apps*" folder:
-
-.. code-block:: bash
-
-    .\mvnw clean install
-
-Build, tag, and push with docker
---------------------------------
-
-To push docker images to a different location, change *yevgenykcx* to your needs.
-
-.. code-block:: bash
-
-    # in bank-gateway folder:
-    docker build -t yevgenykcx/bank-gateway .
-    docker push yevgenykcx/bank-gateway
-    # in bank-analysis folder:
-    docker build -t yevgenykcx/bank-analysis .
-    docker push yevgenykcx/bank-analysis
-    # in bank-storage folder:
-    docker build -t yevgenykcx/bank-storage .
-    docker push yevgenykcx/bank-storage
-    # in java-kafka-http-entry-point folder:
-    docker build -t yevgenykcx/java-kafka-http-entry-point .
-    docker push yevgenykcx/java-kafka-http-entry-point
-    # in java-kafka-entry-point folder:
-    docker build -t yevgenykcx/java-kafka-entry-point .
-    docker push yevgenykcx/java-kafka-entry-point
-    # in java-kafka-propagator folder:
-    docker build -t yevgenykcx/java-kafka-propagator .
-    docker push yevgenykcx/java-kafka-propagator
-    # in java-kafka-sink folder:
-    docker build -t yevgenykcx/java-kafka-sink .
-    docker push yevgenykcx/java-kafka-sink
-    # in java-rabbitmq-http-entry-point folder:
-    docker build -t yevgenykcx/java-rabbitmq-http-entry-point .
-    docker push yevgenykcx/java-rabbitmq-http-entry-point
-    # in java-rabbitmq-entry-point folder:
-    docker build -t yevgenykcx/java-rabbitmq-entry-point .
-    docker push yevgenykcx/java-rabbitmq-entry-point
-    # in java-rabbitmq-propagator folder:
-    docker build -t yevgenykcx/java-rabbitmq-propagator .
-    docker push yevgenykcx/java-rabbitmq-propagator
-    # in java-rabbitmq-sink folder:
-    docker build -t yevgenykcx/java-rabbitmq-sink .
-    docker push yevgenykcx/java-rabbitmq-sink
-
 Usage
 =====
 
@@ -73,7 +20,7 @@ Choose one of the following options to launch the applications.
 Manually on Windows
 ~~~~~~~~~~~~~~~~~~~
 
-* `Compile with Maven`_
+* Compile with Maven: ``.\mvnw clean install``
 * Start a local IAST manager instance
 * Download an agent from IAST manager UI
 * For each application you want to run:
@@ -320,3 +267,47 @@ To trigger RabbitMQ flows you can do one of the following:
 * *commandi* -> Command injection
 * *random* -> Weak random
 * *any other text* -> Log forging
+
+Packaging
+=========
+
+Build, tag, and push with docker
+--------------------------------
+
+To push docker images to a different location, change *yevgenykcx* to your needs.
+
+.. code-block:: bash
+
+    # in bank-gateway folder:
+    docker build -t yevgenykcx/bank-gateway .
+    docker push yevgenykcx/bank-gateway
+    # in bank-analysis folder:
+    docker build -t yevgenykcx/bank-analysis .
+    docker push yevgenykcx/bank-analysis
+    # in bank-storage folder:
+    docker build -t yevgenykcx/bank-storage .
+    docker push yevgenykcx/bank-storage
+    # in java-kafka-http-entry-point folder:
+    docker build -t yevgenykcx/java-kafka-http-entry-point .
+    docker push yevgenykcx/java-kafka-http-entry-point
+    # in java-kafka-entry-point folder:
+    docker build -t yevgenykcx/java-kafka-entry-point .
+    docker push yevgenykcx/java-kafka-entry-point
+    # in java-kafka-propagator folder:
+    docker build -t yevgenykcx/java-kafka-propagator .
+    docker push yevgenykcx/java-kafka-propagator
+    # in java-kafka-sink folder:
+    docker build -t yevgenykcx/java-kafka-sink .
+    docker push yevgenykcx/java-kafka-sink
+    # in java-rabbitmq-http-entry-point folder:
+    docker build -t yevgenykcx/java-rabbitmq-http-entry-point .
+    docker push yevgenykcx/java-rabbitmq-http-entry-point
+    # in java-rabbitmq-entry-point folder:
+    docker build -t yevgenykcx/java-rabbitmq-entry-point .
+    docker push yevgenykcx/java-rabbitmq-entry-point
+    # in java-rabbitmq-propagator folder:
+    docker build -t yevgenykcx/java-rabbitmq-propagator .
+    docker push yevgenykcx/java-rabbitmq-propagator
+    # in java-rabbitmq-sink folder:
+    docker build -t yevgenykcx/java-rabbitmq-sink .
+    docker push yevgenykcx/java-rabbitmq-sink

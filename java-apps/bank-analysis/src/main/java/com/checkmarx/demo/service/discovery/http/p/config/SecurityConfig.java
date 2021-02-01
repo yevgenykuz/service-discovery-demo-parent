@@ -18,18 +18,11 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final RelatedServicesProperties relatedServicesProperties;
-
-    @Autowired
-    public SecurityConfig(RelatedServicesProperties relatedServicesProperties) {
-        this.relatedServicesProperties = relatedServicesProperties;
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/check-loan-credibility").cors().configurationSource(request -> {
             CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(Collections.singletonList(relatedServicesProperties.getBankGatewayUrl()));
+            config.setAllowedOrigins(Collections.singletonList("*"));
             config.setAllowedMethods(Collections.singletonList("GET"));
             config.setAllowedHeaders(Collections.singletonList("*"));
             return config;
