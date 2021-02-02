@@ -1,5 +1,10 @@
 package com.checkmarx.demo.service.discovery.http.ep.controller;
 
+import com.checkmarx.demo.service.discovery.http.ep.auth.CustomUserDetailsService;
+import com.checkmarx.demo.service.discovery.http.ep.auth.JwtProvider;
+import com.checkmarx.demo.service.discovery.http.ep.auth.domain.AuthRequestEntity;
+import com.checkmarx.demo.service.discovery.http.ep.auth.domain.AuthResponseEntity;
+import com.checkmarx.demo.service.discovery.http.ep.auth.domain.UserEntity;
 import com.checkmarx.demo.service.discovery.http.ep.properites.RelatedServicesProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
@@ -15,6 +20,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,12 +44,41 @@ public class HomeController {
 
     private final RelatedServicesProperties relatedServicesProperties;
     private final CloseableHttpClient httpClient;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtProvider jwtProvider;
 
     @Autowired
-    public HomeController(RelatedServicesProperties relatedServicesProperties) {
+    public HomeController(RelatedServicesProperties relatedServicesProperties,
+                          CustomUserDetailsService customUserDetailsService,
+                          JwtProvider jwtProvider) {
         this.relatedServicesProperties = relatedServicesProperties;
         this.httpClient = HttpClients.createDefault();
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtProvider = jwtProvider;
     }
+
+
+    @PostMapping("/login")
+    public AuthResponseEntity auth(@RequestBody AuthRequestEntity request) {
+        UserEntity userEntity = customUserDetailsService.getUserByLoginAndPassword(request.getLogin(), request.getPassword());
+        String token = jwtProvider.generateToken(userEntity.getLogin());
+        return new AuthResponseEntity(token);
+    }
+
+    @PostMapping("/register")
+    public AuthResponseEntity register(@RequestBody AuthRequestEntity request) {
+        UserEntity userEntity;
+        try {
+            userEntity =
+                    customUserDetailsService.getUserByLoginAndPassword(request.getLogin(), request.getPassword());
+        } catch (UsernameNotFoundException ex){
+            userEntity = new UserEntity(request.getLogin(), request.getPassword());
+            customUserDetailsService.registration(userEntity);
+        }
+        String token = jwtProvider.generateToken(userEntity.getLogin());
+        return new AuthResponseEntity(token);
+    }
+
 
     @RequestMapping("/home")
     public void bankGatewayHome(HttpServletRequest request) {
