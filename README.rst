@@ -218,18 +218,6 @@ Port  App
 5563  net-framework-sink
 ====  =============================
 
-Contributors
-------------
-
-* `yevgenykuz <https://github.com/yevgenykuz>`_
-* `ofertavivcx <https://github.com/ofertavivcx>`_
-* `asafHalely <https://github.com/asafHalely>`_
-* `snirshemtov <https://github.com/snirshemtov>`_
-* `idantsadok <https://github.com/idantsadok>`_
-* `talilabok <https://github.com/talilabok>`_
-* `MorisR <https://github.com/MorisR>`_
-* `mariakulesskiy <https://github.com/mariakulesskiy>`_
-
 License
 -------
 
