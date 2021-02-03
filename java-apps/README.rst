@@ -177,6 +177,18 @@ Kubernetes on docker desktop
 
 Remove all pods and services by clicking the ``Reset Kubernetes Cluster`` button in docker desktop k8s settings page.
 
+Manually as war files on IAST demo tomcat
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+| This is relevant only for `bank-gateway`, `bank-analysis`, and `bank-storage` applications.
+| This is intended to test each application separately, the applications will not communicate one with another.
+| The bank UI is also disabled.
+
+* Compile with Maven: ``.\mvnw clean install -P deploy-war``
+* Start a local IAST manager instance
+* For each application you want to run - copy the `.war` file from its `target` folder to your tomcat `webapps` folder
+* Start a local IAST demo instance (an agent should be configure already)
+
 Flow Triggering
 ---------------
 
