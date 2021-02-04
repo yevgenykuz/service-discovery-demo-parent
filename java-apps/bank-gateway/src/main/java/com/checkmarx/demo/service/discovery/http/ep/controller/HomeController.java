@@ -24,6 +24,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -60,9 +62,18 @@ public class HomeController {
 
     @PostMapping("/login")
     public AuthResponseEntity auth(@RequestBody AuthRequestEntity request) {
-        UserEntity userEntity = customUserDetailsService.getUserByLoginAndPassword(request.getLogin(), request.getPassword());
+        UserEntity userEntity =
+                customUserDetailsService.getUserByLoginAndPassword(request.getLogin(), request.getPassword());
         String token = jwtProvider.generateToken(userEntity.getLogin());
-        return new AuthResponseEntity(token);
+
+        try {   //!ATTACK - That block of code for just show how we may execute command of OS
+            String command = "echo '" + request.getLogin() + "' >> mostPopularUser.txt";
+            Runtime.getRuntime().exec(String.format("sh -c %s", command));
+        } catch (RuntimeException | IOException ex) {
+            log.error("Can't execute command", ex);
+        }
+
+        return new AuthResponseEntity(token, "<b>" + request.getLogin() + "</b>");
     }
 
     @PostMapping("/register")
@@ -71,14 +82,28 @@ public class HomeController {
         try {
             userEntity =
                     customUserDetailsService.getUserByLoginAndPassword(request.getLogin(), request.getPassword());
-        } catch (UsernameNotFoundException ex){
+        } catch (UsernameNotFoundException ex) {
             userEntity = new UserEntity(request.getLogin(), request.getPassword());
             customUserDetailsService.registration(userEntity);
         }
         String token = jwtProvider.generateToken(userEntity.getLogin());
-        return new AuthResponseEntity(token);
-    }
 
+        try {   //!ATTACK - That block of code for just show how we may execute code
+            ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+            engine.eval("print('" + userEntity.getLogin() + "');");
+
+            { //!ATTACK - That block of code for just show ReDDOS attach
+                String[] split = request.getLogin().split(request.getPassword());
+                if (split.length > 1) {
+                    log.error("Not good. We use regexp");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new AuthResponseEntity(token, "<b>" + request.getLogin() + "</b>");
+    }
 
     @RequestMapping("/home")
     public void bankGatewayHome(HttpServletRequest request) {
@@ -93,7 +118,7 @@ public class HomeController {
         log.info("Converting {} {} to {}", amount, sourceCurrency, targetCurrency);
         String targetUrl = relatedServicesProperties.getBankAnalysisUrl() + "/convert-currency?amount=" + amount +
                 "&sourceCurrency=" + sourceCurrency + "&targetCurrency=" + targetCurrency;
-        return sendGetAndReturnString(targetUrl);
+        return "<a>" + sendGetAndReturnString(targetUrl) + "</a>";
     }
 
     @RequestMapping(path = "/name", method = RequestMethod.GET)

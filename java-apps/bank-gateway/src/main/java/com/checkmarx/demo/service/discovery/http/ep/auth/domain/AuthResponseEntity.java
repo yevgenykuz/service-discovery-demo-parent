@@ -9,4 +9,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AuthResponseEntity {
     private String token;
+    private String name;
 }
