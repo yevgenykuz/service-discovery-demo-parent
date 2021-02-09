@@ -5,7 +5,7 @@ import CardWrapper from "../../components/cardWrapper";
 import styles from "./convertCurrencyResultScreen.module.css"
 import ColoredMoney from "../../components/coloredMoney";
 
-function ConvertCurrencyResultScreen() {
+function ConvertCurrencyResultScreen({isError = false}) {
 
     let {search} = useLocation();
     const [data,setData] = useState({})
@@ -22,12 +22,19 @@ function ConvertCurrencyResultScreen() {
 
     return (<ScreenWrapper>
             <CardWrapper className={`capitalize ${styles.card}`}>
-                <div className={`flexCenter ${styles.iconsContainer} iconMarginMedium`}>
-                    <img src="/img/exchange.svg" className={`iconMedium ${styles.icon}`} alt="grayscale exchange icon"/>
-                    <img src="/img/exchange-color.svg" className={`iconMedium ${styles.iconColor}`} alt=" colored exchange icon"/>
-                </div>
-                <h4>{data.amount} {data.source} Is Approximately</h4>
-                <ColoredMoney amount={data.result}>{data.result} {data.target}</ColoredMoney>
+                {isError && <h3>Something went wrong on out end 😢</h3>}
+
+                {!isError && <>
+                    <div className={`flexCenter ${styles.iconsContainer} iconMarginMedium`}>
+                        <img src="/img/exchange.svg" className={`iconMedium ${styles.icon}`}
+                             alt="grayscale exchange icon"/>
+                        <img src="/img/exchange-color.svg" className={`iconMedium ${styles.iconColor}`}
+                             alt=" colored exchange icon"/>
+                    </div>
+                    <h4>{data.amount} {data.source} Is Approximately</h4>
+                    <ColoredMoney amount={data.result}>{data.result} {data.target}</ColoredMoney>
+                </>}
+
             </CardWrapper>
         </ScreenWrapper>
     );

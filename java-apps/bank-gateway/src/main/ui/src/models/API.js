@@ -6,7 +6,6 @@ import {
     DEPOSIT_DURATION
 } from "../constants/delayDurations";
 import {loggerInstance} from "./logger";
-import {USD} from "../constants/convertCurrencyOptions";
 
 const ENTRY_POINT_ORIGIN = process.env.NODE_ENV === "production" ? "" : "http://localhost:8110"
 const PROPAGATOR_ORIGIN = "http://localhost:8111"
@@ -77,18 +76,14 @@ export async function convertCurrency(username,amount, sourceCur, targetCur) {
 
     await timeoutPromise(CURRENCY_CONVERSION_DURATION)
 
-    let ilsRate= 3.25;
-    let result;
     try {
-        const response = await _GET_CONVERT_CURRENCY_URL(amount,sourceCur,targetCur)
-        result = response.data
+        const response = await _GET_CONVERT_CURRENCY_URL(amount, sourceCur, targetCur)
+        loggerInstance.logPropagator(`"${username}" responded with  ${response.data} ${targetCur}`)
+        return response.data;
     } catch (e) {
+        throw new Error("Something went wrong :(")
     }
-    if(!result)
-        result = sourceCur === USD? amount * ilsRate : amount*(1/ilsRate);
 
-    loggerInstance.logPropagator(`"${username}" responded with  ${result} ${targetCur}`)
-    return result;
 }
 
 export async function checkLoanCredibility(username) {
