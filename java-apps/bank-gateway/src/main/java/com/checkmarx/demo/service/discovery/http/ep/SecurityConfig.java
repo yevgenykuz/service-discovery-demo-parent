@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs", "/webjars/**",
-                        "/prop-name", "/name",
+                        "/prop-name/**", "/name/**",
                         "/register", "/login",
                         "/", "/static/**", "/img/**", "/favicon.ico").permitAll()
                 .anyRequest().hasRole("USER")
@@ -41,6 +41,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }
