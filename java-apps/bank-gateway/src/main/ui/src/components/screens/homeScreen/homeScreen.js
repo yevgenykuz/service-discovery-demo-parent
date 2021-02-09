@@ -16,10 +16,10 @@ function HomeScreen() {
     //invoke "/home" route whenever the user goes to the home page while logged in
     useEffect(() => {
         (async () => {
-            if (await isLoggedIn())
+            if (await isLoggedIn() && userInfo.token)
                 await silentlyInvokeEntryPoint()
         })().catch()
-    },[])
+    },[userInfo])
 
     return (
         <ScreenWrapper>
