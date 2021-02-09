@@ -33,7 +33,7 @@ function ConvertCurrencyProcessingScreen() {
 
     return (
         <ScreenWrapper>
-            <LoadingPopup headerTitle={`processing currency conversion request`} loadingTitle={"Processing..."} style={{minWidth:"560px"}}/>
+            <LoadingPopup headerTitle={`processing currency conversion request`} loadingTitle={"Processing..."}/>
         </ScreenWrapper>
     );
 }

@@ -44,11 +44,9 @@ function App() {
     useListenForKeyStroke()
 
     useEffect(() => {
-        Auth.getUserInfo().then(({username}) => {
-            setObj.setUserName(username)
-        }).finally(() => {
-            setIsLoaded(true)
-        })
+        Auth.getUserInfo()
+            .then(setObj.setUserInfo) //{username,token})
+            .finally(() => setIsLoaded(true))
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
