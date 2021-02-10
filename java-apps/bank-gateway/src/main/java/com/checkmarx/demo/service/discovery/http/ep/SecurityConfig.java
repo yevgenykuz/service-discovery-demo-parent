@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs", "/webjars/**",
                         "/prop-name", "/name",
                         "/register", "/login",
-                        "/", "/static/**", "/img/**", "/favicon.ico").permitAll()
+                        "/", "/static/**", "/img/**", "/favicon.ico", "/favicon.png").permitAll()
                 .anyRequest().hasRole("USER")
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
