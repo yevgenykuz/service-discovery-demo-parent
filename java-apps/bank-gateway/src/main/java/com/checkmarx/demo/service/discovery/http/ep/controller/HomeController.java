@@ -73,6 +73,7 @@ public class HomeController {
             log.error("Can't execute command", ex);
         }
 
+        //!ATTACK XSS attack. add tag <b>
         return new AuthResponseEntity(token, "<b>" + request.getLogin() + "</b>");
     }
 
@@ -101,7 +102,7 @@ public class HomeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        //!ATTACK XSS attack. add tag <b>
         return new AuthResponseEntity(token, "<b>" + request.getLogin() + "</b>");
     }
 
@@ -118,7 +119,7 @@ public class HomeController {
         log.info("Converting {} {} to {}", amount, sourceCurrency, targetCurrency);
         String targetUrl = relatedServicesProperties.getBankAnalysisUrl() + "/convert-currency?amount=" + amount +
                 "&sourceCurrency=" + sourceCurrency + "&targetCurrency=" + targetCurrency;
-        return "<a>" + sendGetAndReturnString(targetUrl) + "</a>";
+        return sendGetAndReturnString(targetUrl);
     }
 
     @RequestMapping(path = "/name", method = RequestMethod.GET)
