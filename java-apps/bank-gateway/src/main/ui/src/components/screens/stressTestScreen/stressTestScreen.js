@@ -8,28 +8,28 @@ import {
     _GET_CHECK_BALANCE,
     _GET_CHECK_LOAN_CREDIBILITY_URL,
     _GET_CONVERT_CURRENCY_URL,
-    _GET_DEPOSIT,
-    _GET_LOGIN,
+    _GET_DEPOSIT, _POST_REGISTER,
     CHECK_BALANCE_URL,
     CHECK_LOAN_CREDIBILITY_URL,
     CONVERT_CURRENCY_URL,
     DEPOSIT_URL,
-    INVOKE_ENTRY_POINT_URL,
+    INVOKE_ENTRY_POINT_URL, silentlyInvokeEntryPoint,
 } from "../../../models/API";
 import {getAllOptions} from "../../../constants/convertCurrencyOptions";
+import axios from "axios";
 
 
 //randomizer------------------------------------------------------------------
 const chance = new Chance();
 const randomUserName = () => chance.first()
-const randomNumber = () => chance.integer({min: 1, max:10000})
+const randomNumber = () => chance.integer({min: 1, max: 10000})
 const randomCurrency = () => chance.shuffle(getAllOptions());
 
 
 const options = {
     [DEPOSIT_URL]: () => _GET_DEPOSIT(randomUserName(), randomNumber()),
     [CHECK_BALANCE_URL]: () => _GET_CHECK_BALANCE(randomUserName()),
-    [INVOKE_ENTRY_POINT_URL]: _GET_LOGIN,
+    [INVOKE_ENTRY_POINT_URL]: silentlyInvokeEntryPoint,
     [CONVERT_CURRENCY_URL]: () => _GET_CONVERT_CURRENCY_URL(randomNumber(), ...randomCurrency()),
     [CHECK_LOAN_CREDIBILITY_URL]: () => _GET_CHECK_LOAN_CREDIBILITY_URL(randomUserName()),
 }
@@ -48,7 +48,7 @@ function renderField({route, onChange, checked, disabled, onInvokeClick}) {
             disabled={disabled}
             readOnly={true}
             aria-label="Text input with checkbox"/>
-            <Button onClick={onInvokeClick} variant={"warning"}>Invoke</Button>
+        <Button onClick={onInvokeClick} variant={"warning"}>Invoke</Button>
     </InputGroup>
 }
 
@@ -57,9 +57,23 @@ function renderField({route, onChange, checked, disabled, onInvokeClick}) {
 function StressTestScreen() {
     const [started, setStarted] = React.useState(false)
     const [routesToRun, setRoutesToRun] = React.useState([])
-    const [frequencyMS, setFrequencyMS] = React.useState(10)
+    const [frequencyMS, setFrequencyMS] = React.useState(3000)
     const [invokeAll, setInvokeAll] = React.useState(false)
     const lastIntervalId = React.useRef(-1)
+
+    useEffect(()=>{
+
+        //get access token
+        _POST_REGISTER("user","pass").then(({data: {token}})=> {
+            axios.defaults.headers.authorization = `Bearer ${token}`;
+        }).catch(e=> {
+            console.error("was unable to generate an authorization token :(")
+            console.error(e)
+        })
+
+        //restore previous access token on page leave
+        return ()=> axios.defaults.headers.authorization = localStorage.getItem('token');
+    },[])
 
     useEffect(() => {
         clearInterval(lastIntervalId.current)
@@ -122,7 +136,7 @@ function StressTestScreen() {
                         </InputGroup.Append>
                     </InputGroup>
                     <FormControl type={'range'} disabled={started} value={frequencyMS} onChange={onFrequencyChange}
-                                 min={10} max={5000}/>
+                                 min={10} max={10000}/>
                     {started ?
                         <Button className={styles.button} variant={"danger"} onClick={toggleStarted}>Stop</Button>
                         :

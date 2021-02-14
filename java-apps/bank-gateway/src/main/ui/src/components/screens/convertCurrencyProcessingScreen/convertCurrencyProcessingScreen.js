@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import {useHistory, useLocation} from "react-router-dom";
 import {convertCurrency} from "../../../models/API";
-import {CONVERT_CURRENCY_RESULT} from "../../../constants/routes";
+import {CONVERT_CURRENCY_ERROR, CONVERT_CURRENCY_RESULT} from "../../../constants/routes";
 import ScreenWrapper from "../../components/screenWrapper";
 import LoadingPopup from "../../components/loadingPopup";
 import {NIS, USD} from "../../../constants/convertCurrencyOptions";
@@ -25,6 +25,8 @@ function ConvertCurrencyProcessingScreen() {
 
         convertCurrency(username, amount, sourceCur, targetCur).then((response) => {
             history.push(`${CONVERT_CURRENCY_RESULT}?amount=${amount}&source=${sourceCur}&target=${targetCur}&result=${response}`)
+        }).catch(()=>{
+            history.push(CONVERT_CURRENCY_ERROR)
         })
 
 
@@ -33,7 +35,7 @@ function ConvertCurrencyProcessingScreen() {
 
     return (
         <ScreenWrapper>
-            <LoadingPopup headerTitle={`processing currency conversion request`} loadingTitle={"Processing..."} style={{minWidth:"560px"}}/>
+            <LoadingPopup headerTitle={`processing currency conversion request`} loadingTitle={"Processing..."}/>
         </ScreenWrapper>
     );
 }

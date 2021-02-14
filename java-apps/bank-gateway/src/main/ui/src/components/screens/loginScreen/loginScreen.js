@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {login} from "../../../models/auth";
+import React, {useState} from 'react';
+import {registerAndLogin, login} from "../../../models/auth";
 import {useUserInfo} from "../../../recoilStates/userAuth";
 import ScreenWrapper from "../../components/screenWrapper";
 import styles from "./login.module.css"
@@ -9,27 +9,36 @@ import LoadingPopup from "../../components/loadingPopup";
 
 function LoginScreen() {
 
+    const [isRegisterState, setIsRegisterState] = useState(false)
+    const [, setUserInfo] = useUserInfo()
     const [error, setErrorMessage] = useState("")
-    const [, setObj] = useUserInfo()
     const [isLoading, setIsLoading] = useState(false)
 
-    const userLeftPageRef = useRef(false)
-    useEffect(() => () => userLeftPageRef.current = true, [])
 
     function handleSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
 
         const formData = new FormData(e.currentTarget)
+        const username = formData.get("username")
+        const password = formData.get("password")
 
+        const submitFunction = isRegisterState ? registerAndLogin : login;
 
-        login(formData.get("username"), formData.get("password")).then(({username}) => {
-            if(!userLeftPageRef.current)
-            {
-                setObj.setUserName(username)
-                setIsLoading(false)
-            }
-        }).catch(e => !userLeftPageRef.current && setErrorMessage(e.message))
+        submitFunction(username, password)
+            .then((data) =>
+                setUserInfo.setUserInfo(data))
+            .catch(e =>
+                setErrorMessage(e.message))
+            .finally(() =>
+                 setIsLoading(false))
+
+    }
+
+    function toggleRegisterState(e) {
+        e.preventDefault()
+        setIsRegisterState(!isRegisterState)
+        setErrorMessage()
     }
 
 
@@ -38,36 +47,45 @@ function LoginScreen() {
 
             <div className={styles.contentContainer}>
 
-                {isLoading ? <LoadingPopup loadingTitle={"logging in..."}/> : <>
+                {isLoading ? <LoadingPopup loadingTitle={isRegisterState ? "Registering..." : "logging in..."}/> : <>
 
                     <CardWrapper className={styles.cardWrapper}>
                         <Navbar.Brand as={"div"} className={styles.logoTextContainer}>
-                            <span>Bank</span>
+                            <span>Bank {isRegisterState && "Registration"}</span>
                         </Navbar.Brand>
 
                         <Form onSubmit={handleSubmit} className={styles.form}>
                             <Form.Group className={styles.field}>
-                                <Form.Label>username</Form.Label>
-                                <Form.Control placeholder="Enter username"
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control placeholder="Enter Username"
                                               className={styles.fieldInput}
                                               type="text"
                                               autoComplete='username'
                                               name="username"
-                                              required />
+                                              required/>
                             </Form.Group>
 
                             <Form.Group className={styles.field}>
-                                <Form.Label>password</Form.Label>
-                                <Form.Control placeholder="Enter password"
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control placeholder="Enter Password"
                                               className={styles.fieldInput}
                                               type="password"
-                                              autoComplete='current-password'
+                                              autoComplete={isRegisterState ? 'new-password' : 'current-password'}
                                               name={"password"}
                                               required/>
                             </Form.Group>
 
 
-                            <Button type="submit" variant={"info"} className={`capitalize ${styles.loginButton}`}>login</Button>
+                            <Button type="submit"
+                                    variant={"success"}
+                                    className={`capitalize ${styles.loginButton}`}>
+                                {isRegisterState ? "register" : "login"}
+                            </Button>
+
+                            <a href="/" onClick={toggleRegisterState} className={styles.registerButton}>{
+                                isRegisterState ? "Already have an account? Click here to login."
+                                    : "Don't have an account yet? Click here to register."}
+                            </a>
                         </Form>
                     </CardWrapper>
                     <Alert variant={"danger"} className={`${styles.error} ${error ? "" : "noOpacity"}`}>{error}</Alert>

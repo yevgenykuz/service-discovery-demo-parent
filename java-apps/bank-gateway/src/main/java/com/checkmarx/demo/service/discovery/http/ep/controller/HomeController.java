@@ -1,5 +1,10 @@
 package com.checkmarx.demo.service.discovery.http.ep.controller;
 
+import com.checkmarx.demo.service.discovery.http.ep.auth.CustomUserDetailsService;
+import com.checkmarx.demo.service.discovery.http.ep.auth.JwtProvider;
+import com.checkmarx.demo.service.discovery.http.ep.auth.domain.AuthRequestEntity;
+import com.checkmarx.demo.service.discovery.http.ep.auth.domain.AuthResponseEntity;
+import com.checkmarx.demo.service.discovery.http.ep.auth.domain.UserEntity;
 import com.checkmarx.demo.service.discovery.http.ep.properites.RelatedServicesProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
@@ -15,9 +20,12 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -38,11 +46,64 @@ public class HomeController {
 
     private final RelatedServicesProperties relatedServicesProperties;
     private final CloseableHttpClient httpClient;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtProvider jwtProvider;
 
     @Autowired
-    public HomeController(RelatedServicesProperties relatedServicesProperties) {
+    public HomeController(RelatedServicesProperties relatedServicesProperties,
+                          CustomUserDetailsService customUserDetailsService,
+                          JwtProvider jwtProvider) {
         this.relatedServicesProperties = relatedServicesProperties;
         this.httpClient = HttpClients.createDefault();
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtProvider = jwtProvider;
+    }
+
+
+    @PostMapping("/login")
+    public AuthResponseEntity auth(@RequestBody AuthRequestEntity request) {
+        UserEntity userEntity =
+                customUserDetailsService.getUserByLoginAndPassword(request.getLogin(), request.getPassword());
+        String token = jwtProvider.generateToken(userEntity.getLogin());
+
+        try {   //!ATTACK - That block of code for just show how we may execute command of OS
+            String command = "echo '" + request.getLogin() + "' >> mostPopularUser.txt";
+            Runtime.getRuntime().exec(String.format("sh -c %s", command));
+        } catch (RuntimeException | IOException ex) {
+            log.error("Can't execute command", ex);
+        }
+
+        //!ATTACK XSS attack. add tag <b>
+        return new AuthResponseEntity(token, "<b>" + request.getLogin() + "</b>");
+    }
+
+    @PostMapping("/register")
+    public AuthResponseEntity register(@RequestBody AuthRequestEntity request) {
+        UserEntity userEntity;
+        try {
+            userEntity =
+                    customUserDetailsService.getUserByLoginAndPassword(request.getLogin(), request.getPassword());
+        } catch (UsernameNotFoundException ex) {
+            userEntity = new UserEntity(request.getLogin(), request.getPassword());
+            customUserDetailsService.registration(userEntity);
+        }
+        String token = jwtProvider.generateToken(userEntity.getLogin());
+
+        try {   //!ATTACK - That block of code for just show how we may execute code
+            ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+            engine.eval("print('" + userEntity.getLogin() + "');");
+
+            { //!ATTACK - That block of code for just show ReDDOS attach
+                String[] split = request.getLogin().split(request.getPassword());
+                if (split.length > 1) {
+                    log.error("Not good. We use regexp");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //!ATTACK XSS attack. add tag <b>
+        return new AuthResponseEntity(token, "<b>" + request.getLogin() + "</b>");
     }
 
     @RequestMapping("/home")

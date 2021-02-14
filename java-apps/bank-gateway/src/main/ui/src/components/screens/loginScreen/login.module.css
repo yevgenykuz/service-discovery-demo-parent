@@ -37,15 +37,17 @@
     margin: 10px 0;
 }
 .fieldInput{
-    width: 60%;
+    width: calc( 100% - 100px);
     margin: 0 0 0 20px;
 }
 
 .loginButton{
     width: 100%;
-    margin-top: 20px;
+    margin-top: 5px;
 }
-
+.registerButton{
+    font-size: small;
+}
 .error{
     margin-top: 10px;
 }
