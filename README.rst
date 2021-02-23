@@ -23,7 +23,12 @@ Clone the source code
 
     git clone https://github.com/yevgenykuz/service-discovery-demo-parent.git
     
-Specific instructions for every programming language can be found in each folder.
+| Specific instructions for every programming language can be found in each folder.
+|
+| **All docker related commands require docker to work with linux containers.**
+| **This may be hard to achieve on docker installed on Windows Server.**
+| **Please use linux/windows 10/macos for best results.**
+
 
 Cross language flows
 --------------------

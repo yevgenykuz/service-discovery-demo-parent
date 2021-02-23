@@ -81,6 +81,8 @@ Docker-compose
 Kubernetes on docker desktop
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+| **This works only with an old version of docker (<19.x) as the tools used here are no longer maintained.**
+|
 | An agent will be downloaded from the configured manager for each application before running.
 | Depending on your machine, full environment startup may take a couple of minutes.
 | Do the following steps:
