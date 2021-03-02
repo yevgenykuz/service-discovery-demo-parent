@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs", "/webjars/**",
                         "/prop-name/**", "/name/**",
+                        "/cross-http/**",
                         "/register", "/login",
                         "/", "/static/**", "/img/**", "/favicon.ico", "/favicon.png").permitAll()
                 .anyRequest().hasRole("USER")
