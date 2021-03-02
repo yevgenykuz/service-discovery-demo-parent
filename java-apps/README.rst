@@ -58,7 +58,7 @@ Docker-compose
     # Windows:
     docker-compose -f docker-compose-java-http.yml up -d
     # Linux:
-    docker-compose -f docker-compose-java-http.yml -env-file .env.linux up -d
+    sudo docker-compose -f docker-compose-java-http.yml --env-file .env.linux up -d
 
     # check status:
     docker-compose -f docker-compose-java-http.yml ps
@@ -80,7 +80,7 @@ Docker-compose
     # Windows:
     docker-compose -f docker-compose-java-kafka.yml up -d
     # Linux:
-    docker-compose -f docker-compose-java-kafka.yml -env-file .env.linux up -d
+    sudo docker-compose -f docker-compose-java-kafka.yml --env-file .env.linux up -d
 
     # check status:
     docker-compose -f docker-compose-java-kafka.yml ps

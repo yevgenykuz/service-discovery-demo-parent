@@ -69,7 +69,7 @@ Control with docker compose:
     # Windows:
     docker-compose -f docker-compose-cross-http.yml up -d
     # Linux:
-    docker-compose -f docker-compose-cross-http.yml -env-file .env.linux up -d
+    sudo docker-compose -f docker-compose-cross-http.yml --env-file .env.linux up -d
 
     # check status:
     docker-compose -f docker-compose-cross-http.yml ps
