@@ -46,28 +46,26 @@ Docker-compose
 |
 
 * Start a local IAST manager instance
-* Edit the provided "*.env*" file if needed
+* Edit the provided ``.env`` file if needed or use ``.env.linux`` file in linux
 * HTTP flow environment:
 
 .. code-block:: bash
 
+    # Windows
     # pull latest:
     docker-compose -f docker-compose-dotnet-core-http.yml pull
-
     # start:
-    # Windows:
     docker-compose -f docker-compose-dotnet-core-http.yml up -d
-    # Linux:
-    sudo docker-compose -f docker-compose-dotnet-core-http.yml --env-file .env.linux up -d
-
-    # check status:
-    docker-compose -f docker-compose-dotnet-core-http.yml ps
-
-    # check logs:
-    docker-compose -f docker-compose-dotnet-core-http.yml logs
-
     # stop:
     docker-compose -f docker-compose-dotnet-core-http.yml down
+
+    # Linux
+    # pull latest:
+    sudo docker-compose -f docker-compose-dotnet-core-http.yml pull
+    # start:
+    sudo docker-compose -f docker-compose-dotnet-core-http.yml --env-file .env.linux up -d
+    # stop:
+    sudo docker-compose -f docker-compose-dotnet-core-http.yml down
 
 Manually on Windows
 ~~~~~~~~~~~~~~~~~~~

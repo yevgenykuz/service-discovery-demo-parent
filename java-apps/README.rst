@@ -17,26 +17,6 @@ Launching
 
 Choose one of the following options to launch the applications.
 
-Manually on Windows
-~~~~~~~~~~~~~~~~~~~
-
-* Compile with Maven: ``.\mvnw clean install``
-* Start a local IAST manager instance
-* Download an agent from IAST manager UI
-* For each application you want to run:
-
-  * Create an empty "*agent*" folder in the application's folder
-  * Extract the contents of the zipped agent file you've downloaded into the "*agent*" folder
-  
-* In "*java-apps*" folder run "*runAllHttp.bat*"/"*runAllKafka.bat*"/"*runAllRabbitMQ.bat*"
-
-This will run all applications with the following:
-
-* IAST agent attached
-* Agent auto-upgrade disabled
-* Agent log level set to DEBUG
-* Open port for remote debug (see individual "*run.bat*" files for exact port)
-
 Docker-compose
 ~~~~~~~~~~~~~~
 
@@ -46,52 +26,68 @@ Docker-compose
 |
 
 * Start a local IAST manager instance
-* Edit the provided "*.env*" file if needed
+* Edit the provided ``.env`` file if needed or use ``.env.linux`` file in linux
 * HTTP flow environment:
 
 .. code-block:: bash
 
+    # Windows
     # pull latest:
     docker-compose -f docker-compose-java-http.yml pull
-
     # start:
-    # Windows:
     docker-compose -f docker-compose-java-http.yml up -d
-    # Linux:
-    sudo docker-compose -f docker-compose-java-http.yml --env-file .env.linux up -d
-
-    # check status:
-    docker-compose -f docker-compose-java-http.yml ps
-
-    # check logs:
-    docker-compose -f docker-compose-java-http.yml logs
-
     # stop:
     docker-compose -f docker-compose-java-http.yml down
+
+    # Linux
+    # pull latest:
+    sudo docker-compose -f docker-compose-java-http.yml pull
+    # start:
+    sudo docker-compose -f docker-compose-java-http.yml --env-file .env.linux up -d
+    # stop:
+    sudo docker-compose -f docker-compose-java-http.yml down
 
 * Kafka flow environment:
 
 .. code-block:: bash
 
+    # Windows
     # pull latest:
     docker-compose -f docker-compose-java-kafka.yml pull
-
     # start:
-    # Windows:
     docker-compose -f docker-compose-java-kafka.yml up -d
-    # Linux:
-    sudo docker-compose -f docker-compose-java-kafka.yml --env-file .env.linux up -d
-
-    # check status:
-    docker-compose -f docker-compose-java-kafka.yml ps
-
-    # check logs:
-    docker-compose -f docker-compose-java-kafka.yml logs
-
     # stop:
     docker-compose -f docker-compose-java-kafka.yml down
 
+    # Linux
+    # pull latest:
+    sudo docker-compose -f docker-compose-java-kafka.yml pull
+    # start:
+    sudo docker-compose -f docker-compose-java-kafka.yml --env-file .env.linux up -d
+    # stop:
+    sudo docker-compose -f docker-compose-java-kafka.yml down
+
     # to manually access Kafka server, use port 9003 in your consumer/producer
+
+Manually on Windows
+~~~~~~~~~~~~~~~~~~~
+
+* Compile with Maven: ``.\mvnw clean install``
+* Start a local IAST manager instance
+* Download an agent from IAST manager UI
+* For each application you want to run:
+
+  * Create an empty ``agent`` folder in the application's folder
+  * Extract the contents of the zipped agent file you've downloaded into the ``agent`` folder
+  
+* In ``java-apps`` folder run ``runAllHttp.bat``/ ``runAllKafka.bat``/ ``runAllRabbitMQ.bat``
+
+This will run all applications with the following:
+
+* IAST agent attached
+* Agent auto-upgrade disabled
+* Agent log level set to DEBUG
+* Open port for remote debug (see individual ``run.bat`` files for exact port)
 
 Kubernetes on docker desktop
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
