@@ -43,7 +43,7 @@ Cross language flows
 |
 
 * Start a local IAST manager instance
-* Edit the provided "*.env*" file if needed
+* Edit the provided ``.env`` file if needed or use ``.env.linux`` file in linux
 
 Cross HTTP applications
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,23 +62,21 @@ Control with docker compose:
 
 .. code-block:: bash
 
+    # Windows
     # pull latest:
     docker-compose -f docker-compose-cross-http.yml pull
-
     # start:
-    # Windows:
     docker-compose -f docker-compose-cross-http.yml up -d
-    # Linux:
-    sudo docker-compose -f docker-compose-cross-http.yml --env-file .env.linux up -d
-
-    # check status:
-    docker-compose -f docker-compose-cross-http.yml ps
-
-    # check logs:
-    docker-compose -f docker-compose-cross-http.yml logs
-
     # stop:
     docker-compose -f docker-compose-cross-http.yml down
+
+    # Linux
+    # pull latest:
+    sudo docker-compose -f docker-compose-cross-http.yml pull
+    # start:
+    sudo docker-compose -f docker-compose-cross-http.yml --env-file .env.linux up -d
+    # stop:
+    sudo docker-compose -f docker-compose-cross-http.yml down
 
 To trigger HTTP flows you can send HTTP GET request as follows (change ``localhost`` if needed):
 
