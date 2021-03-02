@@ -92,7 +92,8 @@ Manually on Windows
 Flow Triggering
 ---------------
 
-To test locally, make sure all relevant applications are running before triggering flows.
+| Make sure all relevant applications are running before triggering flows.
+| In the following examples, change ``localhost`` to the hostname of your deployed applications.
 
 SQL Injection HTTP Flow
 ~~~~~~~~~~~~~~~~~~~~~~~

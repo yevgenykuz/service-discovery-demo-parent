@@ -80,7 +80,7 @@ Control with docker compose:
     # stop:
     docker-compose -f docker-compose-cross-http.yml down
 
-To trigger HTTP flows you can send HTTP GET request as follows:
+To trigger HTTP flows you can send HTTP GET request as follows (change ``localhost`` if needed):
 
 * | bank-gateway -> bank-analysis -> dotnet-http-entry-point -> dotnet-http-propagator ->
   | nodejs-http-entry-point -> nodejs-http-propagator -> nodejs-http-sink
