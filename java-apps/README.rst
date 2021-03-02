@@ -53,12 +53,19 @@ Docker-compose
 
     # pull latest:
     docker-compose -f docker-compose-java-http.yml pull
+
     # start:
+    # Windows:
     docker-compose -f docker-compose-java-http.yml up -d
+    # Linux:
+    docker-compose -f docker-compose-java-http.yml -env-file .env.linux up -d
+
     # check status:
     docker-compose -f docker-compose-java-http.yml ps
+
     # check logs:
     docker-compose -f docker-compose-java-http.yml logs
+
     # stop:
     docker-compose -f docker-compose-java-http.yml down
 
@@ -68,14 +75,22 @@ Docker-compose
 
     # pull latest:
     docker-compose -f docker-compose-java-kafka.yml pull
+
     # start:
+    # Windows:
     docker-compose -f docker-compose-java-kafka.yml up -d
+    # Linux:
+    docker-compose -f docker-compose-java-kafka.yml -env-file .env.linux up -d
+
     # check status:
     docker-compose -f docker-compose-java-kafka.yml ps
+
     # check logs:
     docker-compose -f docker-compose-java-kafka.yml logs
+
     # stop:
     docker-compose -f docker-compose-java-kafka.yml down
+
     # to manually access Kafka server, use port 9003 in your consumer/producer
 
 Kubernetes on docker desktop

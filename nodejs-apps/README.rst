@@ -82,12 +82,19 @@ Docker-compose
 
     # pull latest:
     docker-compose -f docker-compose-nodejs-http.yml pull
+
     # start:
+    # Windows:
     docker-compose -f docker-compose-nodejs-http.yml up -d
+    # Linux:
+    docker-compose -f docker-compose-nodejs-http.yml -env-file .env.linux up -d
+
     # check status:
     docker-compose -f docker-compose-nodejs-http.yml ps
+
     # check logs:
     docker-compose -f docker-compose-nodejs-http.yml logs
+
     # stop:
     docker-compose -f docker-compose-nodejs-http.yml down
 
