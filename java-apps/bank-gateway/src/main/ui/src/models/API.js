@@ -18,6 +18,7 @@ export const REGISTER_ROUTE= `${ENTRY_POINT_ORIGIN}/register`
 export const LOGIN_ROUTE= `${ENTRY_POINT_ORIGIN}/login`
 export const CHECK_LOAN_CREDIBILITY_URL = `${PROPAGATOR_ORIGIN}/check-loan-credibility`
 export const SWAGGER_ROUTE = `${ENTRY_POINT_ORIGIN}/swagger-ui/`
+export const IS_LOGGED_IN_ROUTE = `${ENTRY_POINT_ORIGIN}/is-logged-in`
 
 
 export  function _GET_DEPOSIT(username,amount){
@@ -38,7 +39,9 @@ export  function _GET_CONVERT_CURRENCY_URL(amount,sourceCur,targetCur){
 export  function _GET_CHECK_LOAN_CREDIBILITY_URL(username){
     return axios.get(`${CHECK_LOAN_CREDIBILITY_URL}?clientName=${username}`)
 }
-
+export  function _GET_IS_LOGGED_IN(token){
+    return axios.get(IS_LOGGED_IN_ROUTE,{headers:{authorization: `Bearer ${token}`}})
+}
 
 
 export function timeoutPromise(time = 1000) {
