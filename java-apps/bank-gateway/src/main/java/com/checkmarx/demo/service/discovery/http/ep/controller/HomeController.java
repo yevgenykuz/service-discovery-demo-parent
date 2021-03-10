@@ -111,6 +111,11 @@ public class HomeController {
         log.info("bank-gateway-home\n" + request.toString());
     }
 
+    @RequestMapping(path = "/is-logged-in", method = RequestMethod.GET)
+    public void checkLoginState() {
+        log.info("bank-gateway login check\n");
+    }
+
     @RequestMapping(path = "/convert-currency", method = RequestMethod.GET)
     @ResponseBody
     public String convertCurrency(@RequestParam("amount") String amount,

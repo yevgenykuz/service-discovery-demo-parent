@@ -7,13 +7,12 @@ import {RecoilRoot} from "recoil";
 import LogsManager from "./components/logic/logsManager";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <RecoilRoot>
-            <HashRouter>
-                <LogsManager/>
-                <App/>
-            </HashRouter>
-        </RecoilRoot>
-    </React.StrictMode>,
+    <RecoilRoot>
+        <HashRouter>
+            <LogsManager/>
+            <App/>
+        </HashRouter>
+    </RecoilRoot>
+    ,
     document.getElementById('root')
 );

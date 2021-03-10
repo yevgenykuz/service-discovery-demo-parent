@@ -64,7 +64,7 @@ function StressTestScreen() {
     useEffect(()=>{
 
         //get access token
-        _POST_REGISTER("user","pass").then(({data: {token}})=> {
+        _POST_REGISTER("username","password").then(({data: {token}})=> {
             axios.defaults.headers.authorization = `Bearer ${token}`;
         }).catch(e=> {
             console.error("was unable to generate an authorization token :(")
