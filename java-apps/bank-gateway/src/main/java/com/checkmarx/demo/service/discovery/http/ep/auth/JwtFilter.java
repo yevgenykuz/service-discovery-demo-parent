@@ -4,6 +4,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -35,17 +36,21 @@ public class JwtFilter extends GenericFilterBean {
 
         String token = getTokenFromRequest((HttpServletRequest) servletRequest);
 
-        if (token != null && jwtProvider.validateToken(token)) {
-            String userLogin = jwtProvider.getLoginFromToken(token);
+        try {
+            if (token != null && jwtProvider.validateToken(token)) {
+                String userLogin = jwtProvider.getLoginFromToken(token);
 
-            CustomUserDetails customUserDetails =
-                    (CustomUserDetails) customUserDetailsService.loadUserByUsername(userLogin);
+                CustomUserDetails customUserDetails =
+                        (CustomUserDetails) customUserDetailsService.loadUserByUsername(userLogin);
 
-            UsernamePasswordAuthenticationToken auth =
-                    new UsernamePasswordAuthenticationToken(customUserDetails, null,
-                            customUserDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(customUserDetails, null,
+                                customUserDetails.getAuthorities());
 
-            SecurityContextHolder.getContext().setAuthentication(auth);
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+        } catch (UsernameNotFoundException e) {
+            logger.warn("User not found", e);
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
