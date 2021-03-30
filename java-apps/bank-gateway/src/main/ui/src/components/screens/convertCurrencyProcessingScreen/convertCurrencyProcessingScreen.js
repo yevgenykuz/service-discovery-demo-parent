@@ -5,7 +5,7 @@ import {convertCurrency} from "../../../models/API";
 import {CONVERT_CURRENCY_ERROR, CONVERT_CURRENCY_RESULT} from "../../../constants/routes";
 import ScreenWrapper from "../../components/screenWrapper";
 import LoadingPopup from "../../components/loadingPopup";
-import {NIS, USD} from "../../../constants/convertCurrencyOptions";
+import {GBP, USD} from "../../../constants/convertCurrencyOptions";
 
 function ConvertCurrencyProcessingScreen() {
     const [{username}] = useUserInfo()
@@ -17,7 +17,7 @@ function ConvertCurrencyProcessingScreen() {
         const searchParams = new URLSearchParams(search)
         const amount = searchParams.get("amount") || "1";
         const sourceCur = searchParams.get("source") || USD;
-        const targetCur = searchParams.get("target") || NIS;
+        const targetCur = searchParams.get("target") || GBP;
         const flow = searchParams.get("flow")?.toLowerCase() === "true"
 
         if (!flow)
