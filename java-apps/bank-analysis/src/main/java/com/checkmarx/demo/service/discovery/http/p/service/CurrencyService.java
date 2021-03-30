@@ -12,8 +12,9 @@ import java.util.Set;
 @Service
 public class CurrencyService {
 
-    private static final Set<ConversionRatio> ratios =
-            ImmutableSet.of(new ConversionRatio(Currency.USD, Currency.NIS, 3.25D));
+    private static final Set<ConversionRatio> ratios = ImmutableSet
+            .of(new ConversionRatio(Currency.USD, Currency.NIS, 3.25D),
+                    new ConversionRatio(Currency.USD, Currency.GBP, 0.73D));
 
     public double convert(Long amount, Currency sourceCurrency, Currency targetCurrency) {
         ConversionRatio conversionRatio =
