@@ -5,5 +5,5 @@ package com.checkmarx.demo.service.discovery.http.p.service;
  * @since 14 December 2020
  **/
 public enum Currency {
-    USD, NIS
+    USD, NIS, GBP
 }
