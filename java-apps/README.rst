@@ -72,7 +72,7 @@ Docker-compose
 Manually on Windows
 ~~~~~~~~~~~~~~~~~~~
 
-* Compile with Maven: ``.\mvnw clean install``
+* Compile with Maven: ``.\mvnw clean install`` *JDK 8 required*
 * Start a local IAST manager instance
 * Download an agent from IAST manager UI
 * For each application you want to run:
