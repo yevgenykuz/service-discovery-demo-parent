@@ -17,6 +17,20 @@ Launching
 
 Choose one of the following options to launch the applications.
 
+Docker-compose without CxIAST
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Launch all ``bank-*`` applications with docker-compose without CxIAST agents:
+
+.. code-block:: bash
+
+    # pull latest:
+    docker-compose -f docker-compose-bank-without-iast.yml pull
+    # start:
+    docker-compose -f docker-compose-bank-without-iast.yml up -d
+    # stop:
+    docker-compose -f docker-compose-bank-without-iast.yml down
+
 Docker-compose
 ~~~~~~~~~~~~~~
 

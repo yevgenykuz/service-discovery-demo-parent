@@ -1,0 +1,42 @@
+version: "3"
+
+networks:
+  java-http-net:
+    driver: bridge
+
+services:
+  bank-gateway:
+    image: 'yevgenykcx/bank-gateway:latest'
+    networks:
+      - java-http-net
+    ports:
+      - '8110:8110'
+    environment:
+      - BANK_ANALYSIS_URL=http://bank-analysis:8111
+      - BANK_STORAGE_URL=http://bank-storage:8112
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+
+  bank-analysis:
+    image: 'yevgenykcx/bank-analysis:latest'
+    networks:
+      - java-http-net
+    ports:
+      - '8111:8111'
+    environment:
+      - BANK_GATEWAY_URL=http://bank-gateway:8110
+      - BANK_STORAGE_URL=http://bank-storage:8112
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
+
+  bank-storage:
+    image: 'yevgenykcx/bank-storage:latest'
+    networks:
+      - java-http-net
+    ports:
+      - '8112:8112'
+    environment:
+      - BANK_GATEWAY_URL=http://bank-gateway:8110
+      - BANK_ANALYSIS_URL=http://bank-analysis:8111
+    # workaround for concurrent IAST agent download bug:
+    restart: on-failure
