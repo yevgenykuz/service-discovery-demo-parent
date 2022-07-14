@@ -5,6 +5,7 @@ COPY pom.xml /java-rabbitmq-propagator
 RUN mvn -f /java-rabbitmq-propagator/pom.xml clean install
 
 # Package and launch
+USER jeffc
 FROM openjdk:8-jre-slim
 EXPOSE 8119
 COPY --from=build /java-rabbitmq-propagator/target/java-rabbitmq-propagator.jar java-rabbitmq-propagator.jar
